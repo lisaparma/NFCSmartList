@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log
+
+.idea
+
+package-lock.json
+
+.DS_Store
+ios/myNFCatalog/build
