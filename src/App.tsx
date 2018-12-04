@@ -1,21 +1,30 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import {createStore, Store} from 'redux';
+import {createBottomTabNavigator, createStackNavigator} from "react-navigation";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import {reducer} from "./redux/reducer";
+import {IAuthentication} from "./redux/action";
+
+export const store: Store<IStore> = createStore(reducer);
 
 interface AppState {
   auth: boolean;
 }
 
 export default class App extends Component<AppState> {
+
+constructor(props: IAppState) {
+    super(props);
+    this.state = {
+      auth:false
+    }
+  }
+
   public render() {
     return (
       <View style={styles.container}>
+      <Text> ciao: {this.state.auth.toString()} </Text>
         <Button
           title="un bottone"
           onPress={this.onPress}/>
@@ -24,7 +33,20 @@ export default class App extends Component<AppState> {
   }
 
   private onPress = () => {
-  console.warn("ops");
+    if (store.getState().auth) {
+      store.dispatch<IAuthentication>({
+        type: "AUTH",
+        auth: false,
+      });
+    } else {
+      store.dispatch<IAuthentication>({
+        type: "AUTH",
+        auth: true,
+      });
+    }
+    this.setState({
+      auth: store.getState().auth
+    })
   }
 }
 
