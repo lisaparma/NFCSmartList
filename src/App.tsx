@@ -3,10 +3,14 @@ import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import {createStore, Store} from 'redux';
 import {createBottomTabNavigator, createStackNavigator} from "react-navigation";
 
+import firebase from 'react-native-firebase';
+
 import {reducer} from "./redux/reducer";
 import {IAuthentication} from "./redux/action";
 
 export const store: Store<IStore> = createStore(reducer);
+
+
 
 interface AppState {
   auth: boolean;
@@ -19,6 +23,9 @@ constructor(props: IAppState) {
     this.state = {
       auth:false
     }
+    firebase.auth().signInAnonymously()
+	  .then((user) => {console.warn(user.user.isAnonymous);
+  	});
   }
 
   public render() {

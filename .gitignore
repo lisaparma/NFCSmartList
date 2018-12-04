@@ -7,5 +7,7 @@ package-lock.json
 
 .DS_Store
 ios/build
+ios/Pods
+
 android/app/
 android/.gradle
