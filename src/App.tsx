@@ -1,60 +1,64 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {createStore, Store} from 'redux';
-import {createBottomTabNavigator, createStackNavigator} from "react-navigation";
-
-import firebase from 'react-native-firebase';
 
 import {reducer} from "./redux/reducer";
-import {IAuthentication} from "./redux/action";
+import {IStore} from "./redux/IStore";
+
+import Login from "./screens/Login";
+import Main from "./screens/Main";
+import Auth from "./firebaseAPI/auth";
 
 export const store: Store<IStore> = createStore(reducer);
 
 
-
-interface AppState {
-  auth: boolean;
+interface AppProps {
 }
 
-export default class App extends Component<AppState> {
+interface AppState {
+  auth: string | null;
+}
 
-constructor(props: IAppState) {
+export default class App extends Component<AppProps, AppState> {
+
+  private mUnsubscribeFromStore: any;
+
+  constructor(props: AppProps) {
     super(props);
     this.state = {
-      auth:false
-    }
-    firebase.auth().signInAnonymously()
-	  .then((user) => {console.warn(user.user.isAnonymous);
-  	});
+      auth: null,
+    };
+    Auth.getUserID();
+  }
+
+  public componentDidMount(): void {
+    this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
+  }
+
+  public componentWillUnmount(): void {
+    this.mUnsubscribeFromStore();
   }
 
   public render() {
-    return (
-      <View style={styles.container}>
-      <Text> ciao: {this.state.auth.toString()} </Text>
-        <Button
-          title="un bottone"
-          onPress={this.onPress}/>
-      </View>
-    );
+    if(this.state.auth !== null) {
+      return (
+        <Main/>
+      );
+    } else {
+      return (
+        <Login/>
+      );
+    }
   }
 
-  private onPress = () => {
-    if (store.getState().auth) {
-      store.dispatch<IAuthentication>({
-        type: "AUTH",
-        auth: false,
-      });
-    } else {
-      store.dispatch<IAuthentication>({
-        type: "AUTH",
-        auth: true,
+  private onStoreChange = () => {
+    const currentState = store.getState();
+    if (currentState.auth !== this.state.auth) {
+      this.setState({
+        auth: currentState.auth,
       });
     }
-    this.setState({
-      auth: store.getState().auth
-    })
-  }
+  };
 }
 
 const styles = StyleSheet.create({
