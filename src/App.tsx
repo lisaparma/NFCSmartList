@@ -16,7 +16,7 @@ interface AppProps {
 }
 
 interface AppState {
-  auth: string | null;
+  auth: boolean;
 }
 
 export default class App extends Component<AppProps, AppState> {
@@ -26,13 +26,13 @@ export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      auth: null,
+      auth: false,
     };
-    Auth.getUserID();
   }
 
   public componentDidMount(): void {
     this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
+    Auth.getUserInfo();
   }
 
   public componentWillUnmount(): void {
@@ -40,9 +40,9 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   public render() {
-    if(this.state.auth !== null) {
+    if(this.state.auth) {
       return (
-        <Main/>
+        <Main store = {store}/>
       );
     } else {
       return (

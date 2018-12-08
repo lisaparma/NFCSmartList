@@ -1,5 +1,18 @@
 import { Action } from "redux";
 
 export interface IAuthentication extends Action<'AUTH'> {
-  auth: string | null,
+  auth: boolean,
+}
+
+export interface IInfoAccount extends Action<'INFO'> {
+  auth: boolean,
+  user : {
+    isNewUser: boolean;
+    email: string;
+    photoURL: string | null;
+    phoneNumber: string | null;
+    displayName: string | null;
+    emailVerified: boolean;
+    uid: string;
+  },
 }

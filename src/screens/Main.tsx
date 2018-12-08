@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {Store} from 'redux';
 import Auth from "../firebaseAPI/auth";
+import {IStore} from "../redux/IStore";
 
 
 interface AppProps {
-
+  store: Store<IStore>
 }
 
 interface AppState {
@@ -21,6 +22,7 @@ export default class Main extends Component<AppProps, AppState> {
   }
 
   public render() {
+    console.warn(this.props.store.getState().user)
     return (
       <View style={styles.container}>
         <Text>Ciao</Text>
