@@ -35,11 +35,13 @@ export default class Login extends Component<AppProps, AppState> {
           onChangeText={text => this.setState({password: text})}
         />
         <Button
-          title="Registrati"
-          onPress={() => {Auth.registerAccount(this.state.username, this.state.password)}}/>
-        <Button
           title="Entra"
-          onPress={() => {Auth.signIn(this.state.username, this.state.password)}}/>
+          onPress={() => {Auth.signIn(this.state.username, this.state.password)}}
+        />
+        {/*<Button*/}
+          {/*title="Registrati"*/}
+          {/*onPress={() => {Auth.registerAccount(this.state.username, this.state.password)}}*/}
+        {/*/>*/}
 
       </View>
     );

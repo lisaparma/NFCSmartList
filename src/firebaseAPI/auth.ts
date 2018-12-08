@@ -5,6 +5,7 @@ import {IAuthentication, IInfoAccount} from "../redux/action";
 
 export default class Auth {
 
+  // TODO: inserire l'utente registrato nel database
   public static registerAccount(email:string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(value => {Auth.getUserInfo(value);})
@@ -21,11 +22,11 @@ export default class Auth {
       });
   }
 
+  // TODO: middleware caricamento dati dal database
   public static getUserInfo(info?: any) {
     if (!info) {
       if (firebase.auth().currentUser) {
         const user = firebase.auth().currentUser;
-        console.warn(user);
         store.dispatch<IInfoAccount>({
           type: "INFO",
           auth: true,
@@ -57,6 +58,7 @@ export default class Auth {
     }
   }
 
+  // TODO: resettare tutti i dati
   public static logout() {
     firebase.auth().signOut()
       .then(value => {
