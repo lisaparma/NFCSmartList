@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput, Settings} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {Store} from 'redux';
-import {createBottomTabNavigator, createStackNavigator, SafeAreaView} from "react-navigation";
+import {createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, SafeAreaView, createAppContainer} from "react-navigation";
 
 import Auth from "../firebaseAPI/auth";
 import {IStore} from "../redux/IStore";
 import Catalogs from "./Catalogs";
+import Settings from "./Settings";
 
 
 const tabbarVisible = (navigation) => {
@@ -23,6 +24,7 @@ const tabbarVisible = (navigation) => {
   return showTabbar;
 };
 
+// TODO: if android  createMaterialTopTabNavigator
 const MainTabs = createBottomTabNavigator(
   {
     'Catalogs': {
@@ -37,7 +39,7 @@ const MainTabs = createBottomTabNavigator(
         // )
       })
     },
-    'Setting': {
+    'Settings': {
       screen: Settings,
       navigationOptions: () => ({
         // tabBarIcon: ({tintColor}) => (
@@ -66,6 +68,8 @@ const MainTabs = createBottomTabNavigator(
   }
 );
 
+const Navigator = createAppContainer(MainTabs);
+
 interface AppProps {
   store: Store<IStore>
 }
@@ -84,7 +88,7 @@ export default class Main extends Component<AppProps, AppState> {
 
   public render() {
     return (
-      <MainTabs/>
+      <Navigator/>
     );
   }
 
