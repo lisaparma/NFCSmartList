@@ -6,8 +6,7 @@ import Auth from "../firebaseAPI/auth";
 import {withNavigation} from "react-navigation";
 
 
-interface AppProps {
-}
+interface AppProps {}
 
 interface AppState {
   username: string;

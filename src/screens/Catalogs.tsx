@@ -1,27 +1,35 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import {createStore, Store} from 'redux';
 import Auth from "../firebaseAPI/auth";
 
-interface AppProps {
+interface CatalogsProps {
 }
 
-interface AppState {
+interface CatalogsState {
 }
 
-class Catalogs extends Component<AppProps, AppState> {
+class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
-  constructor(props: AppProps) {
+  constructor(props: CatalogsProps) {
     super(props);
     this.state = {
     }
   }
+  static navigationOptions = {
+    drawerLabel: 'Home',
+  };
+
 
   public render() {
     return (
       <View style={styles.container}>
         <Text>Cataloghi</Text>
+        <Button
+          title={"Drawable navigator"}
+          onPress={()=>{}}>
+          Esci
+        </Button>
         <Button
           title={"Esci"}
           onPress={()=>{Auth.logout()}}>

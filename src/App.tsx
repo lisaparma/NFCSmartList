@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {createStore, Store} from 'redux';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 
@@ -19,13 +19,13 @@ const LogStack = createAppContainer(
   {
     Login: {
       screen: () => <Login/>,
-      navigationOptions: (navigation) => ({
+      navigationOptions: () => ({
         header: <View/>,
       }),
     },
     Signin: {
       screen: () => <Signin/>,
-      navigationOptions: (navigation) => ({
+      navigationOptions: () => ({
         header: <View/>,
       }),
     }
@@ -35,8 +35,7 @@ const LogStack = createAppContainer(
   }
 ));
 
-interface AppProps {
-}
+interface AppProps {}
 
 interface AppState {
   auth: boolean;
@@ -65,7 +64,7 @@ export default class App extends Component<AppProps, AppState> {
   public render() {
     if(this.state.auth) {
       return (
-        <Main store = {store}/>
+        <Main/>
       );
     } else {
       return (
@@ -90,15 +89,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });

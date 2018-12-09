@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import {createStore, Store} from 'redux';
 
-interface AppProps {
+interface SettingsProps {
 }
 
-interface AppState {
+interface SettingsState {
 }
 
-class Settings extends Component<AppProps, AppState> {
+class Settings extends Component<SettingsProps, SettingsState> {
 
-  constructor(props: AppProps) {
+  constructor(props: SettingsProps) {
     super(props);
     this.state = {
     }
