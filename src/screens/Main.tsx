@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import {Store} from 'redux';
-import {createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, SafeAreaView, createAppContainer} from "react-navigation";
+import {
+  createBottomTabNavigator,
+  createAppContainer,
+  createDrawerNavigator
+} from "react-navigation";
+import { Icon } from "react-native-elements";
 
-import Auth from "../firebaseAPI/auth";
 import {IStore} from "../redux/IStore";
 import Catalogs from "./Catalogs";
 import Settings from "./Settings";
@@ -24,31 +28,30 @@ const tabbarVisible = (navigation) => {
   return showTabbar;
 };
 
-// TODO: if android  createMaterialTopTabNavigator
+// TODO: if android  createDrawerNavigator
+// iconlist only material https://oblador.github.io/react-native-vector-icons/
 const MainTabs = createBottomTabNavigator(
   {
     'Catalogs': {
       screen: Catalogs,
       navigationOptions: () => ({
-        // tabBarIcon: ({tintColor}) => (
-        //   <Icon
-        //     icon="SharedToMeBold"
-        //     color={tintColor}
-        //     size={3*Style.UM}
-        //   />
-        // )
+        tabBarIcon: ({tintColor}) => (
+          <Icon
+            name='looks'
+            color={tintColor}
+          />
+        )
       })
     },
     'Settings': {
       screen: Settings,
       navigationOptions: () => ({
-        // tabBarIcon: ({tintColor}) => (
-        //   <ZxIcon
-        //     icon="SettingsBold"
-        //     color={tintColor}
-        //     size={2.7*Style.UM}
-        //   />
-        // )
+        tabBarIcon: ({tintColor}) => (
+          <Icon
+            name='settings'
+            color={tintColor}
+          />
+        )
       })
     }
   },

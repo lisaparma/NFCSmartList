@@ -10,6 +10,8 @@ target 'myNFCatalog' do
 
   # Pods for myNFCatalog
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'myNFCatalogTests' do
     inherit! :search_paths
     # Pods for testing
