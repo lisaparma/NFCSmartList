@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {createStore, Store} from 'redux';
+import Auth from "../firebaseAPI/auth";
 
 interface AppProps {
 }
@@ -21,6 +22,11 @@ class Catalogs extends Component<AppProps, AppState> {
     return (
       <View style={styles.container}>
         <Text>Cataloghi</Text>
+        <Button
+          title={"Esci"}
+          onPress={()=>{Auth.logout()}}>
+          Esci
+        </Button>
       </View>
     );
   }

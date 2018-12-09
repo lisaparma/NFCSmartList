@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import {createStore, Store} from 'redux';
+import {createStackNavigator, createAppContainer} from "react-navigation";
+
 
 import {reducer} from "./redux/reducer";
 import {IStore} from "./redux/IStore";
@@ -8,9 +10,30 @@ import {IStore} from "./redux/IStore";
 import Login from "./screens/Login";
 import Main from "./screens/Main";
 import Auth from "./firebaseAPI/auth";
+import Signin from "./screens/Signin";
 
 export const store: Store<IStore> = createStore(reducer);
 
+const LogStack = createAppContainer(
+  createStackNavigator(
+  {
+    Login: {
+      screen: () => <Login/>,
+      navigationOptions: (navigation) => ({
+        header: <View/>,
+      }),
+    },
+    Signin: {
+      screen: () => <Signin/>,
+      navigationOptions: (navigation) => ({
+        header: <View/>,
+      }),
+    }
+  },
+  {
+    initialRouteName: 'Login',
+  }
+));
 
 interface AppProps {
 }
@@ -46,7 +69,7 @@ export default class App extends Component<AppProps, AppState> {
       );
     } else {
       return (
-        <Login/>
+        <LogStack/>
       );
     }
   }

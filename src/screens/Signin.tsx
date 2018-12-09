@@ -6,15 +6,15 @@ import Auth from "../firebaseAPI/auth";
 import {withNavigation} from "react-navigation";
 
 
-interface AppProps {}
-
+interface AppProps {
+}
 
 interface AppState {
   username: string;
   password: string;
 }
 
-class Login extends Component<AppProps, AppState> {
+class Signin extends Component<AppProps, AppState> {
 
   constructor(props: AppProps) {
     super(props);
@@ -36,20 +36,19 @@ class Login extends Component<AppProps, AppState> {
           onChangeText={text => this.setState({password: text})}
         />
         <Button
-          title="Entra"
-          onPress={() => {Auth.signIn(this.state.username, this.state.password)}}
+          title="Registrati"
+          onPress={() => {Auth.registerAccount(this.state.username, this.state.password)}}
         />
         <Button
-          title="Non sono registrato"
-          onPress={()=>this.props.navigation.navigate("Signin")}/>
-
+          title="Skee, sono registrato"
+          onPress={()=>this.props.navigation.navigate("Login")}/>
       </View>
     );
   }
 
 }
 
-export default withNavigation(Login);
+export default withNavigation(Signin);
 
 const styles = StyleSheet.create({
   container: {
@@ -57,15 +56,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
