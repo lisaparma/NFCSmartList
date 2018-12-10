@@ -4,7 +4,6 @@ import {
   createBottomTabNavigator,
   createAppContainer,
   createDrawerNavigator,
-  createStackNavigator
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 

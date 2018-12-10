@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, SafeAreaView} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Auth from "../firebaseAPI/auth";
+import Auth from "../../firebaseAPI/auth";
 
 interface CatalogsProps {
 }
@@ -28,11 +28,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         <Button
           title={"Drawable navigator"}
           onPress={()=>{}}>
-          Esci
-        </Button>
-        <Button
-          title={"Esci"}
-          onPress={()=>{Auth.logout()}}>
           Esci
         </Button>
       </View>

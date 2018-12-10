@@ -4,15 +4,19 @@ import {
   createAppContainer
 } from "react-navigation";
 
-import Catalogs from "./Catalogs";
-import {View} from "react-native";
+import Catalogs from "./CatalogStack/Catalogs";
+import TopBar from "../components/TopBar";
+import {TabBarIOS, View} from "react-native";
 
 const CatalogsStack = createAppContainer(createStackNavigator(
   {
     Catalogs: {
       screen: () => <Catalogs/>,
       navigationOptions: () => ({
-        header: <View/>,
+        header: (props) =>
+                <TopBar
+                  onPressLeft={() => props.navigation.toggleDrawer()}
+                />,
       }),
     },
   },

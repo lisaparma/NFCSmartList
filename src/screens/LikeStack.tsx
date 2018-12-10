@@ -4,7 +4,6 @@ import {
   createAppContainer
 } from "react-navigation";
 
-import Catalogs from "./Catalogs";
 import {View} from "react-native";
 
 const LikesStack = createAppContainer(createStackNavigator(

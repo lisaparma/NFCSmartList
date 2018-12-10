@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import { withNavigation } from 'react-navigation';
+import Auth from "../firebaseAPI/auth";
 
 interface SettingsProps {
 }
@@ -20,6 +21,11 @@ class Settings extends Component<SettingsProps, SettingsState> {
     return (
       <View style={styles.container}>
         <Text>Settings</Text>
+        <Button
+          title={"Esci"}
+          onPress={()=>{Auth.logout()}}>
+          Esci
+        </Button>
       </View>
     );
   }
