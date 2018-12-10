@@ -1,24 +1,51 @@
 import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {
   createBottomTabNavigator,
   createAppContainer,
-  createDrawerNavigator
+  createDrawerNavigator,
+  createStackNavigator
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import Catalogs from "./Catalogs";
 import Settings from "./Settings";
+import CatalogStack from "./CatalogStack"
+import FriendStack from "./FriendStack";
+import LikeStack from "./LikeStack";
 
 // TODO: if android  createDrawerNavigator
-// iconlist only material https://oblador.github.io/react-native-vector-icons/
+// iconlist only material icons https://oblador.github.io/react-native-vector-icons/
+
 const MainTabs = createBottomTabNavigator(
   {
+    'Friends': {
+      screen: FriendStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}: any) => (
+          <Icon
+            name='people'
+            color={tintColor}
+          />
+        )
+      })
+    },
     'Catalogs': {
-      screen: Catalogs,
+      screen: CatalogStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
           <Icon
             name='looks'
+            color={tintColor}
+          />
+        )
+      })
+    },
+    'Likes': {
+      screen: LikeStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({tintColor}: any) => (
+          <Icon
+            name='favorite-border'
             color={tintColor}
           />
         )
@@ -39,6 +66,7 @@ const MainTabs = createBottomTabNavigator(
   {
     navigationOptions: ({ navigation }) => ({
     }),
+    initialRouteName: 'Catalogs',
   }
 );
 
