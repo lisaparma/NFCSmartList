@@ -10,9 +10,14 @@ target 'myNFCatalog' do
 
   # Pods for myNFCatalog
 
+  pod 'React', :path => '../node_modules/react-native'
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
   # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'react-native-nfc-manager', :path => '../node_modules/react-native-nfc-manager'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'myNFCatalogTests' do
     inherit! :search_paths

@@ -51,10 +51,9 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   private ciaone() {
-    console.warn('ciaoooo');
     NfcManager.start({
       onSessionClosedIOS: () => {
-        console.log('ios session closed');
+        console.warn('ios session closed');
       }
     })
     .then(result => {
@@ -69,9 +68,9 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
   private ciaone1() {
       NfcManager.registerTagEvent(
-  tag => {this.setState({xx: "" + ByteParser.byteToString(tag.ndefMessage[0].payload),})},
+      tag => {console.warn(ByteParser.byteToString(tag.ndefMessage[0].payload))},
       'Hold your device over the tag',
-      true
+      false
       )
     }
 
