@@ -18,10 +18,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     xx: "",
     }
   }
-  static navigationOptions = {
-    drawerLabel: 'Home',
-  };
-
 
   public render() {
     return (
@@ -41,7 +37,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         </Button>
         <Text>{this.state.xx}</Text>
         <Button
-          title={"blblblblbl"}
+          title={"START"}
           id={"button"}
           onPress={()=>{this.ciaone1()}}>
           Esci

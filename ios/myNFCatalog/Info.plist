@@ -71,7 +71,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NFC Scan Usage Description</key>
-	<string>YOUR_PRIVACY_DESCRIPTION</string>
+	<key>NFCReaderUsageDescription</key>
+    <string>YOUR_PRIVACY_DESCRIPTION</string>
 </dict>
 </plist>

@@ -48,9 +48,9 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C4660C3F6834E71BC0BE5D0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE86BA7F364FE28A7C8DA1 /* Ionicons.ttf */; };
 		94CAB33C201D4AEBA0628FF7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6002C3441E184B09BD810882 /* Zocial.ttf */; };
-		9614F16E21B6DBA3006B4A53 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9614F16D21B6DBA3006B4A53 /* GoogleService-Info.plist */; };
 		96D9F70321C30A8A003FED02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		96D9F70421C30A9C003FED02 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		96D9F75721C45E2A003FED02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D9F75621C45E2A003FED02 /* GoogleService-Info.plist */; };
 		AA64DC7C53D84830B487AA58 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76E4309F58E64D09A700EF3C /* SimpleLineIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B8146D524FCB4DDCAC265380 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23DE8B01B3CA4FDC8EE16770 /* AntDesign.ttf */; };
@@ -394,9 +394,9 @@
 		8DA72D5C2D74AC28EF585816 /* libPods-myNFCatalog-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myNFCatalog-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B4FDC89D554D688F942BB6 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		9458F8AF9A274FF6AE445181 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		9614F16D21B6DBA3006B4A53 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		96D9F5F521C2E5EC003FED02 /* myNFCatalog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = myNFCatalog.entitlements; path = myNFCatalog/myNFCatalog.entitlements; sourceTree = "<group>"; };
 		96D9F5F621C2E831003FED02 /* NfcManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NfcManager.xcodeproj; path = "../node_modules/react-native-nfc-manager/ios/NfcManager.xcodeproj"; sourceTree = "<group>"; };
+		96D9F75621C45E2A003FED02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		978A314537877C199EAD9AAE /* libPods-myNFCatalog-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myNFCatalog-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF223EB548840E18336FA94 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -644,7 +644,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9614F16D21B6DBA3006B4A53 /* GoogleService-Info.plist */,
+				96D9F75621C45E2A003FED02 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* myNFCatalog */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* myNFCatalogTests */,
@@ -1215,7 +1215,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				9614F16E21B6DBA3006B4A53 /* GoogleService-Info.plist in Resources */,
 				B8146D524FCB4DDCAC265380 /* AntDesign.ttf in Resources */,
 				FB4FEB99BDE945F091C71F2E /* Entypo.ttf in Resources */,
 				2514EEA5D3F342008563DE66 /* EvilIcons.ttf in Resources */,
@@ -1225,6 +1224,7 @@
 				5BC1D717707A4F868756D16B /* FontAwesome5_Regular.ttf in Resources */,
 				7D1929348D494A76B2C8B622 /* FontAwesome5_Solid.ttf in Resources */,
 				6259072C375344E18BDB8A51 /* Foundation.ttf in Resources */,
+				96D9F75721C45E2A003FED02 /* GoogleService-Info.plist in Resources */,
 				8C4660C3F6834E71BC0BE5D0 /* Ionicons.ttf in Resources */,
 				154E6624F1E244A0A152C61C /* MaterialCommunityIcons.ttf in Resources */,
 				63E13E90CB6845359CA02BE8 /* MaterialIcons.ttf in Resources */,
