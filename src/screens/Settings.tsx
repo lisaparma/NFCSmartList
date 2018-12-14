@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Auth from "../firebaseAPI/auth";
+import TopBar from "../components/TopBar";
 
 interface SettingsProps {
 }
@@ -39,6 +40,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
 });

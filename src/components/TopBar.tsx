@@ -3,6 +3,9 @@ import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 're
 import {Icon} from "react-native-elements";
 
 interface TopBarProps {
+  onPressLeft?: any;
+  onPressRight?: any;
+  title: string;
 }
 
 interface TopBarState {
@@ -18,13 +21,21 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
 
   public render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
-          <TouchableOpacity
-          onPress={this.props.onPressLeft}>
-            <Icon name={"looks"}/>
-          </TouchableOpacity>
-          <Text>TopBar</Text>
+          {this.props.onPressLeft &&
+            <TouchableOpacity
+              onPress={this.props.onPressLeft}>
+              <Icon name={"looks"}/>
+            </TouchableOpacity>
+          }
+          <Text>{this.props.title}</Text>
+          {this.props.onPressRight &&
+            <TouchableOpacity
+              onPress={this.props.onPressRight}>
+              <Icon name={"looks"}/>
+            </TouchableOpacity>
+          }
         </View>
       </SafeAreaView>
     );
@@ -36,8 +47,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     height: 50,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFE4E1',
+    backgroundColor: '#C0E1FF',
   },
+  safeArea: {
+    backgroundColor: '#C0E1FF',
+  }
 });

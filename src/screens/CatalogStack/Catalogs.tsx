@@ -8,47 +8,41 @@ interface CatalogsProps {
 }
 
 interface CatalogsState {
+  support: string,
+  xx: string
 }
 
 class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
   constructor(props: CatalogsProps) {
     super(props);
-    this.state = {support: "",
-    xx: "",
+    this.state = {
+      support: "",
+      xx: "",
     }
   }
 
   public render() {
     return (
       <View style={styles.container}>
-        <Text>Cataloghi</Text>
         <Button
-          title={"Drawable navigator"}
-          onPress={()=>{}}>
-          Esci
-        </Button>
+          title={"Vado?"}
+          id={"button"}
+          onPress={()=>{this.start()}}/>
         <Text>{this.state.support}</Text>
         <Button
-          title={"blblblblbl"}
+          title={"Leggimi"}
           id={"button"}
-          onPress={()=>{this.ciaone()}}>
-          Esci
-        </Button>
+          onPress={()=>{this.write()}}/>
         <Text>{this.state.xx}</Text>
-        <Button
-          title={"START"}
-          id={"button"}
-          onPress={()=>{this.ciaone1()}}>
-          Esci
-        </Button>
       </View>
     );
   }
 
-  private ciaone() {
+  private start() {
     NfcManager.start({
       onSessionClosedIOS: () => {
+        NfcManager.unregisterTagEvent();
         console.warn('ios session closed');
       }
     })
@@ -62,15 +56,13 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
       })
   }
 
-  private ciaone1() {
+  private write() {
       NfcManager.registerTagEvent(
-      tag => {console.warn(ByteParser.byteToString(tag.ndefMessage[0].payload))},
+      tag => {this.setState({xx:ByteParser.byteToString(tag.ndefMessage[0].payload)})},
       'Hold your device over the tag',
-      false
+      false,
       )
     }
-
-
 }
 
 
@@ -82,7 +74,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 1000,
-    backgroundColor: '#F5FCFF',
   },
 
 });

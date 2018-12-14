@@ -5,13 +5,20 @@ import {
 } from "react-navigation";
 
 import {View} from "react-native";
+import TopBar from "../components/TopBar";
 
 const FriendsStack = createAppContainer(createStackNavigator(
   {
     Friends: {
       screen: () => <View/>,
       navigationOptions: () => ({
-        header: <View/>,
+        header: (props) =>
+          <TopBar
+            title="Friends"
+            // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
+            onPressLeft={() => {}}
+            onPressRight={() => {}}
+          />,
       }),
     },
   },
