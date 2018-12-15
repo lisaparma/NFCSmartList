@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.mynfcatalog"
@@ -137,8 +137,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-gesture-handler')
-    compile project(':react-native-nfc-manager')
     implementation project(':react-native-nfc-manager')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
