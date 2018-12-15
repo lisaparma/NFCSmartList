@@ -32,11 +32,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGestureHandlerPackage(),
-            new NfcManagerPackage(),
-            new NfcManagerPackage(),
-            new VectorIconsPackage(),
-            new RNGestureHandlerPackage(),
+          new NfcManagerPackage(),
+          new VectorIconsPackage(),
+          new RNGestureHandlerPackage(),
           new RNFirebasePackage(),
           new RNFirebaseAuthPackage()
       );

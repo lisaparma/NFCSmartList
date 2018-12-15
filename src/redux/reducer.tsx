@@ -2,14 +2,16 @@
 
 //import { IStore } from "./IStore";
 
-import {IAuthentication, IInfoAccount} from "./action";
-
+import {IAddCatalog, IAuthentication, IInfoAccount} from "./action";
 
 export const reducer = (
   state = {
     auth: false,
+    user: {},
+    catalogs: {},
+    friends: {},
   },
-  action: IAuthentication | IInfoAccount
+  action: IAuthentication | IInfoAccount | IAddCatalog
 ) => {
   switch (action.type) {
     case 'AUTH':
@@ -31,6 +33,11 @@ export const reducer = (
           uid: action.user.uid,
         }
       };
+    case 'ADD_CATALOG':
+      return {
+        ...state,
+        catalogs: [...state.catalogs, {id: action.id, name: action.name}],
+      }
     default:
       return state;
   }

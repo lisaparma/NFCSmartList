@@ -16,3 +16,8 @@ export interface IInfoAccount extends Action<'INFO'> {
     uid: string;
   },
 }
+
+export interface IAddCatalog extends Action<'ADD_CATALOG'> {
+  id: number,
+  name: string;
+}

@@ -6,7 +6,7 @@ export interface IStore {
   friends: IFriend[];
 }
 
-interface IUser {
+export interface IUser {
 	isNewUser: boolean;
 	email: string;
 	photoURL: string | null;
@@ -17,8 +17,9 @@ interface IUser {
 	uid:string;
 }
 
-interface ICatalog {
-
+export interface ICatalog {
+	id: string;
+	name: string;
 }
 
 interface IFriend {
