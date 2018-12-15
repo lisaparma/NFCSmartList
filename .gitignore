@@ -12,7 +12,7 @@ xcuserdata
 
 #Android/Idea
 .idea
-android/app/
+android/app
 android/build
 android/.gradle
 *.iml
@@ -21,3 +21,8 @@ android/.gradle
 node_modules/
 npm-debug.log
 package-lock.json
+
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore
