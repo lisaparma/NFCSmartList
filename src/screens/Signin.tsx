@@ -28,7 +28,7 @@ class Signin extends Component<AppProps, AppState> {
       <View style={styles.container}>
         <TextInput
           placeholder="Enter username"
-          onChangeText={text => this.setState({username: text})}
+          onChangeText={text => this.setState({username: text.toLocaleLowerCase()})}
         />
         <TextInput
           placeholder="Enter password"

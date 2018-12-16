@@ -8,7 +8,7 @@ export const reducer = (
   state = {
     auth: false,
     user: {},
-    catalogs: {},
+    catalogs: [],
     friends: {},
   },
   action: IAuthentication | IInfoAccount | IAddCatalog

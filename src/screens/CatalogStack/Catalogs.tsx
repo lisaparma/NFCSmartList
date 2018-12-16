@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Auth from "../../firebaseAPI/auth";
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
-import {element} from "prop-types";
-
+import firebase from "react-native-firebase";
+import Database from "../../firebaseAPI/database";
 interface CatalogsProps {
 }
 
@@ -61,6 +60,11 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         onPress={this.add}>
         <Text>Aggiungi</Text>
       </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.plus}
+          onPress={this.databasee}>
+          <Text>Database</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -71,7 +75,9 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
       id: this.state.catalogs.length,
       name: "Un catalogo"
     })
+    Database.addCatalog("catalogo1", "propvaprovaprova");
   }
+
 
   // private start() {
   //   NfcManager.start({
@@ -98,7 +104,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   //     )
   //   }
 }
-
 
 export default withNavigation(Catalogs);
 

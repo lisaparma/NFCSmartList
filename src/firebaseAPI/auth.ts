@@ -2,13 +2,16 @@ import firebase from 'react-native-firebase';
 
 import {store} from "../App";
 import {IAuthentication, IInfoAccount} from "../redux/action";
+import Database from "./database";
 
 export default class Auth {
 
-  // TODO: inserire l'utente registrato nel database
   public static registerAccount(email:string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(value => {Auth.getUserInfo(value);})
+      .then(value => {
+        Auth.getUserInfo(value);
+        Database.addUser(value);
+      })
       .catch(function(error) {
       console.warn(error);
     });
