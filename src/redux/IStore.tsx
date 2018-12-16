@@ -20,6 +20,7 @@ export interface IUser {
 export interface ICatalog {
 	id: string;
 	name: string;
+	description: string;
 }
 
 interface IFriend {

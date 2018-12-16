@@ -1,9 +1,10 @@
-import {applyMiddleware, combineReducers, compose, createStore, Reducer, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {IStore} from "./IStore";
-import {AuthReducer} from "./reducers/AuthReducer";
 
+import {AuthReducer} from "./reducers/AuthReducer";
 import {InitialState} from "./InitialState";
 import {UserReducer} from "./reducers/UserReducer";
+import {CatalogsReducer} from "./reducers/CatalogsReducer";
 
 export class StoreFactory {
 
@@ -12,7 +13,8 @@ export class StoreFactory {
     const Store: Store<IStore> = createStore(
       combineReducers({
         auth: AuthReducer,
-        user: UserReducer
+        user: UserReducer,
+        catalogs: CatalogsReducer
       })
       //InitialState,
       //applyMiddleware(),

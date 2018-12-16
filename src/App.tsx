@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {createStore, Store} from 'redux';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 
 import Login from "./screens/Login";
@@ -9,8 +8,6 @@ import Auth from "./firebaseAPI/auth";
 import Signin from "./screens/Signin";
 import {StoreFactory} from "./redux/StoreFactory";
 
-
-// export const store: Store<IStore> = createStore(reducer);
 const storeFactory = new StoreFactory();
 export const store = storeFactory.createStore();
 
@@ -82,12 +79,3 @@ export default class App extends Component<AppProps, AppState> {
     }
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});

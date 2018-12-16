@@ -2,11 +2,10 @@
 
 //import { IStore } from "./IStore";
 
-import {IAddCatalog, IAuthentication, IInfoAccount} from "../action";
+import {IInfoAccount} from "../action";
 
 export const UserReducer = (
-  state = {
-  },
+  state = {},
   action: IInfoAccount
 ) => {
   switch (action.type) {
@@ -20,7 +19,7 @@ export const UserReducer = (
         displayName: action.displayName,
         emailVerified: action.emailVerified,
         uid: action.uid
-      }
+      };
     default:
       return state;
   }

@@ -1,8 +1,7 @@
 import { Action } from "redux";
+import {ICatalog} from "./IStore";
 
-export interface IAuthentication extends Action<'AUTH'> {
-  auth: boolean,
-}
+export interface IAuthentication extends Action<'LOGIN' | 'LOGOUT'> {}
 
 export interface IInfoAccount extends Action<'INFO'> {
     isNewUser: boolean;
@@ -15,6 +14,10 @@ export interface IInfoAccount extends Action<'INFO'> {
 }
 
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {
-  id: number,
+  id: number;
   name: string;
+}
+
+export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {
+  catalogs: ICatalog[];
 }

@@ -25,14 +25,12 @@ export default class Auth {
       });
   }
 
-  // TODO: middleware caricamento dati dal database
   public static getUserInfo(info?: any) {
     if (!info) {
       if (firebase.auth().currentUser) {
         const user = firebase.auth().currentUser;
         store.dispatch<IAuthentication>({
-          type: "AUTH",
-          auth: true,
+          type: "LOGIN"
         });
         store.dispatch<IInfoAccount>({
           type: "INFO",
@@ -44,11 +42,11 @@ export default class Auth {
           emailVerified: user.emailVerified,
           uid: user.uid,
         })
+        Database.initStore(store.getState().user.uid);
       }
     } else {
       store.dispatch<IAuthentication>({
-        type: "AUTH",
-        auth: true,
+        type: "LOGIN"
       });
       store.dispatch<IInfoAccount>({
         type: "INFO",
@@ -60,6 +58,7 @@ export default class Auth {
         emailVerified: info.user.emailVerified,
         uid: info.user.uid,
       })
+      Database.initStore(store.getState().user.uid);
     }
   }
 
@@ -68,8 +67,7 @@ export default class Auth {
     firebase.auth().signOut()
       .then(value => {
         store.dispatch<IAuthentication>({
-          type: "AUTH",
-          auth: false,
+          type: "LOGOUT",
         })
       });
   }

@@ -1,21 +1,18 @@
-//import { Action, Reducer } from "redux";
-
-//import { IStore } from "./IStore";
-
-import {IAddCatalog, IAuthentication, IInfoAccount} from "../action";
+import {IAuthentication} from "../action";
 
 export const AuthReducer = (
-  state = {
-    auth: false,
-  },
-  action: IAuthentication | IInfoAccount | IAddCatalog
+  state = {},
+  action: IAuthentication
 ) => {
   switch (action.type) {
-    case 'AUTH':
+    case 'LOGIN':
       return {
-        ...state,
-        auth: action.auth,
+        auth: true,
       };
+    case 'LOGOUT':
+      return {
+        auth: false,
+      }
     // case 'ADD_CATALOG':
     //   return {
     //     ...state,

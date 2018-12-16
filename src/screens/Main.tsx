@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
 import {
   createBottomTabNavigator,
   createAppContainer,
-  createDrawerNavigator,
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
