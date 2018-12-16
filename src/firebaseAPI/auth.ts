@@ -20,7 +20,7 @@ export default class Auth {
   public static signIn(email:string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(value => {Auth.getUserInfo(value);})
-      .catch(function(error) {
+      .catch((error) => {
         console.warn(error);
       });
   }
@@ -30,33 +30,35 @@ export default class Auth {
     if (!info) {
       if (firebase.auth().currentUser) {
         const user = firebase.auth().currentUser;
+        store.dispatch<IAuthentication>({
+          type: "AUTH",
+          auth: true,
+        });
         store.dispatch<IInfoAccount>({
           type: "INFO",
-          auth: true,
-          user: {
-            isNewUser: false,
-            email: user.email,
-            photoURL: user.photoURL,
-            phoneNumber: user.phoneNumber,
-            displayName: user.displayName,
-            emailVerified: user.emailVerified,
-            uid: user.uid,
-          }
+          isNewUser: false,
+          email: user.email,
+          photoURL: user.photoURL,
+          phoneNumber: user.phoneNumber,
+          displayName: user.displayName,
+          emailVerified: user.emailVerified,
+          uid: user.uid,
         })
       }
     } else {
+      store.dispatch<IAuthentication>({
+        type: "AUTH",
+        auth: true,
+      });
       store.dispatch<IInfoAccount>({
         type: "INFO",
-        auth: true,
-        user: {
-          isNewUser: info.additionalUserInfo.isNewUser,
-          email: info.user.email,
-          photoURL: info.user.photoURL,
-          phoneNumber: info.user.phoneNumber,
-          displayName: info.user.displayName,
-          emailVerified: info.user.emailVerified,
-          uid: info.user.uid,
-        }
+        isNewUser: info.additionalUserInfo.isNewUser,
+        email: info.user.email,
+        photoURL: info.user.photoURL,
+        phoneNumber: info.user.phoneNumber,
+        displayName: info.user.displayName,
+        emailVerified: info.user.emailVerified,
+        uid: info.user.uid,
       })
     }
   }

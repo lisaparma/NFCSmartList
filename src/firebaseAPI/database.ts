@@ -9,8 +9,7 @@ export default class Database {
       email: info.user.email,
       uid: info.user.uid
     })
-      .then(() => console.warn("inserito"))
-      .catch((ok) => console.warn("non inserito"))
+      .catch((err) => console.warn(err))
   }
 
   public static addCatalog(name: string, description: string){
@@ -21,8 +20,7 @@ export default class Database {
       name: name,
       description: description,
     })
-      .then(() => console.warn("inserito"))
-      .catch((ok) => console.warn("non inserito"))
+      .catch((err) => console.warn(err))
   }
 
 

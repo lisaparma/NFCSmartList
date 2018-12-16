@@ -3,16 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import {createStore, Store} from 'redux';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 
-
-import {reducer} from "./redux/reducer";
-import {IStore} from "./redux/IStore";
-
 import Login from "./screens/Login";
 import Main from "./screens/Main";
 import Auth from "./firebaseAPI/auth";
 import Signin from "./screens/Signin";
+import {StoreFactory} from "./redux/StoreFactory";
 
-export const store: Store<IStore> = createStore(reducer);
+
+// export const store: Store<IStore> = createStore(reducer);
+const storeFactory = new StoreFactory();
+export const store = storeFactory.createStore();
 
 const LogStack = createAppContainer(
   createStackNavigator(

@@ -5,8 +5,6 @@ export interface IAuthentication extends Action<'AUTH'> {
 }
 
 export interface IInfoAccount extends Action<'INFO'> {
-  auth: boolean,
-  user : {
     isNewUser: boolean;
     email: string;
     photoURL: string | null;
@@ -14,7 +12,6 @@ export interface IInfoAccount extends Action<'INFO'> {
     displayName: string | null;
     emailVerified: boolean;
     uid: string;
-  },
 }
 
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {

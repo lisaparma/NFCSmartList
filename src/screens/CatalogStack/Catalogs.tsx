@@ -5,7 +5,6 @@ import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
-import firebase from "react-native-firebase";
 import Database from "../../firebaseAPI/database";
 interface CatalogsProps {
 }
@@ -43,27 +42,22 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   public render() {
-    const elements = (this.state.catalogs).map(
-      (element) => (
-      <View style={styles.item} key={element.id}>
-        <Text> {element.name + element.id} </Text>
-      </View>)
-    );
+    // const elements = (this.state.catalogs).map(
+    //   (element) => (
+    //   <View style={styles.item} key={element.id}>
+    //     <Text> {element.name + element.id} </Text>
+    //   </View>)
+    // );
     return (
       <View style={styles.container}>
-      <ScrollView>
-        <Text> I tuoi cataloghi:</Text>
-        {elements}
-      </ScrollView>
-      <TouchableOpacity
-        style={styles.plus}
-        onPress={this.add}>
-        <Text>Aggiungi</Text>
-      </TouchableOpacity>
+        <ScrollView>
+          <Text> I tuoi cataloghi:</Text>
+          {/*{elements}*/}
+        </ScrollView>
         <TouchableOpacity
           style={styles.plus}
-          onPress={this.databasee}>
-          <Text>Database</Text>
+          onPress={this.add}>
+          <Text>Aggiungi</Text>
         </TouchableOpacity>
       </View>
     );
