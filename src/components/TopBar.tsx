@@ -3,9 +3,11 @@ import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 're
 import {Icon} from "react-native-elements";
 
 interface TopBarProps {
+  iconLeft?: string;
   onPressLeft?: any;
-  onPressRight?: any;
   title: string;
+  iconRight?: string;
+  onPressRight?: any;
 }
 
 interface TopBarState {
@@ -29,7 +31,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
               style={styles.buttons}
               onPress={this.props.onPressLeft}>
               <Icon
-                name={"chevron-left"}
+                name={this.props.iconLeft}
                 size={30}
                 color={"#FFFFF0"}
               />
@@ -48,7 +50,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
               style={styles.buttons}
               onPress={this.props.onPressRight}>
               <Icon
-                name={"more-horiz"}
+                name={this.props.iconRight}
                 size={30}
                 color={"#FFFFF0"}
               />

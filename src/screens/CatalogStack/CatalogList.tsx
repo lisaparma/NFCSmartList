@@ -38,7 +38,10 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
         <TouchableOpacity
           style={styles.item}
           key={this.state.catalogs[element].id}
-          onPress={()=>this.props.navigation.navigate("Catalog")}>
+          onPress={()=> this.props.navigation.navigate(
+            "Catalog",
+            {name: this.state.catalogs[element].name}
+            )}>
           <Text> {this.state.catalogs[element].name} </Text>
         </TouchableOpacity>)
       );
@@ -48,11 +51,6 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
           <Text> I tuoi cataloghi:</Text>
           {elements}
         </ScrollView>
-        <TouchableOpacity
-          style={styles.plus}
-          onPress={this.add}>
-          <Text>Aggiungi</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -65,16 +63,6 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       });
     }
   }
-
-  private add = () => {
-    store.dispatch<IAddCatalog>({
-      type: "ADD_CATALOG",
-      id: Object.keys(this.state.catalogs).length,
-      name: "Un catalogo"
-    });
-    //Database.addCatalog("catalogo", "propvaprovaprova");
-  }
-
 
   // private start() {
   //   NfcManager.start({

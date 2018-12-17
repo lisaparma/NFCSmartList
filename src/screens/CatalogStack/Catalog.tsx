@@ -33,17 +33,10 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   public render() {
-    const elements = Object.keys(this.state.catalogs)
-      .map((element) => (
-        <View style={styles.item} key={this.state.catalogs[element].id}>
-          <Text> {this.state.catalogs[element].name} </Text>
-        </View>)
-      );
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text> I tuoi cataloghi:</Text>
-          {elements}
+          <Text> I tuoi item:</Text>
         </ScrollView>
         <TouchableOpacity
           style={styles.plus}
