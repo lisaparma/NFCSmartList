@@ -17,7 +17,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
                 <TopBar
                   title="Catalogs"
                   // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
-                  onPressLeft={() => {}}
+                  //onPressLeft={() => {}}
                   onPressRight={() => {}}
                 />,
       }),

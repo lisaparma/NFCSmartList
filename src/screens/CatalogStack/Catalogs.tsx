@@ -64,12 +64,12 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   private add = () => {
-    // store.dispatch<IAddCatalog>({
-    //   type: "ADD_CATALOG",
-    //   id: this.state.catalogs.length,
-    //   name: "Un catalogo"
-    // });
-    Database.addCatalog("catalogo3", "propvaprovaprova");
+    store.dispatch<IAddCatalog>({
+      type: "ADD_CATALOG",
+      id: Object.keys(this.state.catalogs).length,
+      name: "Un catalogo"
+    });
+    //Database.addCatalog("catalogo", "propvaprovaprova");
   }
 
 

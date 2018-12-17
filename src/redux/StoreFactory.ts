@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import {IStore} from "./IStore";
 
 import {AuthReducer} from "./reducers/AuthReducer";
@@ -15,7 +15,7 @@ export class StoreFactory {
         auth: AuthReducer,
         user: UserReducer,
         catalogs: CatalogsReducer
-      })
+      }),
       //InitialState,
       //applyMiddleware(),
     );

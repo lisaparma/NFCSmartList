@@ -1,20 +1,25 @@
-import {IPopulateCatalogs} from "../action";
+import {IAddCatalog, IPopulateCatalogs} from "../action";
 
 export const CatalogsReducer = (
-  state = {},
-  action: IPopulateCatalogs
+  state = {
+  },
+  action: IPopulateCatalogs | IAddCatalog
 ) => {
   switch (action.type) {
     case 'POPULATE_CATALOGS_LIST' :
       const newState = {...state};
-      if (typeof action.catalogs === "undefined" || action.catalogs === null) {
-        return state;
-      }
       for (const id in action.catalogs) {
-        if (!action.catalogs.hasOwnProperty(id)) { continue; }
         newState[id] = action.catalogs[id];
       }
       return newState;
+
+    case 'ADD_CATALOG':
+      const newState2= {...state};
+      newState2[action.id] = {
+        id: action.id,
+        name: action.name
+      };
+      return newState2;
     default:
       return state;
   }

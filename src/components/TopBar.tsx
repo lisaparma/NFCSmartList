@@ -23,7 +23,8 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
-          {this.props.onPressLeft &&
+          {
+            this.props.onPressLeft &&
             <TouchableOpacity
               style={styles.buttons}
               onPress={this.props.onPressLeft}>
@@ -34,10 +35,15 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
               />
             </TouchableOpacity>
           }
+          {
+            !this.props.onPressLeft &&
+              <View style={styles.buttons}/>
+          }
           <Text style={styles.text}>
             {this.props.title}
             </Text>
-          {this.props.onPressRight &&
+          {
+            this.props.onPressRight &&
             <TouchableOpacity
               style={styles.buttons}
               onPress={this.props.onPressRight}>
@@ -47,6 +53,10 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
                 color={"#FFFFF0"}
               />
             </TouchableOpacity>
+          }
+          {
+            !this.props.onPressRight &&
+            <View style={styles.buttons}/>
           }
         </View>
       </SafeAreaView>
@@ -68,6 +78,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     padding: 15,
+    width: 65
   },
   text: {
     color: "#FFFFF0",

@@ -1,23 +1,14 @@
 import {IAuthentication} from "../action";
 
 export const AuthReducer = (
-  state = {},
+  state = false,
   action: IAuthentication
 ) => {
   switch (action.type) {
     case 'LOGIN':
-      return {
-        auth: true,
-      };
+      return true;
     case 'LOGOUT':
-      return {
-        auth: false,
-      }
-    // case 'ADD_CATALOG':
-    //   return {
-    //     ...state,
-    //     catalogs: [...state.catalogs, {id: action.id, name: action.name}],
-    //   }
+      return false;
     default:
       return state;
   }

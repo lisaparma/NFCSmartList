@@ -16,7 +16,6 @@ const LikesStack = createAppContainer(createStackNavigator(
           <TopBar
             title="Likes"
             // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
-            onPressLeft={() => {}}
             onPressRight={() => {}}
           />,
       }),

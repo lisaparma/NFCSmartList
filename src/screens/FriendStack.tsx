@@ -16,7 +16,6 @@ const FriendsStack = createAppContainer(createStackNavigator(
           <TopBar
             title="Friends"
             // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
-            onPressLeft={() => {}}
             onPressRight={() => {}}
           />,
       }),
