@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import {
   createStackNavigator,
-  createAppContainer
+  createAppContainer, NavigationActions
 } from "react-navigation";
 
-import Catalogs from "./CatalogStack/Catalogs";
+import CatalogList from "./CatalogStack/CatalogList";
 import TopBar from "../components/TopBar";
-import {TabBarIOS, View} from "react-native";
 
 const CatalogsStack = createAppContainer(createStackNavigator(
   {
-    Catalogs: {
-      screen: () => <Catalogs/>,
+    CatalogList: {
+      screen: () => <CatalogList />,
       navigationOptions: () => ({
         header: (props) =>
                 <TopBar
@@ -22,9 +21,20 @@ const CatalogsStack = createAppContainer(createStackNavigator(
                 />,
       }),
     },
+    Catalog: {
+      screen: () => <CatalogList/>,
+      navigationOptions: () => ({
+        header: (props) =>
+          <TopBar
+            title="Catalog"
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
+            onPressRight={() => {}}
+          />,
+      }),
+    },
   },
   {
-    initialRouteName: 'Catalogs',
+    initialRouteName: 'CatalogList',
   }
 ));
 

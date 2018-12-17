@@ -6,18 +6,18 @@ import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
-interface CatalogsProps {
+interface CatalogListProps {
 }
 
-interface CatalogsState {
+interface CatalogListState {
   catalogs: ICatalog[]
 }
 
-class Catalogs extends Component<CatalogsProps, CatalogsState> {
+class CatalogList extends Component<CatalogListProps, CatalogListState> {
 
   private mUnsubscribeFromStore: any;
 
-  constructor(props: CatalogsProps) {
+  constructor(props: CatalogListProps) {
     super(props);
     this.state = {
       catalogs: [],
@@ -35,9 +35,12 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   public render() {
     const elements = Object.keys(this.state.catalogs)
       .map((element) => (
-        <View style={styles.item} key={this.state.catalogs[element].id}>
+        <TouchableOpacity
+          style={styles.item}
+          key={this.state.catalogs[element].id}
+          onPress={()=>this.props.navigation.navigate("Catalog")}>
           <Text> {this.state.catalogs[element].name} </Text>
-        </View>)
+        </TouchableOpacity>)
       );
     return (
       <View style={styles.container}>
@@ -99,7 +102,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   //   }
 }
 
-export default withNavigation(Catalogs);
+export default withNavigation(CatalogList);
 
 const styles = StyleSheet.create({
   container: {
@@ -109,8 +112,9 @@ const styles = StyleSheet.create({
   item: {
     paddingVertical: 10,
     paddingHorizontal: 50,
-    borderColor: "black",
+    borderColor: "#87CEFA",
     borderWidth: 2,
+    borderRadius: 30,
     margin: 10
   },
   plus: {
