@@ -14,14 +14,19 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
-  public static addCatalog(name: string, description: string) {
+  public static addCatalog(id: string, name: string, description: string) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/";
-    const id = Object.keys(store.getState().catalogs).length;
     firebase.database().ref(path + id).set({
       id: id,
       name: name,
       description: description,
     })
+      .catch((err) => console.warn(err))
+  }
+
+  public static removeCatalog(id: string) {
+    const path = 'users/'+ store.getState().user.uid + "/catalogs/";
+    firebase.database().ref(path + id).remove()
       .catch((err) => console.warn(err))
   }
 

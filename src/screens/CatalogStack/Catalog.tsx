@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native
 import { withNavigation } from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
-import {IAddCatalog} from "../../redux/action";
+import {IAddCatalog, IRemoveCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 interface CatalogsProps {
@@ -40,8 +40,8 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         </ScrollView>
         <TouchableOpacity
           style={styles.plus}
-          onPress={this.add}>
-          <Text>Aggiungi</Text>
+          onPress={this.remove}>
+          <Text>Elimina catalogo</Text>
         </TouchableOpacity>
       </View>
     );
@@ -56,13 +56,13 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     }
   }
 
-  private add = () => {
-    store.dispatch<IAddCatalog>({
-      type: "ADD_CATALOG",
-      id: Object.keys(this.state.catalogs).length,
-      name: "Un catalogo"
+  private remove = () => {
+    const id = this.props.navigation.getParam("id");
+    store.dispatch<IRemoveCatalog>({
+      type: "REMOVE_CATALOG",
+      id: id
     });
-    //Database.addCatalog("catalogo", "propvaprovaprova");
+    Database.removeCatalog(id);
   }
 
 

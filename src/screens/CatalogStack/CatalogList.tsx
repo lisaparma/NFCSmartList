@@ -40,7 +40,8 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
           key={this.state.catalogs[element].id}
           onPress={()=> this.props.navigation.navigate(
             "Catalog",
-            {name: this.state.catalogs[element].name}
+            {name: this.state.catalogs[element].name,
+                    id: this.state.catalogs[element].id}
             )}>
           <Text> {this.state.catalogs[element].name} </Text>
         </TouchableOpacity>)
