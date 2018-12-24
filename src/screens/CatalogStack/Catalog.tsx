@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
 import {IStore, ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
+import {Overlay} from "react-native-elements";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -38,7 +39,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   public render() {
-    console.log(this.state.items)
+    console.log(this.props.navigation.getParam("menu"));
     const elements = Object.keys(this.state.items)
       .map((element) => (
         <TouchableOpacity
@@ -64,6 +65,15 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           onPress={this.remove}>
           <Text>Elimina catalogo</Text>
         </TouchableOpacity>
+        {
+          this.props.navigation.getParam("menu") &&
+        <View
+            style={styles.dropdown}>
+          <View style={styles.menu}>
+            <Text>wete</Text>
+          </View>
+        </View>
+        }
       </View>
     );
   }
@@ -120,6 +130,16 @@ const styles = StyleSheet.create({
   },
   plus: {
     padding: 20
+  },
+  dropdown: {
+    height: 50,
+    width: "100%",
+    position: "absolute",
+    alignItems: "flex-end",
+  },
+  menu: {
+    backgroundColor: "#87CEFA",
+    width: 100
   }
 
 });
