@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
+
 interface CatalogListProps {
+  navigation: NavigationScreenProp<object>;
 }
 
 interface CatalogListState {
-  catalogs: ICatalog[]
+  catalogs: {[id: string]: ICatalog}
 }
 
 class CatalogList extends Component<CatalogListProps, CatalogListState> {
@@ -20,7 +22,7 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
   constructor(props: CatalogListProps) {
     super(props);
     this.state = {
-      catalogs: [],
+      catalogs: {},
     }
   }
 
@@ -37,11 +39,11 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       .map((element) => (
         <TouchableOpacity
           style={styles.item}
-          key={this.state.catalogs[element].id}
+          key={this.state.catalogs[element].cid}
           onPress={()=> this.props.navigation.navigate(
             "Catalog",
             {name: this.state.catalogs[element].name,
-                    id: this.state.catalogs[element].id}
+                    id: this.state.catalogs[element].cid}
             )}>
           <Text> {this.state.catalogs[element].name} </Text>
         </TouchableOpacity>)

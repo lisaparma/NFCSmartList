@@ -2,7 +2,6 @@ import firebase from 'react-native-firebase';
 
 import {store} from "../App";
 import {IPopulateCatalogs} from "../redux/action";
-import {ICatalog} from "../redux/IStore";
 
 export default class Database {
   public static addUser(info: any){
@@ -17,7 +16,7 @@ export default class Database {
   public static addCatalog(id: string, name: string, description: string) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/";
     firebase.database().ref(path + id).set({
-      id: id,
+      cid: id,
       name: name,
       description: description,
     })
@@ -33,14 +32,14 @@ export default class Database {
   public static initStore(uid) {
     firebase.database().ref('/users/' + uid + "/catalogs").once('value')
       .then((snapshot) => {
-      const catalogs: ICatalog[] = [];
+      let catalogs = {};
       snapshot.forEach(
         (item) => {
-          catalogs.push({
-            id: item.val().id,
+          catalogs[item.val().cid] = {
+            cid: item.val().cid,
             name: item.val().name,
             description: item.val().description,
-          });
+          };
       });
       store.dispatch<IPopulateCatalogs>({
         type: "POPULATE_CATALOGS_LIST",

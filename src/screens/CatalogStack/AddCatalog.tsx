@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
-import {NavigationActions, withNavigation} from 'react-navigation';
+import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
-import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 
 
 interface AddCatalogProps {
+  navigation: NavigationScreenProp<object>;
 }
 
 interface AddCatalogState {
@@ -47,20 +47,20 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   }
 
   private add = () => {
-  if(this.state.name !== null && this.state.description !== null) {
-    var uuid = require('react-native-uuid');
-    const id = uuid.v4();
-    store.dispatch<IAddCatalog>({
-      type: "ADD_CATALOG",
-      id: id,
-      name: this.state.name,
-      description: this.state.description,
-      class: "standard"
-    });
-    Database.addCatalog(id, this.state.name, this.state.description);
-    this.props.navigation.dispatch(NavigationActions.back());
-    this.props.navigation.navigate("Catalog", {name: this.state.name, id: id});
-  }
+    if(this.state.name !== null && this.state.description !== null) {
+      var uuid = require('react-native-uuid');
+      const id = uuid.v4();
+      store.dispatch<IAddCatalog>({
+        type: "ADD_CATALOG",
+        cid: id,
+        name: this.state.name,
+        description: this.state.description,
+        class: "standard"
+      });
+      Database.addCatalog(id, this.state.name, this.state.description);
+      this.props.navigation.dispatch(NavigationActions.back());
+      this.props.navigation.navigate("Catalog", {name: this.state.name, id: id});
+    }
   }
 }
 

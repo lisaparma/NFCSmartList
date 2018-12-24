@@ -5,6 +5,7 @@ import {AuthReducer} from "./reducers/AuthReducer";
 import {InitialState} from "./InitialState";
 import {UserReducer} from "./reducers/UserReducer";
 import {CatalogsReducer} from "./reducers/CatalogsReducer";
+import devToolsEnhancer from 'remote-redux-devtools';
 
 export class StoreFactory {
 
@@ -18,6 +19,7 @@ export class StoreFactory {
       }),
       //InitialState,
       //applyMiddleware(),
+      devToolsEnhancer()
     );
     return Store;
   }

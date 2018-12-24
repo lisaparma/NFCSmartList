@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
-import {IAddCatalog, IRemoveCatalog} from "../../redux/action";
+import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
+
 interface CatalogsProps {
+  navigation: NavigationScreenProp<object>;
 }
 
 interface CatalogsState {
-  catalogs: ICatalog[]
+  catalogs: {[id: string]: ICatalog}
 }
 
 class Catalogs extends Component<CatalogsProps, CatalogsState> {
@@ -20,7 +22,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   constructor(props: CatalogsProps) {
     super(props);
     this.state = {
-      catalogs: [],
+      catalogs: {},
     }
   }
 
@@ -40,6 +42,11 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         </ScrollView>
         <TouchableOpacity
           style={styles.plus}
+          onPress={this.addItem}>
+          <Text>Aggiungi item</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.plus}
           onPress={this.remove}>
           <Text>Elimina catalogo</Text>
         </TouchableOpacity>
@@ -54,16 +61,30 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         catalogs: currentState.catalogs,
       });
     }
-  }
+  };
 
   private remove = () => {
-    const id = this.props.navigation.getParam("id");
+    const cid = this.props.navigation.getParam("id");
     store.dispatch<IRemoveCatalog>({
       type: "REMOVE_CATALOG",
-      id: id
+      id: cid
     });
-    Database.removeCatalog(id);
-  }
+    Database.removeCatalog(cid);
+  };
+
+  private addItem = () => {
+    const cid = this.props.navigation.getParam("id");
+    var uuid = require('react-native-uuid');
+    const iid = uuid.v4();
+    store.dispatch<IAddItem>({
+      type: "ADD_ITEM",
+      cid: cid,
+      iid: iid,
+      name: "sav",
+      description: "afwer",
+      tag: "null"
+    });
+  };
 
 
   // private start() {

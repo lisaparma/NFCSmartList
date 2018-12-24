@@ -2,7 +2,7 @@
 export interface IStore {
 	auth: boolean,
 	user: IUser;
-	catalogs: ICatalog[];
+	catalogs: { [id: string]: ICatalog};
   friends: IFriend[];
 }
 
@@ -18,7 +18,7 @@ export interface IUser {
 }
 
 export interface ICatalog {
-	id: string;
+	cid: string;
 	class: "standard";
 	name: string;
 	description: string;
@@ -26,9 +26,10 @@ export interface ICatalog {
 }
 
 export interface IItem {
-	id: string;
+	iid: string;
 	name: string;
 	description: string;
+	tag: string;
 }
 
 interface IFriend {

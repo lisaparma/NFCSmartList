@@ -14,7 +14,7 @@ export interface IInfoAccount extends Action<'INFO'> {
 }
 
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {
-  id: number;
+  cid: number;
   name: string;
   class: "standard";
   description: string;
@@ -27,4 +27,12 @@ export interface IRemoveCatalog extends Action<'REMOVE_CATALOG'> {
 
 export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {
   catalogs: ICatalog[];
+}
+
+export interface IAddItem extends Action<'ADD_ITEM'> {
+  cid: string;
+  iid: string;
+  name: string;
+  description: string;
+  tag: string | null;
 }
