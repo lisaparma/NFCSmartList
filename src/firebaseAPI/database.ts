@@ -19,6 +19,8 @@ export default class Database {
       cid: id,
       name: name,
       description: description,
+      class: "standard",
+      items: {},
     })
       .catch((err) => console.warn(err))
   }
@@ -39,6 +41,8 @@ export default class Database {
             cid: item.val().cid,
             name: item.val().name,
             description: item.val().description,
+            items: item.val().items,
+            class: item.val().class
           };
       });
       store.dispatch<IPopulateCatalogs>({
@@ -46,6 +50,17 @@ export default class Database {
         catalogs: catalogs,
       });
     });
+  }
+
+  public static addItem(cid: string, iid: string, name: string, description: string) {
+    const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid + "/items/";
+    firebase.database().ref(path + iid).set({
+      iid: iid,
+      name: name,
+      description: description,
+      description: description,
+    })
+      .catch((err) => console.warn(err))
   }
 
 

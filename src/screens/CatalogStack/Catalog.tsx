@@ -4,7 +4,7 @@ import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
-import {IStore, ICatalog} from "../../redux/IStore";
+import {IStore, ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 
 interface CatalogsProps {
@@ -12,7 +12,8 @@ interface CatalogsProps {
 }
 
 interface CatalogsState {
-  catalogs: {[id: string]: ICatalog}
+  items: {[id: string]: IItem};
+  cid: string;
 }
 
 class Catalogs extends Component<CatalogsProps, CatalogsState> {
@@ -21,8 +22,10 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
   constructor(props: CatalogsProps) {
     super(props);
+    const cid = this.props.navigation.getParam("id");
     this.state = {
-      catalogs: {},
+      items: store.getState().catalogs[cid].items? {...store.getState().catalogs[cid].items} : {},
+      cid: cid,
     }
   }
 
@@ -35,10 +38,21 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   public render() {
+    console.log(this.state.items)
+    const elements = Object.keys(this.state.items)
+      .map((element) => (
+        <TouchableOpacity
+          style={styles.item}
+          key={this.state.items[element].iid}
+        >
+          <Text> {this.state.items[element].name} </Text>
+        </TouchableOpacity>)
+      );
     return (
       <View style={styles.container}>
         <ScrollView>
           <Text> I tuoi item:</Text>
+          {elements}
         </ScrollView>
         <TouchableOpacity
           style={styles.plus}
@@ -55,25 +69,27 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   private onStoreChange = () => {
-    const currentState: IStore = store.getState();
-    if(currentState.catalogs !== this.state.catalogs) {
+    const currentState: ICatalog = store.getState().catalogs[this.state.cid];
+    if(currentState.items !== this.state.items) {
       this.setState({
-        catalogs: currentState.catalogs,
+        items: {...currentState.items},
       });
     }
   };
 
   private remove = () => {
-    const cid = this.props.navigation.getParam("id");
+    this.componentWillUnmount();
+    const cid = this.state.cid;
     store.dispatch<IRemoveCatalog>({
       type: "REMOVE_CATALOG",
-      id: cid
+      cid: cid
     });
     Database.removeCatalog(cid);
+    this.props.navigation.navigate("CatalogList");
   };
 
   private addItem = () => {
-    const cid = this.props.navigation.getParam("id");
+    const cid = this.state.cid;
     var uuid = require('react-native-uuid');
     const iid = uuid.v4();
     store.dispatch<IAddItem>({
@@ -81,36 +97,10 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
       cid: cid,
       iid: iid,
       name: "sav",
-      description: "afwer",
-      tag: "null"
+      description: "afwer"
     });
+    Database.addItem(cid, iid, "ewf", "drg")
   };
-
-
-  // private start() {
-  //   NfcManager.start({
-  //     onSessionClosedIOS: () => {
-  //       NfcManager.unregisterTagEvent();
-  //       console.warn('ios session closed');
-  //     }
-  //   })
-  //   .then(result => {
-  //         console.warn('start OK', result);
-  //         this.setState({support: "true",});
-  //     })
-  //     .catch(error => {
-  //         console.warn('device does not support nfc!');
-  //         this.setState({support: "false",});
-  //     })
-  // }
-  //
-  // private write() {
-  //     NfcManager.registerTagEvent(
-  //     tag => {this.setState({xx:ByteParser.byteToString(tag.ndefMessage[0].payload)})},
-  //     'Hold your device over the tag',
-  //     false,
-  //     )
-  //   }
 }
 
 export default withNavigation(Catalogs);

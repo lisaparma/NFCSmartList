@@ -22,14 +22,13 @@ export interface ICatalog {
 	class: "standard";
 	name: string;
 	description: string;
-	items: IItem[];
+	items: { [id: string]: IItem};
 }
 
 export interface IItem {
 	iid: string;
 	name: string;
 	description: string;
-	tag: string;
 }
 
 interface IFriend {

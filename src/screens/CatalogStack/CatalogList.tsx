@@ -62,7 +62,7 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
     const currentState: IStore = store.getState();
     if(currentState.catalogs !== this.state.catalogs) {
       this.setState({
-        catalogs: currentState.catalogs,
+        catalogs: {...currentState.catalogs},
       });
     }
   }

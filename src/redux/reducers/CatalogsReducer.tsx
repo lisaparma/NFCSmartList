@@ -20,21 +20,24 @@ export const CatalogsReducer = (
         name: action.name,
         description: action.description,
         class: "standard",
+        items: {}
       };
       return newState2;
 
     case 'REMOVE_CATALOG':
       const newState3 = {...state};
-      delete newState3[action.id];
+      delete newState3[action.cid];
       return newState3;
 
     case 'ADD_ITEM':
       const newState4 = {...state};
+      if (!newState4[action.cid]["items"]) {
+        newState4[action.cid]["items"] = {};
+      }
       newState4[action.cid]["items"][action.iid] = {
         iid: action.iid,
         name:  action.name,
         description: action.description,
-        tag: action.tag,
       };
       return newState4;
 

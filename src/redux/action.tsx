@@ -22,7 +22,7 @@ export interface IAddCatalog extends Action<'ADD_CATALOG'> {
 }
 
 export interface IRemoveCatalog extends Action<'REMOVE_CATALOG'> {
-  id: number;
+  cid: string;
 }
 
 export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {
@@ -34,5 +34,4 @@ export interface IAddItem extends Action<'ADD_ITEM'> {
   iid: string;
   name: string;
   description: string;
-  tag: string | null;
 }
