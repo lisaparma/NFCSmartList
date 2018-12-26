@@ -63,5 +63,11 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
+  public static removeItem(cid: string, iid: string) {
+    const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid + "/items/";
+    firebase.database().ref(path + iid ).remove()
+      .catch((err) => console.warn(err))
+  }
+
 
 }

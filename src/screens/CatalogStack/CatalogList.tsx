@@ -6,6 +6,7 @@ import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
+import CatalogCard from "../../components/CatalogCard";
 
 interface CatalogListProps {
   navigation: NavigationScreenProp<object>;
@@ -37,17 +38,12 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
   public render() {
     const elements = Object.keys(this.state.catalogs)
       .map((element) => (
-        <TouchableOpacity
-          style={styles.item}
+        <CatalogCard
           key={this.state.catalogs[element].cid}
-          onPress={()=> this.props.navigation.navigate(
-            "Catalog",
-            {name: this.state.catalogs[element].name,
-                    id: this.state.catalogs[element].cid}
-            )}>
-          <Text> {this.state.catalogs[element].name} </Text>
-        </TouchableOpacity>)
-      );
+          navigation={this.props.navigation}
+          catalog={this.state.catalogs[element]}
+        />
+      ));
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -99,14 +95,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flex: 1,
-  },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
   },
   plus: {
     padding: 20

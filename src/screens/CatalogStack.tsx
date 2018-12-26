@@ -8,6 +8,7 @@ import CatalogList from "./CatalogStack/CatalogList";
 import TopBar from "../components/TopBar";
 import Catalog from "./CatalogStack/Catalog";
 import AddCatalog from "./CatalogStack/AddCatalog";
+import DetailsItem from "./CatalogStack/DetailsItem";
 
 const CatalogsStack = createAppContainer(createStackNavigator(
   {
@@ -43,6 +44,17 @@ const CatalogsStack = createAppContainer(createStackNavigator(
         header: (props) =>
           <TopBar
             title="Add catalog"
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
+          />,
+      }),
+    },
+    DetailsItem: {
+      screen: () => <DetailsItem/>,
+      navigationOptions: () => ({
+        header: (props) =>
+          <TopBar
+            title="Details item"
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,

@@ -35,3 +35,8 @@ export interface IAddItem extends Action<'ADD_ITEM'> {
   name: string;
   description: string;
 }
+
+export interface IRemoveItem extends Action<'REMOVE_ITEM'> {
+  cid: string;
+  iid: string;
+}

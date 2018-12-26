@@ -6,7 +6,7 @@ import {store} from "../../App";
 import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
 import {IStore, ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
-import {Overlay} from "react-native-elements";
+import ItemCard from "../../components/ItemCard";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -42,12 +42,11 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     console.log(this.props.navigation.getParam("menu"));
     const elements = Object.keys(this.state.items)
       .map((element) => (
-        <TouchableOpacity
-          style={styles.item}
+        <ItemCard
           key={this.state.items[element].iid}
-        >
-          <Text> {this.state.items[element].name} </Text>
-        </TouchableOpacity>)
+          navigation={this.props.navigation}
+          item={this.state.items[element]}
+          cid={this.state.cid}/>)
       );
     return (
       <View style={styles.container}>
