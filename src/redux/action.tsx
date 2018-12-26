@@ -40,3 +40,10 @@ export interface IRemoveItem extends Action<'REMOVE_ITEM'> {
   cid: string;
   iid: string;
 }
+
+export interface IEditItem extends Action<'EDIT_ITEM'> {
+  cid: string;
+  iid: string;
+  name: string;
+  description: string;
+}

@@ -1,9 +1,9 @@
-import {IAddCatalog, IAddItem, IPopulateCatalogs, IRemoveCatalog, IRemoveItem} from "../action";
+import {IAddCatalog, IAddItem, IEditItem, IPopulateCatalogs, IRemoveCatalog, IRemoveItem} from "../action";
 
 export const CatalogsReducer = (
   state = {
   },
-  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem
+  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem
 ) => {
   switch (action.type) {
     case 'POPULATE_CATALOGS_LIST' :
@@ -45,6 +45,12 @@ export const CatalogsReducer = (
       const newState5 = {...state};
       delete newState5[action.cid]["items"][action.iid];
       return newState5;
+
+    case 'EDIT_ITEM':
+      const newState6 = {...state};
+      newState6[action.cid]["items"][action.iid].name = action.name;
+      newState6[action.cid]["items"][action.iid].description = action.description;
+      return newState6;
 
     default:
       return state;

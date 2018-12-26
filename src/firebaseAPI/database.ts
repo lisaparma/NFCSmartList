@@ -68,5 +68,11 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
+  public static editItem(cid: string, iid: string, name: string, description: string) {
+    const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid + "/items/";
+    firebase.database().ref(path + iid).update({name: name, description: description})
+      .catch((err) => console.warn(err))
+  }
+
 
 }
