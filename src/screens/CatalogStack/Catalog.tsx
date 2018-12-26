@@ -7,6 +7,7 @@ import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
 import {IStore, ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 import ItemCard from "../../components/ItemCard";
+import AddItem from "../../components/AddItem";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -54,11 +55,9 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           <Text> I tuoi item:</Text>
           {elements}
         </ScrollView>
-        <TouchableOpacity
-          style={styles.plus}
-          onPress={this.addItem}>
-          <Text>Aggiungi item</Text>
-        </TouchableOpacity>
+
+        <AddItem cid={this.state.cid}/>
+
         <TouchableOpacity
           style={styles.plus}
           onPress={this.remove}>

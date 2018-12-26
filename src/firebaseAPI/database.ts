@@ -58,7 +58,6 @@ export default class Database {
       iid: iid,
       name: name,
       description: description,
-      description: description,
     })
       .catch((err) => console.warn(err))
   }

@@ -61,7 +61,6 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
 
   private remove = () => {
     this.componentWillUnmount();
-    console.warn(this.state.cid)
     store.dispatch<IRemoveItem>({
       type: "REMOVE_ITEM",
       cid: this.state.cid,
