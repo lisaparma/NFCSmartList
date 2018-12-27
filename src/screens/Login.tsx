@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Button, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, TouchableOpacity} from 'react-native';
 
 import Auth from "../firebaseAPI/auth";
-import {withNavigation} from "react-navigation";
+import {NavigationScreenProp, withNavigation} from "react-navigation";
 
 
-interface AppProps {}
+interface AppProps {
+  navigation: NavigationScreenProp<object>;
+}
 
 
 interface AppState {
@@ -26,24 +28,45 @@ class Login extends Component<AppProps, AppState> {
   public render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require("../../assets/nfc-logo.png")}
+        />
         <TextInput
-          placeholder="Enter username"
+          style={styles.input}
+          placeholder="E-mail"
+          autoCapitalize={"none"}
+          autoCorrect={false}
           onChangeText={text => this.setState({username: text.toLocaleLowerCase()})}
         />
         <TextInput
-          placeholder="Enter password"
+          style={styles.input}
+          placeholder="Password"
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
         />
-        <Button
-          title="Entra"
-          onPress={() => {Auth.signIn(this.state.username, this.state.password)}}
-        />
-        <Button
-          title="Non sono registrato"
-          onPress={()=>this.props.navigation.navigate("Signin")}/>
+        <TouchableOpacity
+          style={[styles.button, styles.entryButton]}
+          onPress={this.signIn}>
+          <Text style={styles.textButton}>Entra</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={()=>this.props.navigation.navigate("Signin")}>
+          <Text style={styles.text}>Non sono registrato</Text>
+        </TouchableOpacity>
 
       </View>
     );
+  }
+
+  private signIn = () => {
+    if(this.state.username !== (undefined && "") && this.state.password !== (undefined && "")) {
+      Auth.signIn(this.state.username, this.state.password);
+    }
   }
 
 }
@@ -55,6 +78,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#10A0E0',
   },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 30
+  },
+  input: {
+    backgroundColor: "#FFFFF0",
+    width: "50%",
+    borderRadius: 5,
+    padding: 10,
+    margin: 5
+  },
+  button: {
+    padding: 5,
+    margin: 5,
+    alignItems: "center"
+  },
+  entryButton: {
+    marginTop: 15,
+    backgroundColor: '#0b6d99',
+    width: "50%",
+    paddingVertical: 10,
+    borderRadius: 3,
+  },
+  textButton: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFFFF0"
+  },
+  text: {
+    textDecorationLine: "underline",
+  }
 });

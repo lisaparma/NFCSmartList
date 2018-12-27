@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TextInput} from 'react-native';
-import {createStore, Store} from 'redux';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 
 import Auth from "../firebaseAPI/auth";
-import {withNavigation} from "react-navigation";
+import {NavigationScreenProp, withNavigation} from "react-navigation";
 
 
-interface AppProps {}
+interface AppProps {
+  navigation: NavigationScreenProp<object>;
+}
 
 interface AppState {
   username: string;
@@ -27,22 +28,39 @@ class Signin extends Component<AppProps, AppState> {
     return (
       <View style={styles.container}>
         <TextInput
-          placeholder="Enter username"
+          style={styles.input}
+          placeholder="E-mail"
+          autoCapitalize={"none"}
+          autoCorrect={false}
           onChangeText={text => this.setState({username: text.toLocaleLowerCase()})}
         />
         <TextInput
-          placeholder="Enter password"
+          style={styles.input}
+          placeholder="Password"
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
         />
-        <Button
-          title="Registrati"
-          onPress={() => {Auth.registerAccount(this.state.username, this.state.password)}}
-        />
-        <Button
-          title="Skee, sono registrato"
-          onPress={()=>this.props.navigation.navigate("Login")}/>
+        <TouchableOpacity
+          style={[styles.button, styles.entryButton]}
+          onPress={this.registerAcc}
+        >
+          <Text style={styles.textButton}>Registrati</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={()=>this.props.navigation.navigate("Login")}>
+          <Text style={styles.text}>Sono già registrato</Text>
+        </TouchableOpacity>
       </View>
     );
+  }
+
+  private registerAcc = () => {
+    if(this.state.username !== (undefined && "") && this.state.password !== (undefined && "")) {
+      Auth.registerAccount(this.state.username, this.state.password);
+    }
   }
 
 }
@@ -54,6 +72,33 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#10A0E0',
   },
+  input: {
+    backgroundColor: "#FFFFF0",
+    width: "50%",
+    borderRadius: 5,
+    padding: 10,
+    margin: 5
+  },
+  button: {
+    padding: 5,
+    margin: 5,
+    alignItems: "center"
+  },
+  entryButton: {
+    marginTop: 15,
+    backgroundColor: '#0b6d99',
+    width: "50%",
+    paddingVertical: 10,
+    borderRadius: 3,
+  },
+  textButton: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFFFF0"
+  },
+  text: {
+    textDecorationLine: "underline",
+  }
 });
