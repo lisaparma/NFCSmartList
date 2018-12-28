@@ -24,14 +24,25 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
   public render() {
     return (
       <TouchableOpacity
-        style={styles.item}
-        onPress={()=> this.props.navigation.navigate(
-          "DetailsItem",
-          {item: this.props.item,
-                    cid: this.props.cid}
-        )}>
-        <Text> Name: {this.props.item.name} </Text>
-        <Text> Description: {this.props.item.description} </Text>
+        style={styles.container}
+        onPress={()=> {}}>
+        <View>
+          <Text> Name: {this.props.item.name} </Text>
+          <Text> Description: {this.props.item.description} </Text>
+        </View>
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={()=> this.props.navigation.navigate(
+            "DetailsItem",
+            {item: this.props.item,
+              cid: this.props.cid}
+          )}
+        >
+          <Icon
+            name={"info"}
+            size={30}
+          />
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   }
@@ -40,18 +51,19 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
+    borderColor: "#bcbdbe",
+    borderWidth: 0.5,
+    margin: 5,
     flexDirection: "row",
-    height: 50,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#10A0E0',
+    justifyContent: "space-between",
+    backgroundColor: "#FFFFFF",
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: '#bcbdbe',
+    shadowOpacity: 1.0,
+
   },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
-  },
+  icon: {
+    padding: 10
+  }
 });

@@ -31,7 +31,7 @@ const MainTabs = createBottomTabNavigator(
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
           <Icon
-            name='looks'
+            name='assignment'
             color={tintColor}
           />
         )

@@ -29,18 +29,21 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   public render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.text}> Aggiungi un catalogo:</Text>
         <TextInput
+          style={styles.input}
           placeholder="Name"
           onChangeText={text => this.setState({name: text})}
         />
         <TextInput
+          style={styles.input}
           placeholder="Description"
           onChangeText={text => this.setState({description: text})}
         />
         <TouchableOpacity
-          style={styles.plus}
+          style={styles.button}
           onPress={this.add}>
-          <Text>Aggiungi</Text>
+          <Text style={styles.textButton}>Aggiungi</Text>
         </TouchableOpacity>
       </View>
     );
@@ -68,19 +71,35 @@ export default withNavigation(AddCatalog);
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    padding: 10
   },
-  item: {
+  text: {
+    fontSize: 25,
+    color: "#0b6d99",
+    fontFamily: "Yanone Kaffeesatz"
+  },
+  input: {
+    padding: 10,
+    fontSize: 20,
+    fontFamily: "Yanone Kaffeesatz"
+  },
+  button: {
+    padding: 5,
+    marginHorizontal: "25%",
+    alignItems: "center",
+    marginTop: 15,
+    backgroundColor: '#0b6d99',
+    width: "50%",
     paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
+    borderRadius: 3,
   },
-  plus: {
-    padding: 20
-  }
+  textButton: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#FFFFF0",
+    fontFamily: "Yanone Kaffeesatz"
+  },
+
 
 });

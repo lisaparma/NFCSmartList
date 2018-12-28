@@ -23,14 +23,22 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
   public render() {
     return (
       <TouchableOpacity
-        style={styles.item}
+        style={styles.container}
         onPress={()=> this.props.navigation.navigate(
           "Catalog",
           {name: this.props.catalog.name,
             id: this.props.catalog.cid}
         )}>
-        <Text> Name: {this.props.catalog.name} </Text>
-        <Text> Description: {this.props.catalog.description} </Text>
+        <View style={styles.image}>
+          <Icon
+            name={"assignment"}
+            size={50}
+          />
+        </View>
+        <View style={styles.textBox}>
+          <Text style={styles.text1}> {this.props.catalog.name} </Text>
+          <Text style={styles.text2}> {this.props.catalog.description} </Text>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -39,18 +47,28 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    height: 50,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#10A0E0',
-  },
-  item: {
     paddingVertical: 10,
-    paddingHorizontal: 50,
     borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
+    borderWidth: 1,
+    borderRadius: 15,
+    borderTopLeftRadius: 0,
+    margin: 10,
+    flexDirection: "row",
+    alignItems: "flex-start"
   },
+  image: {
+    paddingHorizontal: 10
+  },
+  textBox: {
+  },
+  text1: {
+    color: "#0b6d99",
+    fontSize: 20,
+    fontFamily: "Yanone Kaffeesatz"
+  },
+  text2: {
+    fontSize: 15,
+    fontFamily: "Yanone Kaffeesatz"
+  }
+
 });

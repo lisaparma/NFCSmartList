@@ -52,7 +52,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text> I tuoi item:</Text>
+          <Text style={styles.text}> I tuoi item:</Text>
           {elements}
         </ScrollView>
 
@@ -115,16 +115,13 @@ export default withNavigation(Catalogs);
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    padding: 10
   },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
+  text: {
+    fontSize: 25,
+    color: "#0b6d99",
+    fontFamily: "Yanone Kaffeesatz"
   },
   plus: {
     padding: 20
