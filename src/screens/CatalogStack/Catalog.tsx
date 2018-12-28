@@ -8,6 +8,7 @@ import {IStore, ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 import ItemCard from "../../components/ItemCard";
 import AddItem from "../../components/AddItem";
+import {Icon} from "react-native-elements";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -51,26 +52,49 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
       );
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView style={styles.scroll}>
           <Text style={styles.text}> I tuoi item:</Text>
           {elements}
         </ScrollView>
 
         <AddItem cid={this.state.cid}/>
 
-        <TouchableOpacity
-          style={styles.plus}
-          onPress={this.remove}>
-          <Text>Elimina catalogo</Text>
-        </TouchableOpacity>
         {
           this.props.navigation.getParam("menu") &&
-        <View
+          <View
             style={styles.dropdown}>
-          <View style={styles.menu}>
-            <Text>wete</Text>
+            <View style={styles.menu}>
+              <TouchableOpacity
+                style={styles.itemMenu}
+                onPress={()=>{}}>
+                <Text style={styles.textMenu}>
+                    NFC Check
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.itemMenu}
+                onPress={()=>{}}>
+                <Text style={styles.textMenu}>
+                    Informazioni
+                </Text>
+              </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.itemMenu}
+                  onPress={this.remove}>
+                  <Text style={[styles.textMenu, {color:"#e01038"}]}>
+                      Elimina catalogo
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.closeMenu}
+                    onPress={()=>{this.props.navigation.setParams({"menu": false})}}>
+                    <Icon
+                        name={"keyboard-arrow-up"}
+                        size={30}
+                    />
+                </TouchableOpacity>
+            </View>
           </View>
-        </View>
         }
       </View>
     );
@@ -95,20 +119,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     Database.removeCatalog(cid);
     this.props.navigation.navigate("CatalogList");
   };
-
-  private addItem = () => {
-    const cid = this.state.cid;
-    var uuid = require('react-native-uuid');
-    const iid = uuid.v4();
-    store.dispatch<IAddItem>({
-      type: "ADD_ITEM",
-      cid: cid,
-      iid: iid,
-      name: "sav",
-      description: "afwer"
-    });
-    Database.addItem(cid, iid, "ewf", "drg")
-  };
 }
 
 export default withNavigation(Catalogs);
@@ -116,6 +126,8 @@ export default withNavigation(Catalogs);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scroll:{
     padding: 10
   },
   text: {
@@ -123,18 +135,35 @@ const styles = StyleSheet.create({
     color: "#0b6d99",
     fontFamily: "Yanone Kaffeesatz"
   },
-  plus: {
-    padding: 20
-  },
   dropdown: {
-    height: 50,
-    width: "100%",
+    flex: 1,
     position: "absolute",
-    alignItems: "flex-end",
+    alignContent: "center",
+    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    width: "100%",
+    height: "100%",
+    paddingHorizontal: 1
   },
   menu: {
-    backgroundColor: "#87CEFA",
-    width: 100
+    backgroundColor: "#FFFFFF",
+    width: "100%",
+    borderRadius: 10,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+    paddingHorizontal: 10
+  },
+  itemMenu:{
+    padding: 5,
+    paddingVertical: 10,
+    alignItems: "center",
+    borderBottomWidth: 0.5,
+    borderColor: "#0b6d99",
+  },
+  textMenu: {
+    fontSize: 20,
+    fontFamily: "Yanone Kaffeesatz"
+  },
+  closeMenu: {
+    paddingVertical: 5
   }
-
 });

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog, IItem} from "../redux/IStore";
-import {NavigationScreenProp} from "react-navigation";
 import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
@@ -33,7 +31,10 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         >{this.state.name}</TextInput>
         <TouchableOpacity
           onPress={this.addItem}>
-          <Text>Aggiungi item</Text>
+        <Icon
+          name={"add-circle-outline"}
+          size={30}
+          />
         </TouchableOpacity>
       </View>
     );
@@ -54,23 +55,23 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
       this.setState({name: ""});
     }
   };
-
 }
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10,
+    borderColor: "#bcbdbe",
+    borderWidth: 0.5,
+    margin: 5,
     flexDirection: "row",
-    height: 50,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#10A0E0',
+    justifyContent: "space-between",
+    backgroundColor: "#FFFFFF",
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: '#bcbdbe',
+    shadowOpacity: 1.0,
+
   },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
-  },
+  icon: {
+    padding: 10
+  }
 });
