@@ -79,11 +79,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#10A0E0',
   },
   buttons: {
-    padding: 15,
+    paddingHorizontal: 15,
     width: 65
   },
   text: {
     color: "#FFFFF0",
-    fontSize: 20
+    fontSize: 30,
+    fontWeight: "bold",
+    fontFamily: "Yanone Kaffeesatz"
   }
 });

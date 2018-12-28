@@ -90,7 +90,9 @@ const styles = StyleSheet.create({
     width: "50%",
     borderRadius: 5,
     padding: 10,
-    margin: 5
+    margin: 5,
+    fontSize: 15,
+    fontFamily: "Yanone Kaffeesatz"
   },
   button: {
     padding: 5,
@@ -105,11 +107,13 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   textButton: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
-    color: "#FFFFF0"
+    color: "#FFFFF0",
+    fontFamily: "Yanone Kaffeesatz"
   },
   text: {
     textDecorationLine: "underline",
+    fontFamily: "Yanone Kaffeesatz"
   }
 });

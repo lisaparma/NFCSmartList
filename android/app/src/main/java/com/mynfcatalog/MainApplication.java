@@ -3,6 +3,10 @@ package com.mynfcatalog;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import community.revteltech.nfc.NfcManagerPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import io.invertase.firebase.RNFirebasePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import community.revteltech.nfc.NfcManagerPackage;
 import community.revteltech.nfc.NfcManagerPackage;
@@ -33,6 +37,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new NfcManagerPackage(),
+            new RNGestureHandlerPackage(),
+            new RNFirebasePackage(),
           new NfcManagerPackage(),
           new VectorIconsPackage(),
           new RNGestureHandlerPackage(),

@@ -7,6 +7,9 @@
     "ios": "react-native run-ios",
     "android": "react-native run-android"
   },
+  "rnpm": {
+    "assets": ["./assets/fonts/"]
+  },
   "dependencies": {
     "buffer": "^5.2.1",
     "react": "^16.6.1",

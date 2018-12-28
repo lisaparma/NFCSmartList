@@ -3,9 +3,7 @@ import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
-import {IAddCatalog} from "../../redux/action";
 import {IStore, ICatalog} from "../../redux/IStore";
-import Database from "../../firebaseAPI/database";
 import CatalogCard from "../../components/CatalogCard";
 
 interface CatalogListProps {
@@ -47,8 +45,10 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text> I tuoi cataloghi:</Text>
+          <Text style={styles.text}> I tuoi cataloghi:</Text>
+          <View style={styles.elements}>
           {elements}
+          </View>
         </ScrollView>
       </View>
     );
@@ -93,11 +93,17 @@ export default withNavigation(CatalogList);
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    padding: 5
   },
-  plus: {
-    padding: 20
+  text: {
+    fontSize: 25,
+    color: "#0b6d99",
+    fontFamily: "Yanone Kaffeesatz"
+
+  },
+  elements: {
+
   }
 
 });

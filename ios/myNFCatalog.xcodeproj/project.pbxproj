@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -57,6 +56,10 @@
 		C0E2B70814F941E2903CFFC1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90B4FDC89D554D688F942BB6 /* FontAwesome.ttf */; };
 		F4B464BE1C6DE48995DBA6CD /* libPods-myNFCatalogTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 108F4744C4234EFD9B948F4E /* libPods-myNFCatalogTests.a */; };
 		FB4FEB99BDE945F091C71F2E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 566B72C337ED47D1B059FA0C /* Entypo.ttf */; };
+		595B468ECC29468985576E39 /* YanoneKaffeesatz-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5132E116BD134B80B0CD9091 /* YanoneKaffeesatz-Bold.ttf */; };
+		37062AF3B74B47309155AE3D /* YanoneKaffeesatz-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E3B0CE4095C41DCB91D2FB8 /* YanoneKaffeesatz-ExtraLight.ttf */; };
+		B723318DC7444EFF8D42AA5B /* YanoneKaffeesatz-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0A49690C46E4F458C5FC2B4 /* YanoneKaffeesatz-Light.ttf */; };
+		46262314BFA24D34A40DBB3C /* YanoneKaffeesatz-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 796DBC40D3B24907B4AD79F8 /* YanoneKaffeesatz-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -405,6 +408,10 @@
 		BB1097D299C9475783A07210 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		FB60BA0A51B54803B86A9E53 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		FD91CABF3BD44089A0F7903A /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
+		5132E116BD134B80B0CD9091 /* YanoneKaffeesatz-Bold.ttf */ = {isa = PBXFileReference; name = "YanoneKaffeesatz-Bold.ttf"; path = "../assets/fonts/YanoneKaffeesatz-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4E3B0CE4095C41DCB91D2FB8 /* YanoneKaffeesatz-ExtraLight.ttf */ = {isa = PBXFileReference; name = "YanoneKaffeesatz-ExtraLight.ttf"; path = "../assets/fonts/YanoneKaffeesatz-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A0A49690C46E4F458C5FC2B4 /* YanoneKaffeesatz-Light.ttf */ = {isa = PBXFileReference; name = "YanoneKaffeesatz-Light.ttf"; path = "../assets/fonts/YanoneKaffeesatz-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		796DBC40D3B24907B4AD79F8 /* YanoneKaffeesatz-Regular.ttf */ = {isa = PBXFileReference; name = "YanoneKaffeesatz-Regular.ttf"; path = "../assets/fonts/YanoneKaffeesatz-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -688,6 +695,10 @@
 				BB1097D299C9475783A07210 /* Octicons.ttf */,
 				76E4309F58E64D09A700EF3C /* SimpleLineIcons.ttf */,
 				6002C3441E184B09BD810882 /* Zocial.ttf */,
+				5132E116BD134B80B0CD9091 /* YanoneKaffeesatz-Bold.ttf */,
+				4E3B0CE4095C41DCB91D2FB8 /* YanoneKaffeesatz-ExtraLight.ttf */,
+				A0A49690C46E4F458C5FC2B4 /* YanoneKaffeesatz-Light.ttf */,
+				796DBC40D3B24907B4AD79F8 /* YanoneKaffeesatz-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1231,6 +1242,10 @@
 				7D9A7D2FC73440889FCC0E15 /* Octicons.ttf in Resources */,
 				AA64DC7C53D84830B487AA58 /* SimpleLineIcons.ttf in Resources */,
 				94CAB33C201D4AEBA0628FF7 /* Zocial.ttf in Resources */,
+				595B468ECC29468985576E39 /* YanoneKaffeesatz-Bold.ttf in Resources */,
+				37062AF3B74B47309155AE3D /* YanoneKaffeesatz-ExtraLight.ttf in Resources */,
+				B723318DC7444EFF8D42AA5B /* YanoneKaffeesatz-Light.ttf in Resources */,
+				46262314BFA24D34A40DBB3C /* YanoneKaffeesatz-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
