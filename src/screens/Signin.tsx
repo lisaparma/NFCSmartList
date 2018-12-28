@@ -12,6 +12,8 @@ interface AppProps {
 interface AppState {
   username: string;
   password: string;
+  password2: string;
+  error: string;
 }
 
 class Signin extends Component<AppProps, AppState> {
@@ -21,12 +23,15 @@ class Signin extends Component<AppProps, AppState> {
     this.state = {
       username: undefined,
       password: undefined,
+      password2: undefined,
+      error: undefined
     }
   }
 
   public render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.error}>{this.state.error}</Text>
         <TextInput
           style={styles.input}
           placeholder="E-mail"
@@ -41,6 +46,14 @@ class Signin extends Component<AppProps, AppState> {
           autoCorrect={false}
           secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Ripeti password"
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          secureTextEntry={true}
+          onChangeText={text => this.setState({password2: text})}
         />
         <TouchableOpacity
           style={[styles.button, styles.entryButton]}
@@ -58,9 +71,27 @@ class Signin extends Component<AppProps, AppState> {
   }
 
   private registerAcc = () => {
-    if(this.state.username !== (undefined && "") && this.state.password !== (undefined && "")) {
+    if(this.check()) {
       Auth.registerAccount(this.state.username, this.state.password);
     }
+  };
+
+  private check(): boolean {
+    if(this.state.username === (undefined && "")
+      && this.state.password === (undefined && "")
+      && this.state.password2 === (undefined && "")){
+      this.setState({error: "Compila tutti i campi"});
+      return false;
+    }
+    if(this.state.password.toString().length < 8) {
+      this.setState({error: "Password troppo corta"});
+      return false;
+    }
+    if(this.state.password !== this.state.password2){
+      this.setState({error: "Le due password non corrispondono"});
+      return false;
+    }
+    return true;
   }
 
 }
@@ -100,5 +131,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textDecorationLine: "underline",
+  },
+  error:{
+    color: "#e01038",
   }
 });
