@@ -23,12 +23,14 @@ export interface ICatalog {
 	name: string;
 	description: string;
 	items: { [id: string]: IItem};
+	check?: { [id: string]: IItem};
 }
 
 export interface IItem {
 	iid: string;
 	name: string;
-	description: string;
+	description?: string;
+	check?: boolean;
 }
 
 interface IFriend {

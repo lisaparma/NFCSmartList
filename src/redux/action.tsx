@@ -14,7 +14,7 @@ export interface IInfoAccount extends Action<'INFO'> {
 }
 
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {
-  cid: number;
+  cid: string;
   name: string;
   class: "standard";
   description: string;
@@ -46,4 +46,15 @@ export interface IEditItem extends Action<'EDIT_ITEM'> {
   iid: string;
   name: string;
   description: string;
+}
+
+export interface ICheckInItem extends Action<'CHECKIN_ITEM'> {
+  cid: string;
+  iid: string;
+  name: string;
+}
+
+export interface ICheckOutItem extends Action<'CHECKOUT_ITEM'> {
+  cid: string;
+  iid: string;
 }

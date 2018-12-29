@@ -21,7 +21,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
   public render() {
     return (
       <View style={styles.container}>
-        <Text>Settings</Text>
+        <TopBar title={"Settings"}/>
         <Button
           title={"Esci"}
           onPress={()=>{Auth.logout()}}>
@@ -38,7 +38,5 @@ export default withNavigation(Settings);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

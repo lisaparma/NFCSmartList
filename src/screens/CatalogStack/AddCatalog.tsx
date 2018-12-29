@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
-import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
@@ -100,6 +99,4 @@ const styles = StyleSheet.create({
     color: "#FFFFF0",
     fontFamily: "Yanone Kaffeesatz"
   },
-
-
 });

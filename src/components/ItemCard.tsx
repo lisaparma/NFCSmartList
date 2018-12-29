@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog, IItem} from "../redux/IStore";
+import {IItem} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
+import {store} from "../App";
 
 interface ItemCardProps {
   navigation: NavigationScreenProp<object>;
@@ -11,21 +12,45 @@ interface ItemCardProps {
 }
 
 interface ItemCardState {
+  check: boolean;
 }
 
 export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
 
+  private mUnsubscribeFromStore: any;
+
   constructor(props: ItemCardProps) {
     super(props);
     this.state = {
+      check: store.getState().catalogs[this.props.cid].items[this.props.item.iid].check,
     }
+  }
+
+  public componentDidMount(): void {
+    this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
+  }
+
+  public componentWillUnmount(): void {
+    this.mUnsubscribeFromStore();
   }
 
   public render() {
     return (
       <TouchableOpacity
         style={styles.container}
-        onPress={()=> {}}>
+        onPress={this.check}>
+        {!this.state.check &&
+          <Icon
+            name={"crop-din"}
+            size={30}
+          />
+        }
+        {this.state.check &&
+          <Icon
+              name={"check"}
+              size={30}
+          />
+        }
         <View>
           <Text> Name: {this.props.item.name} </Text>
           <Text> Description: {this.props.item.description} </Text>
@@ -45,6 +70,32 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
         </TouchableOpacity>
       </TouchableOpacity>
     );
+  }
+
+  private check = () => {
+    if(this.state.check) {
+      store.dispatch({
+        type: "CHECKOUT_ITEM",
+        cid: this.props.cid,
+        iid: this.props.item.iid,
+      });
+    } else {
+      store.dispatch({
+        type: "CHECKIN_ITEM",
+        cid: this.props.cid,
+        iid: this.props.item.iid,
+        name: this.props.item.name
+      });
+    }
+  }
+
+  private onStoreChange = () => {
+    const currentState: IItem = store.getState().catalogs[this.props.cid].items[this.props.item.iid];
+    if(currentState.check !== this.state.check) {
+      this.setState({
+        check: currentState.check,
+      });
+    }
   }
 
 }

@@ -15,7 +15,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
     CatalogList: {
       screen: () => <CatalogList />,
       navigationOptions: () => ({
-        header: (props) =>
+        header: (props: any) =>
           <TopBar
             title="Catalogs"
             // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
@@ -27,7 +27,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
     },
     Catalog: {
       screen: () => <Catalog/>,
-      navigationOptions: (props) => ({
+      navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
             title={props.navigation.getParam("name")}
@@ -41,7 +41,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
     AddCatalog: {
       screen: () => <AddCatalog/>,
       navigationOptions: () => ({
-        header: (props) =>
+        header: (props: any) =>
           <TopBar
             title="Add catalog"
             iconLeft={"chevron-left"}
@@ -52,7 +52,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
     DetailsItem: {
       screen: () => <DetailsItem/>,
       navigationOptions: () => ({
-        header: (props) =>
+        header: (props: any) =>
           <TopBar
             title="Details item"
             iconLeft={"chevron-left"}

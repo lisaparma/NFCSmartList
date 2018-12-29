@@ -1,15 +1,27 @@
-import {IAddCatalog, IAddItem, IEditItem, IPopulateCatalogs, IRemoveCatalog, IRemoveItem} from "../action";
+import {
+  IAddCatalog,
+  IAddItem,
+  ICheckInItem, ICheckOutItem,
+  IEditItem,
+  IPopulateCatalogs,
+  IRemoveCatalog,
+  IRemoveItem
+} from "../action";
+import {ICatalog} from "../IStore";
 
 export const CatalogsReducer = (
-  state = {
+  state: { [id: string]: ICatalog}  = {
   },
-  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem
+  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem | ICheckInItem | ICheckOutItem
 ) => {
   switch (action.type) {
     case 'POPULATE_CATALOGS_LIST' :
       const newState = {...state};
-      for (const id in action.catalogs) {
-        newState[id] = action.catalogs[id];
+      for (const cid in action.catalogs) {
+        newState[cid] = action.catalogs[cid];
+        for (const iid in action.catalogs[cid]["items"]) {
+          action.catalogs[cid]["items"][iid].check = false;
+        }
       }
       return newState;
 
@@ -38,6 +50,7 @@ export const CatalogsReducer = (
         iid: action.iid,
         name:  action.name,
         description: action.description,
+        check: false,
       };
       return newState4;
 
@@ -51,6 +64,25 @@ export const CatalogsReducer = (
       newState6[action.cid]["items"][action.iid].name = action.name;
       newState6[action.cid]["items"][action.iid].description = action.description;
       return newState6;
+
+    case 'CHECKIN_ITEM':
+      const newState7 = {...state};
+      if (!newState7[action.cid]["check"]) {
+        newState7[action.cid]["check"] = {};
+      }
+      newState7[action.cid]["check"][action.iid] = {
+        iid: action.iid,
+        name:  action.name,
+      };
+      newState7[action.cid]["items"][action.iid].check = true;
+      return newState7;
+
+    case 'CHECKOUT_ITEM':
+      const newState8 = {...state};
+      delete newState8[action.cid]["check"][action.iid];
+      newState8[action.cid]["items"][action.iid].check = false;
+      return newState8;
+
 
     default:
       return state;

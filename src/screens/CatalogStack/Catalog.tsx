@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, Modal} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
-import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
-import {IAddCatalog, IAddItem, IRemoveCatalog} from "../../redux/action";
-import {IStore, ICatalog, IItem} from "../../redux/IStore";
+import {IRemoveCatalog} from "../../redux/action";
+import {ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 import ItemCard from "../../components/ItemCard";
 import AddItem from "../../components/AddItem";

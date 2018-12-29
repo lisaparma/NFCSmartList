@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
