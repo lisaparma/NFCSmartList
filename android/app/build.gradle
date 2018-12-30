@@ -137,10 +137,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-nfc-manager')
-    compile project(':react-native-gesture-handler')
-    compile project(':react-native-firebase')
     implementation project(':react-native-nfc-manager')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
