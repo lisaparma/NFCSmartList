@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     shadowOffset:{  width: 5,  height: 5,  },
     shadowColor: '#bcbdbe',
     shadowOpacity: 1.0,
+    elevation: 5
 
   },
   icon: {

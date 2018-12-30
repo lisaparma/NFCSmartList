@@ -19,7 +19,7 @@ export class StoreFactory {
       }),
       //InitialState,
       //applyMiddleware(),
-      //devToolsEnhancer()
+      devToolsEnhancer()
     );
     return Store;
   }

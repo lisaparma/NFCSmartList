@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {PixelRatio, Platform, StyleSheet, Text, View} from 'react-native';
 import {createStackNavigator, createAppContainer} from "react-navigation";
+import NfcManager from 'react-native-nfc-manager'
 
 import Login from "./screens/Login";
 import Main from "./screens/Main";
@@ -52,6 +53,16 @@ export default class App extends Component<AppProps, AppState> {
   public componentDidMount(): void {
     this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
     Auth.getUserInfo();
+    NfcManager.isSupported()
+      .then((supp) => {
+        store.dispatch({
+          type: "DEVICE_INFO",
+          pixelRatio: PixelRatio.get(),
+          os: Platform.OS,
+          nfc: supp
+        })
+      })
+      .catch(err => console.warn(err))
   }
 
   public componentWillUnmount(): void {

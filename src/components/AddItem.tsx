@@ -63,12 +63,14 @@ const styles = StyleSheet.create({
     borderColor: "#bcbdbe",
     borderWidth: 0.5,
     margin: 5,
+    marginTop: 0,
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#FFFFFF",
     shadowOffset:{  width: 5,  height: 5,  },
     shadowColor: '#bcbdbe',
     shadowOpacity: 1.0,
+    elevation: 5
 
   },
   icon: {

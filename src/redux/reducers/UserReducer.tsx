@@ -2,11 +2,11 @@
 
 //import { IStore } from "./IStore";
 
-import {IInfoAccount} from "../action";
+import {IInfoAccount, IInfoDevice} from "../action";
 
 export const UserReducer = (
   state = {},
-  action: IInfoAccount
+  action: IInfoAccount | IInfoDevice
 ) => {
   switch (action.type) {
     case 'INFO' :
@@ -20,6 +20,13 @@ export const UserReducer = (
         emailVerified: action.emailVerified,
         uid: action.uid
       };
+    case "DEVICE_INFO":
+      return{
+        ...state,
+        pixelRatio: action.pixelRatio,
+        os: action.os,
+        nfc: action.nfc,
+      }
     default:
       return state;
   }

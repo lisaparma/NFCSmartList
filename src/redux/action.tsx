@@ -13,6 +13,12 @@ export interface IInfoAccount extends Action<'INFO'> {
     uid: string;
 }
 
+export interface IInfoDevice extends Action<'DEVICE_INFO'> {
+  pixelRatio: number;
+  os: "ios" | "android";
+  nfc: boolean;
+}
+
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {
   cid: string;
   name: string;

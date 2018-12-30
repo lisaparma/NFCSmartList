@@ -40,7 +40,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   public render() {
-    console.log(this.props.navigation.getParam("menu"));
     const elements = Object.keys(this.state.items)
       .map((element) => (
         <ItemCard

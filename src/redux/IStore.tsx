@@ -1,3 +1,4 @@
+import {PixelRatio, Platform} from "react-native";
 
 export interface IStore {
 	auth: boolean,
@@ -14,7 +15,10 @@ export interface IUser {
 	displayName: string | null;
 	providerID: "password";
 	emailVerified: boolean;
-	uid:string;
+	uid: string;
+	pixelRatio: number;
+	os: "ios" | "android";
+	nfc: boolean;
 }
 
 export interface ICatalog {

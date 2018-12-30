@@ -8,7 +8,9 @@
     "android": "react-native run-android"
   },
   "rnpm": {
-    "assets": ["./assets/fonts/"]
+    "assets": [
+      "./assets/fonts/"
+    ]
   },
   "dependencies": {
     "buffer": "^5.2.1",
@@ -33,7 +35,7 @@
     "babel-preset-react-native": "^5",
     "jest": "23.6.0",
     "react-native-typescript-transformer": "^1.2.10",
-    "remote-redux-devtools": "^0.5.14",
+    "remote-redux-devtools": "^0.5.16",
     "typescript": "^3.0.1"
   },
   "jest": {
