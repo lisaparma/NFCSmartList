@@ -58,12 +58,13 @@ export default class Database {
     });
   }
 
-  public static addItem(cid: string, iid: string, name: string, description: string) {
+  public static addItem(cid: string, iid: string, name: string, description: string, tag: string) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid + "/items/";
     firebase.database().ref(path + iid).set({
       iid: iid,
       name: name,
       description: description,
+      tag: tag
     })
       .catch((err) => console.warn(err))
   }

@@ -27,7 +27,6 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
   }
 
   public render() {
-    console.warn(this.state.tag);
     return (
       <View style={styles.container}>
         <TextInput
@@ -40,6 +39,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           <Icon
             name={"nfc"}
             size={30}
+            color={this.state.tag !== ""? "#48a23a" : "#bcbdbe"}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -62,10 +62,11 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         cid: this.props.cid,
         iid: iid,
         name: this.state.name,
-        description: ""
+        description: "",
+        tag: this.state.tag,
       });
-      Database.addItem(this.props.cid, iid, this.state.name, "");
-      this.setState({name: ""});
+      Database.addItem(this.props.cid, iid, this.state.name, "", this.state.tag);
+      this.setState({name: "", tag: ""});
     }
   };
 
@@ -100,7 +101,8 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           NfcManager.registerTagEvent(
             tag => {
               this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
-              this.write(tagID)
+              this.write(tagID);
+              this.setState({tag: tagID});
             },
             'Hold your device over the tag',
             true,

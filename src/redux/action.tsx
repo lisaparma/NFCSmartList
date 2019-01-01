@@ -46,6 +46,7 @@ export interface IAddItem extends Action<'ADD_ITEM'> {
   iid: string;
   name: string;
   description: string;
+  tag: string;
 }
 
 export interface IRemoveItem extends Action<'REMOVE_ITEM'> {

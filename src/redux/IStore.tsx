@@ -34,6 +34,7 @@ export interface IItem {
 	iid: string;
 	name: string;
 	description?: string;
+	tag: string;
 	check?: boolean;
 }
 

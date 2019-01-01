@@ -56,6 +56,7 @@ export const CatalogsReducer = (
         iid: action.iid,
         name:  action.name,
         description: action.description,
+        tag: action.tag,
         check: false,
       };
       return newState4;
