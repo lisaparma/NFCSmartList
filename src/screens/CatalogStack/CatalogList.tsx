@@ -62,31 +62,6 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       });
     }
   }
-
-  // private start() {
-  //   NfcManager.start({
-  //     onSessionClosedIOS: () => {
-  //       NfcManager.unregisterTagEvent();
-  //       console.warn('ios session closed');
-  //     }
-  //   })
-  //   .then(result => {
-  //         console.warn('start OK', result);
-  //         this.setState({support: "true",});
-  //     })
-  //     .catch(error => {
-  //         console.warn('device does not support nfc!');
-  //         this.setState({support: "false",});
-  //     })
-  // }
-  //
-  // private write() {
-  //     NfcManager.registerTagEvent(
-  //     tag => {this.setState({xx:ByteParser.byteToString(tag.ndefMessage[0].payload)})},
-  //     'Hold your device over the tag',
-  //     false,
-  //     )
-  //   }
 }
 
 export default withNavigation(CatalogList);
