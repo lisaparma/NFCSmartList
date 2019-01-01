@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import {ICatalog, IItem} from "./IStore";
+import {ICatalog, IItem, IFriend} from "./IStore";
 
 export interface IAuthentication extends Action<'LOGIN' | 'LOGOUT'> {}
 
@@ -70,4 +70,13 @@ export interface ICheckInItem extends Action<'CHECKIN_ITEM'> {
 export interface ICheckOutItem extends Action<'CHECKOUT_ITEM'> {
   cid: string;
   iid: string;
+}
+
+export interface IPopulateFriends extends Action<'POPULATE_FRIENDS_LIST'> {
+  friends: { [uid: string]: IFriend};
+}
+
+export interface IAddFriend extends Action<'ADD_FRIEND'> {
+  uid: string;
+  email: string;
 }

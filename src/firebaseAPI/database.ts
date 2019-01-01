@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 
 import {store} from "../App";
-import {IPopulateCatalogs} from "../redux/action";
+import {IPopulateCatalogs, IPopulateFriends} from "../redux/action";
 
 export default class Database {
   public static addUser(info: any){
@@ -56,6 +56,20 @@ export default class Database {
         catalogs: catalogs,
       });
     });
+    firebase.database().ref('/users/' + uid + "/friends").once('value')
+      .then((snapshot) => {
+        let friends = {};
+        snapshot.forEach(
+          (item) => {
+            friends[item.val().uid] = {
+              email: item.val().email,
+            };
+          });
+        store.dispatch<IPopulateFriends>({
+          type: "POPULATE_FRIENDS_LIST",
+          friends: friends,
+        });
+      });
   }
 
   public static addItem(cid: string, iid: string, name: string, description: string, tag: string) {
@@ -81,5 +95,13 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
+  public static addFriend(id: string, email: string) {
+    const path = 'users/'+ store.getState().user.uid + "/friends/";
+    firebase.database().ref(path + id).set({
+      uid: id,
+      email: email,
+    })
+      .catch((err) => console.warn(err))
+  }
 
 }

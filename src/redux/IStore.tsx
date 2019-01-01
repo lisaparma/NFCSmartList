@@ -4,7 +4,7 @@ export interface IStore {
 	auth: boolean,
 	user: IUser;
 	catalogs: { [id: string]: ICatalog};
-  friends: IFriend[];
+  friends: { [uid: string]: IFriend};
 }
 
 export interface IUser {
@@ -38,6 +38,7 @@ export interface IItem {
 	check?: boolean;
 }
 
-interface IFriend {
-
+export interface IFriend {
+	uid: string;
+	email: string;
 }

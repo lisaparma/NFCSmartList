@@ -4,13 +4,14 @@ import {
   createAppContainer
 } from "react-navigation";
 
-import {View} from "react-native";
+
 import TopBar from "../components/TopBar";
+import Friends from "./FriendStack/Friends";
 
 const FriendsStack = createAppContainer(createStackNavigator(
   {
     Friends: {
-      screen: () => <View/>,
+      screen: () => <Friends/>,
       navigationOptions: () => ({
         header: (props) =>
           <TopBar
