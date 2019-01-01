@@ -8,6 +8,7 @@ import Database from "../../firebaseAPI/database";
 import ItemCard from "../../components/ItemCard";
 import AddItem from "../../components/AddItem";
 import {Icon} from "react-native-elements";
+import NfcManager, {ByteParser} from "react-native-nfc-manager";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -64,7 +65,9 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
             <View style={styles.menu}>
               <TouchableOpacity
                 style={styles.itemMenu}
-                onPress={()=>{this.props.navigation.setParams({"menu": false})}}>
+                onPress={()=>{
+                  this.NFCheck();
+                  this.props.navigation.setParams({"menu": false})}}>
                 <Text style={styles.textMenu}>
                     NFC Check
                 </Text>
@@ -111,6 +114,39 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
       });
     }
   };
+
+  private checkOne(tag: string) {
+    for (let item in this.state.items) {
+      console.warn(this.state.items[item].tag)
+      console.warn(tag)
+      if(this.state.items[item].tag === tag) {
+        console.warn("ok")
+        store.dispatch({
+          type: "CHECKIN_ITEM",
+          cid: this.state.cid,
+          iid: this.state.items[item].iid,
+          name: this.state.items[item].name
+        });
+      }
+    }
+  }
+
+  private NFCheck() {
+    NfcManager.start()
+    .then(() => {
+      NfcManager.registerTagEvent(
+        tag => {
+          this.checkOne(ByteParser.byteToString(tag.ndefMessage[0].payload));
+        },
+        'Hold your device over the tag',
+        true,
+      )
+    })
+    .catch(error => {
+      console.warn(error);
+    })
+  }
+
 
   private remove = () => {
     this.componentWillUnmount();

@@ -52,9 +52,15 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
           />
         }
         <View>
-          <Text> Name: {this.props.item.name} </Text>
-          <Text> Description: {this.props.item.description} </Text>
+          <Text> {this.props.item.name} </Text>
         </View>
+        {(this.props.item.tag !== "") &&
+          <Icon
+            name={"nfc"}
+            size={30}
+            color={"#bcbdbe"}
+          />
+        }
         <TouchableOpacity
           style={styles.icon}
           onPress={()=> this.props.navigation.navigate(
@@ -90,7 +96,7 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
   }
 
   private onStoreChange = () => {
-    if(store.getState().catalogs[this.props.cid]) {
+    if(store.getState().catalogs[this.props.cid] && store.getState().catalogs[this.props.cid].items[this.props.item.iid]) {
       const currentState: IItem = store.getState().catalogs[this.props.cid].items[this.props.item.iid];
       if (currentState.check !== this.state.check) {
         this.setState({

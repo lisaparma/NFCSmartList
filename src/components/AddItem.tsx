@@ -96,13 +96,13 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         if(store.getState().user.os === "ios") {
           this.read();
         } else {
-          var uuid = require('react-native-uuid');
-          const tagID = uuid.v4();
           NfcManager.registerTagEvent(
             tag => {
               this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
-              this.write(tagID);
-              this.setState({tag: tagID});
+                // var uuid = require('react-native-uuid');
+                // const tagID = uuid.v4();
+                // this.write(tagID);
+                // this.setState({tag: tagID});
             },
             'Hold your device over the tag',
             true,
