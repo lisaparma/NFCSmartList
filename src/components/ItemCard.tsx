@@ -54,13 +54,6 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
         <View>
           <Text> {this.props.item.name} </Text>
         </View>
-        {(this.props.item.tag !== "") &&
-          <Icon
-            name={"nfc"}
-            size={30}
-            color={"#bcbdbe"}
-          />
-        }
         <TouchableOpacity
           style={styles.icon}
           onPress={()=> this.props.navigation.navigate(
@@ -69,6 +62,13 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
               cid: this.props.cid}
           )}
         >
+          {(this.props.item.tag !== "") &&
+          <Icon
+            name={"nfc"}
+            size={20}
+            color={"#bcbdbe"}
+          />
+          }
           <Icon
             name={"info"}
             size={30}
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     margin: 5,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     backgroundColor: "#FFFFFF",
     shadowOffset:{  width: 5,  height: 5,  },
     shadowColor: '#bcbdbe',
@@ -124,6 +125,8 @@ const styles = StyleSheet.create({
 
   },
   icon: {
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10
   }
 });

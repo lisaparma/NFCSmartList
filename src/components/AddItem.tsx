@@ -35,6 +35,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           onChangeText={text => this.setState({name: text})}
         >{this.state.name}</TextInput>
         <TouchableOpacity
+          style={styles.icon}
           onPress={this.addTag}>
           <Icon
             name={"nfc"}
@@ -43,6 +44,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           />
         </TouchableOpacity>
         <TouchableOpacity
+          style={styles.icon}
           onPress={this.addItem}>
         <Icon
           name={"add-circle-outline"}
@@ -135,6 +137,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   icon: {
-    padding: 10
+    padding: 5,
   }
 });

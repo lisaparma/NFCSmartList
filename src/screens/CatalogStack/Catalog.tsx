@@ -117,10 +117,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
   private checkOne(tag: string) {
     for (let item in this.state.items) {
-      console.warn(this.state.items[item].tag)
-      console.warn(tag)
       if(this.state.items[item].tag === tag) {
-        console.warn("ok")
         store.dispatch({
           type: "CHECKIN_ITEM",
           cid: this.state.cid,
@@ -139,7 +136,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           this.checkOne(ByteParser.byteToString(tag.ndefMessage[0].payload));
         },
         'Hold your device over the tag',
-        true,
+        false,
       )
     })
     .catch(error => {
