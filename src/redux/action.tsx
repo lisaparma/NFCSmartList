@@ -31,6 +31,12 @@ export interface IRemoveCatalog extends Action<'REMOVE_CATALOG'> {
   cid: string;
 }
 
+export interface IEditCatalog extends Action<'EDIT_CATALOG'> {
+  cid: string;
+  name: string;
+  description: string;
+}
+
 export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {
   catalogs: ICatalog[];
 }

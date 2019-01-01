@@ -1,7 +1,7 @@
 import {
   IAddCatalog,
   IAddItem,
-  ICheckInItem, ICheckOutItem,
+  ICheckInItem, ICheckOutItem, IEditCatalog,
   IEditItem,
   IPopulateCatalogs,
   IRemoveCatalog,
@@ -12,7 +12,7 @@ import {ICatalog} from "../IStore";
 export const CatalogsReducer = (
   state: { [id: string]: ICatalog}  = {
   },
-  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem | ICheckInItem | ICheckOutItem
+  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem | ICheckInItem | ICheckOutItem | IEditCatalog
 ) => {
   switch (action.type) {
     case 'POPULATE_CATALOGS_LIST' :
@@ -40,6 +40,12 @@ export const CatalogsReducer = (
       const newState3 = {...state};
       delete newState3[action.cid];
       return newState3;
+
+    case 'EDIT_CATALOG':
+      const state_editC = {...state};
+      state_editC[action.cid].name = action.name;
+      state_editC[action.cid].description = action.description;
+      return state_editC;
 
     case 'ADD_ITEM':
       const newState4 = {...state};

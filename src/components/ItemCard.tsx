@@ -90,11 +90,13 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
   }
 
   private onStoreChange = () => {
-    const currentState: IItem = store.getState().catalogs[this.props.cid].items[this.props.item.iid];
-    if(currentState.check !== this.state.check) {
-      this.setState({
-        check: currentState.check,
-      });
+    if(store.getState().catalogs[this.props.cid]) {
+      const currentState: IItem = store.getState().catalogs[this.props.cid].items[this.props.item.iid];
+      if (currentState.check !== this.state.check) {
+        this.setState({
+          check: currentState.check,
+        });
+      }
     }
   }
 

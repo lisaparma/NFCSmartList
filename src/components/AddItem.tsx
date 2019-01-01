@@ -26,6 +26,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
     return (
       <View style={styles.container}>
         <TextInput
+          style={styles.input}
           placeholder="Item"
           onChangeText={text => this.setState({name: text})}
         >{this.state.name}</TextInput>
@@ -67,11 +68,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#FFFFFF",
-    shadowOffset:{  width: 5,  height: 5,  },
+    shadowOffset:{  width: 5,  height: 5, },
     shadowColor: '#bcbdbe',
     shadowOpacity: 1.0,
     elevation: 5
-
+  },
+  input: {
+    flex: 1
   },
   icon: {
     padding: 10

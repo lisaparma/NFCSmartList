@@ -64,14 +64,19 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
             <View style={styles.menu}>
               <TouchableOpacity
                 style={styles.itemMenu}
-                onPress={()=>{}}>
+                onPress={()=>{this.props.navigation.setParams({"menu": false})}}>
                 <Text style={styles.textMenu}>
                     NFC Check
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.itemMenu}
-                onPress={()=>{}}>
+                onPress={()=> {
+                  this.props.navigation.navigate(
+                  "DetailsCatalog",
+                  {catalog: store.getState().catalogs[this.state.cid]});
+                  this.props.navigation.setParams({"menu": false});
+                }}>
                 <Text style={styles.textMenu}>
                     Informazioni
                 </Text>
@@ -100,7 +105,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
   private onStoreChange = () => {
     const currentState: ICatalog = store.getState().catalogs[this.state.cid];
-    if(currentState.items !== this.state.items) {
+    if(currentState && (currentState.items !== this.state.items)) {
       this.setState({
         items: {...currentState.items},
       });

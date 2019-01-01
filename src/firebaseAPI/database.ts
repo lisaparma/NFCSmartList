@@ -31,6 +31,12 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
+  public static editCatalog(cid: string, name: string, description: string) {
+    const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid;
+    firebase.database().ref(path).update({name: name, description: description})
+      .catch((err) => console.warn(err))
+  }
+
   public static initStore(uid) {
     firebase.database().ref('/users/' + uid + "/catalogs").once('value')
       .then((snapshot) => {
