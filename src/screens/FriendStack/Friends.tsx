@@ -6,11 +6,16 @@ import NfcManager, {ByteParser} from "react-native-nfc-manager";
 import firebase from 'react-native-firebase';
 import {IAddFriend, IPopulateCatalogs, IPopulateFriends} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
+import CatalogCard from "../../components/CatalogCard";
+import {ICatalog, IFriend, IStore} from "../../redux/IStore";
+import FriendCard from "../../components/FriendCard";
 
 interface FriendsProps {
+  navigation: NavigationScreenProp<object>;
 }
 
 interface FriendsState {
+  friends: {[uid: string]: IFriend}
   email: string;
   yy: string;
 }
@@ -22,6 +27,7 @@ class Friends extends Component<FriendsProps, FriendsState> {
   constructor(props: FriendsProps) {
     super(props);
     this.state = {
+      friends: store.getState().friends,
       email: "",
       yy: "",
     }
@@ -36,43 +42,33 @@ class Friends extends Component<FriendsProps, FriendsState> {
   }
 
   public render() {
+    const elements = Object.keys(this.state.friends)
+      .map((element) => (
+        <FriendCard
+          key={this.state.friends[element].uid}
+          navigation={this.props.navigation}
+          friend={this.state.friends[element]}
+        />));
     return (
       <View style={styles.container}>
-        <TextInput
-          autoCapitalize={"none"}
-          autoCorrect={false}
-          onChangeText={text => this.setState({email: text})}
-        />
-        <TouchableOpacity
-          onPress={this.check}>
-          <Text>Cerca</Text>
-        </TouchableOpacity>
-        <Text>{this.state.yy}</Text>
+        <ScrollView>
+          <Text style={styles.text}> I tuoi amici:</Text>
+          <View>
+            {elements}
+          </View>
+        </ScrollView>
       </View>
     );
   }
 
   private onStoreChange = () => {
-  };
-
-  private check = () => {
-    firebase.database().ref('users/').once('value')
-      .then((snapshot) => {
-        let catalogs = {};
-        snapshot.forEach(
-          (user) => {
-            if(user.val().email === this.state.email) {
-              console.warn("Aggiunto: " + user.val().email);
-              store.dispatch<IAddFriend>({
-                type: "ADD_FRIEND",
-                uid: user.val().uid,
-                email: user.val().email,
-              });
-              Database.addFriend(user.val().uid, user.val().email);
-            }
-          });
+    const currentState: IStore = store.getState();
+    if(currentState.friends !== this.state.friends) {
+      this.setState({
+        friends: {...currentState.friends},
       });
-  }
+    }
+  };
 
 }
 
@@ -81,6 +77,12 @@ export default withNavigation(Friends);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  text: {
+    fontSize: 25,
+    color: "#0b6d99",
+    fontFamily: "Yanone Kaffeesatz"
+
   },
 
 });
