@@ -38,7 +38,7 @@ export interface IEditCatalog extends Action<'EDIT_CATALOG'> {
 }
 
 export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {
-  catalogs: ICatalog[];
+  catalogs: { [cid: string]: ICatalog };
 }
 
 export interface IAddItem extends Action<'ADD_ITEM'> {
@@ -79,4 +79,5 @@ export interface IPopulateFriends extends Action<'POPULATE_FRIENDS_LIST'> {
 export interface IAddFriend extends Action<'ADD_FRIEND'> {
   uid: string;
   email: string;
+  catalogs: { [cid: string]: ICatalog };
 }

@@ -1,4 +1,5 @@
 import {IAddFriend, IPopulateFriends} from "../action";
+import {ICatalog} from "../IStore";
 
 export const FriendsReducer = (
   state = {},
@@ -9,6 +10,12 @@ export const FriendsReducer = (
       const newState = {...state};
       for (const uid in action.friends) {
         newState[uid] = action.friends[uid];
+        for (const cid in action.friends[uid].catalogs) {
+          newState[uid]["catalogs"][cid] = action.friends[uid].catalogs[cid];
+          for (const iid in action.friends[uid].catalogs[cid]["items"]) {
+            newState[uid]["catalogs"][cid]["items"][iid].check = false;
+          }
+        }
       }
       return newState;
 
@@ -17,6 +24,7 @@ export const FriendsReducer = (
       newState2[action.uid] = {
         uid: action.uid,
         email: action.email,
+        catalogs: action.catalogs,
       };
       return newState2;
     default:

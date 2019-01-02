@@ -48,15 +48,15 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
         .then((snapshot) => {
           let catalogs = {};
           snapshot.forEach(
-            (user) => {
+            (user): any => {
               if(user.val().email === this.state.email) {
-                console.warn("Aggiunto: " + user.val().email);
                 store.dispatch<IAddFriend>({
                   type: "ADD_FRIEND",
                   uid: user.val().uid,
                   email: user.val().email,
+                  catalogs: user.val().catalogs,
                 });
-                Database.addFriend(user.val().uid, user.val().email);
+                Database.addFriend(user.val().uid, user.val().email, user.val().catalogs);
               }
             });
         });

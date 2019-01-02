@@ -2,12 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
-import NfcManager, {ByteParser} from "react-native-nfc-manager";
-import firebase from 'react-native-firebase';
-import {IAddFriend, IPopulateCatalogs, IPopulateFriends} from "../../redux/action";
-import Database from "../../firebaseAPI/database";
-import CatalogCard from "../../components/CatalogCard";
-import {ICatalog, IFriend, IStore} from "../../redux/IStore";
+import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
 
 interface FriendsProps {
@@ -16,8 +11,6 @@ interface FriendsProps {
 
 interface FriendsState {
   friends: {[uid: string]: IFriend}
-  email: string;
-  yy: string;
 }
 
 class Friends extends Component<FriendsProps, FriendsState> {
@@ -28,8 +21,6 @@ class Friends extends Component<FriendsProps, FriendsState> {
     super(props);
     this.state = {
       friends: store.getState().friends,
-      email: "",
-      yy: "",
     }
   }
 

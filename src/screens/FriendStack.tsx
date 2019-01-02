@@ -8,6 +8,10 @@ import {
 import TopBar from "../components/TopBar";
 import Friends from "./FriendStack/Friends";
 import AddFriend from "./FriendStack/AddFriend";
+import CatalogList from "./CatalogStack/CatalogList";
+import FCatalogList from "./FriendStack/FCatalogList";
+
+import FCatalog from "./FriendStack/FCatalog";
 
 const FriendsStack = createAppContainer(createStackNavigator(
   {
@@ -31,6 +35,32 @@ const FriendsStack = createAppContainer(createStackNavigator(
             title="Add catalog"
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
+          />,
+      }),
+    },
+    FCatalogList: {
+      screen: () => <FCatalogList />,
+      navigationOptions: () => ({
+        header: (props: any) =>
+          <TopBar
+            title="Catalogs"
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
+            // iconRight={"add"}
+            // onPressRight={() => {props.navigation.navigate("AddCatalog")}}
+          />,
+      }),
+    },
+    FCatalog: {
+      screen: () => <FCatalog/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"*" + props.navigation.getParam("name")}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
+            iconRight={"more-horiz"}
+            onPressRight={() => {props.navigation.setParams({menu: !props.navigation.getParam("menu")})}}
           />,
       }),
     },

@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog, IFriend} from "../redux/IStore";
+import {ICatalog} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
 
-interface FriendCardProps {
+interface CatalogCardProps {
   navigation: NavigationScreenProp<object>;
-  friend: IFriend;
+  catalog: ICatalog;
 }
 
-interface FriendCardState {
+interface CatalogCardState {
 }
 
-export default class FriendCard extends Component<FriendCardProps, FriendCardState> {
+export default class FCatalogCard extends Component<CatalogCardProps, CatalogCardState> {
 
-  constructor(props: FriendCardProps) {
+  constructor(props: CatalogCardProps) {
     super(props);
     this.state = {
     }
@@ -25,8 +25,11 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
       <TouchableOpacity
         style={styles.container}
         onPress={()=> this.props.navigation.navigate(
-          "FCatalogList",
-          {catalogs: this.props.friend.catalogs}
+          "FCatalog",
+          {name: this.props.catalog.name,
+            id: this.props.catalog.cid.length,
+            items: this.props.catalog.items
+          }
         )}>
         <View style={styles.image}>
           <Icon
@@ -35,7 +38,8 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
           />
         </View>
         <View style={styles.textBox}>
-          <Text style={styles.text1}> {this.props.friend.email} </Text>
+          <Text style={styles.text1}> {this.props.catalog.name} </Text>
+          <Text style={styles.text2}> {this.props.catalog.description} </Text>
         </View>
       </TouchableOpacity>
     );

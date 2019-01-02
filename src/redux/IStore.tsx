@@ -41,4 +41,5 @@ export interface IItem {
 export interface IFriend {
 	uid: string;
 	email: string;
+	catalogs: { [id: string]: ICatalog};
 }
