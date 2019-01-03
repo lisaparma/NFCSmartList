@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
 import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
@@ -13,6 +13,7 @@ interface AddCatalogProps {
 interface AddCatalogState {
   name: string;
   description: string;
+  private: boolean;
 }
 
 class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
@@ -21,7 +22,8 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
     super(props);
     this.state = {
       name: null,
-      description: null
+      description: null,
+      private: true,
     }
   }
 
@@ -38,6 +40,10 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
           style={styles.input}
           placeholder="Description"
           onChangeText={text => this.setState({description: text})}
+        />
+        <Switch
+          value={this.state.private}
+          onValueChange={()=>{this.setState({private: !this.state.private})}}
         />
         <TouchableOpacity
           style={styles.button}
@@ -57,9 +63,10 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
         cid: id,
         name: this.state.name,
         description: this.state.description,
-        class: "standard"
+        class: "standard",
+        private: this.state.private
       });
-      Database.addCatalog(id, this.state.name, this.state.description);
+      Database.addCatalog(id, this.state.name, this.state.description, this.state.private);
       this.props.navigation.dispatch(NavigationActions.back());
       this.props.navigation.navigate("Catalog", {name: this.state.name, id: id});
     }

@@ -25,6 +25,7 @@ export interface IAddCatalog extends Action<'ADD_CATALOG'> {
   class: "standard";
   description: string;
   items?: IItem[];
+  private: boolean;
 }
 
 export interface IRemoveCatalog extends Action<'REMOVE_CATALOG'> {
@@ -35,6 +36,7 @@ export interface IEditCatalog extends Action<'EDIT_CATALOG'> {
   cid: string;
   name: string;
   description: string;
+  private: boolean;
 }
 
 export interface IPopulateCatalogs extends Action<'POPULATE_CATALOGS_LIST'> {

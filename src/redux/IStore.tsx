@@ -28,6 +28,7 @@ export interface ICatalog {
 	description: string;
 	items: { [id: string]: IItem};
 	check?: { [id: string]: IItem};
+	private: boolean;
 }
 
 export interface IItem {

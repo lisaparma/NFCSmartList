@@ -32,7 +32,8 @@ export const CatalogsReducer = (
         name: action.name,
         description: action.description,
         class: "standard",
-        items: {}
+        items: {},
+        private: action.private
       };
       return newState2;
 
@@ -45,6 +46,7 @@ export const CatalogsReducer = (
       const state_editC = {...state};
       state_editC[action.cid].name = action.name;
       state_editC[action.cid].description = action.description;
+      state_editC[action.cid].private = action.private;
       return state_editC;
 
     case 'ADD_ITEM':

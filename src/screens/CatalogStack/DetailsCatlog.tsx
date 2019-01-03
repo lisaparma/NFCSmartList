@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
 import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IEditCatalog, IEditItem, IRemoveCatalog, IRemoveItem} from "../../redux/action";
@@ -16,6 +16,7 @@ interface DetailsCatalogState {
   edit: boolean;
   name: string;
   description: string;
+  private: boolean
 }
 
 class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState> {
@@ -29,6 +30,7 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
       edit: false,
       name: this.props.navigation.getParam("catalog").name,
       description: this.props.navigation.getParam("catalog").description,
+      private: this.props.navigation.getParam("catalog").private
     }
   }
 
@@ -47,6 +49,16 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
           <View>
             <Text>{this.state.catalog.name}</Text>
             <Text> {this.state.catalog.description}</Text>
+            <Text> Catalogo privato: </Text>
+            <Switch
+              value={this.state.private}
+              disabled
+            />
+            <TouchableOpacity
+              style={styles.plus}
+              onPress={()=>{this.setState({edit: true})}}>
+              <Text>Modifica catalog</Text>
+            </TouchableOpacity>
           </View>
         }
         {this.state.edit &&
@@ -59,22 +71,19 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
             onChangeText={text => this.setState({description: text})}>
             {this.state.description}
           </TextInput>
+          <Text> Catalogo privato: </Text>
+          <Switch
+            value={this.state.private}
+            onValueChange={()=>{this.setState({private: !this.state.private})}}
+          />
+          <TouchableOpacity
+            style={styles.plus}
+            onPress={this.edit}>
+            <Text>Fatto</Text>
+          </TouchableOpacity>
         </View>
         }
-        {!this.state.edit &&
-        < TouchableOpacity
-          style={styles.plus}
-          onPress={()=>{this.setState({edit: true})}}>
-          <Text>Modifica catalog</Text>
-          </TouchableOpacity>
-        }
-        {this.state.edit &&
-        < TouchableOpacity
-          style={styles.plus}
-          onPress={this.edit}>
-          <Text>Fatto</Text>
-        </TouchableOpacity>
-        }
+
 
         <TouchableOpacity
           style={styles.plus}
@@ -100,9 +109,10 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
       type: "EDIT_CATALOG",
       cid: this.state.catalog.cid,
       name: this.state.name,
-      description: this.state.description
+      description: this.state.description,
+      private: this.state.private
     });
-    Database.editCatalog(this.state.catalog.cid, this.state.name, this.state.description);
+    Database.editCatalog(this.state.catalog.cid, this.state.name, this.state.description, this.state.private);
 
   };
 

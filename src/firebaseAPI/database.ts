@@ -37,12 +37,24 @@ export default class Database {
         let friends = {};
         snapshot.forEach(
           (item): any => {
+            let cat = {};
+            firebase.database().ref('/users/' + item.val().uid + "/catalogs").once('value')
+              .then((snapshot2) => {
+                snapshot2.forEach(
+                  (item2): any => { // per ogni catalogo dell'amico
+                    if (!item2.val().private) {
+                      cat[item2.val().cid] = item2.val();
+                    }
+                  }
+                );
+              })
             friends[item.val().uid] = {
               uid: item.val().uid,
               email: item.val().email,
-              catalogs: item.val().catalogs
+              catalogs: cat,
             };
-          });
+          }
+        );
         store.dispatch<IPopulateFriends>({
           type: "POPULATE_FRIENDS_LIST",
           friends: friends,
@@ -50,7 +62,7 @@ export default class Database {
       });
   }
 
-  public static addCatalog(id: string, name: string, description: string) {
+  public static addCatalog(id: string, name: string, description: string, pvt: boolean) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/";
     firebase.database().ref(path + id).set({
       cid: id,
@@ -58,6 +70,7 @@ export default class Database {
       description: description,
       class: "standard",
       items: {},
+      private: pvt
     })
       .catch((err) => console.warn(err))
   }
@@ -68,9 +81,9 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
-  public static editCatalog(cid: string, name: string, description: string) {
+  public static editCatalog(cid: string, name: string, description: string, pvt: boolean) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/" + cid;
-    firebase.database().ref(path).update({name: name, description: description})
+    firebase.database().ref(path).update({name: name, description: description, private: pvt})
       .catch((err) => console.warn(err))
   }
 
@@ -102,7 +115,6 @@ export default class Database {
     firebase.database().ref(path + id).set({
       uid: id,
       email: email,
-      catalogs: catalogs,
     })
       .catch((err) => console.warn(err))
   }
