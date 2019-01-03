@@ -12,7 +12,8 @@ interface FCatalogListProps {
 }
 
 interface FCatalogListState {
-  catalogs: {[id: string]: ICatalog}
+  catalogs: {[id: string]: ICatalog};
+  uid: string
 }
 
 class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
@@ -21,6 +22,7 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
     super(props);
     this.state = {
       catalogs: this.props.navigation.getParam("catalogs"),
+      uid: this.props.navigation.getParam("uid"),
     }
   }
 
@@ -30,13 +32,14 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
         <FCatalogCard
           key={this.state.catalogs[element].cid}
           navigation={this.props.navigation}
+          uid={this.state.uid}
           catalog={this.state.catalogs[element]}
         />
       ));
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Text style={styles.text}> I tuoi cataloghi:</Text>
+          <Text style={styles.text}> I suoi cataloghi pubblici:</Text>
           <View style={styles.elements}>
           {elements}
           </View>

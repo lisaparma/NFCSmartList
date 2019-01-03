@@ -26,7 +26,7 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
         style={styles.container}
         onPress={()=> this.props.navigation.navigate(
           "FCatalogList",
-          {catalogs: this.props.friend.catalogs}
+          {catalogs: this.props.friend.catalogs, uid: this.props.friend.uid}
         )}>
         <View style={styles.image}>
           <Icon

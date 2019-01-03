@@ -4,6 +4,7 @@ import {Icon} from "react-native-elements";
 import {IItem} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
 import {store} from "../App";
+import {IFrCheckInItem, IFrCheckOutItem} from "../redux/action";
 
 interface ItemCardProps {
   navigation: NavigationScreenProp<object>;
@@ -23,8 +24,7 @@ export default class FItemCard extends Component<ItemCardProps, ItemCardState> {
   constructor(props: ItemCardProps) {
     super(props);
     this.state = {
-      // check: store.getState().friends[this.props.uid].catalogs[this.props.cid].items[this.props.item.iid].check,
-    check: false,
+      check: store.getState().friends[this.props.uid].catalogs[this.props.cid].items[this.props.item.iid].check,
     }
   }
 
@@ -81,31 +81,34 @@ export default class FItemCard extends Component<ItemCardProps, ItemCardState> {
   }
 
   private check = () => {
-    // if(this.state.check) {
-    //   store.dispatch({
-    //     type: "CHECKOUT_ITEM",
-    //     cid: this.props.cid,
-    //     iid: this.props.item.iid,
-    //   });
-    // } else {
-    //   store.dispatch({
-    //     type: "CHECKIN_ITEM",
-    //     cid: this.props.cid,
-    //     iid: this.props.item.iid,
-    //     name: this.props.item.name
-    //   });
-    // }
+    if(this.state.check) {
+      store.dispatch<IFrCheckOutItem>({
+        type: "FR_CHECKOUT_ITEM",
+        uid: this.props.uid,
+        cid: this.props.cid,
+        iid: this.props.item.iid,
+      });
+    } else {
+      store.dispatch<IFrCheckInItem>({
+        type: "FR_CHECKIN_ITEM",
+        uid: this.props.uid,
+        cid: this.props.cid,
+        iid: this.props.item.iid,
+        name: this.props.item.name
+      });
+    }
   }
 
   private onStoreChange = () => {
-    // if(store.getState().catalogs[this.props.cid] && store.getState().catalogs[this.props.cid].items[this.props.item.iid]) {
-    //   const currentState: IItem = store.getState().catalogs[this.props.cid].items[this.props.item.iid];
-    //   if (currentState.check !== this.state.check) {
-    //     this.setState({
-    //       check: currentState.check,
-    //     });
-    //   }
-    // }
+    if(store.getState().friends[this.props.uid].catalogs[this.props.cid]
+      && store.getState().friends[this.props.uid].catalogs[this.props.cid].items[this.props.item.iid]) {
+      const currentState: IItem = store.getState().friends[this.props.uid].catalogs[this.props.cid].items[this.props.item.iid];
+      if (currentState.check !== this.state.check) {
+        this.setState({
+          check: currentState.check,
+        });
+      }
+    }
   }
 
 }

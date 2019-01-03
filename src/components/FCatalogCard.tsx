@@ -10,6 +10,7 @@ interface CatalogCardProps {
 }
 
 interface CatalogCardState {
+  uid: string
 }
 
 export default class FCatalogCard extends Component<CatalogCardProps, CatalogCardState> {
@@ -17,6 +18,7 @@ export default class FCatalogCard extends Component<CatalogCardProps, CatalogCar
   constructor(props: CatalogCardProps) {
     super(props);
     this.state = {
+      uid: this.props.navigation.getParam("uid"),
     }
   }
 
@@ -27,7 +29,8 @@ export default class FCatalogCard extends Component<CatalogCardProps, CatalogCar
         onPress={()=> this.props.navigation.navigate(
           "FCatalog",
           {name: this.props.catalog.name,
-            id: this.props.catalog.cid.length,
+            uid: this.state.uid,
+            cid: this.props.catalog.cid,
             items: this.props.catalog.items
           }
         )}>

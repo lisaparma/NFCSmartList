@@ -17,6 +17,7 @@ interface CatalogsProps {
 
 interface CatalogsState {
   items: {[id: string]: IItem};
+  uid: string;
   cid: string;
 }
 
@@ -26,10 +27,11 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
 
   constructor(props: CatalogsProps) {
     super(props);
-    const cid = this.props.navigation.getParam("id");
+    const cid = this.props.navigation.getParam("cid");
     this.state = {
-      items: this.props.navigation.getParam("items"),
+      items: this.props.navigation.getParam("items")? this.props.navigation.getParam("items") : {},
       cid: cid,
+      uid: this.props.navigation.getParam("uid"),
     }
   }
 
@@ -48,6 +50,7 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
           key={this.state.items[element].iid}
           navigation={this.props.navigation}
           item={this.state.items[element]}
+          uid={this.state.uid}
           cid={this.state.cid}/>)
       );
     return (

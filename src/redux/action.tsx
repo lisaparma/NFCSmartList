@@ -83,3 +83,16 @@ export interface IAddFriend extends Action<'ADD_FRIEND'> {
   email: string;
   catalogs: { [cid: string]: ICatalog };
 }
+
+export interface IFrCheckInItem extends Action<'FR_CHECKIN_ITEM'> {
+  uid: string;
+  cid: string;
+  iid: string;
+  name: string;
+}
+
+export interface IFrCheckOutItem extends Action<'FR_CHECKOUT_ITEM'> {
+  uid: string;
+  cid: string;
+  iid: string;
+}
