@@ -24,7 +24,8 @@ export default class Database {
               name: item.val().name,
               description: item.val().description,
               items: item.val().items,
-              class: item.val().class
+              class: item.val().class,
+              private: item.val().private
             };
           });
         store.dispatch<IPopulateCatalogs>({

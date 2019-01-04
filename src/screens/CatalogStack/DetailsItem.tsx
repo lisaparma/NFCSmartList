@@ -6,6 +6,8 @@ import {IEditItem, IRemoveItem} from "../../redux/action";
 import {IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 
+import {info} from "../../style";
+
 
 interface DetailsItemProps {
   navigation: NavigationScreenProp<object>;
@@ -44,44 +46,55 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
 
   public render() {
     return (
-      <View style={styles.container}>
+      <View style={info.container}>
+        <Text style={info.title}> Informazioni oggetto:</Text>
         {!this.state.edit &&
           <View>
-            <Text>{this.state.item.name}</Text>
-            <Text> {this.state.item.description}</Text>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Nome:</Text>
+              <Text style={info.text2}>{this.state.item.name}</Text>
+            </View>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Descrizione:</Text>
+              <Text style={info.text2}>{this.state.item.description}</Text>
+            </View>
+            <TouchableOpacity
+              style={info.button}
+              onPress={()=>{this.setState({edit: true})}}>
+              <Text style={info.textButton}>Modifica item</Text>
+            </TouchableOpacity>
           </View>
         }
         {this.state.edit &&
-        <View>
-          <TextInput
-            onChangeText={text => this.setState({name: text})}>
-            {this.state.name}
-          </TextInput>
-          <TextInput
-            onChangeText={text => this.setState({description: text})}>
-            {this.state.description}
-          </TextInput>
-        </View>
-        }
-        {!this.state.edit &&
-        < TouchableOpacity
-          style={styles.plus}
-          onPress={()=>{this.setState({edit: true})}}>
-          <Text>Modifica item</Text>
-          </TouchableOpacity>
-        }
-        {this.state.edit &&
-        < TouchableOpacity
-          style={styles.plus}
-          onPress={this.edit}>
-          <Text>Fatto</Text>
-        </TouchableOpacity>
-        }
+          <View>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Nome:</Text>
+              <TextInput
+                style={info.text2}
+                onChangeText={text => this.setState({name: text})}>
+                {this.state.name}
+              </TextInput>
+            </View>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Descrizione:</Text>
+              <TextInput
+                style={info.text2}
+                onChangeText={text => this.setState({description: text})}>
+                {this.state.description}
+              </TextInput>
+            </View>
 
+            <TouchableOpacity
+              style={info.button}
+              onPress={this.edit}>
+              <Text style={info.textButton}>Fatto</Text>
+            </TouchableOpacity>
+          </View>
+        }
         <TouchableOpacity
-          style={styles.plus}
+          style={[info.button, {backgroundColor: "#e01038"}]}
           onPress={this.remove}>
-          <Text>Elimina item</Text>
+          <Text style={info.textButton}>Elimina item</Text>
         </TouchableOpacity>
       </View>
     );
@@ -122,32 +135,3 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
 }
 
 export default withNavigation(DetailsItem);
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-  },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
-  },
-  plus: {
-    padding: 20
-  },
-  dropdown: {
-    height: 50,
-    width: "100%",
-    position: "absolute",
-    alignItems: "flex-end",
-  },
-  menu: {
-    backgroundColor: "#87CEFA",
-    width: 100
-  }
-
-});

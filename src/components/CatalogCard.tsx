@@ -35,9 +35,28 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
             size={50}
           />
         </View>
-        <View style={styles.textBox}>
-          <Text style={styles.text1}> {this.props.catalog.name} </Text>
+        <View style={styles.centerBox}>
+          <View style={styles.title}>
+            {this.props.catalog.private &&
+              <Icon
+                iconStyle={styles.lock}
+                color={"#a8aaaa"}
+                name={"lock-outline"}
+                size={20}
+              />
+            }
+            <Text style={styles.text1}>
+              {this.props.catalog.name}
+            </Text>
+          </View>
           <Text style={styles.text2}> {this.props.catalog.description} </Text>
+        </View>
+        <View style={styles.image}>
+          <Icon
+            color={"#a8aaaa"}
+            name={"chevron-right"}
+            size={30}
+          />
         </View>
       </TouchableOpacity>
     );
@@ -54,12 +73,22 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     margin: 10,
     flexDirection: "row",
-    alignItems: "flex-start"
+    justifyContent: 'space-between',
+    alignItems: "center"
   },
   image: {
     paddingHorizontal: 10
   },
-  textBox: {
+  centerBox: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  title: {
+    flexDirection: "row",
+  },
+  lock: {
+    paddingRight: 5,
+    paddingTop: 1,
   },
   text1: {
     color: "#0b6d99",

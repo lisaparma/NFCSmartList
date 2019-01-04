@@ -6,6 +6,7 @@ import {IEditCatalog, IEditItem, IRemoveCatalog, IRemoveItem} from "../../redux/
 import {ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 
+import {info} from "../../style";
 
 interface DetailsCatalogProps {
   navigation: NavigationScreenProp<object>;
@@ -44,51 +45,74 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
 
   public render() {
     return (
-      <View style={styles.container}>
+      <View style={info.container}>
+        <Text style={info.title}> Informazioni catalogo:</Text>
         {!this.state.edit &&
           <View>
-            <Text>{this.state.catalog.name}</Text>
-            <Text> {this.state.catalog.description}</Text>
-            <Text> Catalogo privato: </Text>
-            <Switch
-              value={this.state.private}
-              disabled
-            />
+            <View style={info.textBox}>
+              <Text style={info.text1}>Nome:</Text>
+              <Text style={info.text2}>{this.state.catalog.name}</Text>
+            </View>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Descrizione:</Text>
+              <Text style={info.text2}>{this.state.catalog.description}</Text>
+            </View>
+            <View style={info.textBox}>
+              <Text style={info.text1}>Privato:</Text>
+              <View style={info.switch}>
+                <Switch
+                  value={this.state.private}
+                  disabled
+                />
+              </View>
+            </View>
             <TouchableOpacity
-              style={styles.plus}
+              style={info.button}
               onPress={()=>{this.setState({edit: true})}}>
-              <Text>Modifica catalog</Text>
+              <Text style={info.textButton}>Modifica catalog</Text>
             </TouchableOpacity>
           </View>
         }
         {this.state.edit &&
         <View>
-          <TextInput
-            onChangeText={text => this.setState({name: text})}>
-            {this.state.name}
-          </TextInput>
-          <TextInput
-            onChangeText={text => this.setState({description: text})}>
-            {this.state.description}
-          </TextInput>
-          <Text> Catalogo privato: </Text>
-          <Switch
-            value={this.state.private}
-            onValueChange={()=>{this.setState({private: !this.state.private})}}
-          />
+          <View style={info.textBox}>
+            <Text style={info.text1}>Nome:</Text>
+            <TextInput
+              style={info.text2}
+              onChangeText={text => this.setState({name: text})}>
+              {this.state.name}
+            </TextInput>
+          </View>
+          <View style={info.textBox}>
+            <Text style={info.text1}>Descrizione:</Text>
+            <TextInput
+              style={info.text2}
+              onChangeText={text => this.setState({description: text})}>
+              {this.state.description}
+            </TextInput>
+          </View>
+
+          <View style={info.textBox}>
+            <Text style={info.text1}>Privato:</Text>
+            <View style={info.switch}>
+              <Switch
+                value={this.state.private}
+                onValueChange={()=>{this.setState({private: !this.state.private})}}
+              />
+            </View>
+          </View>
           <TouchableOpacity
-            style={styles.plus}
+            style={info.button}
             onPress={this.edit}>
-            <Text>Fatto</Text>
+            <Text style={info.textButton}>Fatto</Text>
           </TouchableOpacity>
         </View>
         }
 
-
         <TouchableOpacity
-          style={styles.plus}
+          style={[info.button, {backgroundColor: "#e01038"}]}
           onPress={this.remove}>
-          <Text>Elimina item</Text>
+          <Text style={info.textButton}>Elimina item</Text>
         </TouchableOpacity>
       </View>
     );
@@ -130,31 +154,3 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
 
 export default withNavigation(DetailsCatalog);
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    flex: 1,
-  },
-  item: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    borderColor: "#87CEFA",
-    borderWidth: 2,
-    borderRadius: 30,
-    margin: 10
-  },
-  plus: {
-    padding: 20
-  },
-  dropdown: {
-    height: 50,
-    width: "100%",
-    position: "absolute",
-    alignItems: "flex-end",
-  },
-  menu: {
-    backgroundColor: "#87CEFA",
-    width: 100
-  }
-
-});

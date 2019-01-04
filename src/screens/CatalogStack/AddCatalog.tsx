@@ -30,21 +30,32 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   public render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Aggiungi un catalogo:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Name"
-          onChangeText={text => this.setState({name: text})}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          onChangeText={text => this.setState({description: text})}
-        />
-        <Switch
-          value={this.state.private}
-          onValueChange={()=>{this.setState({private: !this.state.private})}}
-        />
+        <Text style={styles.title}> Aggiungi un catalogo:</Text>
+        <View style={styles.textBox}>
+          <Text style={styles.text}>Nome:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="name"
+            onChangeText={text => this.setState({name: text})}
+          />
+        </View>
+        <View style={styles.textBox}>
+          <Text style={styles.text}>Descrizione:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="description"
+            onChangeText={text => this.setState({description: text})}
+          />
+        </View>
+        <View style={styles.textBox}>
+          <Text style={styles.text}>Privato:</Text>
+          <View style={styles.switch}>
+            <Switch
+              value={this.state.private}
+              onValueChange={()=>{this.setState({private: !this.state.private})}}
+            />
+          </View>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={this.add}>
@@ -78,23 +89,39 @@ export default withNavigation(AddCatalog);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    padding: 10,
   },
-  text: {
+  title: {
     fontSize: 25,
     color: "#0b6d99",
     fontFamily: "Yanone Kaffeesatz"
   },
   input: {
-    padding: 10,
+    paddingLeft: 10,
     fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz"
+    fontFamily: "Yanone Kaffeesatz",
+  },
+  textBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#a8aaaa",
+    paddingVertical: 10,
+    paddingTop: 20
+  },
+  text: {
+    fontSize: 20,
+    fontFamily: "Yanone Kaffeesatz",
+    color: "#a8aaaa",
+  },
+  switch: {
+    paddingLeft: 15
   },
   button: {
     padding: 5,
     marginHorizontal: "25%",
     alignItems: "center",
-    marginTop: 15,
+    marginTop: 30,
     backgroundColor: '#0b6d99',
     width: "50%",
     paddingVertical: 10,
