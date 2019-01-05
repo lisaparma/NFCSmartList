@@ -6,6 +6,7 @@ import {store} from "../../App";
 import {IStore, ICatalog} from "../../redux/IStore";
 import CatalogCard from "../../components/CatalogCard";
 import FCatalogCard from "../../components/FCatalogCard";
+import {std} from "../../style";
 
 interface FCatalogListProps {
   navigation: NavigationScreenProp<object>;
@@ -37,12 +38,12 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
         />
       ));
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.text}> I suoi cataloghi pubblici:</Text>
-          <View style={styles.elements}>
+      <View style={std.screen}>
+        <Text style={std.title}>
+          I suoi cataloghi pubblici:
+        </Text>
+        <ScrollView style={std.scroll}>
           {elements}
-          </View>
         </ScrollView>
       </View>
     );
@@ -50,20 +51,3 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
 }
 
 export default withNavigation(FCatalogList);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10
-  },
-  text: {
-    fontSize: 25,
-    color: "#0b6d99",
-    fontFamily: "Yanone Kaffeesatz"
-
-  },
-  elements: {
-
-  }
-
-});

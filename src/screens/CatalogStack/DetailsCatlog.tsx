@@ -6,6 +6,7 @@ import {IEditCatalog, IEditItem, IRemoveCatalog, IRemoveItem} from "../../redux/
 import {ICatalog, IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 
+import {std} from "../../style";
 import {info} from "../../style";
 
 interface DetailsCatalogProps {
@@ -45,20 +46,20 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
 
   public render() {
     return (
-      <View style={info.container}>
-        <Text style={info.title}> Informazioni catalogo:</Text>
+      <View style={std.screen}>
+        <Text style={std.title}> Informazioni catalogo:</Text>
         {!this.state.edit &&
           <View>
             <View style={info.textBox}>
-              <Text style={info.text1}>Nome:</Text>
-              <Text style={info.text2}>{this.state.catalog.name}</Text>
+              <Text style={[std.text, info.t1]}>Nome:</Text>
+              <Text style={[std.text, info.t2]}>{this.state.catalog.name}</Text>
             </View>
             <View style={info.textBox}>
-              <Text style={info.text1}>Descrizione:</Text>
-              <Text style={info.text2}>{this.state.catalog.description}</Text>
+              <Text style={[std.text, info.t1]}>Descrizione:</Text>
+              <Text style={[std.text, info.t2]}>{this.state.catalog.description}</Text>
             </View>
             <View style={info.textBox}>
-              <Text style={info.text1}>Privato:</Text>
+              <Text style={[std.text, info.t1]}>Privato:</Text>
               <View style={info.switch}>
                 <Switch
                   value={this.state.private}
@@ -67,33 +68,33 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
               </View>
             </View>
             <TouchableOpacity
-              style={info.button}
+              style={std.button}
               onPress={()=>{this.setState({edit: true})}}>
-              <Text style={info.textButton}>Modifica catalog</Text>
+              <Text style={std.textButton}>Modifica catalog</Text>
             </TouchableOpacity>
           </View>
         }
         {this.state.edit &&
         <View>
           <View style={info.textBox}>
-            <Text style={info.text1}>Nome:</Text>
+            <Text style={[std.text, info.t1]}>Nome:</Text>
             <TextInput
-              style={info.text2}
+              style={[std.text, info.t2]}
               onChangeText={text => this.setState({name: text})}>
               {this.state.name}
             </TextInput>
           </View>
           <View style={info.textBox}>
-            <Text style={info.text1}>Descrizione:</Text>
+            <Text style={[std.text, info.t1]}>Descrizione:</Text>
             <TextInput
-              style={info.text2}
+              style={[std.text, info.t2]}
               onChangeText={text => this.setState({description: text})}>
               {this.state.description}
             </TextInput>
           </View>
 
           <View style={info.textBox}>
-            <Text style={info.text1}>Privato:</Text>
+            <Text style={[std.text, info.t1]}>Privato:</Text>
             <View style={info.switch}>
               <Switch
                 value={this.state.private}
@@ -102,17 +103,17 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
             </View>
           </View>
           <TouchableOpacity
-            style={info.button}
+            style={std.button}
             onPress={this.edit}>
-            <Text style={info.textButton}>Fatto</Text>
+            <Text style={std.textButton}>Fatto</Text>
           </TouchableOpacity>
         </View>
         }
 
         <TouchableOpacity
-          style={[info.button, {backgroundColor: "#e01038"}]}
+          style={[std.button, std.safeBut]}
           onPress={this.remove}>
-          <Text style={info.textButton}>Elimina item</Text>
+          <Text style={std.textButton}>Elimina item</Text>
         </TouchableOpacity>
       </View>
     );

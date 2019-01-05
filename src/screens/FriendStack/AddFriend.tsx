@@ -6,6 +6,8 @@ import {IAddCatalog, IAddFriend} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import firebase from "react-native-firebase";
 
+import {std} from "../../style";
+import {info} from "../../style";
 
 interface AddFriendProps {
   navigation: NavigationScreenProp<object>;
@@ -26,17 +28,20 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
 
   public render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}> Aggiungi un amico:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="e-mail"
-          onChangeText={text => this.setState({email: text})}
-        />
+      <View style={std.screen}>
+        <Text style={std.title}> Aggiungi un amico:</Text>
+        <View style={info.textBox}>
+          <Text style={[std.text, info.t1]}>e-mail:</Text>
+          <TextInput
+            style={[std.text, info.t2]}
+            placeholder="e-mail"
+            onChangeText={text => this.setState({email: text})}
+          />
+        </View>
         <TouchableOpacity
-          style={styles.button}
+          style={std.button}
           onPress={this.add}>
-          <Text style={styles.textButton}>Aggiungi</Text>
+          <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>
       </View>
     );
@@ -66,36 +71,3 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
 }
 
 export default withNavigation(AddFriend);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10
-  },
-  text: {
-    fontSize: 25,
-    color: "#0b6d99",
-    fontFamily: "Yanone Kaffeesatz"
-  },
-  input: {
-    padding: 10,
-    fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz"
-  },
-  button: {
-    padding: 5,
-    marginHorizontal: "25%",
-    alignItems: "center",
-    marginTop: 15,
-    backgroundColor: '#0b6d99',
-    width: "50%",
-    paddingVertical: 10,
-    borderRadius: 3,
-  },
-  textButton: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#FFFFF0",
-    fontFamily: "Yanone Kaffeesatz"
-  },
-});

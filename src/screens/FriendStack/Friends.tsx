@@ -4,6 +4,7 @@ import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
+import {std} from "../../style";
 
 interface FriendsProps {
   navigation: NavigationScreenProp<object>;
@@ -41,12 +42,12 @@ class Friends extends Component<FriendsProps, FriendsState> {
           friend={this.state.friends[element]}
         />));
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <Text style={styles.text}> I tuoi amici:</Text>
-          <View>
-            {elements}
-          </View>
+      <View style={std.screen}>
+        <Text style={std.title}>
+          I tuoi amici:
+        </Text>
+        <ScrollView style={std.scroll}>
+          {elements}
         </ScrollView>
       </View>
     );

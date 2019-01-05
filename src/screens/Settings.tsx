@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Auth from "../firebaseAPI/auth";
 import TopBar from "../components/TopBar";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
 import {store} from "../App";
+import {std} from "../style";
 
 interface SettingsProps {
 }
@@ -23,20 +24,20 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
   public render() {
     return (
-      <View style={styles.container}>
+      <View style={std.screen}>
         <TopBar title={"Settings"}/>
         {store.getState().user.os === "android" &&
-          <Button
-            title={"Set id tag NFC"}
+          <TouchableOpacity
+            style={std.button}
             onPress={this.addID}>
-            Esci
-          </Button>
+            <Text style={std.textButton}>Set id tag NFC</Text>
+          </TouchableOpacity>
         }
-        <Button
-          title={"Esci"}
+        <TouchableOpacity
+          style={std.button}
           onPress={()=>{Auth.logout()}}>
-          Esci
-        </Button>
+          <Text style={std.textButton}>Esci</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -69,9 +70,3 @@ class Settings extends Component<SettingsProps, SettingsState> {
 }
 
 export default withNavigation(Settings);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

@@ -10,6 +10,8 @@ import AddItem from "../../components/AddItem";
 import {Icon} from "react-native-elements";
 import NfcManager, {ByteParser} from "react-native-nfc-manager";
 
+import {std} from "../../style";
+
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
 }
@@ -50,9 +52,11 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           cid={this.state.cid}/>)
       );
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
-          <Text style={styles.text}> I tuoi item:</Text>
+      <View style={std.screen}>
+        <Text style={std.title}>
+          I tuoi item:
+        </Text>
+        <ScrollView style={std.scroll}>
           {elements}
         </ScrollView>
 
@@ -60,45 +64,44 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 
         {
           this.props.navigation.getParam("menu") &&
-          <View
-            style={styles.dropdown}>
-            <View style={styles.menu}>
+          <View style={std.DDScreen}>
+            <View style={std.DDmenu}>
               <TouchableOpacity
-                style={styles.itemMenu}
+                style={std.DDitem}
                 onPress={()=>{
                   this.NFCheck();
                   this.props.navigation.setParams({"menu": false})}}>
-                <Text style={styles.textMenu}>
+                <Text style={std.text}>
                     NFC Check
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.itemMenu}
+                style={std.DDitem}
                 onPress={()=> {
                   this.props.navigation.navigate(
                   "DetailsCatalog",
                   {catalog: store.getState().catalogs[this.state.cid]});
                   this.props.navigation.setParams({"menu": false});
                 }}>
-                <Text style={styles.textMenu}>
+                <Text style={std.text}>
                     Informazioni
                 </Text>
               </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.itemMenu}
-                  onPress={this.remove}>
-                  <Text style={[styles.textMenu, {color:"#e01038"}]}>
-                      Elimina catalogo
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.closeMenu}
-                    onPress={()=>{this.props.navigation.setParams({"menu": false})}}>
-                    <Icon
-                        name={"keyboard-arrow-up"}
-                        size={30}
-                    />
-                </TouchableOpacity>
+              <TouchableOpacity
+                style={std.DDitem}
+                onPress={this.remove}>
+                <Text style={[std.text, std.warningText]}>
+                    Elimina catalogo
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                  style={std.DDitem}
+                  onPress={()=>{this.props.navigation.setParams({"menu": false})}}>
+                  <Icon
+                      name={"keyboard-arrow-up"}
+                      size={30}
+                  />
+              </TouchableOpacity>
             </View>
           </View>
         }
@@ -158,48 +161,3 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
 }
 
 export default withNavigation(Catalogs);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scroll:{
-    padding: 10
-  },
-  text: {
-    fontSize: 25,
-    color: "#0b6d99",
-    fontFamily: "Yanone Kaffeesatz"
-  },
-  dropdown: {
-    flex: 1,
-    position: "absolute",
-    alignContent: "center",
-    backgroundColor: 'rgba(52, 52, 52, 0.8)',
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 1
-  },
-  menu: {
-    backgroundColor: "#FFFFFF",
-    width: "100%",
-    borderRadius: 10,
-    borderTopRightRadius: 0,
-    borderTopLeftRadius: 0,
-    paddingHorizontal: 10
-  },
-  itemMenu:{
-    padding: 5,
-    paddingVertical: 10,
-    alignItems: "center",
-    borderBottomWidth: 0.5,
-    borderColor: "#0b6d99",
-  },
-  textMenu: {
-    fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz"
-  },
-  closeMenu: {
-    paddingVertical: 5
-  }
-});
