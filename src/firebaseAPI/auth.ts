@@ -6,11 +6,11 @@ import Database from "./database";
 
 export default class Auth {
 
-  public static registerAccount(email:string, password: string) {
+  public static registerAccount(email:string, password: string, username: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(value => {
         Auth.getUserInfo(value);
-        Database.addUser(value);
+        Database.addUser(value, username);
       })
       .catch(function(error) {
       console.warn(error);
@@ -36,10 +36,6 @@ export default class Auth {
           type: "INFO",
           isNewUser: false,
           email: user.email,
-          photoURL: user.photoURL,
-          phoneNumber: user.phoneNumber,
-          displayName: user.displayName,
-          emailVerified: user.emailVerified,
           uid: user.uid,
         })
         Database.initStore(store.getState().user.uid);
@@ -52,10 +48,6 @@ export default class Auth {
         type: "INFO",
         isNewUser: info.additionalUserInfo.isNewUser,
         email: info.user.email,
-        photoURL: info.user.photoURL,
-        phoneNumber: info.user.phoneNumber,
-        displayName: info.user.displayName,
-        emailVerified: info.user.emailVerified,
         uid: info.user.uid,
       })
       Database.initStore(store.getState().user.uid);

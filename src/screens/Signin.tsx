@@ -11,6 +11,7 @@ interface AppProps {
 }
 
 interface AppState {
+  email: string;
   username: string;
   password: string;
   password2: string;
@@ -22,7 +23,8 @@ class Signin extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      username: undefined,
+      email: undefined,
+      username: "",
       password: undefined,
       password2: undefined,
       error: undefined
@@ -38,7 +40,14 @@ class Signin extends Component<AppProps, AppState> {
           placeholder="E-mail"
           autoCapitalize={"none"}
           autoCorrect={false}
-          onChangeText={text => this.setState({username: text.toLocaleLowerCase()})}
+          onChangeText={text => this.setState({email: text.toLocaleLowerCase()})}
+        />
+        <TextInput
+          style={log.input}
+          placeholder="username"
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          onChangeText={text => this.setState({username: text})}
         />
         <TextInput
           style={log.input}
@@ -72,12 +81,12 @@ class Signin extends Component<AppProps, AppState> {
 
   private registerAcc = () => {
     if(this.check()) {
-      Auth.registerAccount(this.state.username, this.state.password);
+      Auth.registerAccount(this.state.email, this.state.password, this.state.username);
     }
   };
 
   private check(): boolean {
-    if(this.state.username === (undefined && "")
+    if(this.state.email === (undefined && "")
       && this.state.password === (undefined && "")
       && this.state.password2 === (undefined && "")){
       this.setState({error: "Compila tutti i campi"});

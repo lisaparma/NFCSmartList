@@ -2,11 +2,11 @@
 
 //import { IStore } from "./IStore";
 
-import {IInfoAccount, IInfoDevice} from "../action";
+import {IEditAvatar, IEditUsername, IInfo2Account, IInfoAccount, IInfoDevice} from "../action";
 
 export const UserReducer = (
   state = {},
-  action: IInfoAccount | IInfoDevice
+  action: IInfoAccount | IInfoDevice |IInfo2Account | IEditAvatar |IEditUsername
 ) => {
   switch (action.type) {
     case 'INFO' :
@@ -14,12 +14,16 @@ export const UserReducer = (
         ...state,
         isNewUser: action.isNewUser,
         email: action.email,
-        photoURL: action.photoURL,
-        phoneNumber: action.photoURL,
-        displayName: action.displayName,
-        emailVerified: action.emailVerified,
         uid: action.uid
       };
+
+    case 'INFO2' :
+      return {
+        ...state,
+        username: action.username,
+        avatar: action.avatar
+      };
+
     case "DEVICE_INFO":
       return{
         ...state,
@@ -27,6 +31,19 @@ export const UserReducer = (
         os: action.os,
         nfc: action.nfc,
       }
+
+    case 'EDIT_USERNAME' :
+      return {
+        ...state,
+        username: action.username,
+      };
+
+    case 'EDIT_AVATAR' :
+      return {
+        ...state,
+        avatar: action.avatar,
+      }
+
     default:
       return state;
   }

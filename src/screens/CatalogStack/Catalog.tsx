@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IRemoveCatalog} from "../../redux/action";
@@ -52,18 +52,18 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           cid={this.state.cid}/>)
       );
     return (
-      <View style={std.screen}>
-        <Text style={std.title}>
-          I tuoi item:
-        </Text>
-        <ScrollView style={std.scroll}>
-          {elements}
-        </ScrollView>
+      <View style={{flex: 1}}>
+        <View style={std.screen}>
+          <Text style={std.title}>
+            I tuoi item:
+          </Text>
+          <ScrollView style={std.scroll}>
+            {elements}
+          </ScrollView>
 
-        <AddItem cid={this.state.cid}/>
-
-        {
-          this.props.navigation.getParam("menu") &&
+          <AddItem cid={this.state.cid}/>
+        </View>
+        {this.props.navigation.getParam("menu") &&
           <View style={std.DDScreen}>
             <View style={std.DDmenu}>
               <TouchableOpacity

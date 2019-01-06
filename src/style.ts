@@ -13,7 +13,7 @@ export const std = StyleSheet.create({
   text:{
     fontSize: 20,
     fontFamily: "Yanone Kaffeesatz",
-    color: "#3d3d3d"
+    color: "#3d3d3d",
   },
   warningText: {
     color:"#e01038"
@@ -21,6 +21,7 @@ export const std = StyleSheet.create({
   scroll:{
     padding: 10
   },
+
   // ----- PULSANTI -----------------------------
   button: {
     padding: 5,
@@ -41,6 +42,7 @@ export const std = StyleSheet.create({
     color: "#FFFFF0",
     fontFamily: "Yanone Kaffeesatz"
   },
+
   // ----- DROPDOWN MENU -----------------------------
   DDScreen: {
     flex: 1,
@@ -49,7 +51,8 @@ export const std = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.8)',
     width: "100%",
     height: "100%",
-    paddingHorizontal: 1
+    paddingHorizontal: 1,
+    elevation: 6
   },
   DDmenu: {
     backgroundColor: "#FFFFFF",
@@ -73,7 +76,6 @@ export const std = StyleSheet.create({
 export const info = StyleSheet.create({
   input: {
     flex: 1,
-    paddingLeft: 10,
     fontSize: 20,
     fontFamily: "Yanone Kaffeesatz",
   },
@@ -96,7 +98,7 @@ export const info = StyleSheet.create({
   }
 });
 
-
+// ----- LOG IN / SIGN IN -----------------------------
 export const log = StyleSheet.create({
   screen: {
     flex: 1,

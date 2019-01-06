@@ -1,13 +1,14 @@
 import firebase from 'react-native-firebase';
 
 import {store} from "../App";
-import {IPopulateCatalogs, IPopulateFriends} from "../redux/action";
+import {IInfo2Account, IPopulateCatalogs, IPopulateFriends} from "../redux/action";
 
 export default class Database {
-  public static addUser(info: any){
+  public static addUser(info: any, username: string){
     firebase.database().ref('users/'+ info.user.uid).set({
-      username: info.user.displayName,
       email: info.user.email,
+      username: username,
+      avatar: 36,
       uid: info.user.uid
     })
       .catch((err) => console.warn(err))
@@ -31,6 +32,14 @@ export default class Database {
         store.dispatch<IPopulateCatalogs>({
           type: "POPULATE_CATALOGS_LIST",
           catalogs: catalogs,
+        });
+      });
+    firebase.database().ref('/users/' + uid).once('value')
+      .then((snapshot) => {
+        store.dispatch<IInfo2Account>({
+          type: "INFO2",
+          username: snapshot.val().username,
+          avatar: snapshot.val().avatar,
         });
       });
     firebase.database().ref('/users/' + uid + "/friends").once('value')
@@ -117,6 +126,18 @@ export default class Database {
       uid: id,
       email: email,
     })
+      .catch((err) => console.warn(err))
+  }
+
+  public static editUser(name: string) {
+    const path = 'users/'+ store.getState().user.uid;
+    firebase.database().ref(path).update({username: name})
+      .catch((err) => console.warn(err))
+  }
+
+  public static editAvatar(avatar: number) {
+    const path = 'users/'+ store.getState().user.uid;
+    firebase.database().ref(path).update({avatar: avatar})
       .catch((err) => console.warn(err))
   }
 

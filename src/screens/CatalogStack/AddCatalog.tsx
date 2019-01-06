@@ -32,7 +32,8 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}> Aggiungi un catalogo:</Text>
+        <Text style={std.title}>
+          Aggiungi un catalogo:</Text>
         <View style={info.textBox}>
           <Text style={[std.text, info.t1]}>Nome:</Text>
           <TextInput

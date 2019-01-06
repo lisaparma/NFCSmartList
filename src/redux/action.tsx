@@ -6,11 +6,20 @@ export interface IAuthentication extends Action<'LOGIN' | 'LOGOUT'> {}
 export interface IInfoAccount extends Action<'INFO'> {
     isNewUser: boolean;
     email: string;
-    photoURL: string | null;
-    phoneNumber: string | null;
-    displayName: string | null;
-    emailVerified: boolean;
     uid: string;
+}
+
+export interface IInfo2Account extends Action<'INFO2'> {
+  username: string;
+  avatar: number;
+}
+
+export interface IEditUsername extends Action<'EDIT_USERNAME'> {
+  username: string;
+}
+
+export interface IEditAvatar extends Action<'EDIT_AVATAR'> {
+  avatar: number;
 }
 
 export interface IInfoDevice extends Action<'DEVICE_INFO'> {
