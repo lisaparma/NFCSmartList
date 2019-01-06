@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 
 import Auth from "../firebaseAPI/auth";
 import {NavigationScreenProp, withNavigation} from "react-navigation";

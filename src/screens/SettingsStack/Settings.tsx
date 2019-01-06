@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
-import {Button, Image, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import { withNavigation } from 'react-navigation';
-import Auth from "../firebaseAPI/auth";
-import TopBar from "../components/TopBar";
+import {Image, StyleSheet,Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import Auth from "../../firebaseAPI/auth";
+import TopBar from "../../components/TopBar";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
-import {store} from "../App";
+import {store} from "../../App";
 
-import {info, std} from "../style";
-import {IEditAvatar, IEditUsername} from "../redux/action";
-import Database from "../firebaseAPI/database";
-import {getAvatar} from "../../avatars/avatar";
+import {info, std} from "../../style";
+import {IEditAvatar, IEditUsername} from "../../redux/action";
+import Database from "../../firebaseAPI/database";
+import {getAvatar} from "../../../avatars/avatar";
+import {ICatalog, IUser} from "../../redux/IStore";
 
 interface SettingsProps {
+  navigation: NavigationScreenProp<object>;
 }
 
 interface SettingsState {
@@ -24,6 +26,8 @@ interface SettingsState {
 
 class Settings extends Component<SettingsProps, SettingsState> {
 
+  private mUnsubscribeFromStore: any;
+
   constructor(props: SettingsProps) {
     super(props);
     const user = store.getState().user;
@@ -31,14 +35,21 @@ class Settings extends Component<SettingsProps, SettingsState> {
       edit: false,
       username: user.username,
       email: user.email,
-      avatar: 36
+      avatar: store.getState().user.avatar
     }
+  }
+
+  public componentDidMount(): void {
+    this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
+  }
+
+  public componentWillUnmount(): void {
+    this.mUnsubscribeFromStore();
   }
 
   public render() {
     return (
       <View style={std.screen}>
-        <TopBar title={"Settings"}/>
         <Image
           style={{width: 100, height: 100}}
           source={getAvatar(this.state.avatar)}
@@ -86,12 +97,31 @@ class Settings extends Component<SettingsProps, SettingsState> {
         }
         <TouchableOpacity
           style={std.button}
+          onPress={()=>{this.props.navigation.navigate(
+            "Avatars",
+            {avatar: this.state.avatar})
+          }}
+            >
+          <Text style={std.textButton}>Cambia avatar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={std.button}
           onPress={()=>{Auth.logout()}}>
           <Text style={std.textButton}>Esci</Text>
         </TouchableOpacity>
       </View>
     );
   }
+
+  private onStoreChange = () => {
+    const currentState: IUser = store.getState().user;
+    if(currentState.avatar !== this.state.avatar) {
+      this.setState({
+        avatar: currentState.avatar,
+      });
+    }
+  };
 
   private editUser = () => {
     this.setState({edit: false});
@@ -100,14 +130,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
       username: this.state.username,
     });
     Database.editUser(this.state.username);
-  };
-
-  private editAvatar = () => {
-    store.dispatch<IEditAvatar>({
-      type: "EDIT_AVATAR",
-      avatar: this.state.avatar,
-    });
-    Database.editAvatar(this.state.avatar);
   };
 
   private write(tagID: string) {

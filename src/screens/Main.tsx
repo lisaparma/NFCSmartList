@@ -5,7 +5,7 @@ import {
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import Settings from "./Settings";
+import SettingsStack from "./SettingsStack";
 import CatalogStack from "./CatalogStack"
 import FriendStack from "./FriendStack";
 import LikeStack from "./LikeStack";
@@ -49,7 +49,7 @@ const MainTabs = createBottomTabNavigator(
       })
     },
     'Settings': {
-      screen: Settings,
+      screen: SettingsStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
           <Icon

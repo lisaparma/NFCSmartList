@@ -35,6 +35,20 @@ const IMAGES: any = {
   image34: require('./034.png'),
   image35: require('./035.png'),
   image36: require('./036.png'),
+  image37: require('./037.png'),
+  image38: require('./038.png'),
+  image39: require('./039.png'),
+  image40: require('./040.png'),
+  image41: require('./041.png'),
+  image42: require('./042.png'),
+  image43: require('./043.png'),
+  image44: require('./044.png'),
+  image45: require('./045.png'),
+  image46: require('./046.png'),
+  image47: require('./047.png'),
+  image48: require('./048.png'),
+  image49: require('./049.png'),
+  image50: require('./050.png')
 }
 
 export function getAvatar(num: number) {
