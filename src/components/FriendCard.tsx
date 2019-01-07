@@ -4,6 +4,7 @@ import {Icon} from "react-native-elements";
 import {ICatalog, IFriend} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
 import {getAvatar} from "../../avatars/avatar";
+import {card, std} from "../style";
 
 interface FriendCardProps {
   navigation: NavigationScreenProp<object>;
@@ -22,52 +23,34 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
   }
 
   public render() {
+    console.log(this.props.friend.username)
     return (
       <TouchableOpacity
-        style={styles.container}
+        style={[card.container, card.contFriend]}
         onPress={()=> this.props.navigation.navigate(
           "FCatalogList",
-          {catalogs: this.props.friend.catalogs, uid: this.props.friend.uid}
+          {catalogs: this.props.friend.catalogs,
+                    uid: this.props.friend.uid,
+                    username: this.props.friend.username}
         )}>
-        <View style={styles.image}>
+        <View style={card.icon}>
           <Image
             style={{width: 50, resizeMode: "contain",}}
             source={getAvatar(this.props.friend.avatar)}
           />
         </View>
-        <View style={styles.textBox}>
-          <Text style={styles.text1}> {this.props.friend.email} </Text>
+        <View style={card.centerBox}>
+          <Text style={std.text}> {this.props.friend.email} </Text>
+        </View>
+        <View style={card.icon}>
+          <Icon
+            color={"#a8aaaa"}
+            name={"chevron-right"}
+            size={30}
+          />
         </View>
       </TouchableOpacity>
     );
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 10,
-    borderColor: "#87CEFA",
-    borderWidth: 1,
-    borderRadius: 15,
-    borderTopLeftRadius: 0,
-    margin: 10,
-    flexDirection: "row",
-    alignItems: "flex-start"
-  },
-  image: {
-    paddingHorizontal: 10
-  },
-  textBox: {
-  },
-  text1: {
-    color: "#0b6d99",
-    fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz"
-  },
-  text2: {
-    fontSize: 15,
-    fontFamily: "Yanone Kaffeesatz"
-  }
-
-});

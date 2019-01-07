@@ -6,6 +6,7 @@ import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
+import {card} from "../style";
 
 interface AddItemProps {
   cid: string;
@@ -28,14 +29,14 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
 
   public render() {
     return (
-      <View style={styles.container}>
+      <View style={[card.container, card.contItem]}>
         <TextInput
-          style={styles.input}
+          style={card.centerBox}
           placeholder="Item"
           onChangeText={text => this.setState({name: text})}
         >{this.state.name}</TextInput>
         <TouchableOpacity
-          style={styles.icon}
+          style={card.icon}
           onPress={this.addTag}>
           <Icon
             name={"nfc"}
@@ -44,7 +45,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.icon}
+          style={card.icon}
           onPress={this.addItem}>
         <Icon
           name={"add-circle-outline"}
@@ -117,26 +118,3 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    borderColor: "#bcbdbe",
-    borderWidth: 0.5,
-    margin: 5,
-    marginTop: 0,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#FFFFFF",
-    shadowOffset:{  width: 5,  height: 5, },
-    shadowColor: '#bcbdbe',
-    shadowOpacity: 1.0,
-    elevation: 5
-  },
-  input: {
-    flex: 1
-  },
-  icon: {
-    padding: 5,
-  }
-});

@@ -65,16 +65,3 @@ class Friends extends Component<FriendsProps, FriendsState> {
 }
 
 export default withNavigation(Friends);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  text: {
-    fontSize: 25,
-    color: "#0b6d99",
-    fontFamily: "Yanone Kaffeesatz"
-
-  },
-
-});

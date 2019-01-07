@@ -136,3 +136,52 @@ export const log = StyleSheet.create({
     textDecorationLine: "underline",
   }
 });
+
+export const card = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    margin: 5
+  },
+  icon: {
+    paddingHorizontal: 10
+  },
+  centerBox: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  t1:{
+    color: "#0b6d99",
+  },
+  t2: {
+    fontSize: 15,
+  },
+  // -- Cataloghi ------
+  contCatal: {
+    margin: 10,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: "#87CEFA",
+    borderTopLeftRadius: 0,
+    borderRadius: 15,
+  },
+
+  // -- Item ----------
+  contItem: {
+    padding: 10,
+    borderColor: "#bcbdbe",
+    borderWidth: 0.5,
+    backgroundColor: "#FFFFFF",
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: '#bcbdbe',
+    shadowOpacity: 1.0,
+    elevation: 5
+  },
+  // -- Friends ------
+  contFriend: {
+    height: 80,
+    borderColor: "#bcbdbe",
+    borderWidth: 0.5,
+  },
+});

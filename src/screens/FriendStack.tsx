@@ -12,6 +12,7 @@ import CatalogList from "./CatalogStack/CatalogList";
 import FCatalogList from "./FriendStack/FCatalogList";
 
 import FCatalog from "./FriendStack/FCatalog";
+import FDetailsCatalog from "./FriendStack/FDetailsCatalog";
 
 const FriendsStack = createAppContainer(createStackNavigator(
   {
@@ -40,14 +41,12 @@ const FriendsStack = createAppContainer(createStackNavigator(
     },
     FCatalogList: {
       screen: () => <FCatalogList />,
-      navigationOptions: () => ({
-        header: (props: any) =>
+      navigationOptions: (props: any) => ({
+        header: () =>
           <TopBar
-            title="*Catalogs"
+            title={props.navigation.getParam("username")}
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
-            // iconRight={"add"}
-            // onPressRight={() => {props.navigation.navigate("AddCatalog")}}
           />,
       }),
     },
@@ -56,11 +55,22 @@ const FriendsStack = createAppContainer(createStackNavigator(
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={"*" + props.navigation.getParam("name")}
+            title={props.navigation.getParam("name")}
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
             iconRight={"more-horiz"}
             onPressRight={() => {props.navigation.setParams({menu: !props.navigation.getParam("menu")})}}
+          />,
+      }),
+    },
+    FDetailsCatalog: {
+      screen: () => <FDetailsCatalog/>,
+      navigationOptions: () => ({
+        header: (props: any) =>
+          <TopBar
+            title="Details catalog"
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,
       }),
     },

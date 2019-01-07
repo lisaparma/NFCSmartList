@@ -4,6 +4,7 @@ import {Icon} from "react-native-elements";
 import {IItem} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
 import {store} from "../App";
+import {std, card} from "../style";
 
 interface ItemCardProps {
   navigation: NavigationScreenProp<object>;
@@ -37,25 +38,29 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
   public render() {
     return (
       <TouchableOpacity
-        style={styles.container}
+        style={[card.container, card.contItem]}
         onPress={this.check}>
         {!this.state.check &&
-          <Icon
-            name={"crop-din"}
-            size={30}
-          />
+          <View style={card.icon}>
+            <Icon
+              name={"crop-din"}
+              size={30}
+            />
+          </View>
         }
         {this.state.check &&
-          <Icon
-              name={"check"}
-              size={30}
-          />
+          <View style={card.icon}>
+            <Icon
+                name={"check"}
+                size={30}
+            />
+          </View>
         }
-        <View>
-          <Text> {this.props.item.name} </Text>
+        <View style={card.centerBox}>
+          <Text style={std.text}>{this.props.item.name} </Text>
         </View>
         <TouchableOpacity
-          style={styles.icon}
+          style={card.icon}
           onPress={()=> this.props.navigation.navigate(
             "DetailsItem",
             {item: this.props.item,
@@ -107,26 +112,3 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    borderColor: "#bcbdbe",
-    borderWidth: 0.5,
-    margin: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    shadowOffset:{  width: 5,  height: 5,  },
-    shadowColor: '#bcbdbe',
-    shadowOpacity: 1.0,
-    elevation: 5
-
-  },
-  icon: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10
-  }
-});

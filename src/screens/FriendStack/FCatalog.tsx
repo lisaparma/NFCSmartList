@@ -25,8 +25,6 @@ interface CatalogsState {
 
 class FCatalog extends Component<CatalogsProps, CatalogsState> {
 
-  private mUnsubscribeFromStore: any;
-
   constructor(props: CatalogsProps) {
     super(props);
     const cid = this.props.navigation.getParam("cid");
@@ -36,14 +34,6 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
       uid: this.props.navigation.getParam("uid"),
     }
   }
-
-  // public componentDidMount(): void {
-  //   this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
-  // }
-  //
-  // public componentWillUnmount(): void {
-  //   this.mUnsubscribeFromStore();
-  // }
 
   public render() {
     const elements = Object.keys(this.state.items)
@@ -56,16 +46,17 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
           cid={this.state.cid}/>)
       );
     return (
-      <View style={std.screen}>
-        <Text style={std.title}>
-          I suoi item:
-        </Text>
-        <ScrollView style={std.scroll}>
-          {elements}
-        </ScrollView>
+      <View style={{flex: 1}}>
+        <View style={std.screen}>
+          <Text style={std.title}>
+            I suoi item:
+          </Text>
+          <ScrollView style={std.scroll}>
+            {elements}
+          </ScrollView>
 
-        <AddItem cid={this.state.cid}/>
-
+          <AddItem cid={this.state.cid}/>
+        </View>
         {
           this.props.navigation.getParam("menu") &&
           <View style={std.DDScreen}>
@@ -83,8 +74,8 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
                 style={std.DDitem}
                 onPress={()=> {
                   this.props.navigation.navigate(
-                  "DetailsCatalog",
-                  {catalog: store.getState().catalogs[this.state.cid]});
+                  "FDetailsCatalog",
+                  {catalog: store.getState().friends[this.state.uid].catalogs[this.state.cid]});
                   this.props.navigation.setParams({"menu": false});
                 }}>
                 <Text style={std.text}>
@@ -105,15 +96,6 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
       </View>
     );
   }
-
-  private onStoreChange = () => {
-    // const currentState: ICatalog = store.getState().catalogs[this.state.cid];
-    // if(currentState && (currentState.items !== this.state.items)) {
-    //   this.setState({
-    //     items: {...currentState.items},
-    //   });
-    // }
-  };
 
   private checkOne(tag: string) {
     for (let item in this.state.items) {
