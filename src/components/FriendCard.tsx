@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import {Icon} from "react-native-elements";
 import {ICatalog, IFriend} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
+import {getAvatar} from "../../avatars/avatar";
 
 interface FriendCardProps {
   navigation: NavigationScreenProp<object>;
@@ -29,9 +30,9 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
           {catalogs: this.props.friend.catalogs, uid: this.props.friend.uid}
         )}>
         <View style={styles.image}>
-          <Icon
-            name={"assignment"}
-            size={50}
+          <Image
+            style={{width: 50, resizeMode: "contain",}}
+            source={getAvatar(this.props.friend.avatar)}
           />
         </View>
         <View style={styles.textBox}>

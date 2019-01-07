@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 
 import {store} from "../App";
-import {IInfo2Account, IPopulateCatalogs, IPopulateFriends} from "../redux/action";
+import {IAddFriend, IAddFriend2, IInfo2Account, IPopulateCatalogs, IPopulateFriends} from "../redux/action";
 
 export default class Database {
   public static addUser(info: any, username: string){
@@ -48,27 +48,47 @@ export default class Database {
         snapshot.forEach(
           (item): any => {
             let cat = {};
-            firebase.database().ref('/users/' + item.val().uid + "/catalogs").once('value')
-              .then((snapshot2) => {
-                snapshot2.forEach(
-                  (item2): any => { // per ogni catalogo dell'amico
-                    if (!item2.val().private) {
-                      cat[item2.val().cid] = item2.val();
+            let user = "";
+            let avat = null;
+            // firebase.database().ref('/users/' + item.val().uid + "/catalogs").once('value')
+            //   .then((snapshot2) => {
+            //     snapshot2.forEach(
+            //       (item2): any => {
+            //         if (!item2.val().private) {
+            //           cat[item2.val().cid] = item2.val();
+            //         }
+            //       }
+            //     )
+            //   })
+            firebase.database().ref('/users/' + item.val().uid).once('value')
+              .then((snapshot3) => {
+                  user= snapshot3.val().username;
+                  avat=snapshot3.val().avatar;
+                  for(const item2 in snapshot3.val().catalogs) {
+                    console.log(item2)
+                    if (!snapshot3.val().catalogs[item2].private) {
+                      cat[item2] = snapshot3.val().catalogs[item2];
                     }
                   }
-                );
+                friends[item.val().uid] = {
+                  uid: item.val().uid,
+                  username: user,
+                  email: item.val().email,
+                  catalogs: cat,
+                  avatar: avat
+                };
+                store.dispatch<IAddFriend2>({
+                  type: "ADD_FRIEND2",
+                  friend: friends[item.val().uid]
+                });
+
               })
-            friends[item.val().uid] = {
-              uid: item.val().uid,
-              email: item.val().email,
-              catalogs: cat,
-            };
           }
         );
-        store.dispatch<IPopulateFriends>({
-          type: "POPULATE_FRIENDS_LIST",
-          friends: friends,
-        });
+        // store.dispatch<IPopulateFriends>({
+        //   type: "POPULATE_FRIENDS_LIST",
+        //   friends: friends,
+        // });
       });
   }
 

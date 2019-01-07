@@ -38,4 +38,6 @@ export interface IFriend {
 	uid: string;
 	email: string;
 	catalogs: { [id: string]: ICatalog};
+	username: string,
+	avatar: number
 }
