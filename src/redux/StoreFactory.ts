@@ -7,6 +7,7 @@ import {UserReducer} from "./reducers/UserReducer";
 import {CatalogsReducer} from "./reducers/CatalogsReducer";
 import {FriendsReducer} from "./reducers/FriendsReducer";
 import devToolsEnhancer from 'remote-redux-devtools';
+import {LikeReducer} from "./reducers/LikeReducer";
 
 export class StoreFactory {
 
@@ -18,6 +19,7 @@ export class StoreFactory {
         user: UserReducer,
         catalogs: CatalogsReducer,
         friends: FriendsReducer,
+        likes: LikeReducer
       }),
       //InitialState,
       //applyMiddleware(),

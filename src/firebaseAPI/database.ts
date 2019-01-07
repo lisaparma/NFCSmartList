@@ -1,7 +1,14 @@
 import firebase from 'react-native-firebase';
 
 import {store} from "../App";
-import {IAddFriend, IAddFriend2, IInfo2Account, IPopulateCatalogs, IPopulateFriends} from "../redux/action";
+import {
+  IAddFriend,
+  IAddFriend2,
+  IInfo2Account,
+  IPopulateCatalogs,
+  IPopulateFriends,
+  IPopulateLikes
+} from "../redux/action";
 
 export default class Database {
   public static addUser(info: any, username: string){
@@ -15,6 +22,7 @@ export default class Database {
   }
 
   public static initStore(uid: string) {
+    // Popolo cataloghi
     firebase.database().ref('/users/' + uid + "/catalogs").once('value')
       .then((snapshot) => {
         let catalogs = {};
@@ -34,6 +42,8 @@ export default class Database {
           catalogs: catalogs,
         });
       });
+
+    // Popolo info mio account
     firebase.database().ref('/users/' + uid).once('value')
       .then((snapshot) => {
         store.dispatch<IInfo2Account>({
@@ -42,6 +52,25 @@ export default class Database {
           avatar: snapshot.val().avatar,
         });
       });
+
+    // Popolo Like
+    firebase.database().ref('/users/' + uid + "/likes").once('value')
+      .then((snapshot) => {
+        let likes = {};
+        snapshot.forEach(
+          (item): any => {
+            likes[item.val().cid] = {
+              cid: item.val().cid,
+              uid: item.val().uid
+            };
+          });
+        store.dispatch<IPopulateLikes>({
+          type: "POPULATE_LIKES_LIST",
+          likes: likes,
+        });
+      });
+
+    // Popolo amici
     firebase.database().ref('/users/' + uid + "/friends").once('value')
       .then((snapshot) => {
         let friends = {};
@@ -50,24 +79,18 @@ export default class Database {
             let cat = {};
             let user = "";
             let avat = null;
-            // firebase.database().ref('/users/' + item.val().uid + "/catalogs").once('value')
-            //   .then((snapshot2) => {
-            //     snapshot2.forEach(
-            //       (item2): any => {
-            //         if (!item2.val().private) {
-            //           cat[item2.val().cid] = item2.val();
-            //         }
-            //       }
-            //     )
-            //   })
             firebase.database().ref('/users/' + item.val().uid).once('value')
               .then((snapshot3) => {
                   user= snapshot3.val().username;
                   avat=snapshot3.val().avatar;
                   for(const item2 in snapshot3.val().catalogs) {
-                    console.log(item2)
                     if (!snapshot3.val().catalogs[item2].private) {
                       cat[item2] = snapshot3.val().catalogs[item2];
+                      if(store.getState().likes[item2]) {
+                        cat[item2].like = true;
+                      } else {
+                        cat[item2].like = false;
+                      }
                     }
                   }
                 friends[item.val().uid] = {
@@ -85,11 +108,8 @@ export default class Database {
               })
           }
         );
-        // store.dispatch<IPopulateFriends>({
-        //   type: "POPULATE_FRIENDS_LIST",
-        //   friends: friends,
-        // });
       });
+
   }
 
   public static addCatalog(id: string, name: string, description: string, pvt: boolean) {
@@ -158,6 +178,21 @@ export default class Database {
   public static editAvatar(avatar: number) {
     const path = 'users/'+ store.getState().user.uid;
     firebase.database().ref(path).update({avatar: avatar})
+      .catch((err) => console.warn(err))
+  }
+
+  public static addLike(uid: string, cid: string) {
+    const path = 'users/'+ store.getState().user.uid + "/likes/";
+    firebase.database().ref(path + cid).set({
+      cid: cid,
+      uid: uid
+    })
+      .catch((err) => console.warn(err))
+  }
+
+  public static removeLike(cid: string) {
+    const path = 'users/'+ store.getState().user.uid + "/likes/";
+    firebase.database().ref(path + cid).remove()
       .catch((err) => console.warn(err))
   }
 

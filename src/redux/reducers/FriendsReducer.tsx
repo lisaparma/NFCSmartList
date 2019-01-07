@@ -1,9 +1,17 @@
-import {IAddFriend, IAddFriend2, IFrCheckInItem, IFrCheckOutItem, IPopulateFriends} from "../action";
+import {
+  IAddFriend,
+  IAddFriend2,
+  ICheckInLike,
+  ICheckOutLike,
+  IFrCheckInItem,
+  IFrCheckOutItem,
+  IPopulateFriends
+} from "../action";
 import {ICatalog} from "../IStore";
 
 export const FriendsReducer = (
   state = {},
-  action: IAddFriend | IPopulateFriends |IFrCheckInItem | IFrCheckOutItem | IAddFriend2
+  action: IAddFriend | IPopulateFriends |IFrCheckInItem | IFrCheckOutItem | IAddFriend2 | ICheckInLike | ICheckOutLike
 ) => {
   switch (action.type) {
     case 'POPULATE_FRIENDS_LIST' :
@@ -50,6 +58,16 @@ export const FriendsReducer = (
       delete newState4[action.uid].catalogs[action.cid]["check"][action.iid];
       newState4[action.uid].catalogs[action.cid]["items"][action.iid].check = false;
       return newState4;
+
+    case 'CHECKIN_LIKE':
+      const newState5 = {...state};
+      newState5[action.uid].catalogs[action.cid]["like"] = true;
+      return newState5;
+
+    case 'CHECKOUT_LIKE':
+      const newState6 = {...state};
+      newState6[action.uid].catalogs[action.cid]["like"] = false;
+      return newState6;
 
     default:
       return state;

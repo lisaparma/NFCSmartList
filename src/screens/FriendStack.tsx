@@ -8,7 +8,6 @@ import {
 import TopBar from "../components/TopBar";
 import Friends from "./FriendStack/Friends";
 import AddFriend from "./FriendStack/AddFriend";
-import CatalogList from "./CatalogStack/CatalogList";
 import FCatalogList from "./FriendStack/FCatalogList";
 
 import FCatalog from "./FriendStack/FCatalog";
