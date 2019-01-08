@@ -157,6 +157,11 @@ export const card = StyleSheet.create({
   t2: {
     fontSize: 15,
   },
+  textCheck: {
+    color: "#a8aaaa",
+    textDecorationLine: 'line-through',
+    textDecorationColor: "#0b6d99",
+  },
   // -- Cataloghi ------
   contCatal: {
     margin: 10,

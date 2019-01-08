@@ -43,21 +43,23 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
         {!this.state.check &&
           <View style={card.icon}>
             <Icon
+              color={"#a8aaaa"}
               name={"crop-din"}
-              size={30}
+              size={25}
             />
           </View>
         }
         {this.state.check &&
           <View style={card.icon}>
             <Icon
-                name={"check"}
-                size={30}
+              color={"#0b6d99"}
+              name={"check"}
+              size={25}
             />
           </View>
         }
         <View style={card.centerBox}>
-          <Text style={std.text}>{this.props.item.name} </Text>
+          <Text style={[std.text, this.state.check && card.textCheck]}>{this.props.item.name} </Text>
         </View>
         <TouchableOpacity
           style={card.icon}
