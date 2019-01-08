@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
+import {store} from "../App";
 
 interface TopBarProps {
   iconLeft?: string;

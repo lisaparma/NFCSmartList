@@ -91,6 +91,8 @@ export interface IAddFriend extends Action<'ADD_FRIEND'> {
   uid: string;
   email: string;
   catalogs: { [cid: string]: ICatalog };
+  avatar: number;
+  username: string;
 }
 
 export interface IAddFriend2 extends Action<'ADD_FRIEND2'> {

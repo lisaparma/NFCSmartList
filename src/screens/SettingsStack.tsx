@@ -6,7 +6,6 @@ import {
 
 import TopBar from "../components/TopBar";
 import Settings from "./SettingsStack/Settings";
-import Catalog from "./CatalogStack/Catalog";
 import Avatars from "./SettingsStack/Avatars";
 
 const SettingsStack = createAppContainer(createStackNavigator(
@@ -17,8 +16,6 @@ const SettingsStack = createAppContainer(createStackNavigator(
         header: (props: any) =>
           <TopBar
             title="Settings"
-            // onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
-            //onPressRight={() => {}}
           />,
       }),
     },
@@ -27,7 +24,7 @@ const SettingsStack = createAppContainer(createStackNavigator(
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={props.navigation.getParam("name")}
+            title={"Avatar"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,

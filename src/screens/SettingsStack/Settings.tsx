@@ -7,11 +7,12 @@ import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
 import {store} from "../../App";
 
-import {info, std} from "../../style";
+import {card, info, std} from "../../style";
 import {IEditAvatar, IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
 import {ICatalog, IUser} from "../../redux/IStore";
+import {Icon} from "react-native-elements";
 
 interface SettingsProps {
   navigation: NavigationScreenProp<object>;
@@ -60,32 +61,40 @@ class Settings extends Component<SettingsProps, SettingsState> {
         </View>
         {!this.state.edit &&
           <View>
-            <View style={info.textBox}>
+            <View style={[info.textBox, {justifyContent: "space-between"}]}>
               <Text style={[std.text, info.t1]}>Username:</Text>
-              <Text style={[std.text, info.t2]}>{this.state.username}</Text>
+              <Text style={[std.text, info.t2, {flex:1}]}>{this.state.username}</Text>
+              <TouchableOpacity
+                style={card.icon}
+                onPress={()=>{this.setState({edit: true})}}>
+                <Icon
+                  color={"#a8aaaa"}
+                  name={"edit"}
+                  size={30}
+                />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={std.button}
-              onPress={()=>{this.setState({edit: true})}}>
-              <Text style={std.textButton}>Modifica username</Text>
-            </TouchableOpacity>
           </View>
         }
         {this.state.edit &&
         <View>
-          <View style={info.textBox}>
+          <View style={[info.textBox, {justifyContent: "space-between"}]}>
             <Text style={[std.text, info.t1]}>Username:</Text>
             <TextInput
-              style={[std.text, info.t2]}
+              style={[std.text, info.t2, {flex:1}]}
               onChangeText={text => this.setState({username: text})}>
               {this.state.username}
             </TextInput>
+            <TouchableOpacity
+              style={card.icon}
+              onPress={this.editUser}>
+              <Icon
+                color={"#88c25d"}
+                name={"done"}
+                size={30}
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={std.button}
-            onPress={this.editUser}>
-            <Text style={std.textButton}>Fatto</Text>
-          </TouchableOpacity>
         </View>
         }
         {store.getState().user.os === "android" &&

@@ -33,6 +33,8 @@ export const FriendsReducer = (
         uid: action.uid,
         email: action.email,
         catalogs: action.catalogs,
+        avatar: action.avatar,
+        username: action.username
       };
       return newState2;
 

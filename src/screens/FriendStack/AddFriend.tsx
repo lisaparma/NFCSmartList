@@ -60,8 +60,10 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
                   uid: user.val().uid,
                   email: user.val().email,
                   catalogs: user.val().catalogs,
+                  username: user.val().username,
+                  avatar: user.val().avatar,
                 });
-                Database.addFriend(user.val().uid, user.val().email, user.val().catalogs);
+                Database.addFriend(user.val().uid, user.val().email);
               }
             });
         });

@@ -81,7 +81,7 @@ export default class Database {
             let avat = null;
             firebase.database().ref('/users/' + item.val().uid).once('value')
               .then((snapshot3) => {
-                  user= snapshot3.val().username;
+                  user=snapshot3.val().username;
                   avat=snapshot3.val().avatar;
                   for(const item2 in snapshot3.val().catalogs) {
                     if (!snapshot3.val().catalogs[item2].private) {
@@ -160,7 +160,7 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
-  public static addFriend(id: string, email: string, catalogs: {}) {
+  public static addFriend(id: string, email: string) {
     const path = 'users/'+ store.getState().user.uid + "/friends/";
     firebase.database().ref(path + id).set({
       uid: id,

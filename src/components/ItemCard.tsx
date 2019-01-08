@@ -77,6 +77,7 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
           />
           }
           <Icon
+            color={"#a8aaaa"}
             name={"info"}
             size={30}
           />
