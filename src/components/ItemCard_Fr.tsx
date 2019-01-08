@@ -18,7 +18,7 @@ interface ItemCardState {
   check: boolean;
 }
 
-export default class FItemCard extends Component<ItemCardProps, ItemCardState> {
+export default class ItemCard_Fr extends Component<ItemCardProps, ItemCardState> {
 
   private mUnsubscribeFromStore: any;
 

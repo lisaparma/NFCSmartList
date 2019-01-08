@@ -18,7 +18,7 @@ interface CatalogCardState {
   like: boolean;
 }
 
-export default class FCatalogCard extends Component<CatalogCardProps, CatalogCardState> {
+export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogCardState> {
 
   private mUnsubscribeFromStore: any;
 

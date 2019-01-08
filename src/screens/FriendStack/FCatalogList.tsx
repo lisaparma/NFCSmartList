@@ -5,7 +5,7 @@ import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IStore, ICatalog} from "../../redux/IStore";
 import CatalogCard from "../../components/CatalogCard";
-import FCatalogCard from "../../components/FCatalogCard";
+import CatalogCard_Fr from "../../components/CatalogCard_Fr";
 import {std} from "../../style";
 
 interface FCatalogListProps {
@@ -30,7 +30,7 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
   public render() {
     const elements = Object.keys(this.state.catalogs)
       .map((element) => (
-        <FCatalogCard
+        <CatalogCard_Fr
           key={this.state.catalogs[element].cid}
           navigation={this.props.navigation}
           uid={this.state.uid}

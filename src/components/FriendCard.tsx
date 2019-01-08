@@ -23,7 +23,6 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
   }
 
   public render() {
-    console.log(this.props.friend.username)
     return (
       <TouchableOpacity
         style={[card.container, card.contFriend]}

@@ -12,6 +12,7 @@ import NfcManager, {ByteParser} from "react-native-nfc-manager";
 import ItemCard_Fr from "../../components/ItemCard_Fr";
 
 import {std} from "../../style";
+import ItemCard_Like from "../../components/ItemCard_Like";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<object>;
@@ -23,7 +24,7 @@ interface CatalogsState {
   cid: string;
 }
 
-class FCatalog extends Component<CatalogsProps, CatalogsState> {
+class LCatalog extends Component<CatalogsProps, CatalogsState> {
 
   constructor(props: CatalogsProps) {
     super(props);
@@ -38,7 +39,7 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
   public render() {
     const elements = Object.keys(this.state.items)
       .map((element) => (
-        <ItemCard_Fr
+        <ItemCard_Like
           key={this.state.items[element].iid}
           navigation={this.props.navigation}
           item={this.state.items[element]}
@@ -74,7 +75,7 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
                 style={std.DDitem}
                 onPress={()=> {
                   this.props.navigation.navigate(
-                  "FDetailsCatalog",
+                  "LDetailsCatalog",
                   {catalog: store.getState().friends[this.state.uid].catalogs[this.state.cid]});
                   this.props.navigation.setParams({"menu": false});
                 }}>
@@ -98,16 +99,16 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
   }
 
   private checkOne(tag: string) {
-    for (let item in this.state.items) {
-      if(this.state.items[item].tag === tag) {
-        store.dispatch({
-          type: "CHECKIN_ITEM",
-          cid: this.state.cid,
-          iid: this.state.items[item].iid,
-          name: this.state.items[item].name
-        });
-      }
-    }
+    // for (let item in this.state.items) {
+    //   if(this.state.items[item].tag === tag) {
+    //     store.dispatch({
+    //       type: "CHECKIN_ITEM",
+    //       cid: this.state.cid,
+    //       iid: this.state.items[item].iid,
+    //       name: this.state.items[item].name
+    //     });
+    //   }
+    // }
   }
 
   private NFCheck() {
@@ -127,4 +128,4 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
   }
 }
 
-export default withNavigation(FCatalog);
+export default withNavigation(LCatalog);
