@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet,Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Image,Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
-import TopBar from "../../components/TopBar";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
 import {store} from "../../App";
 
 import {card, info, std} from "../../style";
-import {IEditAvatar, IEditUsername} from "../../redux/action";
+import {IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
-import {ICatalog, IUser} from "../../redux/IStore";
+import {IUser} from "../../redux/IStore";
 import {Icon} from "react-native-elements";
 
 interface SettingsProps {

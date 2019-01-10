@@ -18,6 +18,8 @@ const LikesStack = createAppContainer(createStackNavigator(
         header: (props: any) =>
           <TopBar
             title="Catalogs"
+            iconLeft={"menu"}
+            onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
           />,
       }),
     },

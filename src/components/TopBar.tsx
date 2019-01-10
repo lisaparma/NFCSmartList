@@ -27,7 +27,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
           {
-            this.props.onPressLeft &&
+            (this.props.onPressLeft && !(this.props.iconLeft === "menu" && store.getState().user.os === "ios")) &&
             <TouchableOpacity
               style={styles.buttons}
               onPress={this.props.onPressLeft}>
@@ -39,7 +39,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
             </TouchableOpacity>
           }
           {
-            !this.props.onPressLeft &&
+            (!this.props.onPressLeft || (this.props.iconLeft === "menu" && store.getState().user.os === "ios")) &&
               <View style={styles.buttons}/>
           }
           <Text style={styles.text}>

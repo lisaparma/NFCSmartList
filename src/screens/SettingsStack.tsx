@@ -16,6 +16,8 @@ const SettingsStack = createAppContainer(createStackNavigator(
         header: (props: any) =>
           <TopBar
             title="Settings"
+            iconLeft={"menu"}
+            onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
           />,
       }),
     },
