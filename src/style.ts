@@ -18,7 +18,7 @@ export const std = StyleSheet.create({
   warningText: {
     color:"#e01038"
   },
-  scroll:{
+  scroll: {
     padding: 10
   },
 
@@ -41,6 +41,23 @@ export const std = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFFFF0",
     fontFamily: "Yanone Kaffeesatz"
+  },
+  floatingButton: {
+    borderWidth: 1,
+    borderColor: "#10A0E0",
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#fff',
+    borderRadius: 100,
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: '#bcbdbe',
+    shadowOpacity: 1.0,
+    elevation: 5
   },
 
   // ----- DROPDOWN MENU -----------------------------

@@ -31,7 +31,7 @@ const CatalogsStack = createAppContainer(createStackNavigator(
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={props.navigation.getParam("name")}
+            title={"Avatar"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
             iconRight={"more-horiz"}

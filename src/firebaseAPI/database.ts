@@ -79,20 +79,21 @@ export default class Database {
             let cat = {};
             let user = "";
             let avat = null;
-            firebase.database().ref('/users/' + item.val().uid).once('value')
-              .then((snapshot3) => {
-                  user=snapshot3.val().username;
-                  avat=snapshot3.val().avatar;
-                  for(const item2 in snapshot3.val().catalogs) {
-                    if (!snapshot3.val().catalogs[item2].private) {
-                      cat[item2] = snapshot3.val().catalogs[item2];
-                      if(store.getState().likes[item2]) {
-                        cat[item2].like = true;
-                      } else {
-                        cat[item2].like = false;
-                      }
+            firebase.database().ref('/users/' + item.val().uid).on(
+              'value',
+              (snapshot3) => {
+                user=snapshot3.val().username;
+                avat=snapshot3.val().avatar;
+                for(const item2 in snapshot3.val().catalogs) {
+                  if (!snapshot3.val().catalogs[item2].private) {
+                    cat[item2] = snapshot3.val().catalogs[item2];
+                    if(store.getState().likes[item2]) {
+                      cat[item2].like = true;
+                    } else {
+                      cat[item2].like = false;
                     }
                   }
+                }
                 friends[item.val().uid] = {
                   uid: item.val().uid,
                   username: user,

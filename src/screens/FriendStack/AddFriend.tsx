@@ -35,7 +35,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
           <TextInput
             style={[std.text, info.t2]}
             placeholder="e-mail"
-            onChangeText={text => this.setState({email: text})}
+            onChangeText={text => this.setState({email: text.trim()})}
           />
         </View>
         <TouchableOpacity

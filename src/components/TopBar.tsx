@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Platform} from 'react-native';
 import {Icon} from "react-native-elements";
 import {store} from "../App";
 
@@ -42,10 +42,13 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
             (!this.props.onPressLeft || (this.props.iconLeft === "menu" && store.getState().user.os === "ios")) &&
               <View style={styles.buttons}/>
           }
+          <View style={[Platform.OS !== "ios" && styles.textBox]}>
           <Text style={styles.text}>
             {this.props.title}
             </Text>
+          </View>
           {
+            (this.props.onPressRight && !(this.props.iconRight === "add" && store.getState().user.os !== "ios")) &&
             this.props.onPressRight &&
             <TouchableOpacity
               style={styles.buttons}
@@ -82,6 +85,9 @@ const styles = StyleSheet.create({
   buttons: {
     paddingHorizontal: 15,
     width: 65
+  },
+  textBox: {
+    flex: 1
   },
   text: {
     color: "#FFFFF0",

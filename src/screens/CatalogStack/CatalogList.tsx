@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, PixelRatio} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, PixelRatio, TouchableOpacity, Platform} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
@@ -7,6 +7,7 @@ import {IStore, ICatalog} from "../../redux/IStore";
 import CatalogCard from "../../components/CatalogCard";
 
 import {std} from "../../style";
+import {Icon} from "react-native-elements";
 
 interface CatalogListProps {
   navigation: NavigationScreenProp<object>;
@@ -52,6 +53,18 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       <ScrollView style={std.scroll}>
         {elements}
       </ScrollView>
+        {Platform.OS !== "ios" &&
+          <TouchableOpacity
+            style={std.floatingButton}
+            onPress={() => {this.props.navigation.navigate("AddCatalog")}}
+          >
+            <Icon
+              name="add"
+              size={40}
+              color="#10A0E0"
+            />
+          </TouchableOpacity>
+        }
       </View>
     );
   }

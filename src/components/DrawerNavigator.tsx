@@ -12,9 +12,6 @@ import {
 } from 'react-native';
 import {Icon} from "react-native-elements";
 
-import {store} from "../App";
-import {IAddItem} from "../redux/action";
-import Database from "../firebaseAPI/database";
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 import {card, std} from "../style";
 import {getAvatar} from "../../avatars/avatar";
@@ -39,8 +36,8 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps, Dra
 
   public render() {
     return (
-      <ScrollView>
-        <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+      <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+        <ScrollView>
           <View style={styles.box}>
             <View style={{paddingVertical: 10}}>
             <Image
@@ -55,9 +52,15 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps, Dra
               {this.props.user.email}
             </Text>
           </View>
-          <DrawerItems {...this.props.navProps} />
-        </SafeAreaView>
-      </ScrollView>
+          <DrawerItems {...this.props.navProps}
+             getLabel = {(scene) => (
+               <View style={{paddingVertical: 20}}>
+                 <Text>{this.props.navProps.getLabel(scene)}</Text>
+               </View>
+             )}
+          />
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
@@ -65,9 +68,12 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps, Dra
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderRightWidth: 1,
+    borderColor: "#10A0E0",
   },
   box: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#10A0E0",
     padding: 30,
-    backgroundColor: "#FFA500"
   }
 });

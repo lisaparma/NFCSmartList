@@ -37,7 +37,7 @@ class Login extends Component<AppProps, AppState> {
           placeholder="E-mail"
           autoCapitalize={"none"}
           autoCorrect={false}
-          onChangeText={text => this.setState({username: text.toLocaleLowerCase()})}
+          onChangeText={text => this.setState({username: text.toLocaleLowerCase().trim()})}
         />
         <TextInput
           style={log.input}
@@ -45,7 +45,7 @@ class Login extends Component<AppProps, AppState> {
           autoCapitalize={"none"}
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={text => this.setState({password: text})}
+          onChangeText={text => this.setState({password: text.trim()})}
         />
         <TouchableOpacity
           style={[std.button, log.loginButton]}

@@ -81,7 +81,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
             <Text style={[std.text, info.t1]}>Username:</Text>
             <TextInput
               style={[std.text, info.t2, {flex:1}]}
-              onChangeText={text => this.setState({username: text})}>
+              onChangeText={text => this.setState({username: text.trim()})}>
               {this.state.username}
             </TextInput>
             <TouchableOpacity

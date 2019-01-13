@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Platform} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
 import {std} from "../../style";
+import {Icon} from "react-native-elements";
 
 interface FriendsProps {
   navigation: NavigationScreenProp<object>;
@@ -49,6 +50,18 @@ class Friends extends Component<FriendsProps, FriendsState> {
         <ScrollView style={std.scroll}>
           {elements}
         </ScrollView>
+        {Platform.OS !== "ios" &&
+        <TouchableOpacity
+          style={std.floatingButton}
+          onPress={() => {this.props.navigation.navigate("AddFriend")}}
+        >
+          <Icon
+            name="add"
+            size={40}
+            color="#10A0E0"
+          />
+        </TouchableOpacity>
+        }
       </View>
     );
   }
