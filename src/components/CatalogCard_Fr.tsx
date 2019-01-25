@@ -4,7 +4,7 @@ import {Icon} from "react-native-elements";
 import {ICatalog, IItem} from "../redux/IStore";
 import {NavigationScreenProp} from "react-navigation";
 
-import {std, card} from "../style";
+import {std, card, getColor} from "../style";
 import {store} from "../App";
 import Database from "../firebaseAPI/database";
 
@@ -54,6 +54,7 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           <Icon
             name={"assignment"}
             size={50}
+            color={getColor(this.props.catalog.mod)}
           />
         </View>
         <View style={card.centerBox}>

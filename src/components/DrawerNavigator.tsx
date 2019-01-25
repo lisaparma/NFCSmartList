@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   SafeAreaView,
-  TouchableOpacity,
-  TextInput,
   Image,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import {Icon} from "react-native-elements";
 
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 import {card, std} from "../style";
@@ -39,18 +35,23 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps, Dra
       <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
         <ScrollView>
           <View style={styles.box}>
-            <View style={{paddingVertical: 10}}>
             <Image
-              style={{width: 100, height: 100}}
-              source={getAvatar(this.props.user.avatar)}
-            />
+              style={styles.pic}
+              source={require("../../assets/dream.png")}/>
+            <View style={{padding: 30}}>
+              <View style={{paddingVertical: 10}}>
+                  <Image
+                    style={{width: 100, height: 100, opacity: 1}}
+                    source={getAvatar(this.props.user.avatar)}
+                  />
+                </View>
+                <Text style={std.title}>
+                  {this.props.user.username}
+                </Text>
+                <Text style={std.text}>
+                  {this.props.user.email}
+                </Text>
             </View>
-            <Text style={std.title}>
-              {this.props.user.username}
-            </Text>
-            <Text style={std.text}>
-              {this.props.user.email}
-            </Text>
           </View>
           <DrawerItems {...this.props.navProps}
              getLabel = {(scene) => (
@@ -74,6 +75,14 @@ const styles = StyleSheet.create({
   box: {
     borderBottomWidth: 2,
     borderBottomColor: "#10A0E0",
-    padding: 30,
+  },
+  pic: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    opacity: 0.3,
+    width: "100%",
+    height: "100%",
+
   }
 });

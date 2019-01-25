@@ -11,7 +11,6 @@ import FriendStack from "./FriendStack";
 import LikeStack from "./LikeStack";
 import {store} from "../App";
 import {Platform, View, Text, StyleSheet, ScrollView, Image} from "react-native";
-import {getAvatar} from "../../avatars/avatar";
 import DrawerNavigator from "../components/DrawerNavigator";
 import {std} from "../style";
 

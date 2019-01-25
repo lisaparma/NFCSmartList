@@ -31,7 +31,7 @@ export interface IInfoDevice extends Action<'DEVICE_INFO'> {
 export interface IAddCatalog extends Action<'ADD_CATALOG'> {
   cid: string;
   name: string;
-  class: "standard";
+  mod: number;
   description: string;
   items?: IItem[];
   private: boolean;

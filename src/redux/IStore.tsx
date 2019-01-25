@@ -19,7 +19,7 @@ export interface IUser {
 
 export interface ICatalog {
 	cid: string;
-	class: "standard";
+	mod: number;
 	name: string;
 	description: string;
 	items: { [id: string]: IItem};

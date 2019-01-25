@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image,Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Image, Modal, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
@@ -22,6 +22,8 @@ interface SettingsState {
   username: string;
   email: string;
   avatar: number;
+  modal: boolean;
+  textModal: string;
 }
 
 class Settings extends Component<SettingsProps, SettingsState> {
@@ -35,7 +37,9 @@ class Settings extends Component<SettingsProps, SettingsState> {
       edit: false,
       username: user.username,
       email: user.email,
-      avatar: store.getState().user.avatar
+      avatar: store.getState().user.avatar,
+      modal: false,
+      textModal: "",
     }
   }
 
@@ -76,25 +80,25 @@ class Settings extends Component<SettingsProps, SettingsState> {
           </View>
         }
         {this.state.edit &&
-        <View>
-          <View style={[info.textBox, {justifyContent: "space-between"}]}>
-            <Text style={[std.text, info.t1]}>Username:</Text>
-            <TextInput
-              style={[std.text, info.t2, {flex:1}]}
-              onChangeText={text => this.setState({username: text.trim()})}>
-              {this.state.username}
-            </TextInput>
-            <TouchableOpacity
-              style={card.icon}
-              onPress={this.editUser}>
-              <Icon
-                color={"#88c25d"}
-                name={"done"}
-                size={30}
-              />
-            </TouchableOpacity>
+          <View>
+            <View style={[info.textBox, {justifyContent: "space-between"}]}>
+              <Text style={[std.text, info.t1]}>Username:</Text>
+              <TextInput
+                style={[std.text, info.t2, {flex:1}]}
+                onChangeText={text => this.setState({username: text.trim()})}>
+                {this.state.username}
+              </TextInput>
+              <TouchableOpacity
+                style={card.icon}
+                onPress={this.editUser}>
+                <Icon
+                  color={"#88c25d"}
+                  name={"done"}
+                  size={30}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
         }
         {store.getState().user.os === "android" &&
           <TouchableOpacity
@@ -103,6 +107,11 @@ class Settings extends Component<SettingsProps, SettingsState> {
             <Text style={std.textButton}>Set id tag NFC</Text>
           </TouchableOpacity>
         }
+        <TouchableOpacity
+          style={std.button}
+          onPress={this.format}>
+          <Text style={std.textButton}> Formatta</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={std.button}
           onPress={()=>{this.props.navigation.navigate(
@@ -118,6 +127,42 @@ class Settings extends Component<SettingsProps, SettingsState> {
           onPress={()=>{Auth.logout()}}>
           <Text style={std.textButton}>Esci</Text>
         </TouchableOpacity>
+
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.text}>{this.state.textModal}</Text>
+
+              { this.state.textModal === "Tag pronto!" &&
+                <TouchableOpacity
+                  style={[std.modalButton]}
+                  onPress={() => {
+                    this.setState({modal: false});
+                  }}>
+                  <Text style={std.text}>Ok!</Text>
+                </TouchableOpacity>
+              }
+
+              { this.state.textModal !== "Tag pronto!" &&
+                <TouchableOpacity
+                  style={std.modalButton}
+                  onPress={() => {
+                    this.setState({modal: false});
+                    NfcManager.cancelNdefWrite();
+                    this.unreg();
+                    this.stop();
+                  }}>
+                  <Text style={std.text}>Annulla</Text>
+                </TouchableOpacity>
+              }
+            </View>
+          </View>
+        </Modal>
+
       </View>
     );
   }
@@ -140,14 +185,23 @@ class Settings extends Component<SettingsProps, SettingsState> {
     Database.editUser(this.state.username);
   };
 
-  private write(tagID: string) {
+  private write(tagID: string){
+    this.setState({textModal: "Sto riscrivendo il tag..."});
     const mess = Ndef.encodeMessage([Ndef.textRecord(tagID)]);
     NfcManager.requestNdefWrite(mess)
-      .then(() => console.warn('Write completed' + tagID))
-      .catch(err => console.warn(err))
+      .then(() => {
+          this.setState({textModal: "Tag pronto!"});
+          this.unreg();
+          this.stop();
+        }
+      )
+      .catch(err => {
+        console.warn(err);
+      })
   }
 
   private addID = () => {
+    this.setState({modal: true, textModal: "Avvicina il tag"});
     NfcManager.start()
       .then(() => {
         NfcManager.registerTagEvent(
@@ -163,6 +217,43 @@ class Settings extends Component<SettingsProps, SettingsState> {
       .catch(error => {
         console.warn(error);
       })
+  }
+
+  private format = () => {
+    this.setState({modal: true, textModal: "Avvicina il tag"});
+    NfcManager.start()
+      .then(() => {
+        NfcManager.registerTagEvent(
+          tag => {
+            this.setState({textModal: "Sto formattando il tag..."});
+            NfcManager.requestNdefWrite(null, {format: true})
+              .then(() => {
+                  this.setState({textModal: "Tag pronto!"});
+                  this.unreg();
+                  this.stop();
+                }
+              )
+              .catch(err => {
+                console.warn(err);
+              })
+          },
+          'Hold your device over the tag',
+          true,
+        )
+      })
+      .catch(error => {
+        console.warn(error);
+      })
+  }
+
+  private unreg = () => {
+    console.warn("unregister");
+    NfcManager.unregisterTagEvent();
+  }
+
+  private stop = () => {
+    console.warn("Stop");
+    NfcManager.stop();
   }
 
 }

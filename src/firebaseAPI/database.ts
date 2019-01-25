@@ -33,7 +33,7 @@ export default class Database {
               name: item.val().name,
               description: item.val().description,
               items: item.val().items,
-              class: item.val().class,
+              mod: item.val().mod,
               private: item.val().private
             };
           });
@@ -113,13 +113,13 @@ export default class Database {
 
   }
 
-  public static addCatalog(id: string, name: string, description: string, pvt: boolean) {
+  public static addCatalog(id: string, name: string, description: string, pvt: boolean, mod: number) {
     const path = 'users/'+ store.getState().user.uid + "/catalogs/";
     firebase.database().ref(path + id).set({
       cid: id,
       name: name,
       description: description,
-      class: "standard",
+      mod: mod,
       items: {},
       private: pvt
     })

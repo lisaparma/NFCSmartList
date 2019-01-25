@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ImageBackgroundComponent,
+  Image,
+  ImageComponent,
+  ImageBackground
+} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IRemoveCatalog} from "../../redux/action";
@@ -52,7 +61,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           cid={this.state.cid}/>)
       );
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,}}>
         <View style={std.screen}>
           <Text style={std.title}>
             I tuoi item:

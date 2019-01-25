@@ -1,4 +1,16 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+
+export const options = [0, 1, 2, 3, 4];
+export const labels = ['Blu', 'Rosso', 'Giallo', "Verde", "Viola", "Nero"];
+const colors = ["#004fd3", "#d3001a", "#fff600", "#01c00d", "#7401c0", "0e0e0e"];
+
+export function getLabel(num: number): string {
+  return labels[num];
+}
+
+export function getColor(num: number): string {
+  return colors[num];
+}
 
 export const std = StyleSheet.create({
   screen: {
@@ -86,6 +98,29 @@ export const std = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: "#0b6d99",
   },
+
+  // ---- MODALE
+  modal: {
+    flex: 1,
+    backgroundColor:'rgba(0,0,0,0.6)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  card: {
+    borderRadius: 10,
+    borderColor: "#999999",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: "80%",
+    backgroundColor: "#ffffff",
+    padding: 10,
+    opacity: 1,
+  },
+
+  modalButton: {
+  }
 
 });
 
@@ -183,22 +218,22 @@ export const card = StyleSheet.create({
   contCatal: {
     margin: 10,
     paddingVertical: 10,
-    borderWidth: 1,
-    borderColor: "#87CEFA",
-    borderTopLeftRadius: 0,
-    borderRadius: 15,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 0.5,
+    borderColor: "#bcbdbe",
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: '#bcbdbe',
+    shadowOpacity: 1.0,
+    elevation: 5
+
   },
 
   // -- Item ----------
   contItem: {
     padding: 10,
     borderColor: "#bcbdbe",
-    borderWidth: 0.5,
+    borderBottomWidth: 0.5,
     backgroundColor: "#FFFFFF",
-    shadowOffset:{  width: 5,  height: 5,  },
-    shadowColor: '#bcbdbe',
-    shadowOpacity: 1.0,
-    elevation: 5
   },
   // -- Friends ------
   contFriend: {

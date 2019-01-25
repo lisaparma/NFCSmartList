@@ -31,7 +31,7 @@ export const CatalogsReducer = (
         cid: action.cid,
         name: action.name,
         description: action.description,
-        class: "standard",
+        mod: action.mod,
         items: {},
         private: action.private
       };

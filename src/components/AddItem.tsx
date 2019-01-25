@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput} from 'react-native';
+import {View, TouchableOpacity, TextInput} from 'react-native';
 import {Icon} from "react-native-elements";
 
 import {store} from "../App";
@@ -96,21 +96,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
       }
     })
       .then(() => {
-        if(store.getState().user.os === "ios") {
-          this.read();
-        } else {
-          NfcManager.registerTagEvent(
-            tag => {
-              this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
-                // var uuid = require('react-native-uuid');
-                // const tagID = uuid.v4();
-                // this.write(tagID);
-                // this.setState({tag: tagID});
-            },
-            'Hold your device over the tag',
-            true,
-          )
-        }
+        this.read();
       })
       .catch(error => {
         console.warn(error);
