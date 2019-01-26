@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import {Image, Modal, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
 import {store} from "../../App";
 
-import {card, info, std} from "../../style";
+import {card, def, info, std} from "../../style";
 import {IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
 import {IUser} from "../../redux/IStore";
 import {Icon} from "react-native-elements";
+import {SettingsCard} from "../../components/SettingsCard";
 
 interface SettingsProps {
   navigation: NavigationScreenProp<object>;
@@ -23,7 +24,6 @@ interface SettingsState {
   email: string;
   avatar: number;
   modal: boolean;
-  textModal: string;
 }
 
 class Settings extends Component<SettingsProps, SettingsState> {
@@ -39,7 +39,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
       email: user.email,
       avatar: store.getState().user.avatar,
       modal: false,
-      textModal: "",
     }
   }
 
@@ -53,79 +52,108 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
   public render() {
     return (
-      <View style={std.screen}>
-        <Image
-          style={{width: 100, height: 100}}
-          source={getAvatar(this.state.avatar)}
-        />
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>e-mail:</Text>
-          <Text style={[std.text, info.t2]}>{this.state.email}</Text>
+      <ScrollView style={styles.page}>
+        <View style={styles.data}>
+          <Image
+            style={{width: 100, height: 100}}
+            source={getAvatar(this.state.avatar)}
+          />
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>e-mail:</Text>
+            <Text style={[std.text, info.t2]}>{this.state.email}</Text>
+          </View>
+          {!this.state.edit &&
+            <View>
+              <View style={[info.textBox, {justifyContent: "space-between"}]}>
+                <Text style={[std.text, info.t1]}>Username:</Text>
+                <Text style={[std.text, info.t2, {flex:1}]}>{this.state.username}</Text>
+                <TouchableOpacity
+                  style={card.icon}
+                  onPress={()=>{this.setState({edit: true})}}>
+                  <Icon
+                    color={"#a8aaaa"}
+                    name={"edit"}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          }
+          {this.state.edit &&
+            <View>
+              <View style={[info.textBox, {justifyContent: "space-between"}]}>
+                <Text style={[std.text, info.t1]}>Username:</Text>
+                <TextInput
+                  style={[std.text, info.t2, {flex:1}]}
+                  onChangeText={text => this.setState({username: text.trim()})}>
+                  {this.state.username}
+                </TextInput>
+                <TouchableOpacity
+                  style={card.icon}
+                  onPress={this.editUser}>
+                  <Icon
+                    color={"#88c25d"}
+                    name={"done"}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          }
         </View>
-        {!this.state.edit &&
-          <View>
-            <View style={[info.textBox, {justifyContent: "space-between"}]}>
-              <Text style={[std.text, info.t1]}>Username:</Text>
-              <Text style={[std.text, info.t2, {flex:1}]}>{this.state.username}</Text>
-              <TouchableOpacity
-                style={card.icon}
-                onPress={()=>{this.setState({edit: true})}}>
-                <Icon
-                  color={"#a8aaaa"}
-                  name={"edit"}
-                  size={30}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        }
-        {this.state.edit &&
-          <View>
-            <View style={[info.textBox, {justifyContent: "space-between"}]}>
-              <Text style={[std.text, info.t1]}>Username:</Text>
-              <TextInput
-                style={[std.text, info.t2, {flex:1}]}
-                onChangeText={text => this.setState({username: text.trim()})}>
-                {this.state.username}
-              </TextInput>
-              <TouchableOpacity
-                style={card.icon}
-                onPress={this.editUser}>
-                <Icon
-                  color={"#88c25d"}
-                  name={"done"}
-                  size={30}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        }
+        <View style={styles.box}>
+          <Text style={[std.text, styles.titleBox]}> Dati personali</Text>
+          <SettingsCard
+            icon={"add"}
+            text={"Pic"}
+            navigation={this.props.navigation}
+            page={"Avatars"}/>
+        </View>
+
         {store.getState().user.os === "android" &&
-          <TouchableOpacity
-            style={std.button}
-            onPress={this.addID}>
-            <Text style={std.textButton}>Set id tag NFC</Text>
-          </TouchableOpacity>
+        <View style={styles.box}>
+          <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
+          <SettingsCard
+            icon={"add"}
+            text={"Set id"}
+            navigation={this.props.navigation}
+            page={"NFCid"}/>
+          <SettingsCard
+            icon={"add"}
+            text={"Formatta id"}
+            navigation={this.props.navigation}
+            page={"NFCformat"}/>
+        </View>
         }
-        <TouchableOpacity
-          style={std.button}
-          onPress={this.format}>
-          <Text style={std.textButton}> Formatta</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={std.button}
-          onPress={()=>{this.props.navigation.navigate(
-            "Avatars",
-            {avatar: this.state.avatar})
-          }}
-            >
-          <Text style={std.textButton}>Cambia avatar</Text>
-        </TouchableOpacity>
+
+        <View style={styles.box}>
+          <Text style={[std.text, styles.titleBox]}> Aiuto</Text>
+          <SettingsCard
+            icon={"add"}
+            text={"FAQ"}
+            navigation={this.props.navigation}
+            page={""}/>
+          <SettingsCard
+            icon={"add"}
+            text={"Contattaci"}
+            navigation={this.props.navigation}
+            page={""}/>
+          <SettingsCard
+            icon={"add"}
+            text={"Termini e Informativa sulla privacy"}
+            navigation={this.props.navigation}
+            page={""}/>
+          <SettingsCard
+            icon={"add"}
+            text={"Licenze"}
+            navigation={this.props.navigation}
+            page={""}/>
+        </View>
 
         <TouchableOpacity
-          style={std.button}
-          onPress={()=>{Auth.logout()}}>
-          <Text style={std.textButton}>Esci</Text>
+          style={styles.esc}
+          onPress={()=>{this.setState({modal: true})}}>
+          <Text style={[std.textButton, std.warningText]}>Esci</Text>
         </TouchableOpacity>
 
         <Modal
@@ -135,35 +163,29 @@ class Settings extends Component<SettingsProps, SettingsState> {
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>{this.state.textModal}</Text>
-
-              { this.state.textModal === "Tag pronto!" &&
+              <Text style={std.text}>Sei sicuro di voler uscire?</Text>
                 <TouchableOpacity
                   style={[std.modalButton]}
                   onPress={() => {
                     this.setState({modal: false});
+                    Auth.logout();
                   }}>
-                  <Text style={std.text}>Ok!</Text>
+                  <Text style={std.text}>Esci</Text>
                 </TouchableOpacity>
-              }
 
-              { this.state.textModal !== "Tag pronto!" &&
                 <TouchableOpacity
                   style={std.modalButton}
                   onPress={() => {
                     this.setState({modal: false});
-                    NfcManager.cancelNdefWrite();
-                    this.unreg();
-                    this.stop();
                   }}>
                   <Text style={std.text}>Annulla</Text>
                 </TouchableOpacity>
-              }
+
             </View>
           </View>
         </Modal>
 
-      </View>
+      </ScrollView>
     );
   }
 
@@ -185,77 +207,34 @@ class Settings extends Component<SettingsProps, SettingsState> {
     Database.editUser(this.state.username);
   };
 
-  private write(tagID: string){
-    this.setState({textModal: "Sto riscrivendo il tag..."});
-    const mess = Ndef.encodeMessage([Ndef.textRecord(tagID)]);
-    NfcManager.requestNdefWrite(mess)
-      .then(() => {
-          this.setState({textModal: "Tag pronto!"});
-          this.unreg();
-          this.stop();
-        }
-      )
-      .catch(err => {
-        console.warn(err);
-      })
-  }
-
-  private addID = () => {
-    this.setState({modal: true, textModal: "Avvicina il tag"});
-    NfcManager.start()
-      .then(() => {
-        NfcManager.registerTagEvent(
-          tag => {
-            var uuid = require('react-native-uuid');
-            const tagID = uuid.v4();
-            this.write(tagID);
-          },
-          'Hold your device over the tag',
-          true,
-        )
-      })
-      .catch(error => {
-        console.warn(error);
-      })
-  }
-
-  private format = () => {
-    this.setState({modal: true, textModal: "Avvicina il tag"});
-    NfcManager.start()
-      .then(() => {
-        NfcManager.registerTagEvent(
-          tag => {
-            this.setState({textModal: "Sto formattando il tag..."});
-            NfcManager.requestNdefWrite(null, {format: true})
-              .then(() => {
-                  this.setState({textModal: "Tag pronto!"});
-                  this.unreg();
-                  this.stop();
-                }
-              )
-              .catch(err => {
-                console.warn(err);
-              })
-          },
-          'Hold your device over the tag',
-          true,
-        )
-      })
-      .catch(error => {
-        console.warn(error);
-      })
-  }
-
-  private unreg = () => {
-    console.warn("unregister");
-    NfcManager.unregisterTagEvent();
-  }
-
-  private stop = () => {
-    console.warn("Stop");
-    NfcManager.stop();
-  }
-
 }
+
+export const styles = StyleSheet.create({
+  page: {
+    backgroundColor: def.grey2,
+    flex: 1,
+  },
+  data: {
+    padding: 10,
+    backgroundColor: def.white,
+  },
+  titleBox: {
+    fontSize: 14,
+  },
+  box: {
+    marginVertical: 5,
+  },
+  esc: {
+    backgroundColor: def.white,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    borderWidth: 0.3,
+    borderColor: def.red,
+    marginTop: 15,
+    padding: 6,
+  }
+});
 
 export default withNavigation(Settings);

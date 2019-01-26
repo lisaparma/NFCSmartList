@@ -7,6 +7,8 @@ import {
 import TopBar from "../components/TopBar";
 import Settings from "./SettingsStack/Settings";
 import Avatars from "./SettingsStack/Avatars";
+import NFCid from "./SettingsStack/NFCid";
+import NFCformat from "./SettingsStack/NFCformat";
 
 const SettingsStack = createAppContainer(createStackNavigator(
   {
@@ -32,6 +34,32 @@ const SettingsStack = createAppContainer(createStackNavigator(
           />,
       }),
     },
+    NFCid: {
+      screen: () => <NFCid/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"ID"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    NFCformat: {
+      screen: () => <NFCformat/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"Formatta"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    }
   },
   {
     initialRouteName: 'Settings',

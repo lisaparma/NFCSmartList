@@ -12,7 +12,7 @@ import LikeStack from "./LikeStack";
 import {store} from "../App";
 import {Platform, View, Text, StyleSheet, ScrollView, Image} from "react-native";
 import DrawerNavigator from "../components/DrawerNavigator";
-import {std} from "../style";
+import {def, std} from "../style";
 
 // iconlist only material icons https://oblador.github.io/react-native-vector-icons/
 
@@ -134,7 +134,7 @@ const MainTabsAndroid = createDrawerNavigator(
     contentComponent: (props) => <DrawerNavigator navProps={props} user={store.getState().user}/>,
     contentOptions: {
       activeTintColor: "#10A0E0",
-      inactiveTintColor: "#3d3d3d",
+      inactiveTintColor: def.black,
     }
   },
 );

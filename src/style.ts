@@ -12,6 +12,18 @@ export function getColor(num: number): string {
   return colors[num];
 }
 
+export const def = {
+  black: "#3d3d3d",
+  grey0: "#76797a",
+  grey1: "#bbbebe",
+  grey2: "#edeeee",
+  white: "#FAFAFA",
+  theme0: "#0b6d99",
+  theme1: "#10A0E0",
+  theme2: "#a8e0f9",
+  red: "#e01038",
+}
+
 export const std = StyleSheet.create({
   screen: {
     flex: 1,
@@ -19,16 +31,16 @@ export const std = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    color: "#0b6d99",
+    color: def.theme0,
     fontFamily: "Yanone Kaffeesatz"
   },
   text:{
     fontSize: 20,
     fontFamily: "Yanone Kaffeesatz",
-    color: "#3d3d3d",
+    color: def.black,
   },
   warningText: {
-    color:"#e01038"
+    color: def.red
   },
   scroll: {
     padding: 10
@@ -40,23 +52,23 @@ export const std = StyleSheet.create({
     marginHorizontal: "25%",
     alignItems: "center",
     marginTop: 30,
-    backgroundColor: '#0b6d99',
+    backgroundColor: def.theme0,
     width: "50%",
     paddingVertical: 10,
     borderRadius: 3,
   },
   safeBut: {
-    backgroundColor: "#e01038"
+    backgroundColor: def.red
   },
   textButton: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#FFFFF0",
+    color: def.white,
     fontFamily: "Yanone Kaffeesatz"
   },
   floatingButton: {
     borderWidth: 1,
-    borderColor: "#10A0E0",
+    borderColor: def.theme1,
     alignItems: 'center',
     justifyContent: 'center',
     width: 50,
@@ -64,10 +76,10 @@ export const std = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 20,
-    backgroundColor: '#fff',
+    backgroundColor: def.white,
     borderRadius: 100,
     shadowOffset:{  width: 5,  height: 5,  },
-    shadowColor: '#bcbdbe',
+    shadowColor: def.grey1,
     shadowOpacity: 1.0,
     elevation: 5
   },
@@ -84,7 +96,7 @@ export const std = StyleSheet.create({
     elevation: 6
   },
   DDmenu: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: def.white,
     width: "100%",
     borderRadius: 10,
     borderTopRightRadius: 0,
@@ -96,7 +108,7 @@ export const std = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
     borderBottomWidth: 0.5,
-    borderColor: "#0b6d99",
+    borderColor: def.theme1,
   },
 
   // ---- MODALE
@@ -109,12 +121,12 @@ export const std = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    borderColor: "#999999",
+    borderColor: def.grey1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     width: "80%",
-    backgroundColor: "#ffffff",
+    backgroundColor: def.white,
     padding: 10,
     opacity: 1,
   },
@@ -135,12 +147,12 @@ export const info = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 0.5,
-    borderBottomColor: "#a8aaaa",
+    borderBottomColor: def.grey1,
     paddingVertical: 10,
     paddingTop: 20
   },
   t1: {
-    color: "#a8aaaa"
+    color: def.grey1
   },
   t2: {
     paddingLeft: 10,
@@ -156,7 +168,7 @@ export const log = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#10A0E0',
+    backgroundColor: def.theme1,
   },
   image: {
     width: 100,
@@ -164,7 +176,7 @@ export const log = StyleSheet.create({
     margin: 30
   },
   input: {
-    backgroundColor: "#FFFFF0",
+    backgroundColor: def.white,
     width: "50%",
     borderRadius: 5,
     padding: 10,
@@ -174,12 +186,12 @@ export const log = StyleSheet.create({
   },
   loginButton: {
     marginTop: 15,
-    backgroundColor: '#0b6d99',
+    backgroundColor: def.theme0,
   },
   textButton: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#FFFFF0",
+    color: def.white,
     fontFamily: "Yanone Kaffeesatz"
   },
   link: {
@@ -204,25 +216,25 @@ export const card = StyleSheet.create({
     flexDirection: "column",
   },
   t1:{
-    color: "#0b6d99",
+    color: def.theme0,
   },
   t2: {
     fontSize: 15,
   },
   textCheck: {
-    color: "#a8aaaa",
+    color: def.grey1,
     textDecorationLine: 'line-through',
-    textDecorationColor: "#0b6d99",
+    textDecorationColor: def.theme0,
   },
   // -- Cataloghi ------
   contCatal: {
     margin: 10,
     paddingVertical: 10,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: def.white,
     borderWidth: 0.5,
-    borderColor: "#bcbdbe",
+    borderColor: def.grey1,
     shadowOffset:{  width: 5,  height: 5,  },
-    shadowColor: '#bcbdbe',
+    shadowColor: def.grey1,
     shadowOpacity: 1.0,
     elevation: 5
 
@@ -231,14 +243,14 @@ export const card = StyleSheet.create({
   // -- Item ----------
   contItem: {
     padding: 10,
-    borderColor: "#bcbdbe",
+    borderColor: def.grey1,
     borderBottomWidth: 0.5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: def.white,
   },
   // -- Friends ------
   contFriend: {
     height: 80,
-    borderColor: "#bcbdbe",
+    borderColor: def.grey1,
     borderWidth: 0.5,
   },
 });
