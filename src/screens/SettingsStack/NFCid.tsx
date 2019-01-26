@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet, ListView, Modal} from 'react-native';
-import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
-import {std} from "../../style";
+import {def, std} from "../../style";
 
 interface AvatarsProps {
   navigation: NavigationScreenProp<object>;
 }
 
 interface AvatarsState {
-  modal: boolean;
-  textModal: string;
+  time: number
 }
 
 class NFCid extends Component<AvatarsProps, AvatarsState> {
@@ -19,66 +18,56 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
   constructor(props: AvatarsProps) {
     super(props);
     this.state = {
-      modal: false,
-      textModal: "",
+      time: 0
     }
   }
 
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          Setta un id al tuo tag
+        <Text style={std.title}>Setta un id al tuo tag</Text>
+        <Text style={std.text}>In questa pagina puoi settare un id univoco ad
+          uno tuo tag NFC (precedentemente formattato in modo
+          giusto) oppure modificare quello già presente.
+          Procedi cliccando sul tasto sottostante e seguendo le istruzioni
+          che verranno fuori man mano.
         </Text>
         <TouchableOpacity
           style={std.button}
           onPress={this.addID}>
           <Text style={std.textButton}>Set id tag NFC</Text>
         </TouchableOpacity>
-        <Modal
-          transparent={true}
-          visible={this.state.modal}
-          onRequestClose={() => {this.setState({modal: false})}}
-        >
-          <View style={std.modal}>
-            <View style={std.card}>
-              <Text style={std.text}>{this.state.textModal}</Text>
 
-              { this.state.textModal === "Tag pronto!" &&
-              <TouchableOpacity
-                style={[std.modalButton]}
-                onPress={() => {
-                  this.setState({modal: false});
-                }}>
-                <Text style={std.text}>Ok!</Text>
-              </TouchableOpacity>
-              }
+        <View style={[styles.rules, this.state.time === 1 && styles.now]}>
+          <Text style={std.text}>Avvicina il tag</Text>
+          <Text style={std.text}>Avvicina il tag NFC al lettore NFC del telefono.
+            Solitamente si trova nella parte superiore del telefono.
+          </Text>
+        </View>
+        <View style={[styles.rules, this.state.time === 2 && styles.now]}>
+          <Text style={std.text}>Riavvicina il tag</Text>
+          <Text style={std.text}> Ora che è stata riconosciuta la presenza di un
+            tag NFC, allontana e avvicina di nuovo il tag al lettore in modo da
+            permettere la sua scrittura.
+          </Text>
+        </View>
+        <View style={[styles.rules, this.state.time === 4 && styles.now]}>
+          <Text style={std.text}>Tag pronto!</Text>
+          <Text style={std.text}> Il nuovo id del tag è ...
+            Ora può essere associato ad un oggetto di un tuo catalogo per fare il check.
+          </Text>
+        </View>
 
-              { this.state.textModal !== "Tag pronto!" &&
-              <TouchableOpacity
-                style={std.modalButton}
-                onPress={() => {
-                  this.setState({modal: false});
-                  NfcManager.cancelNdefWrite();
-                  this.unreg();
-                  this.stop();
-                }}>
-                <Text style={std.text}>Annulla</Text>
-              </TouchableOpacity>
-              }
-            </View>
-          </View>
-        </Modal>
       </View>
     );
   }
 
   private write(tagID: string){
-    this.setState({textModal: "Sto riscrivendo il tag..."});
+    this.setState({time: 2});
     const mess = Ndef.encodeMessage([Ndef.textRecord(tagID)]);
     NfcManager.requestNdefWrite(mess)
       .then(() => {
-          this.setState({textModal: "Tag pronto!"});
+          this.setState({time: 4});
           this.unreg();
           this.stop();
         }
@@ -89,7 +78,7 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
   }
 
   private addID = () => {
-    this.setState({modal: true, textModal: "Avvicina il tag"});
+    this.setState({time: 1});
     NfcManager.start()
       .then(() => {
         NfcManager.registerTagEvent(
@@ -107,7 +96,6 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
       })
   }
 
-
   private unreg = () => {
     console.warn("unregister");
     NfcManager.unregisterTagEvent();
@@ -124,24 +112,10 @@ export default withNavigation(NFCid);
 
 
 const styles = StyleSheet.create({
-  grid: {
-    paddingHorizontal: 10,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: 'space-between',
-  },
-  icon: {
-    width: 100,
-    height: 100,
-    alignContent: "center",
-    justifyContent: 'center',
-
+  rules: {
+    paddingVertical: 10,
   },
   now: {
-
-  },
-  pic: {
-    width: 80,
-    resizeMode: "contain",
+    backgroundColor: def.red
   }
 });
