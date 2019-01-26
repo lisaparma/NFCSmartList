@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
-import {Image, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import {NavigationScreenProp, withNavigation} from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
@@ -11,7 +21,7 @@ import {IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
 import {IUser} from "../../redux/IStore";
-import {Icon} from "react-native-elements";
+import {Icon, Input} from "react-native-elements";
 import {SettingsCard} from "../../components/SettingsCard";
 
 interface SettingsProps {
@@ -58,56 +68,70 @@ class Settings extends Component<SettingsProps, SettingsState> {
             style={{width: 100, height: 100}}
             source={getAvatar(this.state.avatar)}
           />
-          <View style={info.textBox}>
-            <Text style={[std.text, info.t1]}>e-mail:</Text>
-            <Text style={[std.text, info.t2]}>{this.state.email}</Text>
+          <View style={styles.dataBox}>
+            <Text style={std.title}>{this.state.username}</Text>
+            <Text style={std.text}>{this.state.email}</Text>
           </View>
-          {!this.state.edit &&
-            <View>
-              <View style={[info.textBox, {justifyContent: "space-between"}]}>
-                <Text style={[std.text, info.t1]}>Username:</Text>
-                <Text style={[std.text, info.t2, {flex:1}]}>{this.state.username}</Text>
-                <TouchableOpacity
-                  style={card.icon}
-                  onPress={()=>{this.setState({edit: true})}}>
-                  <Icon
-                    color={"#a8aaaa"}
-                    name={"edit"}
-                    size={30}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          }
-          {this.state.edit &&
-            <View>
-              <View style={[info.textBox, {justifyContent: "space-between"}]}>
-                <Text style={[std.text, info.t1]}>Username:</Text>
-                <TextInput
-                  style={[std.text, info.t2, {flex:1}]}
-                  onChangeText={text => this.setState({username: text.trim()})}>
-                  {this.state.username}
-                </TextInput>
-                <TouchableOpacity
-                  style={card.icon}
-                  onPress={this.editUser}>
-                  <Icon
-                    color={"#88c25d"}
-                    name={"done"}
-                    size={30}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          }
         </View>
+
         <View style={styles.box}>
           <Text style={[std.text, styles.titleBox]}> Dati personali</Text>
-          <SettingsCard
-            icon={"add"}
-            text={"Pic"}
-            navigation={this.props.navigation}
-            page={"Avatars"}/>
+          <TouchableOpacity
+            style={styles.card}
+            activeOpacity={0.3}
+            onPress={() => {
+              if(this.state.edit)
+                this.editUser();
+              this.setState({edit: !this.state.edit});
+            }}>
+            <Text style={std.text}>Nickname</Text>
+            {!this.state.edit?
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+                <Text style={[std.text, {color: def.grey1, paddingRight: 10}]}>{this.state.username}</Text>
+                <Icon
+                  color={def.grey1}
+                  name={"edit"}
+                  size={30}
+                />
+              </View>
+              :
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+                <TextInput
+                  style={[std.text, {padding:0, paddingRight: 10, alignContent: "center"}]}
+                  onChangeText={text => this.setState({username: text})}>
+                  {this.state.username}
+                </TextInput>
+                <Icon
+                  color={def.grey1}
+                  name={"done"}
+                  size={30}
+                />
+              </View>
+            }
+          </TouchableOpacity>
+          <TouchableHighlight
+            activeOpacity={0.3}
+            underlayColor={def.theme2}
+            onPress={()=>this.props.navigation.navigate("Avatars")}>
+            <View style={styles.card}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={std.text}> Avatars </Text>
+              </View>
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+                <View style={{paddingRight: 10}}>
+                  <Image
+                    style={{width: 30, height: 30}}
+                    source={getAvatar(this.state.avatar)}
+                  />
+                </View>
+                <Icon
+                  color={def.grey1}
+                  name="edit"
+                  size={30}
+                />
+              </View>
+            </View>
+          </TouchableHighlight>
         </View>
 
         {store.getState().user.os === "android" &&
@@ -115,12 +139,12 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
           <SettingsCard
             icon={"add"}
-            text={"Set id"}
+            text={"Set id tag"}
             navigation={this.props.navigation}
             page={"NFCid"}/>
           <SettingsCard
             icon={"add"}
-            text={"Formatta id"}
+            text={"Formatta tag"}
             navigation={this.props.navigation}
             page={"NFCformat"}/>
         </View>
@@ -151,7 +175,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
         </View>
 
         <TouchableOpacity
-          style={styles.esc}
+          style={[styles.card, styles.esc]}
           onPress={()=>{this.setState({modal: true})}}>
           <Text style={[std.textButton, std.warningText]}>Esci</Text>
         </TouchableOpacity>
@@ -215,25 +239,37 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   data: {
-    padding: 10,
+    padding: 20,
     backgroundColor: def.white,
+    flexDirection: "row",
   },
   titleBox: {
-    fontSize: 14,
+    fontSize: 16,
+    color: def.grey0,
+    paddingBottom: 5
+  },
+  dataBox: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 20
   },
   box: {
     marginVertical: 5,
   },
-  esc: {
+  card:{
     backgroundColor: def.white,
     flexDirection: "row",
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     height: 50,
     borderWidth: 0.3,
+    borderColor: def.grey1,
+    padding: 6,
+  },
+  esc: {
+    justifyContent: 'center',
     borderColor: def.red,
     marginTop: 15,
-    padding: 6,
   }
 });
 

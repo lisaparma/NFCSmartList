@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
-import {card, std} from "../style";
+import {card, def, std} from "../style";
 import {getAvatar} from "../../avatars/avatar";
 import {DrawerItems} from "react-navigation";
 import {IUser} from "../redux/IStore";
@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRightWidth: 1,
-    borderColor: "#10A0E0",
+    borderColor: def.theme1,
   },
   box: {
     borderBottomWidth: 2,
-    borderBottomColor: "#10A0E0",
+    borderBottomColor: def.theme1,
   },
   pic: {
     position: "absolute",

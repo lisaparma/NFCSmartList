@@ -28,6 +28,7 @@ export const std = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
+    paddingBottom: 0
   },
   title: {
     fontSize: 25,
@@ -156,6 +157,7 @@ export const info = StyleSheet.create({
   },
   t2: {
     paddingLeft: 10,
+    paddingBottom: 0
   },
   switch: {
     paddingLeft: 15

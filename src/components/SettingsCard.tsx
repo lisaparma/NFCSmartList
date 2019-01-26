@@ -25,7 +25,7 @@ export class SettingsCard extends React.Component<ISettingsItemProps> {
     return (
       <TouchableHighlight
         activeOpacity={0.3}
-        // underlayColor={Style.skinData.SelectionColor}
+        underlayColor={def.theme2}
         onPress={this._onPressButton}>
         <View style={styles.item}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
