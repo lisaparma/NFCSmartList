@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {IItem} from "../redux/IStore";
-import {NavigationScreenProp} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 import {store} from "../App";
 import {IFrCheckInItem, IFrCheckOutItem} from "../redux/action";
 import {card, std} from "../style";
 
 interface ItemCardProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   item: IItem;
   uid: string;
   cid: string;

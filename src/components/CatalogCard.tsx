@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {ICatalog} from "../redux/IStore";
-import {NavigationScreenProp} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
 import {std, card, getLabel, getColor} from "../style"
 
 interface CatalogCardProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   catalog: ICatalog;
 }
 

@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {ICatalog, IItem} from "../redux/IStore";
-import {NavigationScreenProp} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
 import {std, card, getColor} from "../style";
 import {store} from "../App";
 import Database from "../firebaseAPI/database";
 
 interface CatalogCardProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   catalog: ICatalog;
 }
 

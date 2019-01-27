@@ -2,10 +2,10 @@ import * as React from 'react'
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import {Icon} from "react-native-elements";
 import {def, std} from '../style';
-import {NavigationScreenProp} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
 interface ISettingsItemProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   icon: string,
   text: string,
   page: string,

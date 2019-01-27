@@ -22,6 +22,7 @@ export const def = {
   theme1: "#10A0E0",
   theme2: "#a8e0f9",
   red: "#e01038",
+  green: "#029615"
 }
 
 export const std = StyleSheet.create({

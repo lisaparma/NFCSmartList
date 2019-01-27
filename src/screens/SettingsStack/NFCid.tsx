@@ -4,6 +4,7 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNaviga
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {def, std} from "../../style";
+import {Rule} from "../../components/Rule";
 
 interface AvatarsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -26,38 +27,57 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
     return (
       <View style={std.screen}>
         <Text style={std.title}>Setta un id al tuo tag</Text>
-        <Text style={std.text}>In questa pagina puoi settare un id univoco ad
+        <Text style={std.text}>
+          In questa pagina puoi settare un id univoco ad
           uno tuo tag NFC (precedentemente formattato in modo
           giusto) oppure modificare quello già presente.
           Procedi cliccando sul tasto sottostante e seguendo le istruzioni
           che verranno fuori man mano.
         </Text>
+
+        <Rule
+          title={"Avvicina il tag"}
+          text={"Avvicina il tag NFC al lettore NFC del telefono.\n" +
+          "Solitamente si trova nella parte superiore del telefono."}
+          id={1}
+          time={this.state.time}
+        />
+        <Rule
+          title={"Riavvicina il tag"}
+          text={"Ora che è stata riconosciuta la presenza di un\n" +
+          "tag NFC, allontana e avvicina di nuovo il tag al lettore in modo da\n" +
+          "permettere la sua scrittura."}
+          id={2}
+          time={this.state.time}
+        />
+        <Rule
+          title={"Tag pronto!"}
+          text={"Ora il tuo tag può essere associato ad un oggetto di un tuo catalogo per fare il check."}
+          id={3}
+          time={this.state.time}
+        />
+
+        { this.state.time === 0 &&
+          <TouchableOpacity
+            style={std.button}
+            onPress={this.addID}>
+            <Text style={std.textButton}>Procedi</Text>
+          </TouchableOpacity>
+        }
+        { (this.state.time !== 0 && this.state.time !== 3) &&
+          <TouchableOpacity
+            style={std.button}
+            onPress={() => {this.unreg(); this.stop(); this.setState({time: 0})}}>
+            <Text style={std.textButton}>Annulla</Text>
+          </TouchableOpacity>
+        }
+        { this.state.time === 3 &&
         <TouchableOpacity
           style={std.button}
-          onPress={this.addID}>
-          <Text style={std.textButton}>Set id tag NFC</Text>
+          onPress={() => {this.setState({time: 0}); this.addID}}>
+          <Text style={std.textButton}>Procedi con un nuovo tag</Text>
         </TouchableOpacity>
-
-        <View style={[styles.rules, this.state.time === 1 && styles.now]}>
-          <Text style={std.text}>Avvicina il tag</Text>
-          <Text style={std.text}>Avvicina il tag NFC al lettore NFC del telefono.
-            Solitamente si trova nella parte superiore del telefono.
-          </Text>
-        </View>
-        <View style={[styles.rules, this.state.time === 2 && styles.now]}>
-          <Text style={std.text}>Riavvicina il tag</Text>
-          <Text style={std.text}> Ora che è stata riconosciuta la presenza di un
-            tag NFC, allontana e avvicina di nuovo il tag al lettore in modo da
-            permettere la sua scrittura.
-          </Text>
-        </View>
-        <View style={[styles.rules, this.state.time === 4 && styles.now]}>
-          <Text style={std.text}>Tag pronto!</Text>
-          <Text style={std.text}> Il nuovo id del tag è ...
-            Ora può essere associato ad un oggetto di un tuo catalogo per fare il check.
-          </Text>
-        </View>
-
+        }
       </View>
     );
   }
@@ -67,7 +87,7 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
     const mess = Ndef.encodeMessage([Ndef.textRecord(tagID)]);
     NfcManager.requestNdefWrite(mess)
       .then(() => {
-          this.setState({time: 4});
+          this.setState({time: 3});
           this.unreg();
           this.stop();
         }
@@ -96,12 +116,12 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
       })
   }
 
-  private unreg = () => {
+  private unreg() {
     console.warn("unregister");
     NfcManager.unregisterTagEvent();
   }
 
-  private stop = () => {
+  private stop() {
     console.warn("Stop");
     NfcManager.stop();
   }
@@ -112,10 +132,5 @@ export default withNavigation(NFCid);
 
 
 const styles = StyleSheet.create({
-  rules: {
-    paddingVertical: 10,
-  },
-  now: {
-    backgroundColor: def.red
-  }
+
 });

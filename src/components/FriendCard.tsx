@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import {Icon} from "react-native-elements";
 import {ICatalog, IFriend} from "../redux/IStore";
-import {NavigationScreenProp} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 import {getAvatar} from "../../avatars/avatar";
 import {card, std} from "../style";
 
 interface FriendCardProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   friend: IFriend;
 }
 
