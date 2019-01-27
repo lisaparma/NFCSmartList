@@ -12,22 +12,18 @@ import {
 } from 'react-native';
 import {
   NavigationParams,
-  NavigationRoute,
   NavigationScreenProp,
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
-import {ByteParser, Ndef} from "react-native-nfc-manager";
-import NfcManager from "react-native-nfc-manager";
 import {store} from "../../App";
-
-import {card, def, info, std} from "../../style";
+import {def, std} from "../../style";
 import {IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
 import {IUser} from "../../redux/IStore";
-import {Icon, Input} from "react-native-elements";
+import {Icon} from "react-native-elements";
 import {SettingsCard} from "../../components/SettingsCard";
 
 interface SettingsProps {

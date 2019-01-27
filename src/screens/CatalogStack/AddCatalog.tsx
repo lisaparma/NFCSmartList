@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch, Picker} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Switch, Picker} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -7,13 +7,12 @@ import {
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
+import SimplePicker from 'react-native-simple-picker';
+
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
-
-import SimplePicker from 'react-native-simple-picker';
-
-import {options, labels, getLabel} from "../../style";
+import {options, labels, getLabel, def} from "../../style";
 import {std} from "../../style";
 import {info} from "../../style";
 
@@ -77,11 +76,11 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
                 {getLabel(this.state.mod)}
               </Text>
             <SimplePicker
-              style={{flex: 1, backgroundColor: "#999999"}}
+              style={{flex: 1, backgroundColor: def.grey1}}
               ref={'picker'}
               options={options}
               labels={labels}
-              onSubmit={(option) => {this.setState({mod: option});
+              onSubmit={(option: any) => {this.setState({mod: option});
               }}
             />
             </View>

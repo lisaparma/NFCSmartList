@@ -8,8 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
-import {card, def, std} from "../style";
+import {def, std} from "../style";
 import {getAvatar} from "../../avatars/avatar";
 import {DrawerItems} from "react-navigation";
 import {IUser} from "../redux/IStore";
@@ -19,16 +18,7 @@ interface DrawerNavigatorProps {
   user: IUser;
 }
 
-interface DrawerNavigatorState {
-}
-
-export default class DrawerNavigator extends Component<DrawerNavigatorProps, DrawerNavigatorState> {
-
-  constructor(props: DrawerNavigatorProps) {
-    super(props);
-    this.state = {
-    }
-  }
+export default class DrawerNavigator extends Component<DrawerNavigatorProps> {
 
   public render() {
     return (
@@ -83,6 +73,5 @@ const styles = StyleSheet.create({
     opacity: 0.3,
     width: "100%",
     height: "100%",
-
   }
 });

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Platform} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Platform} from 'react-native';
 import {Icon} from "react-native-elements";
+
 import {store} from "../App";
+import {def} from "../style";
 
 interface TopBarProps {
   iconLeft?: string;
@@ -11,16 +13,7 @@ interface TopBarProps {
   onPressRight?: any;
 }
 
-interface TopBarState {
-}
-
-export default class TopBar extends Component<TopBarProps, TopBarState> {
-
-  constructor(props: TopBarProps) {
-    super(props);
-    this.state = {
-    }
-  }
+export default class TopBar extends Component<TopBarProps> {
 
   public render() {
     return (
@@ -34,7 +27,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
               <Icon
                 name={this.props.iconLeft}
                 size={30}
-                color={"#FFFFF0"}
+                color={def.white}
               />
             </TouchableOpacity>
           }
@@ -56,7 +49,7 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
               <Icon
                 name={this.props.iconRight}
                 size={30}
-                color={"#FFFFF0"}
+                color={def.white}
               />
             </TouchableOpacity>
           }
@@ -68,19 +61,18 @@ export default class TopBar extends Component<TopBarProps, TopBarState> {
       </SafeAreaView>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: '#10A0E0',
+    backgroundColor: def.theme1,
   },
   container: {
     flexDirection: "row",
     height: 50,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#10A0E0',
+    backgroundColor: def.theme1,
   },
   buttons: {
     paddingHorizontal: 15,
@@ -90,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    color: "#FFFFF0",
+    color: def.white,
     fontSize: 30,
     fontWeight: "bold",
     fontFamily: "Yanone Kaffeesatz"

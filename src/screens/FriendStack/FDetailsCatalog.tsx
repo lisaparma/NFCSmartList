@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
+import {Text, View} from 'react-native';
 import {
-  NavigationActions,
   NavigationParams,
   NavigationScreenProp,
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
-import {store} from "../../App";
-import {IEditCatalog, IEditItem, IRemoveCatalog, IRemoveItem} from "../../redux/action";
-import {ICatalog, IItem} from "../../redux/IStore";
-import Database from "../../firebaseAPI/database";
 
-import {std} from "../../style";
-import {info} from "../../style";
+import {ICatalog} from "../../redux/IStore";
+import {std, info} from "../../style";
+
 
 interface FDetailsCatalogProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;

@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog, IItem} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
-import {std, card, getColor} from "../style";
+import {std, card, getColor, def} from "../style";
 import {store} from "../App";
 import Database from "../firebaseAPI/database";
+import {ICatalog} from "../redux/IStore";
 
 interface CatalogCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   catalog: ICatalog;
+  uid: string;
 }
 
 interface CatalogCardState {
@@ -66,14 +67,14 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           onPress={this.check}>
           {this.state.like &&
             <Icon
-              color={"#a8aaaa"}
+              color={def.grey1}
               name={"favorite"}
               size={30}
             />
           }
           {!this.state.like &&
           <Icon
-            color={"#a8aaaa"}
+            color={def.grey1}
             name={"favorite-border"}
             size={30}
           />
@@ -109,5 +110,4 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
       });
     }
   }
-
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet, ListView} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -8,13 +8,8 @@ import {
   withNavigation
 } from 'react-navigation';
 import {store} from "../../App";
-import {IEditAvatar, IRemoveCatalog} from "../../redux/action";
-import {ICatalog, IItem} from "../../redux/IStore";
+import {IEditAvatar} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
-import ItemCard from "../../components/ItemCard";
-import AddItem from "../../components/AddItem";
-import {Icon} from "react-native-elements";
-import NfcManager, {ByteParser} from "react-native-nfc-manager";
 
 import {std} from "../../style";
 import {getAvatar} from "../../../avatars/avatar";

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -7,11 +7,11 @@ import {
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
+
 import {store} from "../../App";
 import {IEditItem, IRemoveItem} from "../../redux/action";
 import {IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
-
 import {std} from "../../style";
 import {info} from "../../style";
 

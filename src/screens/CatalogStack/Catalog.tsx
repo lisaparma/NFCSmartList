@@ -4,10 +4,6 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ImageBackgroundComponent,
-  Image,
-  ImageComponent,
-  ImageBackground
 } from 'react-native';
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import {store} from "../../App";

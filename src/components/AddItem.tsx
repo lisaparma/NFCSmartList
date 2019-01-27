@@ -6,7 +6,7 @@ import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
-import {card} from "../style";
+import {card, def} from "../style";
 
 interface AddItemProps {
   cid: string;
@@ -41,7 +41,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           <Icon
             name={"nfc"}
             size={30}
-            color={this.state.tag !== ""? "#48a23a" : "#bcbdbe"}
+            color={this.state.tag !== ""? def.green : def.grey1}
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -86,18 +86,18 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
       true,
     )
   }
+
   private addTag = () => {
     NfcManager.start({
       onSessionClosedIOS: () => {
         console.warn('ios session closed');
       }
     })
-      .then(() => {
-        this.read();
-      })
-      .catch(error => {
-        console.warn(error);
-      })
+    .then(() => {
+      this.read();
+    })
+    .catch(error => {
+      console.warn(error);
+    })
   }
-
 }

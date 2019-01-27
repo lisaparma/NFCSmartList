@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, PixelRatio} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
-import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
-import {store} from "../../App";
-import {IStore, ICatalog} from "../../redux/IStore";
-import CatalogCard from "../../components/CatalogCard";
+
+import {ICatalog} from "../../redux/IStore";
 import CatalogCard_Fr from "../../components/CatalogCard_Fr";
 import {std} from "../../style";
 

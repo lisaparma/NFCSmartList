@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Platform} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, Platform} from 'react-native';
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IFriend, IStore} from "../../redux/IStore";

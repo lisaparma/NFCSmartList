@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {
-  NavigationActions,
   NavigationParams,
   NavigationScreenProp,
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
 import {store} from "../../App";
-import {IAddCatalog, IAddFriend} from "../../redux/action";
+import {IAddFriend} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import firebase from "react-native-firebase";
 

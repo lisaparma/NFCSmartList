@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {IItem} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 import {store} from "../App";
 import {IFrCheckInItem, IFrCheckOutItem} from "../redux/action";
-import {card, std} from "../style";
+import {card, def, std} from "../style";
 
 interface ItemCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -45,7 +45,7 @@ export default class ItemCard_Fr extends Component<ItemCardProps, ItemCardState>
         {!this.state.check &&
           <View style={card.icon}>
             <Icon
-              color={"#a8aaaa"}
+              color={def.grey1}
               name={"crop-din"}
               size={25}
             />
@@ -54,7 +54,7 @@ export default class ItemCard_Fr extends Component<ItemCardProps, ItemCardState>
         {this.state.check &&
           <View style={card.icon}>
             <Icon
-              color={"#0b6d99"}
+              color={def.theme1}
               name={"check"}
               size={25}
             />
@@ -68,7 +68,7 @@ export default class ItemCard_Fr extends Component<ItemCardProps, ItemCardState>
             <Icon
               name={"nfc"}
               size={20}
-              color={"#bcbdbe"}
+              color={def.grey1}
             />
           </View>
         }
@@ -106,5 +106,4 @@ export default class ItemCard_Fr extends Component<ItemCardProps, ItemCardState>
       }
     }
   }
-
 }

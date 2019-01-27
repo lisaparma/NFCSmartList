@@ -1,26 +1,17 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
-import {std, card, getLabel, getColor} from "../style"
+import {std, card, getColor, def} from "../style"
+import {ICatalog} from "../redux/IStore";
 
 interface CatalogCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   catalog: ICatalog;
 }
 
-interface CatalogCardState {
-}
-
-export default class CatalogCard extends Component<CatalogCardProps, CatalogCardState> {
-
-  constructor(props: CatalogCardProps) {
-    super(props);
-    this.state = {
-    }
-  }
+export default class CatalogCard extends Component<CatalogCardProps> {
 
   public render() {
     return (
@@ -43,7 +34,7 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
             {this.props.catalog.private &&
               <Icon
                 iconStyle={styles.lock}
-                color={"#a8aaaa"}
+                color={def.grey1}
                 name={"lock-outline"}
                 size={20}
               />
@@ -56,7 +47,7 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
         </View>
         <View style={card.icon}>
           <Icon
-            color={"#a8aaaa"}
+            color={def.grey1}
             name={"chevron-right"}
             size={30}
           />
@@ -64,7 +55,6 @@ export default class CatalogCard extends Component<CatalogCardProps, CatalogCard
       </TouchableOpacity>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

@@ -1,26 +1,18 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {Icon} from "react-native-elements";
-import {ICatalog, IFriend} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
+
+import {IFriend} from "../redux/IStore";
 import {getAvatar} from "../../avatars/avatar";
-import {card, std} from "../style";
+import {card, def, std} from "../style";
 
 interface FriendCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
   friend: IFriend;
 }
 
-interface FriendCardState {
-}
-
-export default class FriendCard extends Component<FriendCardProps, FriendCardState> {
-
-  constructor(props: FriendCardProps) {
-    super(props);
-    this.state = {
-    }
-  }
+export default class FriendCard extends Component<FriendCardProps> {
 
   public render() {
     return (
@@ -43,7 +35,7 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
         </View>
         <View style={card.icon}>
           <Icon
-            color={"#a8aaaa"}
+            color={def.grey1}
             name={"chevron-right"}
             size={30}
           />
@@ -51,5 +43,4 @@ export default class FriendCard extends Component<FriendCardProps, FriendCardSta
       </TouchableOpacity>
     );
   }
-
 }
