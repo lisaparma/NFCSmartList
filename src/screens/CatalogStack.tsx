@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
   createStackNavigator,
-  createAppContainer, NavigationActions
+  createAppContainer, NavigationActions, NavigationScreenProp, NavigationStateRoute, NavigationParams
 } from "react-navigation";
 
 import CatalogList from "./CatalogStack/CatalogList";
@@ -78,7 +78,11 @@ const CatalogsStack = createAppContainer(createStackNavigator(
   }
 ));
 
-export default class CatalogStack extends Component {
+interface CatalogStackProps {
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
+}
+
+export default class CatalogStack extends Component<CatalogStackProps> {
 
   static router = CatalogsStack.router;
 

@@ -9,7 +9,7 @@ import {
   ImageComponent,
   ImageBackground
 } from 'react-native';
-import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IRemoveCatalog} from "../../redux/action";
 import {ICatalog, IItem} from "../../redux/IStore";
@@ -22,7 +22,7 @@ import NfcManager, {ByteParser} from "react-native-nfc-manager";
 import {std} from "../../style";
 
 interface CatalogsProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface CatalogsState {

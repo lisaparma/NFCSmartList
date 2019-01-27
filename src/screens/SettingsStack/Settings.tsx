@@ -10,7 +10,13 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import {
+  NavigationParams,
+  NavigationRoute,
+  NavigationScreenProp,
+  NavigationStateRoute,
+  withNavigation
+} from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
 import {ByteParser, Ndef} from "react-native-nfc-manager";
 import NfcManager from "react-native-nfc-manager";
@@ -25,7 +31,7 @@ import {Icon, Input} from "react-native-elements";
 import {SettingsCard} from "../../components/SettingsCard";
 
 interface SettingsProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface SettingsState {

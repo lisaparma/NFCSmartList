@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 
 import Auth from "../firebaseAPI/auth";
-import {NavigationScreenProp, withNavigation} from "react-navigation";
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from "react-navigation";
 
 import {std, log} from "../style";
 
 interface AppProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface AppState {

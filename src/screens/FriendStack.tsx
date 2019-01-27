@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
   createStackNavigator,
-  createAppContainer, NavigationActions
+  createAppContainer, NavigationActions, NavigationScreenProp, NavigationStateRoute, NavigationParams
 } from "react-navigation";
 
 
@@ -80,7 +80,10 @@ const FriendsStack = createAppContainer(createStackNavigator(
   }
 ));
 
-export default class FriendStack extends Component {
+interface FriendStackProps {
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
+}
+export default class FriendStack extends Component<FriendStackProps> {
 
   static router = FriendsStack.router;
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
   createStackNavigator,
-  createAppContainer, NavigationActions
+  createAppContainer, NavigationActions, NavigationScreenProp, NavigationStateRoute, NavigationParams
 } from "react-navigation";
 
 import TopBar from "../components/TopBar";
@@ -42,7 +42,11 @@ const LikesStack = createAppContainer(createStackNavigator(
   }
 ));
 
-export default class LikeStack extends Component {
+interface LikeStackProps {
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
+}
+
+export default class LikeStack extends Component<LikeStackProps> {
 
   static router = LikesStack.router;
 

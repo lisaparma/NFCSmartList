@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch, Picker} from 'react-native';
-import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
+import {
+  NavigationActions,
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationStateRoute,
+  withNavigation
+} from 'react-navigation';
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
@@ -12,7 +18,7 @@ import {std} from "../../style";
 import {info} from "../../style";
 
 interface AddCatalogProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface AddCatalogState {

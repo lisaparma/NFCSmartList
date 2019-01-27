@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet, ListView} from 'react-native';
-import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
+import {
+  NavigationActions,
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationStateRoute,
+  withNavigation
+} from 'react-navigation';
 import {store} from "../../App";
 import {IEditAvatar, IRemoveCatalog} from "../../redux/action";
 import {ICatalog, IItem} from "../../redux/IStore";
@@ -14,7 +20,7 @@ import {std} from "../../style";
 import {getAvatar} from "../../../avatars/avatar";
 
 interface AvatarsProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface AvatarsState {

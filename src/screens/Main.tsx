@@ -116,7 +116,7 @@ const MainTabsAndroid = createDrawerNavigator(
     },
     'Settings': {
       screen: SettingsStack,
-      navigationOptions: (navigation) => ({
+      navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
           <Text style={[std.text, {color: tintColor}]}>Settings</Text>
         ),

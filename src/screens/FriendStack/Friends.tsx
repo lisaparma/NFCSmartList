@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Platform} from 'react-native';
-import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import {store} from "../../App";
 import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
@@ -8,7 +8,7 @@ import {std} from "../../style";
 import {Icon} from "react-native-elements";
 
 interface FriendsProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface FriendsState {

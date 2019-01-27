@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, PixelRatio, TouchableOpacity, Platform} from 'react-native';
-import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import NfcManager, {Ndef, NfcTech, ByteParser} from 'react-native-nfc-manager'
 import {store} from "../../App";
 import {IStore, ICatalog} from "../../redux/IStore";
@@ -10,7 +10,7 @@ import {std} from "../../style";
 import {Icon} from "react-native-elements";
 
 interface CatalogListProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface CatalogListState {

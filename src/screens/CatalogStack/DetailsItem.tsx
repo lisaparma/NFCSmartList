@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
-import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
+import {
+  NavigationActions,
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationStateRoute,
+  withNavigation
+} from 'react-navigation';
 import {store} from "../../App";
 import {IEditItem, IRemoveItem} from "../../redux/action";
 import {IItem} from "../../redux/IStore";
@@ -11,7 +17,7 @@ import {info} from "../../style";
 
 
 interface DetailsItemProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface DetailsItemState {

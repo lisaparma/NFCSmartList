@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
-import {NavigationActions, NavigationScreenProp, withNavigation} from 'react-navigation';
+import {
+  NavigationActions,
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationStateRoute,
+  withNavigation
+} from 'react-navigation';
 import {store} from "../../App";
 import {IEditCatalog, IEditItem, IRemoveCatalog, IRemoveItem} from "../../redux/action";
 import {ICatalog, IItem} from "../../redux/IStore";
@@ -10,7 +16,7 @@ import {std} from "../../style";
 import {info} from "../../style";
 
 interface DetailsCatalogProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface DetailsCatalogState {

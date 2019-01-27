@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
-import {NavigationScreenProp, withNavigation} from 'react-navigation';
+import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {def, std} from "../../style";
 
 interface AvatarsProps {
-  navigation: NavigationScreenProp<object>;
+  navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface AvatarsState {
