@@ -69,6 +69,15 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           <ScrollView style={std.scroll}>
             {elements}
           </ScrollView>
+          <TouchableOpacity
+            style={std.button}
+            onPress={() => {
+              console.warn("unregister");
+              NfcManager.unregisterTagEvent();
+              console.warn("Stop");
+              NfcManager.stop()}}>
+            <Text style={std.textButton}>Annulla</Text>
+          </TouchableOpacity>
 
           <AddItem cid={this.state.cid}/>
         </View>

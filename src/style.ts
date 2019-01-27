@@ -29,7 +29,8 @@ export const std = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
-    paddingBottom: 0
+    paddingBottom: 0,
+    backgroundColor: def.white
   },
   title: {
     fontSize: 25,
@@ -212,7 +213,9 @@ export const card = StyleSheet.create({
     margin: 5
   },
   icon: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "center",
   },
   centerBox: {
     flex: 1,

@@ -75,20 +75,17 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
 
   private read() {
     NfcManager.registerTagEvent(
-      tag => {this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)}); },
+      tag => {
+          this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
+          console.warn("unregister");
+          NfcManager.unregisterTagEvent();
+          console.warn("Stop");
+          NfcManager.stop();
+        },
       'Hold your device over the tag',
       true,
     )
   }
-
-  private write(tagID: string) {
-    const mess = Ndef.encodeMessage([Ndef.textRecord(tagID)]);
-
-    NfcManager.requestNdefWrite(mess)
-      .then(() => console.warn('write completed'))
-      .catch(err => console.warn("not" + err))
-  }
-
   private addTag = () => {
     NfcManager.start({
       onSessionClosedIOS: () => {

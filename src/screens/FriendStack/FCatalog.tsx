@@ -54,8 +54,6 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
           <ScrollView style={std.scroll}>
             {elements}
           </ScrollView>
-
-          <AddItem cid={this.state.cid}/>
         </View>
         {
           this.props.navigation.getParam("menu") &&
