@@ -36,6 +36,7 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
   }
 
   public render() {
+    console.log(this.state.likes)
     const elements = Object.keys(this.state.likes)
       .map((element) => (
         <CatalogCard_Like
@@ -59,6 +60,7 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
 
   private onStoreChange = () => {
     const currentState: IStore = store.getState();
+    console.log("sfer")
     if(currentState.likes !== this.state.likes) {
       this.setState({
         likes: {...currentState.likes},

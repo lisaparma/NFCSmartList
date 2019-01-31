@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
-import {std, card, getColor, def} from "../style"
+import {std, card, getColor, def, getIcon} from "../style"
 import {ICatalog} from "../redux/IStore";
 
 interface CatalogCardProps {
@@ -24,8 +24,8 @@ export default class CatalogCard extends Component<CatalogCardProps> {
         )}>
         <View style={card.icon}>
           <Icon
-            name={"assignment"}
-            size={50}
+            name={getIcon(this.props.catalog.mod)}
+            size={40}
             color={getColor(this.props.catalog.mod)}
           />
         </View>

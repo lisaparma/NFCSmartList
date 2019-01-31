@@ -1,8 +1,16 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const options = [0, 1, 2, 3, 4];
-export const labels = ['Blu', 'Rosso', 'Giallo', "Verde", "Viola", "Nero"];
-const colors = ["#004fd3", "#d3001a", "#fff600", "#01c00d", "#7401c0", "0e0e0e"];
+export const labels = ['General', 'Persone', 'Oggetti', "Lista", "Luoghi", "Animali"];
+const colors = [
+  "#3d3d3d",
+  "#d3001a",
+  "#004fd3",
+  "#fff600",
+  "#01c00d",
+  "#7401c0"
+];
+const icons = ["assignment","group", "build", "format-list-bulleted", "place", "pets"]
 
 export function getLabel(num: number): string {
   return labels[num];
@@ -10,6 +18,10 @@ export function getLabel(num: number): string {
 
 export function getColor(num: number): string {
   return colors[num];
+}
+
+export function getIcon(num: number): string {
+  return icons[num];
 }
 
 export const def = {

@@ -29,7 +29,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
 
   public render() {
     return (
-      <View style={[card.container, card.contItem]}>
+      <View style={[card.container, card.contItem, {borderWidth: 1, borderRadius: 5}]}>
         <TextInput
           style={card.centerBox}
           placeholder="Item"
@@ -50,6 +50,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         <Icon
           name={"add-circle-outline"}
           size={30}
+          color={def.grey1}
           />
         </TouchableOpacity>
       </View>
