@@ -3,7 +3,7 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity, Modal,
 } from 'react-native';
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNavigation} from 'react-navigation';
 import {store} from "../../App";
@@ -24,6 +24,8 @@ interface CatalogsProps {
 interface CatalogsState {
   items: {[id: string]: IItem};
   cid: string;
+  check: boolean;
+  modal: boolean;
 }
 
 class Catalogs extends Component<CatalogsProps, CatalogsState> {
@@ -36,6 +38,8 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     this.state = {
       items: store.getState().catalogs[cid].items? {...store.getState().catalogs[cid].items} : {},
       cid: cid,
+      check: false,
+      modal: false,
     }
   }
 
@@ -65,17 +69,21 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           <ScrollView style={std.scroll}>
             {elements}
           </ScrollView>
-          <TouchableOpacity
-            style={std.button}
-            onPress={() => {
-              console.warn("unregister");
-              NfcManager.unregisterTagEvent();
-              console.warn("Stop");
-              NfcManager.stop()}}>
-            <Text style={std.textButton}>Annulla</Text>
-          </TouchableOpacity>
-
-          <AddItem cid={this.state.cid}/>
+          {
+            this.state.check?
+              <TouchableOpacity
+                style={std.button}
+                onPress={() => {
+                  this.setState({check: false})
+                  console.warn("unregister");
+                  NfcManager.unregisterTagEvent();
+                  console.warn("Stop");
+                  NfcManager.stop()}}>
+                <Text style={std.textButton}>Annulla</Text>
+              </TouchableOpacity>
+              :
+              <AddItem cid={this.state.cid}/>
+          }
         </View>
         {this.props.navigation.getParam("menu") &&
           <View style={std.DDScreen}>
@@ -148,6 +156,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   private NFCheck() {
     NfcManager.start()
     .then(() => {
+      this.setState({check: true});
       NfcManager.registerTagEvent(
         tag => {
           this.checkOne(ByteParser.byteToString(tag.ndefMessage[0].payload));

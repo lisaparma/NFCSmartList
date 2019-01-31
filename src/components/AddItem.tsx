@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, TextInput} from 'react-native';
+import {View, TouchableOpacity, TextInput, Text, Modal} from 'react-native';
 import {Icon} from "react-native-elements";
 
 import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
-import {card, def} from "../style";
+import {card, def, std} from "../style";
 
 interface AddItemProps {
   cid: string;
@@ -15,6 +15,8 @@ interface AddItemProps {
 interface AddItemState {
   name: string;
   tag: string;
+  modal: boolean;
+  text: string;
 }
 
 export default class AddItem extends Component<AddItemProps, AddItemState> {
@@ -24,6 +26,8 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
     this.state = {
       name: "",
       tag: "",
+      modal: false,
+      text: "",
     }
   }
 
@@ -53,6 +57,42 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           color={def.grey1}
           />
         </TouchableOpacity>
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.text}>{this.state.text}</Text>
+              {
+                this.state.text === "Avvicina il tag..."?
+                  <TouchableOpacity
+                    style={std.modalButton}
+                    onPress={() => {
+                      this.setState({modal: false});
+                      console.warn("Unregister");
+                      NfcManager.unregisterTagEvent();
+                      console.warn("Stop");
+                      NfcManager.stop();
+                    }}>
+                    <Text style={std.text}>Annulla</Text>
+                  </TouchableOpacity>
+                  :
+                  <View>
+                    <TouchableOpacity
+                      style={std.modalButton}
+                      onPress={() => {
+                        this.setState({modal: false});
+                      }}>
+                      <Text style={std.text}>Ok</Text>
+                    </TouchableOpacity>
+                  </View>
+              }
+
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -78,6 +118,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
     NfcManager.registerTagEvent(
       tag => {
           this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
+          this.setState({modal: true, text: "Tag associato!"})
           console.warn("unregister");
           NfcManager.unregisterTagEvent();
           console.warn("Stop");
@@ -95,6 +136,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
       }
     })
     .then(() => {
+      this.setState({modal: true, text: "Avvicina il tag..."})
       this.read();
     })
     .catch(error => {
