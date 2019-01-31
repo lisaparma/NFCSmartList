@@ -67,7 +67,7 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
         { (this.state.time !== 0 && this.state.time !== 3) &&
           <TouchableOpacity
             style={std.button}
-            onPress={() => {this.unreg(); this.stop(); this.setState({time: 0})}}>
+            onPress={() => {NfcManager.unregisterTagEvent(); NfcManager.stop(); this.setState({time: 0})}}>
             <Text style={std.textButton}>Annulla</Text>
           </TouchableOpacity>
         }

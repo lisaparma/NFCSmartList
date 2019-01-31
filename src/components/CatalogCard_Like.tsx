@@ -58,7 +58,7 @@ export default class CatalogCard_Like extends Component<CatalogCardProps, Catalo
         </View>
         <View style={card.centerBox}>
           <Text style={[std.text, card.t1]}> {this.props.catalog.name} </Text>
-          <Text style={[std.text, card.t2]}> {this.props.catalog.description} </Text>
+          <Text style={[std.text, card.t2]}> {store.getState().friends[this.props.uid].username} </Text>
         </View>
         <TouchableOpacity
           style={card.icon}

@@ -12,9 +12,10 @@ import SimplePicker from 'react-native-simple-picker';
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
-import {options, labels, getLabel, def} from "../../style";
+import {options, labels, getLabel, def, getIcon, getColor} from "../../style";
 import {std} from "../../style";
 import {info} from "../../style";
+import {Icon} from "react-native-elements";
 
 interface AddCatalogProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -64,7 +65,12 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
           />
         </View>
         <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Colore:</Text>
+          <Text style={[std.text, info.t1]}>Tipologia: </Text>
+          <Icon
+            name={getIcon(this.state.mod)}
+            size={20}
+            color={getColor(this.state.mod)}
+          />
           {store.getState().user.os === "ios" &&
             <View>
               <Text
@@ -88,7 +94,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
           {store.getState().user.os !== "ios" &&
           <Picker
             style={{flex: 1}}
-            selectedValue={getLabel(this.state.mod)}
+            selectedValue={this.state.mod}
             onValueChange={(itemValue) => this.setState({mod: itemValue})}>
             <Picker.Item label={labels[0]} value={options[0]}/>
             <Picker.Item label={labels[1]} value={options[1]}/>

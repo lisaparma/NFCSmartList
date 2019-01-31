@@ -9,14 +9,16 @@ import {
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {std} from "../../style";
+import {Rule} from "../../components/Rule";
+import Auth from "../../firebaseAPI/auth";
 
 interface AvatarsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
 interface AvatarsState {
-  modal: boolean;
-  textModal: string;
+  time: number,
+  error: boolean
 }
 
 class NFCformat extends Component<AvatarsProps, AvatarsState> {
@@ -24,53 +26,80 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
   constructor(props: AvatarsProps) {
     super(props);
     this.state = {
-      modal: false,
-      textModal: "",
+      time: 0,
+      error: false
     }
   }
 
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          Formatta il tuo tag
+        <Text style={std.title}>Formatta il tuo tag</Text>
+        <Text style={std.text}>
+          In questa pagina puoi formattare bla bla bla...
+          Procedi cliccando sul tasto sottostante e seguendo le istruzioni
+          che verranno fuori man mano.
         </Text>
+
+        <Rule
+          title={"Avvicina il tag"}
+          text={"Avvicina il tag NFC al lettore NFC del telefono.\n" +
+          "Solitamente si trova nella parte superiore del telefono."}
+          id={1}
+          time={this.state.time}
+        />
+        <Rule
+          title={"Riavvicina il tag"}
+          text={"Ora che è stata riconosciuta la presenza di un\n" +
+          "tag NFC, allontana e avvicina di nuovo il tag al lettore in modo da\n" +
+          "permettere la sua scrittura."}
+          id={2}
+          time={this.state.time}
+        />
+        <Rule
+          title={"Tag pronto!"}
+          text={"Ora il tuo tag può ricevere un id."}
+          id={3}
+          time={this.state.time}
+        />
+
+        { this.state.time === 0 &&
         <TouchableOpacity
           style={std.button}
           onPress={this.format}>
-          <Text style={std.textButton}> Formatta</Text>
+          <Text style={std.textButton}>Procedi</Text>
         </TouchableOpacity>
+        }
+        { (this.state.time !== 0 && this.state.time !== 3) &&
+        <TouchableOpacity
+          style={std.button}
+          onPress={() => {this.unreg(); this.stop(); this.setState({time: 0})}}>
+          <Text style={std.textButton}>Annulla</Text>
+        </TouchableOpacity>
+        }
+        { this.state.time === 3 &&
+        <TouchableOpacity
+          style={std.button}
+          onPress={() => {this.setState({time: 0}); this.format()}}>
+          <Text style={std.textButton}>Procedi con un nuovo tag</Text>
+        </TouchableOpacity>
+        }
         <Modal
           transparent={true}
-          visible={this.state.modal}
-          onRequestClose={() => {this.setState({modal: false})}}
+          visible={this.state.error}
+          onRequestClose={() => {this.setState({error: false})}}
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>{this.state.textModal}</Text>
-
-              { this.state.textModal === "Tag pronto!" &&
-              <TouchableOpacity
-                style={[std.modalButton]}
-                onPress={() => {
-                  this.setState({modal: false});
-                }}>
-                <Text style={std.text}>Ok!</Text>
-              </TouchableOpacity>
-              }
-
-              { this.state.textModal !== "Tag pronto!" &&
+              <Text style={std.text}>Il tag risulta già formattato</Text>
               <TouchableOpacity
                 style={std.modalButton}
                 onPress={() => {
-                  this.setState({modal: false});
-                  NfcManager.cancelNdefWrite();
-                  this.unreg();
-                  this.stop();
+                  this.setState({error: false});
                 }}>
-                <Text style={std.text}>Annulla</Text>
+                <Text style={std.text}>Ok</Text>
               </TouchableOpacity>
-              }
+
             </View>
           </View>
         </Modal>
@@ -79,21 +108,23 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
   }
 
   private format = () => {
-    this.setState({modal: true, textModal: "Avvicina il tag"});
+    this.setState({time: 1});
     NfcManager.start()
       .then(() => {
         NfcManager.registerTagEvent(
           tag => {
-            this.setState({textModal: "Sto formattando il tag..."});
+            this.setState({time: 2});
             NfcManager.requestNdefWrite(null, {format: true})
               .then(() => {
-                  this.setState({textModal: "Tag pronto!"});
+                  this.setState({time: 3});
                   this.unreg();
                   this.stop();
                 }
               )
               .catch(err => {
-                console.warn(err);
+                this.setState({error: true, time: 0})
+                this.unreg();
+                this.stop();
               })
           },
           'Hold your device over the tag',
@@ -118,27 +149,3 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
 }
 
 export default withNavigation(NFCformat);
-
-
-const styles = StyleSheet.create({
-  grid: {
-    paddingHorizontal: 10,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: 'space-between',
-  },
-  icon: {
-    width: 100,
-    height: 100,
-    alignContent: "center",
-    justifyContent: 'center',
-
-  },
-  now: {
-
-  },
-  pic: {
-    width: 80,
-    resizeMode: "contain",
-  }
-});
