@@ -173,7 +173,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
             icon={"add"}
             text={"Licenze"}
             navigation={this.props.navigation}
-            page={""}/>
+            page={"License"}/>
         </View>
 
         <TouchableOpacity

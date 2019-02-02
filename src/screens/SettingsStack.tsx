@@ -9,6 +9,7 @@ import Settings from "./SettingsStack/Settings";
 import Avatars from "./SettingsStack/Avatars";
 import NFCid from "./SettingsStack/NFCid";
 import NFCformat from "./SettingsStack/NFCformat";
+import License from "./SettingsStack/License";
 
 const SettingsStack = createAppContainer(createStackNavigator(
   {
@@ -53,6 +54,58 @@ const SettingsStack = createAppContainer(createStackNavigator(
         header: () =>
           <TopBar
             title={"Formatta"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    FAQ: {
+      screen: () => <License/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"FAQ"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    Contattaci: {
+      screen: () => <License/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"Contattaci"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    Privacy: {
+      screen: () => <License/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"Privacy"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    License: {
+      screen: () => <License/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"License"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())
