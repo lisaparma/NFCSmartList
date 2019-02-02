@@ -9,6 +9,8 @@ export interface IInfoAccount extends Action<'INFO'> {
     uid: string;
 }
 
+export interface IOld extends Action<'OLD'> {}
+
 export interface IInfo2Account extends Action<'INFO2'> {
   username: string;
   avatar: number;

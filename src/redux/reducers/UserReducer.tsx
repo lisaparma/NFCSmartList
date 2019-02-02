@@ -2,11 +2,11 @@
 
 //import { IStore } from "./IStore";
 
-import {IEditAvatar, IEditUsername, IInfo2Account, IInfoAccount, IInfoDevice} from "../action";
+import {IEditAvatar, IEditUsername, IInfo2Account, IInfoAccount, IInfoDevice, IOld} from "../action";
 
 export const UserReducer = (
   state = {},
-  action: IInfoAccount | IInfoDevice |IInfo2Account | IEditAvatar |IEditUsername
+  action: IInfoAccount | IInfoDevice |IInfo2Account | IEditAvatar |IEditUsername | IOld
 ) => {
   switch (action.type) {
     case 'INFO' :
@@ -30,7 +30,13 @@ export const UserReducer = (
         pixelRatio: action.pixelRatio,
         os: action.os,
         nfc: action.nfc,
-      }
+      };
+
+    case "OLD":
+      return{
+        ...state,
+        isNewUser: false,
+      };
 
     case 'EDIT_USERNAME' :
       return {
@@ -42,7 +48,7 @@ export const UserReducer = (
       return {
         ...state,
         avatar: action.avatar,
-      }
+      };
 
     default:
       return state;

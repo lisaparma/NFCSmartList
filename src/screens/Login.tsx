@@ -30,7 +30,7 @@ class Login extends Component<AppProps, AppState> {
       <View style={log.screen}>
         <Image
           style={log.image}
-          source={require("../../assets/nfc-logo.png")}
+          source={require("../../assets/oink.png")}
         />
         <TextInput
           style={log.input}
@@ -57,7 +57,6 @@ class Login extends Component<AppProps, AppState> {
           onPress={()=>this.props.navigation.navigate("Signin")}>
           <Text style={[std.text, log.link]}>Non sono registrato</Text>
         </TouchableOpacity>
-
       </View>
     );
   }
