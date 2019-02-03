@@ -36,11 +36,10 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
   }
 
   public render() {
-    console.log(this.state.likes)
     const elements = Object.keys(this.state.likes)
       .map((element) => (
         <CatalogCard_Like
-          key={this.state.likes[element].cid}
+          key={element}
           navigation={this.props.navigation}
           catalog={store.getState().friends[this.state.likes[element].uid].catalogs[element]}
           uid={this.state.likes[element].uid}
@@ -60,7 +59,6 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
 
   private onStoreChange = () => {
     const currentState: IStore = store.getState();
-    console.log("sfer")
     if(currentState.likes !== this.state.likes) {
       this.setState({
         likes: {...currentState.likes},

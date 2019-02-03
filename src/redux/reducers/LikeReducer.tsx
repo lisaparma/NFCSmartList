@@ -15,7 +15,7 @@ export const LikeReducer = (
     case 'CHECKIN_LIKE':
       const newState1 = {...state};
       newState1[action.cid] = {
-        uid: action.cid,
+        uid: action.uid,
         cid: action.cid,
       }
       return newState1;

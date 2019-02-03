@@ -77,7 +77,7 @@ export default class App extends Component<AppProps, AppState> {
 
   public render() {
     if(this.state.auth) {
-      if(!this.state.new) {
+      if(this.state.new) {
         return (
           <Swiper showsButtons={false}>
             <View style={[styles.slide]}>

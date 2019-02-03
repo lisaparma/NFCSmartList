@@ -77,7 +77,6 @@ export default class ItemCard_Like extends Component<ItemCardProps, ItemCardStat
   }
 
   private check = () => {
-          console.log(this.props.uid, this.props.cid, this.props.item.iid)
     if(this.state.check) {
       store.dispatch<IFrCheckOutItem>({
         type: "FR_CHECKOUT_ITEM",
