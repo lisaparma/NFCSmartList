@@ -91,11 +91,11 @@ export default class App extends Component<AppProps, AppState> {
             </View>
             <View style={[styles.slide]}>
               <Text style={[std.text, styles.text]}>
-                Se è la prima volta che usi un tag NFC in questa applicazione formattalo e associaci un id seguendo le indicazioni che troverai sulla pagina "settings"
+                Se è la prima volta che usi un tag NFC formattalo e associaci un id seguendo le indicazioni che troverai sulla pagina "settings"
               </Text>
               <Image
-                style={log.image}
-                source={require("../assets/oink.png")}
+                style={styles.image}
+                source={require("../assets/ist1.png")}
               />
               <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
                 <Text style={[std.text, log.link]}>Salta</Text>
@@ -104,8 +104,8 @@ export default class App extends Component<AppProps, AppState> {
             <View style={[styles.slide]}>
               <Text style={[std.text, styles.text]}>Aggiungi un item ad una lista scannerizzando il tag NFC{"\n"}</Text>
               <Image
-                style={log.image}
-                source={require("../assets/oink.png")}
+                style={styles.image}
+                source={require("../assets/ist2.png")}
               />
               <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
                 <Text style={[std.text, log.link]}>Salta</Text>
@@ -114,8 +114,8 @@ export default class App extends Component<AppProps, AppState> {
             <View style={[styles.slide]}>
               <Text style={[std.text, styles.text]}>Quando vorrai fare un check degli oggetti con un tag NFC associato ti basterà avvicinare il telefono al tag perchè questo venga riconosciuto{"\n"}</Text>
               <Image
-                style={log.image}
-                source={require("../assets/oink.png")}
+                style={styles.image}
+                source={require("../assets/ist3.png")}
               />
               <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
                 <Text style={[std.text, log.link]}>Salta</Text>
@@ -169,5 +169,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: "center"
-  }
+  },
+   image: {
+     width: 200,
+     height: 300,
+     margin: 10
+   }
 })

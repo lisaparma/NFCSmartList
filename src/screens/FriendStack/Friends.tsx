@@ -4,7 +4,7 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNaviga
 import {store} from "../../App";
 import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
-import {std} from "../../style";
+import {def, std} from "../../style";
 import {Icon} from "react-native-elements";
 
 interface FriendsProps {
@@ -58,7 +58,7 @@ class Friends extends Component<FriendsProps, FriendsState> {
           <Icon
             name="add"
             size={40}
-            color="#10A0E0"
+            color={def.white}
           />
         </TouchableOpacity>
         }

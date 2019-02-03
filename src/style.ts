@@ -91,7 +91,7 @@ export const std = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 20,
-    backgroundColor: def.white,
+    backgroundColor: def.theme1,
     borderRadius: 100,
     shadowOffset:{  width: 5,  height: 5,  },
     shadowColor: def.grey1,

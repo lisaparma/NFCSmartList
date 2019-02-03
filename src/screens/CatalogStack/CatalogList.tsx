@@ -6,7 +6,7 @@ import {store} from "../../App";
 import {IStore, ICatalog} from "../../redux/IStore";
 import CatalogCard from "../../components/CatalogCard";
 
-import {std} from "../../style";
+import {def, std} from "../../style";
 import {Icon} from "react-native-elements";
 
 interface CatalogListProps {
@@ -61,7 +61,7 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
             <Icon
               name="add"
               size={40}
-              color="#10A0E0"
+              color={def.white}
             />
           </TouchableOpacity>
         }
