@@ -141,14 +141,14 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
           <SettingsCard
             icon={"add"}
-            text={"Set id tag"}
-            navigation={this.props.navigation}
-            page={"NFCid"}/>
-          <SettingsCard
-            icon={"add"}
             text={"Formatta tag"}
             navigation={this.props.navigation}
             page={"NFCformat"}/>
+          <SettingsCard
+            icon={"add"}
+            text={"Set id tag"}
+            navigation={this.props.navigation}
+            page={"NFCid"}/>
         </View>
         }
 
@@ -162,11 +162,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <SettingsCard
             icon={"add"}
             text={"Contattaci"}
-            navigation={this.props.navigation}
-            page={""}/>
-          <SettingsCard
-            icon={"add"}
-            text={"Termini e Informativa sulla privacy"}
             navigation={this.props.navigation}
             page={""}/>
           <SettingsCard
@@ -190,8 +185,9 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <View style={std.modal}>
             <View style={std.card}>
               <Text style={std.text}>Sei sicuro di voler uscire?</Text>
-                <TouchableOpacity
-                  style={[std.modalButton]}
+              <View style={std.boxButton}>
+              <TouchableOpacity
+                  style={[std.modalButton1]}
                   onPress={() => {
                     this.setState({modal: false});
                     Auth.logout();
@@ -200,13 +196,13 @@ class Settings extends Component<SettingsProps, SettingsState> {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={std.modalButton}
+                  style={std.modalButton2}
                   onPress={() => {
                     this.setState({modal: false});
                   }}>
                   <Text style={std.text}>Annulla</Text>
                 </TouchableOpacity>
-
+              </View>
             </View>
           </View>
         </Modal>

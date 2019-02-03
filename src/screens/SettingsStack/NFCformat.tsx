@@ -92,14 +92,15 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
           <View style={std.modal}>
             <View style={std.card}>
               <Text style={std.text}>Il tag risulta già formattato</Text>
+              <View style={std.boxButton}>
               <TouchableOpacity
-                style={std.modalButton}
+                style={std.modalButton1}
                 onPress={() => {
                   this.setState({error: false});
                 }}>
                 <Text style={std.text}>Ok</Text>
               </TouchableOpacity>
-
+            </View>
             </View>
           </View>
         </Modal>

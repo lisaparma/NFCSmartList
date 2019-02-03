@@ -87,19 +87,6 @@ const SettingsStack = createAppContainer(createStackNavigator(
           />,
       }),
     },
-    Privacy: {
-      screen: () => <License/>,
-      navigationOptions: (props: any) => ({
-        header: () =>
-          <TopBar
-            title={"Privacy"}
-            iconLeft={"chevron-left"}
-            onPressLeft={() => {
-              props.navigation.dispatch(NavigationActions.back())
-            }}
-          />,
-      }),
-    },
     License: {
       screen: () => <License/>,
       navigationOptions: (props: any) => ({

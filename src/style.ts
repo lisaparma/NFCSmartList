@@ -147,13 +147,29 @@ export const std = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: "80%",
+    width: "75%",
     backgroundColor: def.white,
     padding: 10,
+    paddingVertical: 20,
     opacity: 1,
   },
-
-  modalButton: {
+  boxButton:{
+    flexDirection: "row",
+    alignContent: "space-between"
+  },
+  modalButton1: {
+    borderRadius: 10,
+    padding: 5,
+    paddingHorizontal: 15,
+    backgroundColor: def.theme2,
+    margin: 10
+  },
+  modalButton2: {
+    borderRadius: 10,
+    padding: 7,
+    paddingHorizontal: 20,
+    backgroundColor: def.grey2,
+    margin: 10
   }
 
 });

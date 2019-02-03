@@ -65,10 +65,11 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           <View style={std.modal}>
             <View style={std.card}>
               <Text style={std.text}>{this.state.text}</Text>
+              <View style={std.boxButton}>
               {
                 this.state.text === "Avvicina il tag..."?
                   <TouchableOpacity
-                    style={std.modalButton}
+                    style={std.modalButton2}
                     onPress={() => {
                       this.setState({modal: false});
                       console.warn("Unregister");
@@ -79,16 +80,15 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
                     <Text style={std.text}>Annulla</Text>
                   </TouchableOpacity>
                   :
-                  <View>
                     <TouchableOpacity
-                      style={std.modalButton}
+                      style={std.modalButton1}
                       onPress={() => {
                         this.setState({modal: false});
                       }}>
                       <Text style={std.text}>Ok</Text>
                     </TouchableOpacity>
-                  </View>
               }
+              </View>
 
             </View>
           </View>
