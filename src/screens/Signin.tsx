@@ -27,27 +27,26 @@ class Signin extends Component<AppProps, AppState> {
       username: "",
       password: undefined,
       password2: undefined,
-      error: undefined
+      error: ""
     }
   }
 
   public render() {
     return (
       <View style={log.screen}>
-        <Text style={[std.text, std.warningText]}>{this.state.error}</Text>
         <TextInput
           style={log.input}
           placeholder="E-mail"
           autoCapitalize={"none"}
           autoCorrect={false}
-          onChangeText={text => this.setState({email: text.toLocaleLowerCase().trim()})}
+          onChangeText={text => this.setState({email: text.toLocaleLowerCase().trim(), error: ""})}
         />
         <TextInput
           style={log.input}
           placeholder="username"
           autoCapitalize={"none"}
           autoCorrect={false}
-          onChangeText={text => this.setState({username: text.trim()})}
+          onChangeText={text => this.setState({username: text.trim(), error: ""})}
         />
         <TextInput
           style={log.input}
@@ -55,7 +54,7 @@ class Signin extends Component<AppProps, AppState> {
           autoCapitalize={"none"}
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={text => this.setState({password: text.trim()})}
+          onChangeText={text => this.setState({password: text.trim(), error: ""})}
         />
         <TextInput
           style={log.input}
@@ -63,8 +62,13 @@ class Signin extends Component<AppProps, AppState> {
           autoCapitalize={"none"}
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={text => this.setState({password2: text.trim()})}
+          onChangeText={text => this.setState({password2: text.trim(), error: ""})}
         />
+        { this.state.error !== "" &&
+        <View style={std.error}>
+          <Text style={[std.text, std.warningText]}>{this.state.error}</Text>
+        </View>
+        }
         <TouchableOpacity
           style={[std.button, log.loginButton]}
           onPress={this.registerAcc}

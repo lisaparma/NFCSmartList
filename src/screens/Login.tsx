@@ -13,6 +13,7 @@ interface AppProps {
 interface AppState {
   username: string;
   password: string;
+  error: string;
 }
 
 class Login extends Component<AppProps, AppState> {
@@ -22,6 +23,7 @@ class Login extends Component<AppProps, AppState> {
     this.state = {
       username: undefined,
       password: undefined,
+      error: "",
     }
   }
 
@@ -37,7 +39,7 @@ class Login extends Component<AppProps, AppState> {
           placeholder="E-mail"
           autoCapitalize={"none"}
           autoCorrect={false}
-          onChangeText={text => this.setState({username: text.toLocaleLowerCase().trim()})}
+          onChangeText={text => this.setState({username: text.toLocaleLowerCase().trim(), error: ""})}
         />
         <TextInput
           style={log.input}
@@ -45,8 +47,13 @@ class Login extends Component<AppProps, AppState> {
           autoCapitalize={"none"}
           autoCorrect={false}
           secureTextEntry={true}
-          onChangeText={text => this.setState({password: text.trim()})}
+          onChangeText={text => this.setState({password: text.trim(), error: ""})}
         />
+        { this.state.error !== "" &&
+        <View style={std.error}>
+          <Text style={[std.text, std.warningText]}>{this.state.error}</Text>
+        </View>
+        }
         <TouchableOpacity
           style={[std.button, log.loginButton]}
           onPress={this.signIn}>
@@ -63,8 +70,12 @@ class Login extends Component<AppProps, AppState> {
 
   private signIn = () => {
     if(this.state.username !== (undefined && "") && this.state.password !== (undefined && "")) {
-      Auth.signIn(this.state.username, this.state.password);
+      Auth.signIn(this, this.state.username, this.state.password);
     }
+  }
+
+  private error(error: string) {
+    this.setState({error: error})
   }
 
 }

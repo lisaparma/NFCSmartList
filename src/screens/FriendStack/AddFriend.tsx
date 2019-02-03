@@ -20,6 +20,7 @@ interface AddFriendProps {
 
 interface AddFriendState {
   email: string;
+  error: boolean;
 }
 
 class AddFriend extends Component<AddFriendProps, AddFriendState> {
@@ -28,6 +29,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
     super(props);
     this.state = {
       email: null,
+      error: false
     }
   }
 
@@ -40,9 +42,16 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
           <TextInput
             style={[std.text, info.t2]}
             placeholder="e-mail"
-            onChangeText={text => this.setState({email: text.trim()})}
+            onChangeText={text => this.setState({email: text.trim(), error: false})}
           />
         </View>
+        { this.state.error &&
+          <View style={{paddingTop: 10, alignItems: "center"}}>
+            <View style={[std.error, {width: 200, alignItems: "center", paddingVertical: 5}]}>
+              <Text style={[std.text, std.warningText]}>Indirizzo e-mail non trovato</Text>
+            </View>
+          </View>
+        }
         <TouchableOpacity
           style={std.button}
           onPress={this.add}>
@@ -56,10 +65,11 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
     if(this.state.email !== null) {
       firebase.database().ref('users/').once('value')
         .then((snapshot) => {
-          let catalogs = {};
+          let find = false;
           snapshot.forEach(
             (user): any => {
               if(user.val().email === this.state.email) {
+                find = true;
                 store.dispatch<IAddFriend>({
                   type: "ADD_FRIEND",
                   uid: user.val().uid,
@@ -70,9 +80,15 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
                 });
                 Database.addFriend(user.val().uid, user.val().email);
               }
+              if(find) {
+                this.props.navigation.navigate("Friends");
+                return;
+              }
             });
+          if(!find) {
+            this.setState({error: true})
+          }
         });
-      this.props.navigation.navigate("Friends");
     }
   }
 }

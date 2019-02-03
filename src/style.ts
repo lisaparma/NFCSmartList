@@ -60,6 +60,13 @@ export const std = StyleSheet.create({
   scroll: {
     padding: 10
   },
+  error: {
+    backgroundColor: def.white,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: def.red,
+    paddingHorizontal: 5
+  },
 
   // ----- PULSANTI -----------------------------
   button: {
@@ -189,7 +196,6 @@ export const log = StyleSheet.create({
   image: {
     width: 160,
     height: 150,
-    margin: 10
   },
   input: {
     backgroundColor: def.white,
