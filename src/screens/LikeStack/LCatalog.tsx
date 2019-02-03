@@ -17,6 +17,7 @@ interface CatalogsState {
   items: {[id: string]: IItem};
   uid: string;
   cid: string;
+  check: boolean;
 }
 
 class LCatalog extends Component<CatalogsProps, CatalogsState> {
@@ -28,6 +29,7 @@ class LCatalog extends Component<CatalogsProps, CatalogsState> {
       items: this.props.navigation.getParam("items")? this.props.navigation.getParam("items") : {},
       cid: cid,
       uid: this.props.navigation.getParam("uid"),
+      check: false,
     }
   }
 
@@ -50,6 +52,19 @@ class LCatalog extends Component<CatalogsProps, CatalogsState> {
           <ScrollView style={std.scroll}>
             {elements}
           </ScrollView>
+          {
+            this.state.check &&
+            <TouchableOpacity
+              style={std.button}
+              onPress={() => {
+                this.setState({check: false})
+                console.warn("unregister");
+                NfcManager.unregisterTagEvent();
+                console.warn("Stop");
+                NfcManager.stop()}}>
+              <Text style={std.textButton}>Annulla</Text>
+            </TouchableOpacity>
+          }
         </View>
         {
           this.props.navigation.getParam("menu") &&
@@ -92,21 +107,23 @@ class LCatalog extends Component<CatalogsProps, CatalogsState> {
   }
 
   private checkOne(tag: string) {
-    // for (let item in this.state.items) {
-    //   if(this.state.items[item].tag === tag) {
-    //     store.dispatch({
-    //       type: "CHECKIN_ITEM",
-    //       cid: this.state.cid,
-    //       iid: this.state.items[item].iid,
-    //       name: this.state.items[item].name
-    //     });
-    //   }
-    // }
+    for (let item in this.state.items) {
+      if(this.state.items[item].tag === tag) {
+        store.dispatch({
+          type: "FR_CHECKIN_ITEM",
+          uid: this.state.uid,
+          cid: this.state.cid,
+          iid: this.state.items[item].iid,
+          name: this.state.items[item].name
+        });
+      }
+    }
   }
 
   private NFCheck() {
     NfcManager.start()
     .then(() => {
+      this.setState({check: true});
       NfcManager.registerTagEvent(
         tag => {
           this.checkOne(ByteParser.byteToString(tag.ndefMessage[0].payload));
