@@ -147,7 +147,7 @@ export default class App extends Component<AppProps, AppState> {
         auth: currentState.auth,
       });
     }
-    if (currentState.user.isNewUser && !this.state.new) {
+    if (currentState.user.isNewUser !== this.state.new) {
       this.setState({
         new: currentState.user.isNewUser,
       });
