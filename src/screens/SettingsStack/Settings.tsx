@@ -136,7 +136,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
           </TouchableHighlight>
         </View>
 
-        {store.getState().user.os === "android" &&
+        {(store.getState().user.os === "android" && store.getState().user.nfc)  &&
         <View style={styles.box}>
           <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
           <SettingsCard

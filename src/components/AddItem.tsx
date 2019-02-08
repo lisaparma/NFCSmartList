@@ -39,15 +39,17 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           placeholder="Item"
           onChangeText={text => this.setState({name: text})}
         >{this.state.name}</TextInput>
-        <TouchableOpacity
-          style={card.icon}
-          onPress={this.addTag}>
-          <Icon
-            name={"nfc"}
-            size={30}
-            color={this.state.tag !== ""? def.green : def.grey1}
-          />
-        </TouchableOpacity>
+        {store.getState().user.nfc &&
+          <TouchableOpacity
+            style={card.icon}
+            onPress={this.addTag}>
+            <Icon
+              name={"nfc"}
+              size={30}
+              color={this.state.tag !== "" ? def.green : def.grey1}
+            />
+          </TouchableOpacity>
+        }
         <TouchableOpacity
           style={card.icon}
           onPress={this.addItem}>

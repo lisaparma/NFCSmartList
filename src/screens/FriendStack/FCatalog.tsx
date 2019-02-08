@@ -70,15 +70,18 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
           this.props.navigation.getParam("menu") &&
           <View style={std.DDScreen}>
             <View style={std.DDmenu}>
-              <TouchableOpacity
-                style={std.DDitem}
-                onPress={()=>{
-                  this.NFCheck();
-                  this.props.navigation.setParams({"menu": false})}}>
-                <Text style={std.text}>
+              {store.getState().user.nfc &&
+                <TouchableOpacity
+                  style={std.DDitem}
+                  onPress={() => {
+                    this.NFCheck();
+                    this.props.navigation.setParams({"menu": false})
+                  }}>
+                  <Text style={std.text}>
                     NFC Check
-                </Text>
-              </TouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
+              }
               <TouchableOpacity
                 style={std.DDitem}
                 onPress={()=> {
