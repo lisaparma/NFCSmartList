@@ -197,4 +197,16 @@ export default class Database {
       .catch((err) => console.warn(err))
   }
 
+  public static send(email: string, title: string, desc: string, mod: number){
+    var uuid = require('react-native-uuid');
+    const id = uuid.v4();
+    firebase.database().ref('bug/'+ id).set({
+      email: email,
+      title: title,
+      desc: desc,
+      mod: mod
+    })
+      .catch((err) => console.warn(err))
+  }
+
 }

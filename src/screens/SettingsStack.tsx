@@ -10,6 +10,8 @@ import Avatars from "./SettingsStack/Avatars";
 import NFCid from "./SettingsStack/NFCid";
 import NFCformat from "./SettingsStack/NFCformat";
 import License from "./SettingsStack/License";
+import Contattaci from "./SettingsStack/Contattaci";
+import FAQ from "./SettingsStack/FAQ";
 
 const SettingsStack = createAppContainer(createStackNavigator(
   {
@@ -62,7 +64,7 @@ const SettingsStack = createAppContainer(createStackNavigator(
       }),
     },
     FAQ: {
-      screen: () => <License/>,
+      screen: () => <FAQ/>,
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
@@ -75,7 +77,7 @@ const SettingsStack = createAppContainer(createStackNavigator(
       }),
     },
     Contattaci: {
-      screen: () => <License/>,
+      screen: () => <Contattaci/>,
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar

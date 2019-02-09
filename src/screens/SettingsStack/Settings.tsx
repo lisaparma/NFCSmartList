@@ -158,12 +158,12 @@ class Settings extends Component<SettingsProps, SettingsState> {
             icon={"add"}
             text={"FAQ"}
             navigation={this.props.navigation}
-            page={""}/>
+            page={"FAQ"}/>
           <SettingsCard
             icon={"add"}
             text={"Contattaci"}
             navigation={this.props.navigation}
-            page={""}/>
+            page={"Contattaci"}/>
           <SettingsCard
             icon={"add"}
             text={"Licenze"}
