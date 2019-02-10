@@ -12,7 +12,9 @@ xcuserdata
 
 #Android/Idea
 .idea
-android/app
+android/app/build
+android/app/debug/
+android/app/release/
 android/build
 android/.gradle
 *.iml
