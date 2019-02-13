@@ -9,6 +9,7 @@ import LCatalogList from "./LikeStack/LCatalogList";
 import FCatalog from "./FriendStack/FCatalog";
 import FDetailsCatalog from "./FriendStack/FDetailsCatalog";
 import LCatalog from "./LikeStack/LCatalog";
+import LDetailsCatalog from "./LikeStack/LDetailsCatalog";
 
 const LikesStack = createAppContainer(createStackNavigator(
   {
@@ -33,6 +34,17 @@ const LikesStack = createAppContainer(createStackNavigator(
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
             iconRight={"more-horiz"}
             onPressRight={() => {props.navigation.setParams({menu: !props.navigation.getParam("menu")})}}
+          />,
+      }),
+    },
+    LDetailsCatalog: {
+      screen: () => <LDetailsCatalog/>,
+      navigationOptions: () => ({
+        header: (props: any) =>
+          <TopBar
+            title="Details catalog"
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,
       }),
     },
