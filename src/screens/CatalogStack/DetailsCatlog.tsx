@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput, Switch} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput} from 'react-native';
 import {
   NavigationParams,
   NavigationScreenProp,
   NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
+import { Switch } from 'react-native-switch';
 
 import {store} from "../../App";
 import {IEditCatalog, IRemoveCatalog} from "../../redux/action";
@@ -84,7 +85,7 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Nome:</Text>
             <TextInput
-              style={[std.text, info.t2]}
+              style={[std.text, info.t2, info.input]}
               onChangeText={text => this.setState({name: text})}>
               {this.state.name}
             </TextInput>
@@ -92,7 +93,7 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Descrizione:</Text>
             <TextInput
-              style={[std.text, info.t2]}
+              style={[std.text, info.t2, info.input]}
               onChangeText={text => this.setState({description: text})}>
               {this.state.description}
             </TextInput>

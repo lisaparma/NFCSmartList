@@ -17,7 +17,7 @@ const LikesStack = createAppContainer(createStackNavigator(
       navigationOptions: () => ({
         header: (props: any) =>
           <TopBar
-            title="Catalogs"
+            title="Likes"
             iconLeft={"menu"}
             onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
           />,

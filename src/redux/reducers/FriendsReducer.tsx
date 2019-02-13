@@ -1,6 +1,6 @@
 import {
   IAddFriend,
-  IAddFriend2,
+  IAddFriend2, IAuthentication,
   ICheckInLike,
   ICheckOutLike,
   IFrCheckInItem,
@@ -11,7 +11,7 @@ import {ICatalog} from "../IStore";
 
 export const FriendsReducer = (
   state = {},
-  action: IAddFriend | IPopulateFriends |IFrCheckInItem | IFrCheckOutItem | IAddFriend2 | ICheckInLike | ICheckOutLike
+  action: IAddFriend | IPopulateFriends |IFrCheckInItem | IFrCheckOutItem | IAddFriend2 | ICheckInLike | ICheckOutLike | IAuthentication
 ) => {
   switch (action.type) {
     case 'POPULATE_FRIENDS_LIST' :
@@ -70,6 +70,9 @@ export const FriendsReducer = (
       const newState6 = {...state};
       newState6[action.uid].catalogs[action.cid]["like"] = false;
       return newState6;
+
+    case 'LOGOUT':
+      return {};
 
     default:
       return state;

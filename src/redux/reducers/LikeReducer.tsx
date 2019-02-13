@@ -1,8 +1,8 @@
-import {ICheckInLike, ICheckOutLike, IPopulateLikes} from "../action";
+import {IAuthentication, ICheckInLike, ICheckOutLike, IPopulateLikes} from "../action";
 
 export const LikeReducer = (
   state = {},
-  action: ICheckOutLike | ICheckInLike | IPopulateLikes
+  action: ICheckOutLike | ICheckInLike | IPopulateLikes | IAuthentication
 ) => {
   switch (action.type) {
     case 'POPULATE_LIKES_LIST' :
@@ -24,6 +24,10 @@ export const LikeReducer = (
       const newState2 = {...state};
       delete newState2[action.cid];
       return newState2;
+
+    case 'LOGOUT':
+      return {};
+
 
     default:
       return state;

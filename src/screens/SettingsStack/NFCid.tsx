@@ -75,7 +75,7 @@ class NFCid extends Component<AvatarsProps, AvatarsState> {
         <TouchableOpacity
           style={std.button}
           onPress={() => {this.setState({time: 0}); this.addID}}>
-          <Text style={std.textButton}>Procedi con un nuovo tag</Text>
+          <Text style={std.textButton}>Altro tag</Text>
         </TouchableOpacity>
         }
       </View>

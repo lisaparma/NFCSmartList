@@ -77,7 +77,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
             <View style={info.textBox}>
               <Text style={[std.text, info.t1]}>Nome:</Text>
               <TextInput
-                style={[std.text, info.t2]}
+                style={[std.text, info.t2, info.input]}
                 onChangeText={text => this.setState({name: text})}>
                 {this.state.name}
               </TextInput>
@@ -85,7 +85,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
             <View style={info.textBox}>
               <Text style={[std.text, info.t1]}>Descrizione:</Text>
               <TextInput
-                style={[std.text, info.t2]}
+                style={[std.text, info.t2, info.input]}
                 onChangeText={text => this.setState({description: text})}>
                 {this.state.description}
               </TextInput>

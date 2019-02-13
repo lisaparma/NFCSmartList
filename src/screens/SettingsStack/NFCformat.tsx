@@ -36,7 +36,8 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
       <View style={std.screen}>
         <Text style={std.title}>Formatta il tuo tag</Text>
         <Text style={std.text}>
-          In questa pagina puoi formattare bla bla bla...
+          In questa pagina puoi formattare un tag NFC mai utilizzato prima,
+          così da poterci associare un id successivamente. {"\n"}
           Procedi cliccando sul tasto sottostante e seguendo le istruzioni
           che verranno fuori man mano.
         </Text>
@@ -81,7 +82,7 @@ class NFCformat extends Component<AvatarsProps, AvatarsState> {
         <TouchableOpacity
           style={std.button}
           onPress={() => {this.setState({time: 0}); this.format()}}>
-          <Text style={std.textButton}>Procedi con un nuovo tag</Text>
+          <Text style={std.textButton}>Altro tag</Text>
         </TouchableOpacity>
         }
         <Modal

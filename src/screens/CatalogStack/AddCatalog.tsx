@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput, Switch, Picker} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Picker} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -8,6 +8,7 @@ import {
   withNavigation
 } from 'react-navigation';
 import SimplePicker from 'react-native-simple-picker';
+import { Switch } from 'react-native-switch';
 
 import {store} from "../../App";
 import {IAddCatalog} from "../../redux/action";

@@ -153,12 +153,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
         }
 
         <View style={styles.box}>
-          <Text style={[std.text, styles.titleBox]}> Aiuto</Text>
-          <SettingsCard
-            icon={"add"}
-            text={"FAQ"}
-            navigation={this.props.navigation}
-            page={"FAQ"}/>
+          <Text style={[std.text, styles.titleBox]}>Aiuto</Text>
           <SettingsCard
             icon={"add"}
             text={"Contattaci"}
@@ -190,6 +185,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
                   style={[std.modalButton1]}
                   onPress={() => {
                     this.setState({modal: false});
+
                     Auth.logout();
                   }}>
                   <Text style={std.text}>Esci</Text>

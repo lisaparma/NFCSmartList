@@ -11,7 +11,7 @@ import NFCid from "./SettingsStack/NFCid";
 import NFCformat from "./SettingsStack/NFCformat";
 import License from "./SettingsStack/License";
 import Contattaci from "./SettingsStack/Contattaci";
-import FAQ from "./SettingsStack/FAQ";
+
 
 const SettingsStack = createAppContainer(createStackNavigator(
   {
@@ -56,19 +56,6 @@ const SettingsStack = createAppContainer(createStackNavigator(
         header: () =>
           <TopBar
             title={"Formatta"}
-            iconLeft={"chevron-left"}
-            onPressLeft={() => {
-              props.navigation.dispatch(NavigationActions.back())
-            }}
-          />,
-      }),
-    },
-    FAQ: {
-      screen: () => <FAQ/>,
-      navigationOptions: (props: any) => ({
-        header: () =>
-          <TopBar
-            title={"FAQ"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())

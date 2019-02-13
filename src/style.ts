@@ -180,6 +180,10 @@ export const info = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     fontFamily: "Yanone Kaffeesatz",
+    borderRadius: 5,
+    borderColor: def.grey1,
+    borderWidth: 0.5,
+    marginHorizontal: 5
   },
   textBox: {
     flexDirection: "row",
@@ -234,7 +238,7 @@ export const log = StyleSheet.create({
   },
   link: {
     paddingTop: 10,
-    fontSize: 15,
+    fontSize: 18,
     textDecorationLine: "underline",
   }
 });

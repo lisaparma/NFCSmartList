@@ -62,7 +62,7 @@ class Login extends Component<AppProps, AppState> {
 
         <TouchableOpacity
           onPress={()=>this.props.navigation.navigate("Signin")}>
-          <Text style={[std.text, log.link]}>Non sono registrato</Text>
+          <Text style={[std.text, log.link, {padding: 10}]}>Non sono registrato</Text>
         </TouchableOpacity>
       </View>
     );

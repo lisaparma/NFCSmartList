@@ -37,14 +37,18 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
 
   public render() {
     const elements = Object.keys(this.state.likes)
-      .map((element) => (
-        <CatalogCard_Like
-          key={element}
-          navigation={this.props.navigation}
-          catalog={store.getState().friends[this.state.likes[element].uid].catalogs[element]}
-          uid={this.state.likes[element].uid}
-        />
-      ));
+      .map((element) => {
+        if(store.getState().friends[this.state.likes[element].uid].catalogs[element]) {
+          return (
+            <CatalogCard_Like
+              key={element}
+              navigation={this.props.navigation}
+              catalog={store.getState().friends[this.state.likes[element].uid].catalogs[element]}
+              uid={this.state.likes[element].uid}
+            />
+          );
+        }
+      });
     return (
       <View style={std.screen}>
         <Text style={std.title}>

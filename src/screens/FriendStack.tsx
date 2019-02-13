@@ -33,7 +33,7 @@ const FriendsStack = createAppContainer(createStackNavigator(
       navigationOptions: () => ({
         header: (props: any) =>
           <TopBar
-            title="Add catalog"
+            title="Add friend"
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,
