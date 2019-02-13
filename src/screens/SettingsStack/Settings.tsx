@@ -153,7 +153,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
         }
 
         <View style={styles.box}>
-          <Text style={[std.text, styles.titleBox]}>Aiuto</Text>
+          <Text style={[std.text, styles.titleBox]}> Aiuto</Text>
           <SettingsCard
             icon={"add"}
             text={"Contattaci"}

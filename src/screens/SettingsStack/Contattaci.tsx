@@ -90,8 +90,6 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
             <Picker.Item label={labels[0]} value={options[0]}/>
             <Picker.Item label={labels[1]} value={options[1]}/>
             <Picker.Item label={labels[2]} value={options[2]}/>
-            <Picker.Item label={labels[3]} value={options[3]}/>
-            <Picker.Item label={labels[4]} value={options[4]}/>
           </Picker>
           }
         </View>
