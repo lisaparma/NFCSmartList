@@ -208,5 +208,4 @@ export default class Database {
     })
       .catch((err) => console.warn(err))
   }
-
 }

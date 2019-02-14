@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, TextInput, Text, Modal} from 'react-native';
 import {Icon} from "react-native-elements";
+import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
-import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
+
 import {card, def, std} from "../style";
 
 interface AddItemProps {
@@ -37,8 +38,9 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         <TextInput
           style={card.centerBox}
           placeholder="Item"
-          onChangeText={text => this.setState({name: text})}
-        >{this.state.name}</TextInput>
+          onChangeText={text => this.setState({name: text})}>
+          {this.state.name}
+        </TextInput>
         {store.getState().user.nfc &&
           <TouchableOpacity
             style={card.icon}
@@ -62,8 +64,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
         <Modal
           transparent={true}
           visible={this.state.modal}
-          onRequestClose={() => {this.setState({modal: false})}}
-        >
+          onRequestClose={() => {this.setState({modal: false})}}>
           <View style={std.modal}>
             <View style={std.card}>
               <Text style={std.text}>{this.state.text}</Text>
@@ -91,7 +92,6 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
                     </TouchableOpacity>
               }
               </View>
-
             </View>
           </View>
         </Modal>

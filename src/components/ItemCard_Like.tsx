@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {IItem} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
+
 import {store} from "../App";
 import {IFrCheckInItem, IFrCheckOutItem} from "../redux/action";
+import {IItem} from "../redux/IStore";
+
 import {card, def, std} from "../style";
 
 interface ItemCardProps {

@@ -2,7 +2,10 @@ import {IAuthentication, ICheckInLike, ICheckOutLike, IPopulateLikes} from "../a
 
 export const LikeReducer = (
   state = {},
-  action: ICheckOutLike | ICheckInLike | IPopulateLikes | IAuthentication
+  action: ICheckOutLike
+    | ICheckInLike
+    | IPopulateLikes
+    | IAuthentication
 ) => {
   switch (action.type) {
     case 'POPULATE_LIKES_LIST' :
@@ -27,7 +30,6 @@ export const LikeReducer = (
 
     case 'LOGOUT':
       return {};
-
 
     default:
       return state;

@@ -65,7 +65,6 @@ export default class Auth {
     }
   }
 
-  // TODO: resettare tutti i dati
   public static logout() {
     store.dispatch<IAuthentication>({
       type: "LOGOUT",

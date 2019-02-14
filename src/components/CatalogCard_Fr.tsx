@@ -3,10 +3,11 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
-import {std, card, getColor, def, getIcon} from "../style";
 import {store} from "../App";
 import Database from "../firebaseAPI/database";
 import {ICatalog} from "../redux/IStore";
+
+import {std, card, getColor, def, getIcon} from "../style";
 
 interface CatalogCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;

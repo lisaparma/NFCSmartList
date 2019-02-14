@@ -12,7 +12,16 @@ import {ICatalog} from "../IStore";
 export const CatalogsReducer = (
   state: { [id: string]: ICatalog}  = {
   },
-  action: IPopulateCatalogs | IAddCatalog | IRemoveCatalog | IAddItem | IRemoveItem | IEditItem | ICheckInItem | ICheckOutItem | IEditCatalog | IAuthentication
+  action: IPopulateCatalogs
+    | IAddCatalog
+    | IRemoveCatalog
+    | IAddItem
+    | IRemoveItem
+    | IEditItem
+    | ICheckInItem
+    | ICheckOutItem
+    | IEditCatalog
+    | IAuthentication
 ) => {
   switch (action.type) {
     case 'POPULATE_CATALOGS_LIST' :

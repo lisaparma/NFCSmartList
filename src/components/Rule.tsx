@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {def, std} from "../style";
 import {Icon} from "react-native-elements";
+
+import {def, std} from "../style";
 
 interface RuleProps {
   title: string;
@@ -21,7 +22,6 @@ export class Rule extends Component<RuleProps> {
        phase = 1;
       }
     }
-
     return (
       <View style={[styles.rule, phase === 1 && styles.now, phase === 2 && styles.already]}>
         <View style={{flexDirection: "row"}}>

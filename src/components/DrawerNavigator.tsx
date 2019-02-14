@@ -22,7 +22,9 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps> {
 
   public render() {
     return (
-      <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+      <SafeAreaView
+        style={styles.container}
+        forceInset={{ top: 'always', horizontal: 'never' }}>
         <ScrollView>
           <View style={styles.box}>
             <Image
@@ -30,17 +32,17 @@ export default class DrawerNavigator extends Component<DrawerNavigatorProps> {
               source={require("../../assets/dream.png")}/>
             <View style={{padding: 30}}>
               <View style={{paddingVertical: 10}}>
-                  <Image
-                    style={{width: 100, height: 100, opacity: 1}}
-                    source={getAvatar(this.props.user.avatar)}
-                  />
-                </View>
-                <Text style={std.title}>
-                  {this.props.user.username}
-                </Text>
-                <Text style={std.text}>
-                  {this.props.user.email}
-                </Text>
+                <Image
+                  style={{width: 100, height: 100, opacity: 1}}
+                  source={getAvatar(this.props.user.avatar)}
+                />
+              </View>
+              <Text style={std.title}>
+                {this.props.user.username}
+              </Text>
+              <Text style={std.text}>
+                {this.props.user.email}
+              </Text>
             </View>
           </View>
           <DrawerItems {...this.props.navProps}

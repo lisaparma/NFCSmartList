@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
-import {IItem} from "../redux/IStore";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
+
+import {IItem} from "../redux/IStore";
 import {store} from "../App";
+
 import {std, card, def} from "../style";
 
 interface ItemCardProps {

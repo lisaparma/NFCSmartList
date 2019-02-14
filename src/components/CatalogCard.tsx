@@ -3,8 +3,9 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from "react-native-elements";
 import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "react-navigation";
 
-import {std, card, getColor, def, getIcon} from "../style"
 import {ICatalog} from "../redux/IStore";
+
+import {std, card, getColor, def, getIcon} from "../style"
 
 interface CatalogCardProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -62,5 +63,4 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingTop: 1,
   },
-
 });

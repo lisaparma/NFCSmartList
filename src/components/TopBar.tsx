@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Platform} from '
 import {Icon} from "react-native-elements";
 
 import {store} from "../App";
+
 import {def} from "../style";
 
 interface TopBarProps {
@@ -53,8 +54,7 @@ export default class TopBar extends Component<TopBarProps> {
               />
             </TouchableOpacity>
           }
-          {
-            !this.props.onPressRight &&
+          {!this.props.onPressRight &&
             <View style={styles.buttons}/>
           }
         </View>

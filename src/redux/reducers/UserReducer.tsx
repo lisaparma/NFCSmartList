@@ -6,7 +6,13 @@ import {IAuthentication, IEditAvatar, IEditUsername, IInfo2Account, IInfoAccount
 
 export const UserReducer = (
   state = {},
-  action: IInfoAccount | IInfoDevice |IInfo2Account | IEditAvatar |IEditUsername | IOld | IAuthentication
+  action: IInfoAccount
+    | IInfoDevice
+    | IInfo2Account
+    | IEditAvatar
+    | IEditUsername
+    | IOld
+    | IAuthentication
 ) => {
   switch (action.type) {
     case 'INFO' :

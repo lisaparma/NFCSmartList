@@ -5,6 +5,7 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute} from "reac
 
 import {IFriend} from "../redux/IStore";
 import {getAvatar} from "../../avatars/avatar";
+
 import {card, def, std} from "../style";
 
 interface FriendCardProps {

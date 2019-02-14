@@ -11,7 +11,14 @@ import {ICatalog} from "../IStore";
 
 export const FriendsReducer = (
   state = {},
-  action: IAddFriend | IPopulateFriends |IFrCheckInItem | IFrCheckOutItem | IAddFriend2 | ICheckInLike | ICheckOutLike | IAuthentication
+  action: IAddFriend
+    | IPopulateFriends
+    | IFrCheckInItem
+    | IFrCheckOutItem
+    | IAddFriend2
+    | ICheckInLike
+    | ICheckOutLike
+    | IAuthentication
 ) => {
   switch (action.type) {
     case 'POPULATE_FRIENDS_LIST' :
