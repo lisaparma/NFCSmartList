@@ -35,8 +35,8 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   constructor(props: AddCatalogProps) {
     super(props);
     this.state = {
-      name: null,
-      description: null,
+      name: "",
+      description: "",
       private: true,
       mod: 0,
       modal: false,
@@ -115,8 +115,10 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
           </View>
         </View>
         <TouchableOpacity
-          style={std.button}
-          onPress={this.add}>
+          style={[std.button, this.state.name === "" && std.buttonDisabled]}
+          onPress={this.add}
+          disabled={this.state.name ===  ""}
+        >
           <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>
       </View>
@@ -124,7 +126,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   }
 
   private add = () => {
-    if(this.state.name !== null && this.state.description !== null) {
+    if(this.state.name !== "") {
       var uuid = require('react-native-uuid');
       const id = uuid.v4();
       store.dispatch<IAddCatalog>({
@@ -138,6 +140,8 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
       Database.addCatalog(id, this.state.name, this.state.description, this.state.private, this.state.mod);
       this.props.navigation.dispatch(NavigationActions.back());
       this.props.navigation.navigate("Catalog", {name: this.state.name, id: id});
+    } else {
+       // TODO: errore! Inswerire il nome per continuare
     }
   }
 }

@@ -166,11 +166,13 @@ class Settings extends Component<SettingsProps, SettingsState> {
             page={"License"}/>
         </View>
 
-        <TouchableOpacity
+        {store.getState().user.os === "ios" &&
+        < TouchableOpacity
           style={[styles.card, styles.esc]}
           onPress={()=>{this.setState({modal: true})}}>
           <Text style={[std.textButton, std.warningText]}>Esci</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        }
 
         <Modal
           transparent={true}

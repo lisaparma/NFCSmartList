@@ -79,6 +79,9 @@ export const std = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 3,
   },
+  buttonDisabled: {
+    backgroundColor: def.grey1,
+  },
   safeBut: {
     backgroundColor: def.red
   },
