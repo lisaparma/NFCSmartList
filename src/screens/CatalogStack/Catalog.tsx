@@ -114,7 +114,8 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
               </TouchableOpacity>
               <TouchableOpacity
                 style={std.DDitem}
-                onPress={this.remove}>
+                onPress={() => this.setState({modal: true})}
+              >
                 <Text style={[std.text, std.warningText]}>
                     Elimina catalogo
                 </Text>
@@ -130,6 +131,35 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
             </View>
           </View>
         }
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.text}>Sei sicuro di voler eliminare il catalogo?</Text>
+              <View style={std.boxButton}>
+                <TouchableOpacity
+                  style={[std.modalButton1]}
+                  onPress={() => {
+                    this.setState({modal: false});
+                    this.remove();
+                  }}>
+                  <Text style={std.text}>Elimina</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={std.modalButton2}
+                  onPress={() => {
+                    this.setState({modal: false});
+                  }}>
+                  <Text style={std.text}>Annulla</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, ScrollView, Modal} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -26,6 +26,7 @@ interface DetailsItemState {
   edit: boolean;
   name: string;
   description: string;
+  modal: boolean;
 }
 
 class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
@@ -40,6 +41,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
       edit: false,
       name: this.props.navigation.getParam("item").name,
       description: this.props.navigation.getParam("item").description,
+      modal: false
     }
   }
 
@@ -55,7 +57,8 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
     return (
       <View style={std.screen}>
         <Text style={std.title}> Informazioni oggetto:</Text>
-        {!this.state.edit &&
+        <ScrollView>
+        {!this.state.edit ?
           <View>
             <View style={info.textBox}>
               <Text style={[std.text, info.t1]}>Nome:</Text>
@@ -71,8 +74,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
               <Text style={std.textButton}>Modifica item</Text>
             </TouchableOpacity>
           </View>
-        }
-        {this.state.edit &&
+        :
           <View>
             <View style={info.textBox}>
               <Text style={[std.text, info.t1]}>Nome:</Text>
@@ -100,9 +102,40 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
         }
         <TouchableOpacity
           style={[std.button, std.safeBut]}
-          onPress={this.remove}>
+          onPress={() => this.setState({modal: true})}
+          >
           <Text style={std.textButton}>Elimina item</Text>
         </TouchableOpacity>
+        </ScrollView>
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.text}>Sei sicuro di voler eliminare l'oggetto?</Text>
+              <View style={std.boxButton}>
+                <TouchableOpacity
+                  style={[std.modalButton1]}
+                  onPress={() => {
+                    this.setState({modal: false});
+                    this.remove();
+                  }}>
+                  <Text style={std.text}>Elimina</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={std.modalButton2}
+                  onPress={() => {
+                    this.setState({modal: false});
+                  }}>
+                  <Text style={std.text}>Annulla</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }

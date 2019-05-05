@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, ScrollView, Modal} from 'react-native';
 import {
   NavigationParams,
   NavigationScreenProp,
@@ -14,6 +14,7 @@ import {ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
 import {std} from "../../style";
 import {info} from "../../style";
+import Auth from "../../firebaseAPI/auth";
 
 interface DetailsCatalogProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -25,6 +26,7 @@ interface DetailsCatalogState {
   name: string;
   description: string;
   private: boolean
+  modal: boolean
 }
 
 class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState> {
@@ -38,7 +40,8 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
       edit: false,
       name: this.props.navigation.getParam("catalog").name,
       description: this.props.navigation.getParam("catalog").description,
-      private: this.props.navigation.getParam("catalog").private
+      private: this.props.navigation.getParam("catalog").private,
+      modal: false
     }
   }
 
@@ -127,10 +130,40 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
           }
           <TouchableOpacity
             style={[std.button, std.safeBut]}
-            onPress={this.remove}>
-            <Text style={std.textButton}>Elimina item</Text>
+            onPress={() => this.setState({modal: true})}>
+            <Text style={std.textButton}>Elimina catalogo</Text>
           </TouchableOpacity>
         </ScrollView>
+
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.text}>Sei sicuro di voler eliminare il catalogo?</Text>
+              <View style={std.boxButton}>
+                <TouchableOpacity
+                  style={[std.modalButton1]}
+                  onPress={() => {
+                    this.setState({modal: false});
+                    this.remove();
+                  }}>
+                  <Text style={std.text}>Elimina</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={std.modalButton2}
+                  onPress={() => {
+                    this.setState({modal: false});
+                  }}>
+                  <Text style={std.text}>Annulla</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
