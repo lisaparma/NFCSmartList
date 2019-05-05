@@ -32,6 +32,8 @@ interface AddCatalogState {
 
 class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
 
+  private refs: {} = {picker: undefined};
+
   constructor(props: AddCatalogProps) {
     super(props);
     this.state = {

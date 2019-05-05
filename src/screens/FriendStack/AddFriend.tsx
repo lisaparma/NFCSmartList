@@ -28,7 +28,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
   constructor(props: AddFriendProps) {
     super(props);
     this.state = {
-      email: null,
+      email: "",
       error: false
     }
   }
@@ -53,8 +53,10 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
           </View>
         }
         <TouchableOpacity
-          style={std.button}
-          onPress={this.add}>
+          style={[std.button, this.state.email === "" && std.buttonDisabled]}
+          onPress={this.add}
+          disabled={this.state.email ===  ""}
+        >
           <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>
       </View>
@@ -62,7 +64,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
   }
 
   private add = () => {
-    if(this.state.email !== null) {
+    if(this.state.email !== "") {
       firebase.database().ref('users/').once('value')
         .then((snapshot) => {
           let find = false;
@@ -89,6 +91,8 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
             this.setState({error: true})
           }
         });
+    } else {
+      // TODO: segnalare errore
     }
   }
 }
