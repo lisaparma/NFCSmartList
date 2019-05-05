@@ -72,8 +72,8 @@ export const std = StyleSheet.create({
   button: {
     padding: 5,
     marginHorizontal: "25%",
+    marginVertical: 15,
     alignItems: "center",
-    marginTop: 30,
     backgroundColor: def.theme0,
     width: "50%",
     paddingVertical: 10,
@@ -189,8 +189,7 @@ export const info = StyleSheet.create({
     marginHorizontal: 5
   },
   textBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
     borderBottomWidth: 0.5,
     borderBottomColor: def.grey1,
     paddingVertical: 10,
@@ -200,10 +199,18 @@ export const info = StyleSheet.create({
     color: def.grey1
   },
   t2: {
+    flex: 1,
     paddingLeft: 10,
     paddingBottom: 0
   },
+  picker: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 10
+  },
   switch: {
+    flexDirection: "row",
+    padding: 5,
     paddingLeft: 15
   }
 });

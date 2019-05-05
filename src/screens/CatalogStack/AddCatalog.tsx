@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput, Picker} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Picker, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {
   NavigationActions,
   NavigationParams,
@@ -32,7 +32,7 @@ interface AddCatalogState {
 
 class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
 
-  private refs: {} = {picker: undefined};
+  public refs: {picker: any};
 
   constructor(props: AddCatalogProps) {
     super(props);
@@ -50,72 +50,91 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
     return (
       <View style={std.screen}>
         <Text style={std.title}>
-          Aggiungi un catalogo:</Text>
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Nome:</Text>
-          <TextInput
-            style={[std.text, info.t2]}
-            placeholder="name"
-            onChangeText={text => this.setState({name: text})}
-          />
-        </View>
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Descrizione:</Text>
-          <TextInput
-            style={[std.text, info.t2]}
-            placeholder="description"
-            onChangeText={text => this.setState({description: text})}
-          />
-        </View>
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Tipologia: </Text>
-          <Icon
-            name={getIcon(this.state.mod)}
-            size={20}
-            color={getColor(this.state.mod)}
-          />
-          {store.getState().user.os === "ios" &&
-            <View>
-              <Text
-                style={[std.text, info.t2]}
-                onPress={() => {
-                  this.refs.picker.show();
-                }}
-              >
-                {getLabel(this.state.mod)}
-              </Text>
-            <SimplePicker
-              style={{flex: 1, backgroundColor: def.grey1}}
-              ref={'picker'}
-              options={options}
-              labels={labels}
-              onSubmit={(option: any) => {this.setState({mod: option});
-              }}
-            />
-            </View>
-          }
-          {store.getState().user.os !== "ios" &&
-          <Picker
-            style={{flex: 1}}
-            selectedValue={this.state.mod}
-            onValueChange={(itemValue) => this.setState({mod: itemValue})}>
-            <Picker.Item label={labels[0]} value={options[0]}/>
-            <Picker.Item label={labels[1]} value={options[1]}/>
-            <Picker.Item label={labels[2]} value={options[2]}/>
-            <Picker.Item label={labels[3]} value={options[3]}/>
-            <Picker.Item label={labels[4]} value={options[4]}/>
-          </Picker>
-          }
-        </View>
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Privato:</Text>
-          <View style={info.switch}>
-            <Switch
-              value={this.state.private}
-              onValueChange={()=>{this.setState({private: !this.state.private})}}
+          Crea catalogo
+        </Text>
+
+        <ScrollView>
+
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>
+              Nome *:
+            </Text>
+            <TextInput
+              style={[std.text, info.t2]}
+              placeholder="Inserisci un nome"
+              onChangeText={text => this.setState({name: text})}
             />
           </View>
-        </View>
+
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>Descrizione:</Text>
+            <TextInput
+              style={[std.text, info.t2]}
+              placeholder="Inserisci una descrizione"
+              onChangeText={text => this.setState({description: text})}
+            />
+          </View>
+
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>Tipologia:</Text>
+            <View style={info.picker}>
+              <Icon
+                name={getIcon(this.state.mod)}
+                size={30}
+                color={getColor(this.state.mod)}
+              />
+              {store.getState().user.os === "ios" &&
+                <View>
+                  <Text
+                    style={[std.text, info.t2]}
+                    onPress={() => {
+                      this.refs.picker.show();
+                    }}
+                  >
+                    {getLabel(this.state.mod)}
+                  </Text>
+                <SimplePicker
+                  style={{flex: 1, backgroundColor: def.grey1}}
+                  ref={'picker'}
+                  options={options}
+                  labels={labels}
+                  onSubmit={(option: any) => {this.setState({mod: option});
+                  }}
+                />
+                </View>
+              }
+              {store.getState().user.os !== "ios" &&
+              <Picker
+                style={{flex: 1}}
+                selectedValue={this.state.mod}
+                onValueChange={(itemValue) => this.setState({mod: itemValue})}>
+                <Picker.Item label={labels[0]} value={options[0]}/>
+                <Picker.Item label={labels[1]} value={options[1]}/>
+                <Picker.Item label={labels[2]} value={options[2]}/>
+                <Picker.Item label={labels[3]} value={options[3]}/>
+                <Picker.Item label={labels[4]} value={options[4]}/>
+              </Picker>
+              }
+            </View>
+          </View>
+
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>Sicurezza:</Text>
+            <View style={info.switch}>
+              { this.state.private ?
+                <Text style={[std.text, info.t2]}>Privato</Text>
+                :
+                <Text style={[std.text, info.t2]}>Pubblico</Text>
+              }
+              <Switch
+                value={this.state.private}
+                onValueChange={()=>{this.setState({private: !this.state.private})}}
+              />
+            </View>
+          </View>
+
+        </ScrollView>
+
         <TouchableOpacity
           style={[std.button, this.state.name === "" && std.buttonDisabled]}
           onPress={this.add}
@@ -123,6 +142,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
         >
           <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>
+
       </View>
     );
   }

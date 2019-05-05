@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import {
   NavigationParams,
   NavigationScreenProp,
@@ -21,6 +21,7 @@ interface AddFriendProps {
 interface AddFriendState {
   email: string;
   error: boolean;
+  testEmail: boolean
 }
 
 class AddFriend extends Component<AddFriendProps, AddFriendState> {
@@ -29,33 +30,47 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
     super(props);
     this.state = {
       email: "",
-      error: false
+      error: false,
+      testEmail: false
     }
   }
+
+  private onChangeText = (text: string) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let test = re.test(String(text).toLowerCase());
+    this.setState({
+      email: text.trim(),
+      error: false,
+      testEmail: test
+    });
+  };
 
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}> Aggiungi un amico:</Text>
-        <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>e-mail:</Text>
-          <TextInput
-            style={[std.text, info.t2]}
-            placeholder="e-mail"
-            onChangeText={text => this.setState({email: text.trim(), error: false})}
-          />
-        </View>
-        { this.state.error &&
-          <View style={{paddingTop: 10, alignItems: "center"}}>
-            <View style={[std.error, {width: 200, alignItems: "center", paddingVertical: 5}]}>
-              <Text style={[std.text, std.warningText]}>Indirizzo e-mail non trovato</Text>
-            </View>
+        <Text style={std.title}>Aggiungi un amico</Text>
+        <ScrollView>
+          <View style={info.textBox}>
+            <Text style={[std.text, info.t1]}>e-mail:</Text>
+            <TextInput
+              style={[std.text, info.t2]}
+              placeholder="Inserisci un'email"
+              onChangeText={this.onChangeText}
+            />
           </View>
-        }
+          { this.state.error &&
+            <View style={{paddingTop: 10, alignItems: "center"}}>
+              <View style={[std.error, {width: 200, alignItems: "center", paddingVertical: 5}]}>
+                <Text style={[std.text, std.warningText]}>Indirizzo e-mail non trovato</Text>
+              </View>
+            </View>
+          }
+        </ScrollView>
+
         <TouchableOpacity
-          style={[std.button, this.state.email === "" && std.buttonDisabled]}
+          style={[std.button, !this.state.testEmail && std.buttonDisabled]}
           onPress={this.add}
-          disabled={this.state.email ===  ""}
+          disabled={!this.state.testEmail}
         >
           <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>
@@ -64,7 +79,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
   }
 
   private add = () => {
-    if(this.state.email !== "") {
+    if(this.state.testEmail) {
       firebase.database().ref('users/').once('value')
         .then((snapshot) => {
           let find = false;
@@ -91,8 +106,6 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
             this.setState({error: true})
           }
         });
-    } else {
-      // TODO: segnalare errore
     }
   }
 }
