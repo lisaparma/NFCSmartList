@@ -39,7 +39,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let test = re.test(String(text).toLowerCase());
     this.setState({
-      email: text.trim(),
+      email: text.trim().toLowerCase(),
       error: false,
       testEmail: test
     });

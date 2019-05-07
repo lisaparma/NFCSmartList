@@ -133,7 +133,7 @@ const MainTabsAndroid = createDrawerNavigator(
     initialRouteName: 'Catalogs',
     contentComponent: (props) => <DrawerNavigator navProps={props} user={store.getState().user}/>,
     contentOptions: {
-      activeTintColor: "#10A0E0",
+      activeTintColor: def.theme1,
       inactiveTintColor: def.black,
     }
   },

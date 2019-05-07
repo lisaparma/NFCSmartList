@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
     color: def.white,
     fontSize: 30,
     fontWeight: "bold",
-    fontFamily: "Yanone Kaffeesatz"
+    // fontFamily: "Yanone Kaffeesatz"
   }
 });

@@ -3,12 +3,12 @@ import {Dimensions, StyleSheet} from 'react-native';
 export const options = [0, 1, 2, 3, 4];
 export const labels = ['General', 'Persone', 'Oggetti', "Lista", "Luoghi", "Animali"];
 const colors = [
+  "#0057a1",
+  "#dd4124",
   "#3d3d3d",
-  "#d3001a",
-  "#004fd3",
   "#fff600",
-  "#01c00d",
-  "#7401c0"
+  "#4ca752",
+  "#8f72ba"
 ];
 const icons = ["assignment","group", "build", "format-list-bulleted", "place", "pets"]
 
@@ -30,12 +30,12 @@ export const def = {
   grey1: "#bbbebe",
   grey2: "#edeeee",
   white: "#FAFAFA",
-  theme0: "#0b6d99",
-  theme1: "#10A0E0",
+  theme0: "#006eb3",
+  theme1: "#0094d5",
   theme2: "#a8e0f9",
-  red: "#e01038",
-  green: "#029615"
-}
+  red: "#dd4124",
+  green: "#4ca752"
+};
 
 export const std = StyleSheet.create({
   screen: {
@@ -47,11 +47,11 @@ export const std = StyleSheet.create({
   title: {
     fontSize: 25,
     color: def.theme0,
-    fontFamily: "Yanone Kaffeesatz"
+    // fontFamily: "Yanone Kaffeesatz"
   },
   text:{
     fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz",
+    // fontFamily: "Yanone Kaffeesatz",
     color: def.black,
   },
   warningText: {
@@ -89,7 +89,7 @@ export const std = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: def.white,
-    fontFamily: "Yanone Kaffeesatz"
+    // fontFamily: "Yanone Kaffeesatz"
   },
   floatingButton: {
     borderWidth: 1,
@@ -182,7 +182,7 @@ export const info = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 20,
-    fontFamily: "Yanone Kaffeesatz",
+    // fontFamily: "Yanone Kaffeesatz",
     borderRadius: 5,
     borderColor: def.grey1,
     borderWidth: 0.5,
@@ -219,22 +219,26 @@ export const info = StyleSheet.create({
 export const log = StyleSheet.create({
   screen: {
     flex: 1,
+  },
+  screen2: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: def.theme1,
+    paddingTop: '30%',
+    alignItems: 'center'
   },
   image: {
-    width: 160,
+    width: 150,
     height: 150,
   },
   input: {
     backgroundColor: def.white,
     width: "50%",
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: def.theme0,
     padding: 10,
     margin: 5,
     fontSize: 15,
-    fontFamily: "Yanone Kaffeesatz"
+    // fontFamily: "Yanone Kaffeesatz"
   },
   loginButton: {
     marginTop: 15,
@@ -244,11 +248,12 @@ export const log = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: def.white,
-    fontFamily: "Yanone Kaffeesatz"
+    // fontFamily: "Yanone Kaffeesatz"
   },
   link: {
     paddingTop: 10,
     fontSize: 18,
+    color: def.theme1,
     textDecorationLine: "underline",
   }
 });
