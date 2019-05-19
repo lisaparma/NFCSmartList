@@ -40,9 +40,9 @@ export const def = {
 export const std = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 10,
+    padding: 5,
     paddingBottom: 0,
-    backgroundColor: def.white
+    backgroundColor: def.theme2
   },
   title: {
     fontSize: 25,
@@ -59,6 +59,13 @@ export const std = StyleSheet.create({
   },
   scroll: {
     padding: 10
+  },
+  list: {
+    flex: 1,
+    margin: 10,
+    marginBottom:0,
+    backgroundColor: def.white,
+    borderRadius: 10,
   },
   error: {
     backgroundColor: def.white,
@@ -263,7 +270,8 @@ export const card = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     alignItems: "center",
-    margin: 5
+    backgroundColor: def.white,
+    margin: 5,
   },
   icon: {
     paddingHorizontal: 10,
@@ -287,16 +295,13 @@ export const card = StyleSheet.create({
   },
   // -- Cataloghi ------
   contCatal: {
-    margin: 10,
+    height: 80,
     paddingVertical: 10,
-    backgroundColor: def.white,
-    borderWidth: 0.5,
-    borderColor: def.grey1,
+    borderRadius: 5,
     shadowOffset:{  width: 5,  height: 5,  },
     shadowColor: def.grey1,
     shadowOpacity: 1.0,
     elevation: 5
-
   },
 
   // -- Item ----------
@@ -311,5 +316,9 @@ export const card = StyleSheet.create({
     height: 80,
     borderColor: def.grey1,
     borderWidth: 0.5,
+    shadowOffset:{  width: 5,  height: 5,  },
+    shadowColor: def.grey1,
+    shadowOpacity: 1.0,
+    elevation: 5
   },
 });

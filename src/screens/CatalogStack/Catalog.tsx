@@ -63,27 +63,29 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     return (
       <View style={{flex: 1,}}>
         <View style={std.screen}>
-          <Text style={std.title}>
-            I tuoi item:
-          </Text>
-          <ScrollView style={std.scroll}>
-            {elements}
-          </ScrollView>
-          {
-            this.state.check?
-              <TouchableOpacity
-                style={std.button}
-                onPress={() => {
-                  this.setState({check: false})
-                  console.warn("unregister");
-                  NfcManager.unregisterTagEvent();
-                  console.warn("Stop");
-                  NfcManager.stop()}}>
-                <Text style={std.textButton}>Annulla</Text>
-              </TouchableOpacity>
-              :
-              <AddItem cid={this.state.cid}/>
-          }
+          {/*<Text style={std.title}>*/}
+            {/*I tuoi item:*/}
+          {/*</Text>*/}
+          <View style={std.list}>
+            <ScrollView style={std.scroll}>
+              {elements}
+            </ScrollView>
+            {
+              this.state.check?
+                <TouchableOpacity
+                  style={std.button}
+                  onPress={() => {
+                    this.setState({check: false})
+                    console.warn("unregister");
+                    NfcManager.unregisterTagEvent();
+                    console.warn("Stop");
+                    NfcManager.stop()}}>
+                  <Text style={std.textButton}>Annulla</Text>
+                </TouchableOpacity>
+                :
+                <AddItem cid={this.state.cid}/>
+            }
+          </View>
         </View>
         {this.props.navigation.getParam("menu") &&
           <View style={std.DDScreen}>

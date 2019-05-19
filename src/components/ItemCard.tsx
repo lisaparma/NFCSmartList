@@ -59,7 +59,7 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
               size={25}
             />
           </View>
-        }
+      }
         <View style={card.centerBox}>
           <Text style={[std.text, this.state.check && card.textCheck]}>{this.props.item.name} </Text>
         </View>

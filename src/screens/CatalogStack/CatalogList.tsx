@@ -48,11 +48,11 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
     return (
       <View style={std.screen}>
         <Text style={std.title}>
-        I tuoi cataloghi:
-      </Text>
-      <ScrollView style={std.scroll}>
-        {elements}
-      </ScrollView>
+          I tuoi cataloghi:
+        </Text>
+        <ScrollView style={std.scroll}>
+          {elements}
+        </ScrollView>
         {Platform.OS !== "ios" &&
           <TouchableOpacity
             style={std.floatingButton}

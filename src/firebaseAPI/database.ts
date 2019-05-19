@@ -32,7 +32,7 @@ export default class Database {
               cid: item.val().cid,
               name: item.val().name,
               description: item.val().description,
-              items: item.val().items,
+              items: item.val().items? item.val().items : {},
               mod: item.val().mod,
               private: item.val().private
             };

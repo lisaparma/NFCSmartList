@@ -44,7 +44,9 @@ export default class CatalogCard extends Component<CatalogCardProps> {
               {this.props.catalog.name}
             </Text>
           </View>
-          <Text style={[std.text, card.t2]}> {this.props.catalog.description} </Text>
+          <Text style={[std.text, card.t2]}>
+            Oggetti: {Object.keys(this.props.catalog.items).length}
+          </Text>
         </View>
         <View style={card.icon}>
           <Icon
