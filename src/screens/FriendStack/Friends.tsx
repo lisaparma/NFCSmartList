@@ -6,6 +6,7 @@ import {IFriend, IStore} from "../../redux/IStore";
 import FriendCard from "../../components/FriendCard";
 import {def, std} from "../../style";
 import {Icon} from "react-native-elements";
+import NullComponent from "../../components/NullComponent";
 
 interface FriendsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -48,7 +49,11 @@ class Friends extends Component<FriendsProps, FriendsState> {
           I tuoi amici:
         </Text>
         <ScrollView style={std.scroll}>
-          {elements}
+          {elements.length > 0 ?
+            elements
+            :
+            <NullComponent type={"friends"}/>
+          }
         </ScrollView>
         {Platform.OS !== "ios" &&
         <TouchableOpacity

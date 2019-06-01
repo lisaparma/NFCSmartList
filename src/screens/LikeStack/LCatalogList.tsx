@@ -6,6 +6,7 @@ import {store} from "../../App";
 import {IStore, ICatalog} from "../../redux/IStore";
 import {std} from "../../style";
 import CatalogCard_Like from "../../components/CatalogCard_Like";
+import NullComponent from "../../components/NullComponent";
 
 interface LCatalogListProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -52,10 +53,14 @@ class LCatalogList extends Component<LCatalogListProps, LCatalogListState> {
     return (
       <View style={std.screen}>
         <Text style={std.title}>
-        I tuoi preferiti:
-      </Text>
+          I tuoi preferiti:
+        </Text>
       <ScrollView style={std.scroll}>
-        {elements}
+        {elements.length > 0 ?
+          elements
+          :
+          <NullComponent type={"likes"}/>
+        }
       </ScrollView>
       </View>
     );
