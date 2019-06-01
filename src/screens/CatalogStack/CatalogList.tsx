@@ -8,6 +8,7 @@ import CatalogCard from "../../components/CatalogCard";
 
 import {def, std} from "../../style";
 import {Icon} from "react-native-elements";
+import NullComponent from "../../components/NullComponent";
 
 interface CatalogListProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -47,11 +48,15 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       ));
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          I tuoi cataloghi:
-        </Text>
+        {/*<Text style={std.title}>*/}
+          {/*I tuoi cataloghi:*/}
+        {/*</Text>*/}
         <ScrollView style={std.scroll}>
-          {elements}
+          {elements.length > 0 ?
+            elements
+            :
+            <NullComponent type={"catalogs"}/>
+          }
         </ScrollView>
         {Platform.OS !== "ios" &&
           <TouchableOpacity

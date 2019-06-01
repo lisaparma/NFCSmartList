@@ -45,9 +45,9 @@ class Friends extends Component<FriendsProps, FriendsState> {
         />));
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          I tuoi amici:
-        </Text>
+        {/*<Text style={std.title}>*/}
+          {/*I tuoi amici:*/}
+        {/*</Text>*/}
         <ScrollView style={std.scroll}>
           {elements.length > 0 ?
             elements

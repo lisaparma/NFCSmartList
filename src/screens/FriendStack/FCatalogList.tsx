@@ -5,6 +5,7 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNaviga
 import {ICatalog} from "../../redux/IStore";
 import CatalogCard_Fr from "../../components/CatalogCard_Fr";
 import {std} from "../../style";
+import NullComponent from "../../components/NullComponent";
 
 interface FCatalogListProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -37,11 +38,15 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
       ));
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          I suoi cataloghi pubblici:
-        </Text>
+        {/*<Text style={std.title}>*/}
+          {/*I suoi cataloghi pubblici:*/}
+        {/*</Text>*/}
         <ScrollView style={std.scroll}>
-          {elements}
+          {elements.length > 0 ?
+            elements
+            :
+            <NullComponent type={"catalogs"}/>
+          }
         </ScrollView>
       </View>
     );
