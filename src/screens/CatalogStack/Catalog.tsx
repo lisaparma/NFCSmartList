@@ -16,6 +16,7 @@ import {Icon} from "react-native-elements";
 import NfcManager, {ByteParser} from "react-native-nfc-manager";
 
 import {std} from "../../style";
+import NullComponent from "../../components/NullComponent";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -68,7 +69,11 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           {/*</Text>*/}
           <View style={std.list}>
             <ScrollView style={std.scroll}>
-              {elements}
+              {elements.length > 0 ?
+                elements
+                :
+                <NullComponent type={"items"}/>
+              }
             </ScrollView>
             {
               this.state.check?

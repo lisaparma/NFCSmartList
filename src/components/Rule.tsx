@@ -47,7 +47,9 @@ export class Rule extends Component<RuleProps> {
 }
 
 const styles = StyleSheet.create({
+
   rule: {
+    backgroundColor: def.white,
     margin: 5,
     borderWidth: 1,
     borderColor: def.grey2,

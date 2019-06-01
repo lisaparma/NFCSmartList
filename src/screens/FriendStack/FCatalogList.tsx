@@ -45,7 +45,7 @@ class FCatalogList extends Component<FCatalogListProps, FCatalogListState> {
           {elements.length > 0 ?
             elements
             :
-            <NullComponent type={"catalogs"}/>
+            <NullComponent type={"fr_catalogs"}/>
           }
         </ScrollView>
       </View>

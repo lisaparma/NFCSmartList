@@ -41,7 +41,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           <Icon
             name={"add-circle-outline"}
             size={30}
-            color={def.grey1}
+            color={this.state.name === ""? def.grey1 : def.green}
           />
         </TouchableOpacity>
         <TextInput

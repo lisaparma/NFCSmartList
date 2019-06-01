@@ -63,7 +63,6 @@ export const std = StyleSheet.create({
   list: {
     flex: 1,
     margin: 10,
-    marginBottom:0,
     backgroundColor: def.white,
     borderRadius: 10,
   },
@@ -96,6 +95,7 @@ export const std = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: def.white,
+    textAlign: "center"
     // fontFamily: "Yanone Kaffeesatz"
   },
   floatingButton: {
@@ -191,19 +191,19 @@ export const info = StyleSheet.create({
     fontSize: 20,
     // fontFamily: "Yanone Kaffeesatz",
     borderRadius: 5,
-    borderColor: def.grey1,
+    borderColor: def.black,
     borderWidth: 0.5,
     marginHorizontal: 5
   },
   textBox: {
     flexDirection: "column",
     borderBottomWidth: 0.5,
-    borderBottomColor: def.grey1,
+    borderBottomColor: def.black,
     paddingVertical: 10,
     paddingTop: 20
   },
   t1: {
-    color: def.grey1
+    color: def.black
   },
   t2: {
     flex: 1,

@@ -85,7 +85,7 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
               <TouchableOpacity
                 style={std.button}
                 onPress={()=>{this.setState({edit: true})}}>
-                <Text style={std.textButton}>Modifica catalog</Text>
+                <Text style={std.textButton}>Modifica catalogo</Text>
               </TouchableOpacity>
             </View>
           :
