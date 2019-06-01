@@ -16,16 +16,12 @@ export default class NullComponent extends Component<NullComponentProps> {
       <View style={{flex: 1}}>
         {this.props.type === "likes" &&
           <View style={styles.card}>
-            <Image
-              style={styles.imageSad}
-              source={require("../../assets/saad.png")}
-            />
-            <Text style={styles.title}>Non hai ancora delle liste condivise contrassegnate come preferite!</Text>
-            <Text style={styles.text}>Visita la pagina delle liste dei tuoi amici e salvale premendo il pulsante a cuore.</Text>
+            <Text style={styles.title}>Non hai ancora dei cataloghi condivisi contrassegnati come preferiti!</Text>
+            <Text style={styles.text}>Visita la pagina delle liste dei tuoi contatti e salvali premendo il pulsante a stella.</Text>
             <View style={styles.icons}>
               <Icon
                 color={def.white}
-                name={"favorite-border"}
+                name={"star-border"}
                 size={50}
               />
               <Icon
@@ -35,7 +31,7 @@ export default class NullComponent extends Component<NullComponentProps> {
               />
               <Icon
                 color={def.white}
-                name={"favorite"}
+                name={"star"}
                 size={50}
               />
             </View>
@@ -43,12 +39,8 @@ export default class NullComponent extends Component<NullComponentProps> {
         }
         {this.props.type === "friends" &&
           <View>
-            <Image
-              style={styles.imageSad}
-              source={require("../../assets/saad.png")}
-            />
-            <Text style={styles.title}>Non hai ancora degli amici!</Text>
-            <Text style={styles.text}>Premi il pulsante in basso a destra per procedere con l'aggiunta di un amico.</Text>
+            <Text style={styles.title}>Non hai ancora dei contatti!</Text>
+            <Text style={styles.text}>Premi il pulsante in basso a destra per procedere con l'aggiunta di un contatto.</Text>
             <Image
               style={styles.image}
               source={require("../../assets/arrow.png")}
@@ -57,12 +49,8 @@ export default class NullComponent extends Component<NullComponentProps> {
         }
         {this.props.type === "catalogs" &&
           <View style={styles.card}>
-            <Image
-              style={styles.imageSad}
-              source={require("../../assets/saad.png")}
-            />
-            <Text style={styles.title}>Non hai ancora delle liste!</Text>
-            <Text style={styles.text}>Premi il pulsante in basso a destra per procedere con la creazione di una nuova lista.</Text>
+            <Text style={styles.title}>Non hai ancora dei cataloghi!</Text>
+            <Text style={styles.text}>Premi il pulsante in basso a destra per procedere con la creazione di un catalogo.</Text>
             <Image
               style={styles.image}
               source={require("../../assets/arrow.png")}
@@ -71,17 +59,13 @@ export default class NullComponent extends Component<NullComponentProps> {
         }
         {this.props.type === "fr_catalogs" &&
           <View style={styles.card}>
-            <Image
-              style={styles.imageSad}
-              source={require("../../assets/saad.png")}
-            />
-            <Text style={styles.title}>Purtroppo non ha delle liste pubbliche!</Text>
-            <Text style={styles.text}>Appena il tuo amico procederà a creare delle liste accessibili al pubblico le potrai visualizzare qui.</Text>
+            <Text style={styles.title}>Purtroppo non ha dei cataloghi pubblici!</Text>
+            <Text style={styles.text}>Appena il tuo amico procederà a creare dei cataloghi accessibili al pubblico li potrai visualizzare qui.</Text>
           </View>
         }
         {this.props.type === "items" &&
         <View style={styles.card}>
-          <Text style={styles.title}>Non ci sono ancora elementi nella lista</Text>
+          <Text style={styles.title}>Non ci sono ancora elementi nel catalogo!</Text>
           <Text style={styles.text}>Inseriscili attraverso il riquadro sottostante specificando un nome e associandoci un tag NFC.</Text>
         </View>
         }
@@ -92,7 +76,7 @@ export default class NullComponent extends Component<NullComponentProps> {
 
 const styles = StyleSheet.create({
   card: {
-    paddingVertical: 30,
+    paddingVertical: 10,
     paddingHorizontal: 10,
     justifyContent: 'center',
     alignContent: 'center',

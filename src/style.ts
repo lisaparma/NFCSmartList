@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
-export const options = [0, 1, 2, 3, 4];
-export const labels = ['General', 'Persone', 'Oggetti', "Lista", "Luoghi", "Animali"];
+export const options = [0, 1, 2, 3, 4, 5];
+export const labels = ['Hardware', 'Applicativi', 'Impianti', "Servizi di outsourcing", "Documentazione", "General"];
 const colors = [
   "#0057a1",
   "#dd4124",
@@ -10,7 +10,7 @@ const colors = [
   "#4ca752",
   "#8f72ba"
 ];
-const icons = ["assignment","group", "build", "format-list-bulleted", "place", "pets"]
+const icons = ["devices","dvr", "settings-input-component", "playlist-add", "description", "attachment"]
 
 export function getLabel(num: number): string {
   return labels[num];
@@ -40,7 +40,7 @@ export const def = {
 export const std = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 5,
+    padding: 10,
     paddingBottom: 0,
     backgroundColor: def.theme2
   },
@@ -152,30 +152,30 @@ export const std = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    borderRadius: 10,
+    borderRadius: 3,
     borderColor: def.grey1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     width: "75%",
     backgroundColor: def.white,
-    padding: 10,
-    paddingVertical: 20,
+    padding: 20,
     opacity: 1,
   },
   boxButton:{
     flexDirection: "row",
-    alignContent: "space-between"
+    alignContent: "space-between",
+    paddingTop: 10
   },
   modalButton1: {
-    borderRadius: 10,
+    borderRadius: 3,
     padding: 5,
     paddingHorizontal: 15,
     backgroundColor: def.theme2,
     margin: 10
   },
   modalButton2: {
-    borderRadius: 10,
+    borderRadius: 3,
     padding: 7,
     paddingHorizontal: 20,
     backgroundColor: def.grey2,
@@ -193,7 +193,8 @@ export const info = StyleSheet.create({
     borderRadius: 5,
     borderColor: def.black,
     borderWidth: 0.5,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    backgroundColor: def.white
   },
   textBox: {
     flexDirection: "column",

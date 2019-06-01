@@ -20,7 +20,7 @@ const FriendsStack = createAppContainer(createStackNavigator(
       navigationOptions: () => ({
         header: (props) =>
           <TopBar
-            title="Friends"
+            title="Contatti"
             iconLeft={"menu"}
             onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
             iconRight={"add"}
@@ -33,7 +33,7 @@ const FriendsStack = createAppContainer(createStackNavigator(
       navigationOptions: () => ({
         header: (props: any) =>
           <TopBar
-            title="Add friend"
+            title="Aggiungi contatto"
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,
@@ -68,7 +68,7 @@ const FriendsStack = createAppContainer(createStackNavigator(
       navigationOptions: () => ({
         header: (props: any) =>
           <TopBar
-            title="Details catalog"
+            title="Dettagli catalogo"
             iconLeft={"chevron-left"}
             onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
           />,

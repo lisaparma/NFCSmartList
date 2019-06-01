@@ -56,7 +56,6 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}> Informazioni oggetto:</Text>
         <ScrollView>
         {!this.state.edit ?
           <View>
@@ -71,7 +70,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
             <TouchableOpacity
               style={std.button}
               onPress={()=>{this.setState({edit: true})}}>
-              <Text style={std.textButton}>Modifica item</Text>
+              <Text style={std.textButton}>Modifica</Text>
             </TouchableOpacity>
           </View>
         :
@@ -88,7 +87,9 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
               <Text style={[std.text, info.t1]}>Descrizione:</Text>
               <TextInput
                 style={[std.text, info.t2, info.input]}
-                onChangeText={text => this.setState({description: text})}>
+                onChangeText={text => this.setState({description: text})}
+                multiline={true}
+              >
                 {this.state.description}
               </TextInput>
             </View>
@@ -104,7 +105,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
           style={[std.button, std.safeBut]}
           onPress={() => this.setState({modal: true})}
           >
-          <Text style={std.textButton}>Elimina item</Text>
+          <Text style={std.textButton}>Elimina</Text>
         </TouchableOpacity>
         </ScrollView>
         <Modal

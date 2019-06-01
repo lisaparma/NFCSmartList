@@ -46,9 +46,6 @@ class LCatalog extends Component<CatalogsProps, CatalogsState> {
     return (
       <View style={{flex: 1}}>
         <View style={std.screen}>
-          <Text style={std.title}>
-            I suoi item:
-          </Text>
           <ScrollView style={std.scroll}>
             {elements}
           </ScrollView>

@@ -67,14 +67,14 @@ export default class CatalogCard_Like extends Component<CatalogCardProps, Catalo
           {this.state.like &&
             <Icon
               color={def.grey1}
-              name={"favorite"}
+              name={"star"}
               size={30}
             />
           }
           {!this.state.like &&
           <Icon
             color={def.grey1}
-            name={"favorite-border"}
+            name={"star-border"}
             size={30}
           />
           }

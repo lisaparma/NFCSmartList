@@ -18,7 +18,7 @@ import {def, std} from "../style";
 
 const MainTabsIOS = createBottomTabNavigator(
   {
-    'Friends': {
+    'Contatti': {
       screen: FriendStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
@@ -29,7 +29,7 @@ const MainTabsIOS = createBottomTabNavigator(
         )
       })
     },
-    'Catalogs': {
+    'Cataloghi': {
       screen: CatalogStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
@@ -40,18 +40,18 @@ const MainTabsIOS = createBottomTabNavigator(
         )
       })
     },
-    'Likes': {
+    'Salvati': {
       screen: LikeStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
           <Icon
-            name='favorite-border'
+            name='star-border'
             color={tintColor}
           />
         )
       })
     },
-    'Settings': {
+    'Impostazioni': {
       screen: SettingsStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
@@ -66,17 +66,17 @@ const MainTabsIOS = createBottomTabNavigator(
   {
     navigationOptions: ({ navigation }) => ({
     }),
-    initialRouteName: 'Catalogs',
+    initialRouteName: 'Cataloghi',
   }
 );
 
 const MainTabsAndroid = createDrawerNavigator(
   {
-    'Friends': {
+    'Contatti': {
       screen: FriendStack,
       navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
-          <Text style={[std.text, {color: tintColor}]}>Friends</Text>
+          <Text style={[std.text, {color: tintColor}]}>Contatti</Text>
         ),
         drawerIcon: ({tintColor}: any) => (
           <Icon
@@ -86,11 +86,11 @@ const MainTabsAndroid = createDrawerNavigator(
         )
       })
     },
-    'Catalogs': {
+    'Cataloghi': {
       screen: CatalogStack,
       navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
-          <Text style={[std.text, {color: tintColor}]}>Catalogs</Text>
+          <Text style={[std.text, {color: tintColor}]}>Cataloghi</Text>
         ),
         drawerIcon: ({tintColor}: any) => (
           <Icon
@@ -100,25 +100,25 @@ const MainTabsAndroid = createDrawerNavigator(
         )
       })
     },
-    'Likes': {
+    'Salvati': {
       screen: LikeStack,
       navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
-          <Text style={[std.text, {color: tintColor}]}>Likes</Text>
+          <Text style={[std.text, {color: tintColor}]}>Preferiti</Text>
         ),
         drawerIcon: ({tintColor}: any) => (
           <Icon
-            name='favorite-border'
+            name='star-border'
             color={tintColor}
           />
         )
       })
     },
-    'Settings': {
+    'Impostazioni': {
       screen: SettingsStack,
       navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
-          <Text style={[std.text, {color: tintColor}]}>Settings</Text>
+          <Text style={[std.text, {color: tintColor}]}>Impostazioni</Text>
         ),
         drawerIcon: ({tintColor}: any) => (
           <Icon
@@ -130,7 +130,7 @@ const MainTabsAndroid = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Catalogs',
+    initialRouteName: 'Cataloghi',
     contentComponent: (props) => <DrawerNavigator navProps={props} user={store.getState().user}/>,
     contentOptions: {
       activeTintColor: def.theme1,

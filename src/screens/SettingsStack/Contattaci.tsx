@@ -45,7 +45,7 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
         </Text>
 
         <View style={info.textBox}>
-          <Text style={[std.text, info.t1]}>Titolo:</Text>
+          <Text style={[std.text, info.t1]}>Titolo*:</Text>
           <TextInput
             style={[std.text, info.t2]}
             placeholder="name"
@@ -58,6 +58,7 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
             style={[std.text, info.t2]}
             placeholder="description"
             onChangeText={text => this.setState({description: text})}
+            multiline={true}
           />
         </View>
         <View style={info.textBox}>
@@ -94,7 +95,7 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
           }
         </View>
         <TouchableOpacity
-          style={std.button}
+          style={[std.button, this.state.title === "" && std.buttonDisabled]}
           onPress={this.send}>
           <Text style={std.textButton}>Aggiungi</Text>
         </TouchableOpacity>

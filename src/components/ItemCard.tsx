@@ -80,7 +80,7 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
           }
           <Icon
             color={def.grey1}
-            name={"info"}
+            name={"info-outline"}
             size={30}
           />
         </TouchableOpacity>

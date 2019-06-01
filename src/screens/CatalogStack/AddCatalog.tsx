@@ -49,12 +49,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
 
     return (
       <View style={std.screen}>
-        <Text style={std.title}>
-          Crea catalogo
-        </Text>
-
         <ScrollView>
-
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>
               Nome *:
@@ -72,11 +67,12 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
               style={[std.text, info.t2]}
               placeholder="Inserisci una descrizione"
               onChangeText={text => this.setState({description: text})}
+              multiline={true}
             />
           </View>
 
           <View style={info.textBox}>
-            <Text style={[std.text, info.t1]}>Tipologia:</Text>
+            <Text style={[std.text, info.t1]}>Categoria:</Text>
             <View style={info.picker}>
               <Icon
                 name={getIcon(this.state.mod)}
@@ -113,6 +109,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
                 <Picker.Item label={labels[2]} value={options[2]}/>
                 <Picker.Item label={labels[3]} value={options[3]}/>
                 <Picker.Item label={labels[4]} value={options[4]}/>
+                <Picker.Item label={labels[5]} value={options[5]}/>
               </Picker>
               }
             </View>

@@ -37,7 +37,7 @@ export default class TopBar extends Component<TopBarProps> {
               <View style={styles.buttons}/>
           }
           <View style={[Platform.OS !== "ios" && styles.textBox]}>
-          <Text style={styles.text}>
+          <Text style={this.props.title.length < 13 ? styles.textBig : styles.textSmall} numberOfLines = { 1 }>
             {this.props.title}
             </Text>
           </View>
@@ -81,10 +81,16 @@ const styles = StyleSheet.create({
   textBox: {
     flex: 1
   },
-  text: {
+  textBig: {
     color: def.white,
     fontSize: 30,
     fontWeight: "bold",
     // fontFamily: "Yanone Kaffeesatz"
-  }
+  },
+  textSmall: {
+    color: def.white,
+    fontSize: 25,
+    fontWeight: "bold",
+    // fontFamily: "Yanone Kaffeesatz"
+  },
 });
