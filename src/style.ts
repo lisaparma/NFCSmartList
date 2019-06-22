@@ -161,8 +161,7 @@ export const std = StyleSheet.create({
     width: "75%",
     backgroundColor: def.white,
     padding: 20,
-    opacity: 1,
-    flex: 1
+    opacity: 1
   },
   boxButton:{
     flexDirection: "row",
@@ -206,10 +205,10 @@ export const info = StyleSheet.create({
     paddingTop: 20
   },
   t1: {
+    fontWeight: "bold",
     color: def.black
   },
   t2: {
-    flex: 1,
     paddingLeft: 10,
     paddingBottom: 0
   },

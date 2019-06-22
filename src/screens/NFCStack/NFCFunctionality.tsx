@@ -7,9 +7,11 @@ import {
   withNavigation
 } from 'react-navigation';
 
-import {def, std} from "../../style";
+import {def, log, std} from "../../style";
 import {store} from "../../App";
 import {SettingsCard} from "../../components/SettingsCard";
+import NfcManager, {ByteParser} from "react-native-nfc-manager";
+import {readOneNFC} from "../../NFCapi";
 
 interface NFCFunctionalityProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -28,21 +30,14 @@ class NFCFunctionality extends Component<NFCFunctionalityProps, NFCFunctionality
 
   public render() {
     return (
-      <View style={std.screen}>
-        <Text style={std.title}>Formatta il tuo tag</Text>
+      <View style={styles.page}>
         {(store.getState().user.os === "android" && store.getState().user.nfc)  &&
         <View style={styles.box}>
-          <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
           <SettingsCard
             icon={"add"}
-            text={"Formatta tag"}
+            text={"Leggi tag"}
             navigation={this.props.navigation}
-            page={"NFCformat"}/>
-          <SettingsCard
-            icon={"add"}
-            text={"Set id tag"}
-            navigation={this.props.navigation}
-            page={"NFCid"}/>
+            page={"readTag"}/>
         </View>
         }
       </View>

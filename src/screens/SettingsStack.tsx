@@ -7,7 +7,7 @@ import {
 import TopBar from "../components/TopBar";
 import Settings from "./SettingsStack/Settings";
 import Avatars from "./SettingsStack/Avatars";
-import NFCid from "./NFCStack/NFCid";
+import NFCid from "./NFCStack/ReadTag";
 import NFCformat from "./NFCStack/NFCformat";
 import License from "./SettingsStack/License";
 import Contattaci from "./SettingsStack/Contattaci";

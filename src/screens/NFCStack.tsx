@@ -5,10 +5,8 @@ import {
 } from "react-navigation";
 
 import TopBar from "../components/TopBar";
-import LCatalogList from "./NFCStack/LCatalogList";
-import NFCid from "./NFCStack/NFCid";
-import NFCformat from "./NFCStack/NFCformat";
 import NFCFunctionality from "./NFCStack/NFCFunctionality";
+import ReadTag from "./NFCStack/ReadTag";
 
 const NFCsStack = createAppContainer(createStackNavigator(
   {
@@ -23,25 +21,12 @@ const NFCsStack = createAppContainer(createStackNavigator(
           />,
       }),
     },
-    NFCid: {
-      screen: () => <NFCid/>,
+    readTag: {
+      screen: () => <ReadTag/>,
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
             title={"ID"}
-            iconLeft={"chevron-left"}
-            onPressLeft={() => {
-              props.navigation.dispatch(NavigationActions.back())
-            }}
-          />,
-      }),
-    },
-    NFCformat: {
-      screen: () => <NFCformat/>,
-      navigationOptions: (props: any) => ({
-        header: () =>
-          <TopBar
-            title={"Formatta"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())
