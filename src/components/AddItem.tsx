@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, TextInput, Text, Modal} from 'react-native';
 import {Icon} from "react-native-elements";
-import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {store} from "../App";
 import {IAddItem} from "../redux/action";
 import Database from "../firebaseAPI/database";
 
 import {card, def, std} from "../style";
+import {readOneNFC, unregisterNFC} from "../NFCapi";
 
 interface AddItemProps {
   cid: string;
@@ -75,21 +75,20 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
                     style={std.modalButton2}
                     onPress={() => {
                       this.setState({modal: false});
-                      console.warn("Unregister");
-                      NfcManager.unregisterTagEvent();
-                      console.warn("Stop");
-                      NfcManager.stop();
+                      unregisterNFC()
+                        .then(log => console.log(log))
+                        .catch(er => console.warn(er));
                     }}>
                     <Text style={std.text}>Annulla</Text>
                   </TouchableOpacity>
                   :
-                    <TouchableOpacity
-                      style={std.modalButton1}
-                      onPress={() => {
-                        this.setState({modal: false});
-                      }}>
-                      <Text style={std.text}>Ok</Text>
-                    </TouchableOpacity>
+                  <TouchableOpacity
+                    style={std.modalButton1}
+                    onPress={() => {
+                      this.setState({modal: false});
+                    }}>
+                    <Text style={std.text}>Ok</Text>
+                  </TouchableOpacity>
               }
               </View>
             </View>
@@ -116,33 +115,13 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
     }
   };
 
-  private read() {
-    NfcManager.registerTagEvent(
-      tag => {
-          this.setState({tag: ByteParser.byteToString(tag.ndefMessage[0].payload)});
-          this.setState({modal: true, text: "Tag associato!"})
-          console.warn("unregister");
-          NfcManager.unregisterTagEvent();
-          console.warn("Stop");
-          NfcManager.stop();
-        },
-      'Hold your device over the tag',
-      true,
-    )
-  }
-
   private addTag = () => {
-    NfcManager.start({
-      onSessionClosedIOS: () => {
-        console.warn('ios session closed');
-      }
-    })
-    .then(() => {
-      this.setState({modal: true, text: "Avvicina il tag..."})
-      this.read();
-    })
-    .catch(error => {
-      console.warn(error);
-    })
+    this.setState({modal: true, text: "Avvicina il tag..."});
+    readOneNFC()
+      .then((tag) => {
+        this.setState({tag: tag.id, text: "Tag associato!"});
+        console.log(this.state.tag);
+      })
+      .catch(er => console.error(er));
   }
 }

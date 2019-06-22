@@ -17,6 +17,7 @@ import NfcManager, {ByteParser} from "react-native-nfc-manager";
 
 import {std} from "../../style";
 import NullComponent from "../../components/NullComponent";
+import {readOneNFC, unregisterNFC} from "../../NFCapi";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -80,11 +81,10 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
                 <TouchableOpacity
                   style={std.button}
                   onPress={() => {
-                    this.setState({check: false})
-                    console.warn("unregister");
-                    NfcManager.unregisterTagEvent();
-                    console.warn("Stop");
-                    NfcManager.stop()}}>
+                    this.setState({check: false});
+                    unregisterNFC()
+                      .then(log => console.log(log))
+                      .catch(er => console.warn(er));}}>
                   <Text style={std.textButton}>Annulla</Text>
                 </TouchableOpacity>
                 :
@@ -194,20 +194,13 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
   }
 
   private NFCheck() {
-    NfcManager.start()
-    .then(() => {
-      this.setState({check: true});
-      NfcManager.registerTagEvent(
-        tag => {
-          this.checkOne(ByteParser.byteToString(tag.ndefMessage[0].payload));
-        },
-        'Hold your device over the tag',
-        false,
-      )
-    })
-    .catch(error => {
-      console.warn(error);
-    })
+    this.setState({check: true});
+    readOneNFC()
+      .then((tag) => {
+        this.checkOne(tag.id);
+        this.NFCheck();
+      })
+      .catch(er => console.error(er));
   }
 
 

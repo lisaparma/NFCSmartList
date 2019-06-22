@@ -4,7 +4,7 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNaviga
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {def, info, std} from "../../style";
-import {readOneNFC} from "../../NFCapi";
+import {readOneNFC, unregisterNFC} from "../../NFCapi";
 
 interface ReadTagProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -97,6 +97,9 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
                   style={std.modalButton2}
                   onPress={() => {
                     this.setState({read: false});
+                    unregisterNFC()
+                      .then(log => console.log(log))
+                      .catch(er => console.warn(er));
                   }}>
                   <Text style={std.text}>Annulla</Text>
                 </TouchableOpacity>

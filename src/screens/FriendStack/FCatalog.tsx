@@ -8,6 +8,7 @@ import {Icon} from "react-native-elements";
 import NfcManager, {ByteParser} from "react-native-nfc-manager";
 import ItemCard_Fr from "../../components/ItemCard_Fr";
 import {std} from "../../style";
+import {unregisterNFC} from "../../NFCapi";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -55,10 +56,9 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
                 style={std.button}
                 onPress={() => {
                   this.setState({check: false})
-                  console.warn("unregister");
-                  NfcManager.unregisterTagEvent();
-                  console.warn("Stop");
-                  NfcManager.stop()}}>
+                  unregisterNFC()
+                    .then(log => console.log(log))
+                    .catch(er => console.warn(er))}}>
                 <Text style={std.textButton}>Annulla</Text>
               </TouchableOpacity>
           }
