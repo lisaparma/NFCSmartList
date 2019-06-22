@@ -63,44 +63,8 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           <Text style={[std.text, card.t1]}> {this.props.catalog.name} </Text>
           <Text style={[std.text, card.t2]}> {this.props.catalog.description} </Text>
         </View>
-        <TouchableOpacity
-          style={card.icon}
-          onPress={this.check}>
-          {this.state.like &&
-            <Icon
-              color={def.grey0}
-              name={"star"}
-              size={30}
-            />
-          }
-          {!this.state.like &&
-          <Icon
-            color={def.yellow}
-            name={"star-border"}
-            size={30}
-          />
-          }
-        </TouchableOpacity>
       </TouchableOpacity>
     );
-  }
-
-  private check = () => {
-    if(this.state.like) {
-      store.dispatch({
-        type: "CHECKOUT_LIKE",
-        uid: this.state.uid,
-        cid: this.props.catalog.cid,
-      });
-      Database.removeLike(this.props.catalog.cid);
-    } else {
-      store.dispatch({
-        type: "CHECKIN_LIKE",
-        uid: this.state.uid,
-        cid: this.props.catalog.cid,
-      });
-      Database.addLike(this.state.uid, this.props.catalog.cid);
-    }
   }
 
   private onStoreChange = () => {

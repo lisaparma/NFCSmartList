@@ -157,22 +157,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
           </View>
         </View>
 
-        {(store.getState().user.os === "android" && store.getState().user.nfc)  &&
-        <View style={styles.box}>
-          <Text style={[std.text, styles.titleBox]}> NFC Manager</Text>
-          <SettingsCard
-            icon={"add"}
-            text={"Formatta tag"}
-            navigation={this.props.navigation}
-            page={"NFCformat"}/>
-          <SettingsCard
-            icon={"add"}
-            text={"Set id tag"}
-            navigation={this.props.navigation}
-            page={"NFCid"}/>
-        </View>
-        }
-
         <View style={styles.box}>
           <Text style={[std.text, styles.titleBox]}> Aiuto</Text>
           <SettingsCard

@@ -5,44 +5,30 @@ import {
 } from "react-navigation";
 
 import TopBar from "../components/TopBar";
-import Settings from "./SettingsStack/Settings";
-import Avatars from "./SettingsStack/Avatars";
+import LCatalogList from "./NFCStack/LCatalogList";
 import NFCid from "./NFCStack/NFCid";
 import NFCformat from "./NFCStack/NFCformat";
-import License from "./SettingsStack/License";
-import Contattaci from "./SettingsStack/Contattaci";
+import NFCFunctionality from "./NFCStack/NFCFunctionality";
 
-
-const SettingsStack = createAppContainer(createStackNavigator(
+const NFCsStack = createAppContainer(createStackNavigator(
   {
-    Settings: {
-      screen: () => <Settings/>,
+    NFCFunctionality: {
+      screen: () => <NFCFunctionality />,
       navigationOptions: () => ({
         header: (props: any) =>
           <TopBar
-            title="Impostazioni"
+            title="NFC"
             iconLeft={"menu"}
             onPressLeft={() => props.navigation.toggleDrawer()} // TODO: only if android
           />,
       }),
     },
-    Avatars: {
-      screen: () => <Avatars/>,
+    NFCid: {
+      screen: () => <NFCid/>,
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={"Avatar"}
-            iconLeft={"chevron-left"}
-            onPressLeft={() => {props.navigation.dispatch(NavigationActions.back())}}
-          />,
-      }),
-    },
-    Contattaci: {
-      screen: () => <Contattaci/>,
-      navigationOptions: (props: any) => ({
-        header: () =>
-          <TopBar
-            title={"Contattaci"}
+            title={"ID"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())
@@ -50,12 +36,12 @@ const SettingsStack = createAppContainer(createStackNavigator(
           />,
       }),
     },
-    License: {
-      screen: () => <License/>,
+    NFCformat: {
+      screen: () => <NFCformat/>,
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={"Licenze"}
+            title={"Formatta"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())
@@ -65,21 +51,21 @@ const SettingsStack = createAppContainer(createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'NFCFunctionality',
   }
 ));
 
-interface SettingsStackProps {
+interface NFCStackProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
-export default class SettingStack extends Component<SettingsStackProps> {
+export default class NFCStack extends Component<NFCStackProps> {
 
-  static router = SettingsStack.router;
+  static router = NFCsStack.router;
 
   public render() {
     return (
-      <SettingsStack navigation={this.props.navigation}/>
+      <NFCsStack navigation={this.props.navigation}/>
     )
   }
 }

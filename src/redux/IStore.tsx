@@ -3,7 +3,6 @@ export interface IStore {
 	user: IUser;
 	catalogs: { [id: string]: ICatalog};
   friends: { [uid: string]: IFriend};
-  likes: {[cid: string]: {cid:string, uid:string}};
 }
 
 export interface IUser {
@@ -25,7 +24,6 @@ export interface ICatalog {
 	items: { [id: string]: IItem};
 	check?: { [id: string]: IItem};
 	private: boolean;
-	like?: boolean;
 }
 
 export interface IItem {

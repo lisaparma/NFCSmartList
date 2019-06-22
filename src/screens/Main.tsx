@@ -8,7 +8,7 @@ import { Icon } from "react-native-elements";
 import SettingsStack from "./SettingsStack";
 import CatalogStack from "./CatalogStack"
 import FriendStack from "./FriendStack";
-import LikeStack from "./LikeStack";
+import NFCStack from "./NFCStack";
 import {store} from "../App";
 import {Platform, View, Text, StyleSheet, ScrollView, Image} from "react-native";
 import DrawerNavigator from "../components/DrawerNavigator";
@@ -40,12 +40,12 @@ const MainTabsIOS = createBottomTabNavigator(
         )
       })
     },
-    'Salvati': {
-      screen: LikeStack,
+    'NFC': {
+      screen: NFCStack,
       navigationOptions: () => ({
         tabBarIcon: ({tintColor}: any) => (
           <Icon
-            name='star-border'
+            name='nfc'
             color={tintColor}
           />
         )
@@ -100,15 +100,15 @@ const MainTabsAndroid = createDrawerNavigator(
         )
       })
     },
-    'Salvati': {
-      screen: LikeStack,
+    'NFC': {
+      screen: NFCStack,
       navigationOptions: () => ({
         drawerLabel: ({tintColor}: any) => (
-          <Text style={[std.text, {color: tintColor}]}>Preferiti</Text>
+          <Text style={[std.text, {color: tintColor}]}>NFC</Text>
         ),
         drawerIcon: ({tintColor}: any) => (
           <Icon
-            name='star-border'
+            name='nfc'
             color={tintColor}
           />
         )

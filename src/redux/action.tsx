@@ -113,17 +113,3 @@ export interface IFrCheckOutItem extends Action<'FR_CHECKOUT_ITEM'> {
   cid: string;
   iid: string;
 }
-
-export interface ICheckInLike extends Action<'CHECKIN_LIKE'> {
-  cid: string;
-  uid: string;
-}
-
-export interface ICheckOutLike extends Action<'CHECKOUT_LIKE'> {
-  cid: string;
-  uid: string;
-}
-
-export interface IPopulateLikes extends Action<'POPULATE_LIKES_LIST'> {
-  likes: { [cid: string]: {cid: string, uid: string} };
-}

@@ -53,23 +53,6 @@ export default class Database {
         });
       });
 
-    // Popolo Like
-    firebase.database().ref('/users/' + uid + "/likes").once('value')
-      .then((snapshot) => {
-        let likes = {};
-        snapshot.forEach(
-          (item): any => {
-            likes[item.val().cid] = {
-              cid: item.val().cid,
-              uid: item.val().uid
-            };
-          });
-        store.dispatch<IPopulateLikes>({
-          type: "POPULATE_LIKES_LIST",
-          likes: likes,
-        });
-      });
-
     // Popolo amici
     firebase.database().ref('/users/' + uid + "/friends").once('value')
       .then((snapshot) => {
@@ -179,21 +162,6 @@ export default class Database {
   public static editAvatar(avatar: number) {
     const path = 'users/'+ store.getState().user.uid;
     firebase.database().ref(path).update({avatar: avatar})
-      .catch((err) => console.warn(err))
-  }
-
-  public static addLike(uid: string, cid: string) {
-    const path = 'users/'+ store.getState().user.uid + "/likes/";
-    firebase.database().ref(path + cid).set({
-      cid: cid,
-      uid: uid
-    })
-      .catch((err) => console.warn(err))
-  }
-
-  public static removeLike(cid: string) {
-    const path = 'users/'+ store.getState().user.uid + "/likes/";
-    firebase.database().ref(path + cid).remove()
       .catch((err) => console.warn(err))
   }
 
