@@ -20,17 +20,17 @@ export default class NullComponent extends Component<NullComponentProps> {
             <Text style={styles.text}>Visita la pagina delle liste dei tuoi contatti e salvali premendo il pulsante a stella.</Text>
             <View style={styles.icons}>
               <Icon
-                color={def.white}
+                color={def.grey0}
                 name={"star-border"}
                 size={50}
               />
               <Icon
-                color={def.white}
+                color={def.black}
                 name={"arrow-forward"}
                 size={50}
               />
               <Icon
-                color={def.white}
+                color={def.yellow}
                 name={"star"}
                 size={50}
               />

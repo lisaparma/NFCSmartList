@@ -34,7 +34,8 @@ export const def = {
   theme1: "#0094d5",
   theme2: "#a8e0f9",
   red: "#dd4124",
-  green: "#4ca752"
+  green: "#4ca752",
+  yellow: "#FFE118"
 };
 
 export const std = StyleSheet.create({
@@ -42,7 +43,7 @@ export const std = StyleSheet.create({
     flex: 1,
     padding: 10,
     paddingBottom: 0,
-    backgroundColor: def.theme2
+    backgroundColor: def.grey2
   },
   title: {
     fontSize: 25,
@@ -161,6 +162,7 @@ export const std = StyleSheet.create({
     backgroundColor: def.white,
     padding: 20,
     opacity: 1,
+    flex: 1
   },
   boxButton:{
     flexDirection: "row",

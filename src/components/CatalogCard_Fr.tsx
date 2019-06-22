@@ -68,14 +68,14 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           onPress={this.check}>
           {this.state.like &&
             <Icon
-              color={def.grey1}
+              color={def.grey0}
               name={"star"}
               size={30}
             />
           }
           {!this.state.like &&
           <Icon
-            color={def.grey1}
+            color={def.yellow}
             name={"star-border"}
             size={30}
           />

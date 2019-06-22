@@ -18,7 +18,7 @@ import {
 } from 'react-navigation';
 import Auth from "../../firebaseAPI/auth";
 import {store} from "../../App";
-import {def, std} from "../../style";
+import {def, info, std} from "../../style";
 import {IEditUsername} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import {getAvatar} from "../../../avatars/avatar";
@@ -65,75 +65,96 @@ class Settings extends Component<SettingsProps, SettingsState> {
   public render() {
     return (
       <ScrollView style={styles.page}>
-        <View style={styles.data}>
-          <Image
-            style={{width: 100, height: 100}}
-            source={getAvatar(this.state.avatar)}
-          />
-          <View style={styles.dataBox}>
-            <Text style={std.title}>{this.state.username}</Text>
-            <Text style={std.text}>{this.state.email}</Text>
-          </View>
-        </View>
+        {/*<View style={styles.data}>*/}
+          {/*<Image*/}
+            {/*style={{width: 100, height: 100}}*/}
+            {/*source={getAvatar(this.state.avatar)}*/}
+          {/*/>*/}
+          {/*<View style={styles.dataBox}>*/}
+            {/*<Text style={std.title}>{this.state.username}</Text>*/}
+            {/*<Text style={std.text}>{this.state.email}</Text>*/}
+          {/*</View>*/}
+        {/*</View>*/}
 
         <View style={styles.box}>
           <Text style={[std.text, styles.titleBox]}> Dati personali</Text>
-          <TouchableOpacity
-            style={styles.card}
-            activeOpacity={0.3}
-            onPress={() => {
-              if(this.state.edit)
-                this.editUser();
-              this.setState({edit: !this.state.edit});
-            }}>
-            <Text style={std.text}>Nickname</Text>
-            {!this.state.edit?
-              <View style={{flexDirection: "row", alignItems: "center"}}>
+          <View style={styles.card}>
+            <View style={{flex:1, flexDirection: "row", alignItems: "center"}}>
+              <Text style={std.text}>E-mail: </Text>
+              <Text style={[std.text, {color: def.grey1, paddingRight: 10}]}>{this.state.email}</Text>
+            </View>
+          </View>
+          {!this.state.edit?
+            <View style={styles.card}>
+              <View style={{flex:1, flexDirection: "row", alignItems: "center"}}>
+                <Text style={std.text}>Nickname: </Text>
                 <Text style={[std.text, {color: def.grey1, paddingRight: 10}]}>{this.state.username}</Text>
+              </View>
+              <TouchableOpacity
+                style={{paddingLeft:20}}
+                activeOpacity={0.3}
+                onPress={() => {
+                  if(this.state.edit)
+                    this.editUser();
+                  this.setState({edit: !this.state.edit});
+                }}
+              >
                 <Icon
                   color={def.grey1}
                   name={"edit"}
                   size={30}
                 />
-              </View>
-              :
-              <View style={{flexDirection: "row", alignItems: "center"}}>
+              </TouchableOpacity>
+            </View>
+            :
+            <View style={styles.card}>
+              <View style={{flex:1, flexDirection: "row", alignItems: "center"}}>
+                <Text style={std.text}>Nickname: </Text>
                 <TextInput
-                  style={[std.text, {padding:0, paddingRight: 10, alignContent: "center"}]}
+                  style={[std.text, info.input, {padding:5, paddingRight: 10, alignContent: "center"}]}
                   onChangeText={text => this.setState({username: text})}>
                   {this.state.username}
                 </TextInput>
+              </View>
+              <TouchableOpacity
+                style={{paddingLeft:20}}
+                activeOpacity={0.3}
+                onPress={() => {
+                  if(this.state.edit)
+                    this.editUser();
+                  this.setState({edit: !this.state.edit});
+                }}
+              >
                 <Icon
-                  color={def.grey1}
+                  color={def.green}
                   name={"done"}
                   size={30}
                 />
-              </View>
-            }
-          </TouchableOpacity>
-          <TouchableHighlight
-            activeOpacity={0.3}
-            underlayColor={def.theme2}
-            onPress={()=>this.props.navigation.navigate("Avatars")}>
-            <View style={styles.card}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={std.text}> Avatars </Text>
-              </View>
-              <View style={{flexDirection: "row", alignItems: "center"}}>
-                <View style={{paddingRight: 10}}>
-                  <Image
-                    style={{width: 30, height: 30}}
-                    source={getAvatar(this.state.avatar)}
-                  />
-                </View>
-                <Icon
-                  color={def.grey1}
-                  name="edit"
-                  size={30}
+              </TouchableOpacity>
+            </View>
+          }
+          <View style={styles.card}>
+            <View style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
+              <Text style={std.text}>Avatar: </Text>
+              <View style={{paddingRight: 10}}>
+                <Image
+                  style={{width: 30, height: 30}}
+                  source={getAvatar(this.state.avatar)}
                 />
               </View>
             </View>
-          </TouchableHighlight>
+            <TouchableOpacity
+              style={{paddingLeft:20}}
+              activeOpacity={0.3}
+              onPress={()=>this.props.navigation.navigate("Avatars")}
+            >
+              <Icon
+                color={def.grey1}
+                name={"edit"}
+                size={30}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {(store.getState().user.os === "android" && store.getState().user.nfc)  &&
