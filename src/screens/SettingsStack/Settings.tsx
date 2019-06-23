@@ -160,12 +160,10 @@ class Settings extends Component<SettingsProps, SettingsState> {
         <View style={styles.box}>
           <Text style={[std.text, styles.titleBox]}> Aiuto</Text>
           <SettingsCard
-            icon={"add"}
             text={"Contattaci"}
             navigation={this.props.navigation}
             page={"Contattaci"}/>
           <SettingsCard
-            icon={"add"}
             text={"Licenze"}
             navigation={this.props.navigation}
             page={"License"}/>

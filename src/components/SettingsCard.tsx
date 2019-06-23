@@ -7,9 +7,10 @@ import {def, std} from '../style';
 
 interface ISettingsItemProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
-  icon: string,
+  icon?: string,
   text: string,
   page: string,
+  disabled?: boolean
 }
 
 export class SettingsCard extends React.Component<ISettingsItemProps> {
@@ -24,21 +25,50 @@ export class SettingsCard extends React.Component<ISettingsItemProps> {
 
   public render(): React.ReactNode  {
     return (
-      <TouchableHighlight
-        activeOpacity={0.3}
-        underlayColor={def.theme2}
-        onPress={this._onPressButton}>
-        <View style={styles.item}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={std.text}> {this.props.text} </Text>
-          </View>
+      <View>
+      {!this.props.disabled?
+          <TouchableHighlight
+            activeOpacity={0.3}
+            underlayColor={def.theme2}
+            onPress={this._onPressButton}>
+            <View style={styles.item}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                {this.props.icon &&
+                <Icon
+                  color={def.grey1}
+                  name={this.props.icon}
+                  size={30}
+                />
+                }
+                <Text style={std.text}> {this.props.text} </Text>
+              </View>
+              <Icon
+                color={def.grey1}
+                name="chevron-right"
+                size={30}
+              />
+            </View>
+          </TouchableHighlight>
+      :
+      <View style={[styles.item, {backgroundColor: def.grey2}]}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {this.props.icon &&
           <Icon
             color={def.grey1}
-            name="chevron-right"
+            name={this.props.icon}
             size={30}
           />
+          }
+          <Text style={std.text}> {this.props.text} </Text>
         </View>
-      </TouchableHighlight>
+        <Icon
+          color={def.grey1}
+          name="chevron-right"
+          size={30}
+        />
+      </View>
+      }
+      </View>
     )
   }
 }
