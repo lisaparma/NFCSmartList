@@ -143,7 +143,7 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>Sei sicuro di voler eliminare il catalogo?</Text>
+              <Text style={std.textModal}>Sei sicuro di voler eliminare il catalogo?</Text>
               <View style={std.boxButton}>
                 <TouchableOpacity
                   style={[std.modalButton1]}

@@ -115,7 +115,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>Sei sicuro di voler eliminare l'oggetto?</Text>
+              <Text style={std.textModal}>Sei sicuro di voler eliminare l'oggetto?</Text>
               <View style={std.boxButton}>
                 <TouchableOpacity
                   style={[std.modalButton1]}

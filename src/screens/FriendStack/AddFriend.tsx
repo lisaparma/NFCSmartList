@@ -47,7 +47,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
 
   public render() {
     return (
-      <View style={std.screen}>
+      <View style={std.page}>
         <Text style={std.title}>Aggiungi un amico</Text>
         <ScrollView>
           <View style={info.textBox}>

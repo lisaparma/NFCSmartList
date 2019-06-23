@@ -48,7 +48,7 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
   public render() {
 
     return (
-      <View style={std.screen}>
+      <View style={std.page}>
         <ScrollView>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>
@@ -109,7 +109,6 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
                 <Picker.Item label={labels[2]} value={options[2]}/>
                 <Picker.Item label={labels[3]} value={options[3]}/>
                 <Picker.Item label={labels[4]} value={options[4]}/>
-                <Picker.Item label={labels[5]} value={options[5]}/>
               </Picker>
               }
             </View>
@@ -119,11 +118,12 @@ class AddCatalog extends Component<AddCatalogProps, AddCatalogState> {
             <Text style={[std.text, info.t1]}>Sicurezza:</Text>
             <View style={info.switch}>
               { this.state.private ?
-                <Text style={[std.text, info.t2]}>Privato</Text>
+                <Text style={[std.text, info.t2, {paddingRight: 10}]}>Privato</Text>
                 :
-                <Text style={[std.text, info.t2]}>Pubblico</Text>
+                <Text style={[std.text, info.t2, {paddingRight: 10}]}>Pubblico</Text>
               }
               <Switch
+                style={ {paddingHorizontal: 10}}
                 value={this.state.private}
                 onValueChange={()=>{this.setState({private: !this.state.private})}}
               />

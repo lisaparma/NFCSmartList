@@ -10,7 +10,7 @@ class License extends Component {
 
   public render() {
     return (
-      <ScrollView style={std.screen}>
+      <ScrollView style={std.page}>
         <Text style={[std.title]}>Libraries We Use</Text>
         <Text style={[std.text]}>
           The following sets forth attribution notices for third party software

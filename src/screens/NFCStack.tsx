@@ -7,6 +7,7 @@ import {
 import TopBar from "../components/TopBar";
 import NFCFunctionality from "./NFCStack/NFCFunctionality";
 import ReadTag from "./NFCStack/ReadTag";
+import WriteTag from "./NFCStack/WriteTag";
 
 const NFCsStack = createAppContainer(createStackNavigator(
   {
@@ -26,7 +27,20 @@ const NFCsStack = createAppContainer(createStackNavigator(
       navigationOptions: (props: any) => ({
         header: () =>
           <TopBar
-            title={"ID"}
+            title={"Lettura tag"}
+            iconLeft={"chevron-left"}
+            onPressLeft={() => {
+              props.navigation.dispatch(NavigationActions.back())
+            }}
+          />,
+      }),
+    },
+    writeTag: {
+      screen: () => <WriteTag/>,
+      navigationOptions: (props: any) => ({
+        header: () =>
+          <TopBar
+            title={"Scrittura tag"}
             iconLeft={"chevron-left"}
             onPressLeft={() => {
               props.navigation.dispatch(NavigationActions.back())

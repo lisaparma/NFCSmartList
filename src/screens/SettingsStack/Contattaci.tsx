@@ -4,11 +4,9 @@ import {
   NavigationActions, NavigationParams, NavigationScreenProp, NavigationStateRoute,
   withNavigation
 } from 'react-navigation';
-import {def, getColor, getIcon, getLabel, info, labels, options, std} from "../../style";
-import {Icon} from "react-native-elements";
+import {def, info, std} from "../../style";
 import {store} from "../../App";
 import SimplePicker from 'react-native-simple-picker';
-import {IAddCatalog} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 
 interface ContattaciProps {
@@ -36,7 +34,7 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
     const options=[0, 1, 2];
     const labels=["Bug", "Crash", "Feature"]
     return (
-      <ScrollView style={std.screen}>
+      <ScrollView style={std.page}>
         <Text style={[std.title]}>Problemi?</Text>
         <Text style={[std.text]}>
           Segnalaci tutti i problemi che riscontri durante l'utilizzo dell'applicazione

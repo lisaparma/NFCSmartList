@@ -65,9 +65,6 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
     return (
       <View style={{flex: 1,}}>
         <View style={std.screen}>
-          {/*<Text style={std.title}>*/}
-            {/*I tuoi item:*/}
-          {/*</Text>*/}
           <View style={std.list}>
             <ScrollView style={std.scroll}>
               {elements.length > 0 ?
@@ -145,7 +142,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>Sei sicuro di voler eliminare il catalogo?</Text>
+              <Text style={std.textModal}>Sei sicuro di voler eliminare il catalogo?</Text>
               <View style={std.boxButton}>
                 <TouchableOpacity
                   style={[std.modalButton1]}

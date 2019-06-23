@@ -1,16 +1,15 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const options = [0, 1, 2, 3, 4, 5];
-export const labels = ['Hardware', 'Applicativi', 'Impianti', "Servizi di outsourcing", "Documentazione", "General"];
+export const labels = ['Hardware', 'Applicativi', 'Impianti', "Documentazione", "General"];
 const colors = [
   "#0057a1",
   "#dd4124",
   "#3d3d3d",
-  "#fff600",
   "#4ca752",
   "#8f72ba"
 ];
-const icons = ["devices","dvr", "settings-input-component", "playlist-add", "description", "attachment"]
+const icons = ["devices","dvr", "settings-input-component", "description", "attachment"]
 
 export function getLabel(num: number): string {
   return labels[num];
@@ -44,6 +43,12 @@ export const std = StyleSheet.create({
     padding: 10,
     paddingBottom: 0,
     backgroundColor: def.grey2
+  },
+  page: {
+    flex: 1,
+    padding: 10,
+    paddingBottom: 0,
+    backgroundColor: def.white
   },
   title: {
     fontSize: 25,
@@ -161,7 +166,15 @@ export const std = StyleSheet.create({
     width: "75%",
     backgroundColor: def.white,
     padding: 20,
-    opacity: 1
+    opacity: 1,
+    textAlign: "center"
+  },
+  textModal: {
+    alignContent: "center",
+    fontSize: 20,
+    color: def.black,
+    textAlign: "center"
+
   },
   boxButton:{
     flexDirection: "row",

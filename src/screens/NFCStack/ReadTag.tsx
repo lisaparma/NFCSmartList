@@ -28,7 +28,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
   public render() {
     console.log(this.state.tag? this.state.tag.id : null);
     return (
-      <View style={std.screen}>
+      <View style={std.page}>
         { !this.state.tag?
           <View>
             <Text style={std.title}>Leggi un tag</Text>
@@ -36,14 +36,14 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
               dhgjdghjydgjy
             </Text>
             <TouchableOpacity
-              style={std.modalButton2}
+              style={std.button}
               onPress={() => {
                 this.setState({read:true});
                 readOneNFC()
                   .then((tag) => this.setState({tag: tag, read: false}))
                   .catch(er => console.error(er));
               }}>
-              <Text style={std.text}>Leggi</Text>
+              <Text style={std.textButton}>Leggi</Text>
             </TouchableOpacity>
           </View>
           :
@@ -91,7 +91,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
         >
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>Avvicina un tag NFC...</Text>
+              <Text style={std.textModal}>Avvicina un tag NFC...</Text>
               <View style={std.boxButton}>
                 <TouchableOpacity
                   style={std.modalButton2}

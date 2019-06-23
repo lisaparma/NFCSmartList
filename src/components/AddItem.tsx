@@ -67,7 +67,7 @@ export default class AddItem extends Component<AddItemProps, AddItemState> {
           onRequestClose={() => {this.setState({modal: false})}}>
           <View style={std.modal}>
             <View style={std.card}>
-              <Text style={std.text}>{this.state.text}</Text>
+              <Text style={std.textModal}>{this.state.text}</Text>
               <View style={std.boxButton}>
               {
                 this.state.text === "Avvicina il tag..."?

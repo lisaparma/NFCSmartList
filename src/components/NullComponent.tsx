@@ -38,7 +38,7 @@ export default class NullComponent extends Component<NullComponentProps> {
           </View>
         }
         {this.props.type === "friends" &&
-          <View>
+        <View style={styles.card}>
             <Text style={styles.title}>Non hai ancora dei contatti!</Text>
             <Text style={styles.text}>Premi il pulsante in basso a destra per procedere con l'aggiunta di un contatto.</Text>
             <Image
