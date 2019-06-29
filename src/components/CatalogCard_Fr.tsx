@@ -17,7 +17,6 @@ interface CatalogCardProps {
 
 interface CatalogCardState {
   uid: string;
-  like: boolean;
 }
 
 export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogCardState> {
@@ -28,17 +27,9 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
     super(props);
     this.state = {
       uid: this.props.navigation.getParam("uid"),
-      like: this.props.catalog.like,
     }
   }
 
-  public componentDidMount(): void {
-    this.mUnsubscribeFromStore = store.subscribe(this.onStoreChange);
-  }
-
-  public componentWillUnmount(): void {
-    this.mUnsubscribeFromStore();
-  }
 
   public render() {
     return (
@@ -63,16 +54,13 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           <Text style={[std.text, card.t1]}> {this.props.catalog.name} </Text>
           <Text style={[std.text, card.t2]}> {this.props.catalog.description} </Text>
         </View>
+        <Icon
+          color={def.grey1}
+          name={"chevron-right"}
+          size={30}
+        />
       </TouchableOpacity>
     );
   }
 
-  private onStoreChange = () => {
-    const currentState: ICatalog = store.getState().friends[this.state.uid].catalogs[this.props.catalog.cid];
-    if (currentState.like !== this.state.like) {
-      this.setState({
-        like: currentState.like,
-      });
-    }
-  }
 }

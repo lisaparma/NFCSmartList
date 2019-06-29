@@ -68,16 +68,6 @@ export const FriendsReducer = (
       newState4[action.uid].catalogs[action.cid]["items"][action.iid].check = false;
       return newState4;
 
-    case 'CHECKIN_LIKE':
-      const newState5 = {...state};
-      newState5[action.uid].catalogs[action.cid]["like"] = true;
-      return newState5;
-
-    case 'CHECKOUT_LIKE':
-      const newState6 = {...state};
-      newState6[action.uid].catalogs[action.cid]["like"] = false;
-      return newState6;
-
     case 'LOGOUT':
       return {};
 

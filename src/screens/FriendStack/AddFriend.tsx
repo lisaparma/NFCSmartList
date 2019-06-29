@@ -7,7 +7,7 @@ import {
   withNavigation
 } from 'react-navigation';
 import {store} from "../../App";
-import {IAddFriend} from "../../redux/action";
+import {IAddFriend, IAddFriend2} from "../../redux/action";
 import Database from "../../firebaseAPI/database";
 import firebase from "react-native-firebase";
 
@@ -91,7 +91,7 @@ class AddFriend extends Component<AddFriendProps, AddFriendState> {
                   type: "ADD_FRIEND",
                   uid: user.val().uid,
                   email: user.val().email,
-                  catalogs: user.val().catalogs,
+                  catalogs: user.val().catalogs? user.val().catalogs: [],
                   username: user.val().username,
                   avatar: user.val().avatar,
                 });

@@ -70,11 +70,6 @@ export default class Database {
                 for(const item2 in snapshot3.val().catalogs) {
                   if (!snapshot3.val().catalogs[item2].private) {
                     cat[item2] = snapshot3.val().catalogs[item2];
-                    if(store.getState().likes[item2]) {
-                      cat[item2].like = true;
-                    } else {
-                      cat[item2].like = false;
-                    }
                   }
                 }
                 friends[item.val().uid] = {

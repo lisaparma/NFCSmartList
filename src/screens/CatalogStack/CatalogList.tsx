@@ -48,9 +48,6 @@ class CatalogList extends Component<CatalogListProps, CatalogListState> {
       ));
     return (
       <View style={std.screen}>
-        {/*<Text style={std.title}>*/}
-          {/*I tuoi cataloghi:*/}
-        {/*</Text>*/}
         <ScrollView style={std.scroll}>
           {elements.length > 0 ?
             elements

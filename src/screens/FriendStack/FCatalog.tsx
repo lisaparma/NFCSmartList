@@ -9,6 +9,7 @@ import NfcManager, {ByteParser} from "react-native-nfc-manager";
 import ItemCard_Fr from "../../components/ItemCard_Fr";
 import {std} from "../../style";
 import {unregisterNFC} from "../../NFCapi";
+import NullComponent from "../../components/NullComponent";
 
 interface CatalogsProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -48,7 +49,11 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
       <View style={{flex: 1}}>
         <View style={std.screen}>
           <ScrollView style={std.scroll}>
-            {elements}
+            {elements.length > 0 ?
+              elements
+              :
+              <NullComponent type={"items_fr"}/>
+            }
           </ScrollView>
           {
             this.state.check &&

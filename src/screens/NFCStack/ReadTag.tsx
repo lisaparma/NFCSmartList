@@ -26,7 +26,21 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
   }
 
   public render() {
-    console.log(this.state.tag? this.state.tag.id : null);
+    console.log(this.state.tag? this.state.tag : null);
+    let tagText = "";
+    if(this.state.tag && this.state.tag.ndefMessage) {
+      tagText = Ndef.text.decodePayload(this.state.tag.ndefMessage[0].payload);
+    }
+    let tagTypes = "";
+    if(this.state.tag && this.state.tag.techTypes) {
+      for(let i=0; i<this.state.tag.techTypes.length; i++) {
+        if(i== 0) {
+          tagTypes = this.state.tag.techTypes[i].substr(17);
+        } else {
+          tagTypes = tagTypes + ", " + this.state.tag.techTypes[i].substr(17);
+        }
+      }
+    }
     return (
       <View style={std.page}>
         { !this.state.tag?
@@ -62,24 +76,24 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
           {this.state.tag.techTypes &&
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Tech Types:</Text>
-            <Text style={[std.text, info.t2]}>{this.state.tag.techTypes[0]}</Text>
+            <Text style={[std.text, info.t2]}>{tagTypes}</Text>
           </View>
           }
           {this.state.tag.ndefMessage &&
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Messggio NDEF:</Text>
-            {/*<Text style={[std.text, info.t2]}>{this.state.tag.ndefMessage[0]}</Text>*/}
+            <Text style={[std.text, info.t2]}>{tagText}</Text>
           </View>
           }
           <TouchableOpacity
-            style={std.modalButton2}
+            style={std.button}
             onPress={() => {
-              this.setState({read: true})
+              this.setState({read: true});
               readOneNFC()
                 .then((tag) => this.setState({tag: tag, read: false}))
                 .catch(er => console.error(er));
             }}>
-            <Text style={std.text}>Ri Leggi</Text>
+            <Text style={std.textButton}>Leggi altro tag</Text>
           </TouchableOpacity>
         </View>
         }

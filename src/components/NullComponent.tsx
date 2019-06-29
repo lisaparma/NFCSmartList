@@ -69,6 +69,12 @@ export default class NullComponent extends Component<NullComponentProps> {
           <Text style={styles.text}>Inseriscili attraverso il riquadro sottostante specificando un nome e associandoci un tag NFC.</Text>
         </View>
         }
+        {this.props.type === "items_fr" &&
+        <View style={styles.card}>
+          <Text style={styles.title}>Non ci sono ancora elementi nel suo catalogo!</Text>
+          <Text style={styles.text}>Appena il tuo amico procederà ad aggiungere degli elementi nella lista li potrai visualizzare.</Text>
+        </View>
+        }
       </View>
     );
   }
