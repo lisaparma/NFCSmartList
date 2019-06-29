@@ -8,7 +8,7 @@ import {
 } from 'react-navigation';
 
 import {ICatalog} from "../../redux/IStore";
-import {std, info} from "../../style";
+import {std, info, def} from "../../style";
 
 
 interface FDetailsCatalogProps {
@@ -34,14 +34,18 @@ class FDetailsCatalog extends Component<FDetailsCatalogProps, FDetailsCatalogSta
   public render() {
     return (
       <View style={std.screen}>
-        <Text style={std.title}> Informazioni catalogo:</Text>
+        <Text style={std.title}>Informazioni catalogo:</Text>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Nome:</Text>
             <Text style={[std.text, info.t2]}>{this.state.catalog.name}</Text>
           </View>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Descrizione:</Text>
-            <Text style={[std.text, info.t2]}>{this.state.catalog.description}</Text>
+            { this.state.catalog.description === ""?
+              <Text style={[std.text, info.t2, {color: def.grey1}]}>Nessuna descrizione</Text>
+              :
+              <Text style={[std.text, info.t2]}>{this.state.catalog.description}</Text>
+            }
           </View>
       </View>
     );

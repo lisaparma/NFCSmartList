@@ -77,6 +77,26 @@ export function writeTag(text: string): Promise<any> {
   });
 }
 
+// Only after registerTag
+export function formatTag(text: string): Promise<any> {
+  const mess = Ndef.encodeMessage([Ndef.textRecord(text)]);
+  return new Promise((resolve, reject) => {
+    NfcManager.requestNdefWrite(mess, {format: true})
+      .then(() => {
+          unregisterNFC()
+            .then(log => console.log(log))
+            .catch(er => console.warn(er));
+          resolve(text);
+        }
+      )
+      .catch(() => {
+        NfcManager.stop();
+        console.log("STOP");
+        reject("Errore: requestNdefWrite");
+      });
+  });
+}
+
 export function cancelWriteTag(): Promise<any> {
   return new Promise((resolve, reject) => {
 

@@ -12,7 +12,7 @@ import {store} from "../../App";
 import {IEditCatalog, IRemoveCatalog} from "../../redux/action";
 import {ICatalog} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
-import {std} from "../../style";
+import {def, std} from "../../style";
 import {info} from "../../style";
 import Auth from "../../firebaseAPI/auth";
 
@@ -65,7 +65,11 @@ class DetailsCatalog extends Component<DetailsCatalogProps, DetailsCatalogState>
               </View>
               <View style={info.textBox}>
                 <Text style={[std.text, info.t1]}>Descrizione:</Text>
-                <Text style={[std.text, info.t2]}>{this.state.catalog.description}</Text>
+                { this.state.catalog.description === ""?
+                  <Text style={[std.text, info.t2, {color: def.grey1}]}>Nessuna descrizione</Text>
+                  :
+                  <Text style={[std.text, info.t2]}>{this.state.catalog.description}</Text>
+                }
               </View>
               <View style={info.textBox}>
                 <Text style={[std.text, info.t1]}>Sicurezza:</Text>

@@ -48,13 +48,14 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
     return (
       <View style={{flex: 1}}>
         <View style={std.screen}>
-          <ScrollView style={std.scroll}>
-            {elements.length > 0 ?
-              elements
-              :
-              <NullComponent type={"items_fr"}/>
-            }
-          </ScrollView>
+          <View style={std.list}>
+            <ScrollView style={std.scroll}>
+              {elements.length > 0 ?
+                elements
+                :
+                <NullComponent type={"items_fr"}/>
+              }
+            </ScrollView>
           {
             this.state.check &&
               <TouchableOpacity
@@ -67,6 +68,7 @@ class FCatalog extends Component<CatalogsProps, CatalogsState> {
                 <Text style={std.textButton}>Annulla</Text>
               </TouchableOpacity>
           }
+          </View>
         </View>
         {
           this.props.navigation.getParam("menu") &&

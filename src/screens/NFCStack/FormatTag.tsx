@@ -6,18 +6,18 @@ import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 import {def, info, std} from "../../style";
 import {readOneNFC, unregisterNFC} from "../../NFCapi";
 
-interface ReadTagProps {
+interface FormatTagProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
 }
 
-interface ReadTagState {
+interface FormatTagState {
   read: boolean,
   tag: Tag | null
 }
 
-class ReadTag extends Component<ReadTagProps, ReadTagState> {
+class FormatTag extends Component<FormatTagProps, FormatTagState> {
 
-  constructor(props: ReadTagProps) {
+  constructor(props: FormatTagProps) {
     super(props);
     this.state = {
       read: false,
@@ -51,7 +51,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
       <View style={std.page}>
         { !this.state.tag?
           <View>
-            <Text style={std.title}>Leggi un tag</Text>
+            <Text style={std.title}>Formatta un tag</Text>
             <Text style={std.text}>
               Effettua la lettura di un tag NFC tramite il tuo telefono.
               Qui di seguito visualizzerai tutte le informazioni che il tag riporta.
@@ -69,29 +69,11 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
           </View>
           :
         <View>
-          <Text style={std.title}>Dettagli tag letto:</Text>
+          <Text style={std.title}>Tag formattato!</Text>
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Tag id:</Text>
             <Text style={[std.text, info.t2]}>{this.state.tag.id}</Text>
           </View>
-          {this.state.tag.maxSize &&
-          <View style={info.textBox}>
-            <Text style={[std.text, info.t1]}>Max Size:</Text>
-            <Text style={[std.text, info.t2]}>{this.state.tag.maxSize}</Text>
-          </View>
-          }
-          {this.state.tag.techTypes &&
-          <View style={info.textBox}>
-            <Text style={[std.text, info.t1]}>Tech Types:</Text>
-            <Text style={[std.text, info.t2]}>{tagTypes}</Text>
-          </View>
-          }
-          {this.state.tag.ndefMessage &&
-          <View style={info.textBox}>
-            <Text style={[std.text, info.t1]}>Messggio NDEF:</Text>
-            <Text style={[std.text, info.t2]}>{tagText}</Text>
-          </View>
-          }
           <TouchableOpacity
             style={std.button}
             onPress={() => {
@@ -100,7 +82,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
                 .then((tag) => this.setState({tag: tag, read: false}))
                 .catch(er => console.error(er));
             }}>
-            <Text style={std.textButton}>Leggi altro tag</Text>
+            <Text style={std.textButton}>Formatta altro tag</Text>
           </TouchableOpacity>
         </View>
         }
@@ -135,7 +117,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
 
 }
 
-export default withNavigation(ReadTag);
+export default withNavigation(FormatTag);
 
 
 const styles = StyleSheet.create({

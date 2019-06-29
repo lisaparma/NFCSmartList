@@ -4,7 +4,8 @@ import {NavigationParams, NavigationScreenProp, NavigationStateRoute, withNaviga
 import NfcManager, {ByteParser, Ndef} from "react-native-nfc-manager";
 
 import {def, info, std} from "../../style";
-import {cancelWriteTag, registerTag, unregisterNFC, writeTag} from "../../NFCapi";
+import {cancelWriteTag, registerTag, unregisterNFC, writeTag, formatTag} from "../../NFCapi";
+import {bool} from "prop-types";
 
 interface WriteTagProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -113,19 +114,39 @@ class WriteTag extends Component<WriteTagProps, WriteTagState> {
   private writeTag = (text: string) => {
     this.setState({modal: true, textModal: "Avvicina un tag NFC..."});
     registerTag()
-      .then( () => {
+      .then( (tag) => {
         this.setState({textModal: "Avvicina di nuovo il tag NFC..."});
-        writeTag(text)
-          .then((tag) => this.setState({
-            textModal: "Scrittura completata!",
-            text: ""
-          }))
-          .catch(er => {
-            this.setState({textModal: "Errore nella scrittura! Il tag potrebbe essere compromesso o di solo lettura"});
-            unregisterNFC()
-              .then(log => console.log(log))
-              .catch(er => console.warn(er));
-            console.log(er)});
+        console.log(tag);
+        let form = false;
+        for(let i=0; i<tag.techTypes.length; i++) {
+          if(tag.techTypes[i] === "android.nfc.tech.NdefFormatable"){
+            form=true;
+            formatTag(text)
+              .then((tag) => this.setState({
+                textModal: "Scrittura completata!",
+                text: ""
+              }))
+              .catch(er => {
+                this.setState({textModal: "Errore nella scrittura! Il tag potrebbe essere compromesso o di solo lettura"});
+                unregisterNFC()
+                  .then(log => console.log(log))
+                  .catch(er => console.warn(er));
+                console.log(er)});
+          }
+        }
+        if(!form) {
+          writeTag(text)
+            .then((tag) => this.setState({
+              textModal: "Scrittura completata!",
+              text: ""
+            }))
+            .catch(er => {
+              this.setState({textModal: "Errore nella scrittura! Il tag potrebbe essere compromesso o di solo lettura"});
+              unregisterNFC()
+                .then(log => console.log(log))
+                .catch(er => console.warn(er));
+              console.log(er)});
+        }
       })
       .catch((er) => console.log(er))
   }

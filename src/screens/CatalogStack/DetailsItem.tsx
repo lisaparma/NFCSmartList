@@ -12,7 +12,7 @@ import {store} from "../../App";
 import {IEditItem, IRemoveItem} from "../../redux/action";
 import {IItem} from "../../redux/IStore";
 import Database from "../../firebaseAPI/database";
-import {std} from "../../style";
+import {def, std} from "../../style";
 import {info} from "../../style";
 
 
@@ -26,6 +26,7 @@ interface DetailsItemState {
   edit: boolean;
   name: string;
   description: string;
+  nfc: string | null;
   modal: boolean;
 }
 
@@ -41,6 +42,7 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
       edit: false,
       name: this.props.navigation.getParam("item").name,
       description: this.props.navigation.getParam("item").description,
+      nfc: this.props.navigation.getParam("item").tag? this.props.navigation.getParam("item").tag : null,
       modal: false
     }
   }
@@ -65,8 +67,18 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
             </View>
             <View style={info.textBox}>
               <Text style={[std.text, info.t1]}>Descrizione:</Text>
-              <Text style={[std.text, info.t2]}>{this.state.item.description}</Text>
+              { this.state.item.description === ""?
+                <Text style={[std.text, info.t2, {color: def.grey1}]}>Nessuna descrizione</Text>
+                :
+                <Text style={[std.text, info.t2]}>{this.state.item.description}</Text>
+              }
             </View>
+            { this.state.nfc &&
+            <View style={info.textBox}>
+              <Text style={[std.text, info.t1]}>Tag NFC:</Text>
+              <Text style={[std.text, info.t2]}>{this.state.nfc}</Text>
+            </View>
+            }
             <TouchableOpacity
               style={std.button}
               onPress={()=>{this.setState({edit: true})}}>
@@ -93,6 +105,12 @@ class DetailsItem extends Component<DetailsItemProps, DetailsItemState> {
                 {this.state.description}
               </TextInput>
             </View>
+            { this.state.nfc &&
+            <View style={info.textBox}>
+              <Text style={[std.text, info.t1]}>Tag NFC:</Text>
+              <Text style={[std.text, info.t2]}>{this.state.nfc}</Text>
+            </View>
+            }
 
             <TouchableOpacity
               style={std.button}
