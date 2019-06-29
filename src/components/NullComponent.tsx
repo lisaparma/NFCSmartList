@@ -4,6 +4,7 @@ import {Icon} from "react-native-elements";
 
 
 import { def} from "../style"
+import {store} from "../App";
 
 interface NullComponentProps {
   type: string
@@ -14,29 +15,6 @@ export default class NullComponent extends Component<NullComponentProps> {
   public render() {
     return (
       <View style={{flex: 1}}>
-        {this.props.type === "likes" &&
-          <View style={styles.card}>
-            <Text style={styles.title}>Non hai ancora dei cataloghi condivisi contrassegnati come preferiti!</Text>
-            <Text style={styles.text}>Visita la pagina delle liste dei tuoi contatti e salvali premendo il pulsante a stella.</Text>
-            <View style={styles.icons}>
-              <Icon
-                color={def.grey0}
-                name={"star-border"}
-                size={50}
-              />
-              <Icon
-                color={def.black}
-                name={"arrow-forward"}
-                size={50}
-              />
-              <Icon
-                color={def.yellow}
-                name={"star"}
-                size={50}
-              />
-            </View>
-          </View>
-        }
         {this.props.type === "friends" &&
         <View style={styles.card}>
             <Text style={styles.title}>Non hai ancora dei contatti!</Text>
@@ -66,7 +44,30 @@ export default class NullComponent extends Component<NullComponentProps> {
         {this.props.type === "items" &&
         <View style={styles.card}>
           <Text style={styles.title}>Non ci sono ancora elementi nel catalogo!</Text>
-          <Text style={styles.text}>Inseriscili attraverso il riquadro sottostante specificando un nome e associandoci un tag NFC.</Text>
+          <Text style={styles.text}>Inseriscili attraverso il riquadro sottostante specificando un nome.</Text>
+          {
+            store.getState().user.nfc &&
+              <View>
+                <Text style={styles.text}>Inoltre premendo l'icona dell'NFC puoi associare un tag NFC al tuo elemento!</Text>
+                <View style={styles.icons}>
+                  <Icon
+                    color={def.grey1}
+                    name={"nfc"}
+                    size={50}
+                  />
+                  <Icon
+                    color={def.black}
+                    name={"arrow-forward"}
+                    size={40}
+                  />
+                  <Icon
+                    color={def.green}
+                    name={"nfc"}
+                    size={50}
+                  />
+                </View>
+              </View>
+          }
         </View>
         }
         {this.props.type === "items_fr" &&

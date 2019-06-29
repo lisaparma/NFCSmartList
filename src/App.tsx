@@ -77,66 +77,13 @@ export default class App extends Component<AppProps, AppState> {
 
   public render() {
     if(this.state.auth) {
-      if(this.state.new) {
-        return (
-          <Swiper showsButtons={false}>
-            <View style={[styles.slide]}>
-              <Text style={[std.text, styles.text]}>
-                Benvenuto su NFC Smart List, l'applicazione che renderà smart la verifica delle tue liste grazie ai tag NFC!{"\n"}{"\n"}
-                Associa un tag NFC agli item della tua lista in pochi passi...
-              </Text>
-              <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
-                <Text style={[std.text, log.link]}>Salta</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slide]}>
-              <Text style={[std.text, styles.text]}>
-                Se è la prima volta che usi un tag NFC formattalo e associaci un id seguendo le indicazioni che troverai sulla pagina "settings"
-              </Text>
-              <Image
-                style={styles.image}
-                source={require("../assets/ist1.png")}
-              />
-              <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
-                <Text style={[std.text, log.link]}>Salta</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slide]}>
-              <Text style={[std.text, styles.text]}>Aggiungi un item ad una lista scannerizzando il tag NFC{"\n"}</Text>
-              <Image
-                style={styles.image}
-                source={require("../assets/ist2.png")}
-              />
-              <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
-                <Text style={[std.text, log.link]}>Salta</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slide]}>
-              <Text style={[std.text, styles.text]}>Quando vorrai fare un check degli oggetti con un tag NFC associato ti basterà avvicinare il telefono al tag perchè questo venga riconosciuto{"\n"}</Text>
-              <Image
-                style={styles.image}
-                source={require("../assets/ist3.png")}
-              />
-              <TouchableOpacity onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
-                <Text style={[std.text, log.link]}>Salta</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slide]}>
-              <TouchableOpacity style={styles.slide} onPress={()=>store.dispatch<IOld>({type: "OLD"})}>
-                <Text style={[std.text, styles.text]}>Iniziamo!</Text>
-              </TouchableOpacity>
-            </View>
-          </Swiper>
-        );
-      } else {
-        return (
-          <Main/>
-        );
-      }
+      return (
+        <Main/>
+      );
     } else {
-        return (
-          <LogStack/>
-        );
+      return (
+        <LogStack/>
+      );
     }
   }
 

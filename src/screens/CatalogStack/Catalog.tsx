@@ -90,7 +90,12 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
           </View>
         </View>
         {this.props.navigation.getParam("menu") &&
-          <View style={std.DDScreen}>
+          <TouchableOpacity
+            style={std.DDScreen}
+            activeOpacity={0}
+            onPress={() => {
+              this.props.navigation.setParams({"menu": false})
+            }}>
             <View style={std.DDmenu}>
               {store.getState().user.nfc &&
                 <TouchableOpacity
@@ -133,7 +138,7 @@ class Catalogs extends Component<CatalogsProps, CatalogsState> {
                   />
               </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
         }
         <Modal
           transparent={true}

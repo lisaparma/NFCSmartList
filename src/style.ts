@@ -1,7 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 export const options = [0, 1, 2, 3, 4, 5];
-export const labels = ['Hardware', 'Applicativi', 'Impianti', "Documentazione", "General"];
+export const labels = ['Hardware', 'Imballaggi', 'Persone', "Documentazione", "General"];
 const colors = [
   "#0057a1",
   "#dd4124",
@@ -9,7 +9,7 @@ const colors = [
   "#4ca752",
   "#8f72ba"
 ];
-const icons = ["devices","dvr", "settings-input-component", "description", "attachment"]
+const icons = ["devices","redeem", "wc", "description", "attachment"]
 
 export function getLabel(num: number): string {
   return labels[num];
