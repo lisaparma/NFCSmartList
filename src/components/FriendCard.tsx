@@ -32,7 +32,7 @@ export default class FriendCard extends Component<FriendCardProps> {
           />
         </View>
         <View style={card.centerBox}>
-          <Text style={std.text}> {this.props.friend.email} </Text>
+          <Text style={std.text} numberOfLines = { 1 }> {this.props.friend.email} </Text>
         </View>
         <View style={card.icon}>
           <Icon

@@ -51,9 +51,9 @@ export default class CatalogCard_Fr extends Component<CatalogCardProps, CatalogC
           />
         </View>
         <View style={card.centerBox}>
-          <Text style={[std.text, card.t1]}> {this.props.catalog.name} </Text>
+          <Text style={[std.text, card.t1]} numberOfLines = { 1 }> {this.props.catalog.name} </Text>
           <Text style={[std.text, card.t2]}>
-            Oggetti: {Object.keys(this.props.catalog.items).length}
+            Oggetti: {this.props.catalog.items? Object.keys(this.props.catalog.items).length : 0}
           </Text>
         </View>
         <Icon

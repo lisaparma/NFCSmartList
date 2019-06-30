@@ -61,7 +61,7 @@ export default class ItemCard extends Component<ItemCardProps, ItemCardState> {
           </View>
       }
         <View style={card.centerBox}>
-          <Text style={[std.text, this.state.check && card.textCheck]}>{this.props.item.name} </Text>
+          <Text style={[std.text, this.state.check && card.textCheck]} >{this.props.item.name} </Text>
         </View>
         <TouchableOpacity
           style={card.icon}

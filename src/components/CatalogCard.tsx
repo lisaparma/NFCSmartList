@@ -40,7 +40,7 @@ export default class CatalogCard extends Component<CatalogCardProps> {
                 size={20}
               />
             }
-            <Text style={[std.text, card.t1]}>
+            <Text style={[std.text, card.t1]} numberOfLines = { 1 }>
               {this.props.catalog.name}
             </Text>
           </View>
