@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet, TextInput, Picker} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity, Image, StyleSheet, TextInput, Picker, Modal} from 'react-native';
 import {
   NavigationActions, NavigationParams, NavigationScreenProp, NavigationStateRoute,
   withNavigation
@@ -8,6 +8,7 @@ import {def, info, std} from "../../style";
 import {store} from "../../App";
 import SimplePicker from 'react-native-simple-picker';
 import Database from "../../firebaseAPI/database";
+import {goToSettings} from "../../NFCapi";
 
 interface ContattaciProps {
   navigation: NavigationScreenProp<NavigationStateRoute<NavigationParams>>;
@@ -17,6 +18,7 @@ interface ContattaciState {
   title: string;
   description: string;
   mod: number;
+  modal: boolean;
 }
 
 class Contattaci extends Component<ContattaciProps, ContattaciState> {
@@ -27,6 +29,7 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
       title: "",
       description: "",
       mod: 0,
+      modal: false,
     }
   }
 
@@ -99,12 +102,33 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
         onPress={this.send}>
           <Text style={std.textButton}>Aggiungi</Text>
       </TouchableOpacity>
+
+        <Modal
+          transparent={true}
+          visible={this.state.modal}
+          onRequestClose={() => {this.setState({modal: false})}}
+        >
+          <View style={std.modal}>
+            <View style={std.card}>
+              <Text style={std.textModal}>Grazie per la tua segnalazione!</Text>
+              <View style={std.boxButton}>
+                <TouchableOpacity
+                  style={std.modalButton2}
+                  onPress={() => {
+                    this.setState({modal: false});
+                  }}>
+                  <Text style={std.text}>Ok</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
   private send = () => {
     Database.send(store.getState().user.email, this.state.title, this.state.description, this.state.mod);
-    this.props.navigation.dispatch(NavigationActions.back());
+    this.setState({modal: true});
   }
 }
 
