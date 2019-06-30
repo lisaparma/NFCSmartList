@@ -77,7 +77,7 @@ class ReadTag extends Component<ReadTagProps, ReadTagState> {
           {this.state.tag.maxSize &&
           <View style={info.textBox}>
             <Text style={[std.text, info.t1]}>Max Size:</Text>
-            <Text style={[std.text, info.t2]}>{this.state.tag.maxSize}</Text>
+            <Text style={[std.text, info.t2]}>{this.state.tag.maxSize} byte</Text>
           </View>
           }
           {this.state.tag.techTypes &&

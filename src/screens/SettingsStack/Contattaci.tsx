@@ -34,7 +34,8 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
     const options=[0, 1, 2];
     const labels=["Bug", "Crash", "Feature"]
     return (
-      <ScrollView style={std.page}>
+      <View style={std.page}>
+      <ScrollView>
         <Text style={[std.title]}>Problemi?</Text>
         <Text style={[std.text]}>
           Segnalaci tutti i problemi che riscontri durante l'utilizzo dell'applicazione
@@ -92,13 +93,13 @@ class Contattaci extends Component<ContattaciProps, ContattaciState> {
           </Picker>
           }
         </View>
-        <TouchableOpacity
-          style={[std.button, this.state.title === "" && std.buttonDisabled]}
-          onPress={this.send}>
-          <Text style={std.textButton}>Aggiungi</Text>
-        </TouchableOpacity>
-
       </ScrollView>
+      <TouchableOpacity
+        style={[std.button, this.state.title === "" && std.buttonDisabled]}
+        onPress={this.send}>
+          <Text style={std.textButton}>Aggiungi</Text>
+      </TouchableOpacity>
+      </View>
     );
   }
   private send = () => {

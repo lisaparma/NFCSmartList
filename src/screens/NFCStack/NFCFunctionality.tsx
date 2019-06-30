@@ -67,37 +67,42 @@ class NFCFunctionality extends Component<NFCFunctionalityProps, NFCFunctionality
             navigation={this.props.navigation}
             page={"readTag"}/>
         </View>
-        <View style={styles.box}>
-          <SettingsCard
-            disabled={this.state.enabled !== "true" ? true : false}
-            icon={"border-color"}
-            text={"Scrivi tag"}
-            navigation={this.props.navigation}
-            page={"writeTag"}/>
-        </View>
-
-        <View style={styles.box}>
-          <TouchableHighlight
-            activeOpacity={0.3}
-            underlayColor={def.theme2}
-            onPress={() => this.setState({modal: true})}>
-            <View style={styles.item}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        {
+          store.getState().user.os !== "ios" &&
+          <View style={styles.box}>
+            <SettingsCard
+              disabled={this.state.enabled !== "true" ? true : false}
+              icon={"border-color"}
+              text={"Scrivi tag"}
+              navigation={this.props.navigation}
+              page={"writeTag"}/>
+          </View>
+        }
+        {
+          store.getState().user.os !== "ios" &&
+          <View style={styles.box}>
+            <TouchableHighlight
+              activeOpacity={0.3}
+              underlayColor={def.theme2}
+              onPress={() => this.setState({modal: true})}>
+              <View style={styles.item}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Icon
+                    color={def.grey1}
+                    name="settings"
+                    size={30}
+                  />
+                  <Text style={std.text}>Vai alle impostazione dell'NFC</Text>
+                </View>
                 <Icon
                   color={def.grey1}
-                  name="settings"
+                  name="chevron-right"
                   size={30}
                 />
-                <Text style={std.text}>Vai alle impostazione dell'NFC</Text>
               </View>
-              <Icon
-                color={def.grey1}
-                name="chevron-right"
-                size={30}
-              />
-            </View>
-          </TouchableHighlight>
-        </View>
+            </TouchableHighlight>
+          </View>
+        }
 
         <Modal
           transparent={true}
